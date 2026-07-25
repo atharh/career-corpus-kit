@@ -130,6 +130,20 @@ story gets bent to fit. The defence is that through-lines are *derived and falsi
 new evidence can demote them. Never let a through-line pick a story's framing; let the job
 description do that.
 
+## Lessons — how this skill personalises to you
+
+This skill ships generic. It gets sharper by accumulating the user's own corrections in
+`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit.
+
+- **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
+  additional rule for this user, on equal footing with the hard rules above.
+- **After the user corrects you in a way that generalises** — a preference, a repeated
+  mistake, a framing they reject — append one dated line to `corpus/LESSONS.md`: the mistake,
+  and the rule to apply next time. One line each. Append-only.
+- **Never edit this SKILL.md to record a lesson,** and never write lessons into the kit repo.
+  The method stays stable and shareable; the scar tissue stays private and personal. A skill
+  that rewrites itself bloats and drifts.
+
 ## The file
 
 Context nests, and each layer is written exactly once:

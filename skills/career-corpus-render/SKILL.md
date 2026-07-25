@@ -93,6 +93,19 @@ one-line reason per change. Flag genuine choices — accurate-but-different vs s
 wording, whether to include a team win, what to cut for length — as *the user's* call, not
 yours. Reconciling their own material is their decision, not yours.
 
+## Lessons — how this skill personalises to you
+
+This skill ships generic. It gets sharper by accumulating the user's own corrections in
+`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit.
+
+- **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
+  additional rule for this user, on equal footing with the hard rules above.
+- **After the user corrects a render in a way that generalises** — a wording preference, a
+  claim they won't make, a framing they reject — append one dated line to `corpus/LESSONS.md`:
+  the mistake, and the rule to apply next time. One line each. Append-only.
+- **Never edit this SKILL.md to record a lesson,** and never write lessons into the kit repo.
+  The method stays stable and shareable; the scar tissue stays private and personal.
+
 ## Workflow
 
 1. **Decide the tier.** JD in hand → tailored (write to `applications/<company>-<role>/`). No

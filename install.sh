@@ -11,7 +11,7 @@ DEST="${CLAUDE_SKILLS_DIR:-$HOME/.claude/skills}"
 
 mkdir -p "$DEST"
 
-for skill in career-corpus-interview career-corpus-render; do
+for skill in career-corpus-bootstrap career-corpus-interview career-corpus-render; do
   src="$REPO_DIR/skills/$skill"
   link="$DEST/$skill"
   if [ -L "$link" ]; then
@@ -27,5 +27,6 @@ done
 echo
 echo "Done. Start a new Claude Code session to pick up the skills, then:"
 echo "  1. create a PRIVATE repo with a corpus/ directory"
-echo "  2. run /career-corpus-interview to start filling it"
-echo "  3. run /career-corpus-render when you need a résumé or cover letter"
+echo "  2. run /career-corpus-bootstrap to seed it from your résumé"
+echo "  3. run /career-corpus-interview to fill in stories, one at a time"
+echo "  4. run /career-corpus-render when you need a résumé or cover letter"

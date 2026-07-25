@@ -15,12 +15,21 @@ It's also how you stop forgetting your own career. Recall is triggered, not enum
 remember the thing you did five years ago only when something adjacent jogs it. The interview
 skill is built to do that jogging, and to write down what surfaces before it evaporates.
 
-## The two skills
+## The three skills
 
-| Skill | Direction | What it does |
+| Skill | When | What it does |
 |---|---|---|
+| **`career-corpus-bootstrap`** | once, at the start | Reads your existing résumé/LinkedIn, sets up the corpus, and generates a prioritized queue of stories worth extracting. Gets you from empty to "start with this one." |
 | **`career-corpus-interview`** | corpus **in** | Interviews you about one memory and writes a vetted story file. Relentless, one question at a time, and it never lets a claim in that you can't defend. |
 | **`career-corpus-render`** | corpus **out** | Reads the vetted corpus + a job description and produces a résumé entry, cover letter, or interview-prep answers — tailored to that role, sourced only from what the corpus vouches for. |
+
+### The skills learn your preferences
+
+They ship generic, but they sharpen to *you* over time. When you correct one in a way that
+generalises — a wording you won't use, a framing you reject, a repeated mistake — it appends a
+one-line rule to `corpus/LESSONS.md` in your **private** repo and reads it back at the start of
+every session. The method stays public and stable; your scar tissue stays private and personal.
+That feedback loop — mistake → durable rule — is what makes a corpus setup genuinely yours.
 
 ## Install
 
@@ -42,14 +51,20 @@ instead, symlink the two `skills/*` folders into that project's `.claude/skills/
    mkdir my-career && cd my-career && git init
    mkdir corpus
    ```
-2. **Fill it, one story at a time.** In Claude Code, from that repo:
+2. **Bootstrap from your résumé.** In Claude Code, from that repo:
+   ```
+   /career-corpus-bootstrap
+   ```
+   Paste in your résumé (and anything else you have). It sets up the corpus, writes
+   `profile.md`, and hands you a ranked queue of the stories worth extracting first.
+3. **Fill it, one story at a time.**
    ```
    /career-corpus-interview the hardest project I led at <company>
    ```
    Answer the questions. It writes a story file under `corpus/<company>/`, marks every open
    thread as a gap, and stops when you're out of energy. Come back and do another whenever a
    memory surfaces. Depth accretes.
-3. **Render when you need to apply.** With a job description in hand:
+4. **Render when you need to apply.** With a job description in hand:
    ```
    /career-corpus-render tailor a résumé and cover letter for this JD: <paste>
    ```
