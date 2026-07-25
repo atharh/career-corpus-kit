@@ -93,6 +93,20 @@ one-line reason per change. Flag genuine choices — accurate-but-different vs s
 wording, whether to include a team win, what to cut for length — as *the user's* call, not
 yours. Reconciling their own material is their decision, not yours.
 
+**10. Make it sound like the user, not a model — always, as the last step.** Rendered prose
+that reads as AI-written gets binned. Two moves, in order:
+- **Use the user's own recorded voice.** The corpus captures how they actually talk — their
+  quotes, blunt phrasings, the concrete scenes. Pull those in rather than smoothing them into
+  competent generic prose. A generic humanizer strips AI tells but can't *invent* their voice;
+  the corpus already has it. This step is unique to this system — do it first.
+- **Run a humanizing pass to finish.** If a dedicated `humanizer` skill is installed, invoke
+  it on the draft. If not, self-edit for the reliable tells: em-dash pile-ups (cut to near
+  zero), uniform sentence length (vary it hard), rule-of-three cadence, inflated vocabulary
+  (*leverage, robust, seamless, testament, delve*), and filler/throat-clearing.
+
+This applies to human-facing prose only (cover letters, interview answers) — corpus story
+files are internal scaffolding and stay as they are.
+
 ## Lessons — how this skill personalises to you
 
 This skill ships generic. It gets sharper by accumulating the user's own corrections in
