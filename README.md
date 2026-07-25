@@ -1,0 +1,93 @@
+# Career Corpus Kit
+
+Two [Claude Code](https://claude.com/claude-code) skills for building a **career corpus** — a
+private, high-depth record of your work history — and rendering résumés, cover letters, and
+interview prep from it.
+
+The premise: **your résumé is an output, not the source of truth.** A résumé bullet, a cover-
+letter paragraph, and a spoken interview answer are the same fact compressed to three
+different lengths. Most people author the compressed bullet and throw away the source — so
+when an interviewer pushes, there's nothing underneath. This kit inverts that. You author your
+career once, at full depth, in Markdown story files. Everything you send is *rendered* from
+that corpus on demand and tailored to the specific role.
+
+It's also how you stop forgetting your own career. Recall is triggered, not enumerated — you
+remember the thing you did five years ago only when something adjacent jogs it. The interview
+skill is built to do that jogging, and to write down what surfaces before it evaporates.
+
+## The two skills
+
+| Skill | Direction | What it does |
+|---|---|---|
+| **`career-corpus-interview`** | corpus **in** | Interviews you about one memory and writes a vetted story file. Relentless, one question at a time, and it never lets a claim in that you can't defend. |
+| **`career-corpus-render`** | corpus **out** | Reads the vetted corpus + a job description and produces a résumé entry, cover letter, or interview-prep answers — tailored to that role, sourced only from what the corpus vouches for. |
+
+## Install
+
+```bash
+git clone <this-repo> ~/career-corpus-kit
+cd ~/career-corpus-kit
+./install.sh
+```
+
+`install.sh` symlinks both skills into `~/.claude/skills/`, so a later `git pull` updates them
+automatically. Start a new Claude Code session to pick them up. (To install per-project
+instead, symlink the two `skills/*` folders into that project's `.claude/skills/`.)
+
+## Quick start
+
+1. **Make a private repo for your corpus.** It will contain real details about you and, in
+   roles-only form, about people you've worked with. Keep it private, permanently.
+   ```bash
+   mkdir my-career && cd my-career && git init
+   mkdir corpus
+   ```
+2. **Fill it, one story at a time.** In Claude Code, from that repo:
+   ```
+   /career-corpus-interview the hardest project I led at <company>
+   ```
+   Answer the questions. It writes a story file under `corpus/<company>/`, marks every open
+   thread as a gap, and stops when you're out of energy. Come back and do another whenever a
+   memory surfaces. Depth accretes.
+3. **Render when you need to apply.** With a job description in hand:
+   ```
+   /career-corpus-render tailor a résumé and cover letter for this JD: <paste>
+   ```
+   Without a JD, it produces a strong *baseline* you maintain as a checkpoint. With one, it
+   tailors from the corpus for that specific role.
+
+## What makes the output trustworthy
+
+The value isn't "an AI wrote my résumé" — anything can do that. It's a set of rules, each
+learned by getting it wrong, that keep every rendered line defensible in the room:
+
+- **Vetted facts only.** A claim reaches a résumé only if a story file sources it. Raw drafts
+  live in `corpus/_inbox/` and are never rendered from.
+- **Numbers carry a source and a ceiling.** "Doubled" never drifts to "tripled" because a
+  reused draft made it sound better.
+- **Vocabulary gets dated.** You don't get described using a tool or job title that didn't
+  exist when you did the work — it's the fastest way to get caught.
+- **Honest role attribution.** "Proposed and prototyped; the team delivered" never becomes "I
+  built it." Bylines are checkable.
+- **No names of private people; no internal codenames.** Roles only, always.
+- **The true version wins.** In practice the accurate story is almost always stronger than the
+  inflated one.
+- **Nothing is applied silently.** You see a diff with a reason per change, and every genuine
+  judgment call is surfaced as yours to make.
+
+## Honest caveats
+
+- **The tailoring step is the least-tested part.** Selecting and angling stories from a real
+  job description is the newest capability here; treat early tailored drafts as strong first
+  drafts and review the diff, don't trust the selection blindly.
+- **It's only as good as your corpus.** The skills can't invent depth. The work is sitting for
+  the interviews. That work is also the entire point — it's what nobody else will do, and it's
+  why the output isn't generic.
+
+## A note on where this came from
+
+These skills were generalised from a working setup built for one person's real job search. The
+private career details have been stripped out; what remains is the method and the hard-won
+rules. If you find a rule cryptic, it's probably a scar — keep it.
+
+Do what you like with this. Attribution appreciated, not required.
