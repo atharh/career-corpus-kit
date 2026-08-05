@@ -1,6 +1,6 @@
 ---
-name: career-corpus-render
-description: Render a résumé entry, cover letter, or interview-prep answers from the user's vetted career corpus, tailored to a target job description. The corpus-out counterpart to career-corpus-interview. Use when they want to write/tailor a résumé or cover letter, prep for an interview, or adapt their application to a specific role or JD.
+name: render
+description: Render a résumé entry, cover letter, or interview-prep answers from the user's vetted career corpus, tailored to a target job description. The corpus-out counterpart to the career-corpus interview skill. Use when they want to write/tailor a résumé or cover letter, prep for an interview, or adapt their application to a specific role or JD.
 ---
 
 # Career corpus — render
@@ -8,7 +8,7 @@ description: Render a résumé entry, cover letter, or interview-prep answers fr
 The `corpus/` directory is the source of truth. Résumés, cover letters, and interview answers
 are **renderings** of it — never the other way round. This skill turns vetted corpus material
 into one of those artifacts, aimed at a specific role. Material gets *into* the corpus with
-the companion skill `career-corpus-interview`.
+the companion `interview` skill.
 
 Every LLM can "write a résumé." The value here is **rendering faithfully** — saying only what
 the corpus vouches for, in the form the artifact needs, tailored to the job. The rules below

@@ -1,5 +1,5 @@
 ---
-name: career-corpus-interview
+name: interview
 description: Interview the user to turn a career memory into a vetted story file in their career corpus. Use when they want to add to the corpus, decompress a résumé bullet, capture a story that just surfaced, prepare for an interview, or when a job description needs evidence the corpus doesn't have yet.
 ---
 
@@ -7,8 +7,7 @@ description: Interview the user to turn a career memory into a vetted story file
 
 The corpus lives in a `corpus/` directory (keep it in a **private** git repo). It holds the
 user's career at full depth. Résumés, cover letters, and interview answers are **renderings**
-of it. This skill is how material gets in. The companion skill `career-corpus-render` is how
-it comes out.
+of it. This skill is how material gets in. The companion `render` skill is how it comes out.
 
 **Recall is triggered, not enumerated.** People do not remember their careers by listing
 them — they remember when something snags. Whole years of relevant work stay invisible until
