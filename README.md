@@ -1,6 +1,6 @@
 # Career Corpus Kit
 
-Two [Claude Code](https://claude.com/claude-code) skills for building a **career corpus** — a
+A [Claude Code](https://claude.com/claude-code) plugin for building a **career corpus** — a
 private, high-depth record of your work history — and rendering résumés, cover letters, and
 interview prep from it.
 
@@ -19,9 +19,9 @@ skill is built to do that jogging, and to write down what surfaces before it eva
 
 | Skill | When | What it does |
 |---|---|---|
-| **`career-corpus-bootstrap`** | once, at the start | Reads your existing résumé/LinkedIn, sets up the corpus, and generates a prioritized queue of stories worth extracting. Gets you from empty to "start with this one." |
-| **`career-corpus-interview`** | corpus **in** | Interviews you about one memory and writes a vetted story file. Relentless, one question at a time, and it never lets a claim in that you can't defend. |
-| **`career-corpus-render`** | corpus **out** | Reads the vetted corpus + a job description and produces a résumé entry, cover letter, or interview-prep answers — tailored to that role, sourced only from what the corpus vouches for. |
+| **`/career-corpus:bootstrap`** | once, at the start | Reads your existing résumé/LinkedIn, sets up the corpus, and generates a prioritized queue of stories worth extracting. Gets you from empty to "start with this one." |
+| **`/career-corpus:interview`** | corpus **in** | Interviews you about one memory and writes a vetted story file. Relentless, one question at a time, and it never lets a claim in that you can't defend. |
+| **`/career-corpus:render`** | corpus **out** | Reads the vetted corpus + a job description and produces a résumé entry, cover letter, or interview-prep answers — tailored to that role, sourced only from what the corpus vouches for. |
 
 ### The skills learn your preferences
 
@@ -33,15 +33,33 @@ That feedback loop — mistake → durable rule — is what makes a corpus setup
 
 ## Install
 
+In Claude Code:
+
+```
+/plugin marketplace add atharh/career-corpus-kit
+/plugin install career-corpus@career-corpus-kit
+```
+
+That's it — the three skills show up as `/career-corpus:bootstrap`, `/career-corpus:interview`,
+and `/career-corpus:render`. If the install summary says `Run /reload-plugins to activate.`,
+run that. Later, `/plugin marketplace update career-corpus-kit` pulls new versions.
+
+<details>
+<summary>Or: install from a clone, without the marketplace</summary>
+
 ```bash
-git clone <this-repo> ~/career-corpus-kit
+git clone https://github.com/atharh/career-corpus-kit ~/career-corpus-kit
 cd ~/career-corpus-kit
 ./install.sh
 ```
 
-`install.sh` symlinks both skills into `~/.claude/skills/`, so a later `git pull` updates them
-automatically. Start a new Claude Code session to pick them up. (To install per-project
-instead, symlink the two `skills/*` folders into that project's `.claude/skills/`.)
+`install.sh` symlinks the repo into `~/.claude/skills/career-corpus`, where Claude Code picks
+it up as a plugin, so a later `git pull` updates it. Same skill names either way. Don't use
+both paths at once — two plugins named `career-corpus` would provide the same skills.
+
+To scope it to one project instead, symlink the repo into that project's
+`.claude/skills/career-corpus` and start Claude Code from the repo root.
+</details>
 
 ## Quick start
 
@@ -53,20 +71,20 @@ instead, symlink the two `skills/*` folders into that project's `.claude/skills/
    ```
 2. **Bootstrap from your résumé.** In Claude Code, from that repo:
    ```
-   /career-corpus-bootstrap
+   /career-corpus:bootstrap
    ```
    Paste in your résumé (and anything else you have). It sets up the corpus, writes
    `profile.md`, and hands you a ranked queue of the stories worth extracting first.
 3. **Fill it, one story at a time.**
    ```
-   /career-corpus-interview the hardest project I led at <company>
+   /career-corpus:interview the hardest project I led at <company>
    ```
    Answer the questions. It writes a story file under `corpus/<company>/`, marks every open
    thread as a gap, and stops when you're out of energy. Come back and do another whenever a
    memory surfaces. Depth accretes.
 4. **Render when you need to apply.** With a job description in hand:
    ```
-   /career-corpus-render tailor a résumé and cover letter for this JD: <paste>
+   /career-corpus:render tailor a résumé and cover letter for this JD: <paste>
    ```
    Without a JD, it produces a strong *baseline* you maintain as a checkpoint. With one, it
    tailors from the corpus for that specific role.
@@ -105,4 +123,4 @@ These skills were generalised from a working setup built for one person's real j
 private career details have been stripped out; what remains is the method and the hard-won
 rules. If you find a rule cryptic, it's probably a scar — keep it.
 
-Do what you like with this. Attribution appreciated, not required.
+Do what you like with this — [MIT](LICENSE). Attribution appreciated, not required.

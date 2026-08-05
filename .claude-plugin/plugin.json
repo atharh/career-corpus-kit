@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "career-corpus",
+  "displayName": "Career Corpus Kit",
+  "version": "1.0.0",
+  "description": "Build a private, high-depth record of your work history, then render résumés, cover letters, and interview prep from it — sourced only from claims you can defend.",
+  "author": {
+    "name": "Athar Hameed",
+    "url": "https://github.com/atharh"
+  },
+  "homepage": "https://github.com/atharh/career-corpus-kit",
+  "repository": "https://github.com/atharh/career-corpus-kit",
+  "license": "MIT",
+  "keywords": [
+    "resume",
+    "cv",
+    "cover-letter",
+    "interview-prep",
+    "job-search",
+    "career",
+    "writing"
+  ]
+}

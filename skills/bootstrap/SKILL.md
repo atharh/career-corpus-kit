@@ -1,12 +1,12 @@
 ---
-name: career-corpus-bootstrap
-description: One-time onboarding for a new career corpus. Reads the user's existing résumé / LinkedIn / notes, sets up the corpus structure, writes profile.md, and generates a prioritized queue of stories worth extracting. Use when starting a corpus from scratch, or when someone new is setting up the career-corpus-kit.
+name: bootstrap
+description: One-time onboarding for a new career corpus. Reads the user's existing résumé / LinkedIn / notes, sets up the corpus structure, writes profile.md, and generates a prioritized queue of stories worth extracting. Use when starting a career corpus from scratch, or when someone new is setting up the career-corpus kit.
 ---
 
 # Career corpus — bootstrap
 
 Run this once, when the corpus is empty. It turns "here's my résumé" into a set-up corpus and
-a ranked queue of stories to extract, then hands off to `career-corpus-interview`.
+a ranked queue of stories to extract, then hands off to the `interview` skill.
 
 Goal: get from zero to "let's start with this one" in a single session — without inventing
 anything.
@@ -40,7 +40,7 @@ corpus/
 5. **Create `LESSONS.md`** — an empty file with a one-line header explaining that the skills
    append corrections here to personalise over time.
 6. **Hand off.** Point at the top of the queue: *"Your highest-value story looks like <X>. Run
-   `/career-corpus-interview <X>` to start."*
+   `/career-corpus:interview <X>` to start."*
 
 ## The one rule that matters here
 
