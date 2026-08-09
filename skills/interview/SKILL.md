@@ -22,13 +22,55 @@ The temperament of a hard design review, pointed at a memory instead of a plan.
 - **This attacks a memory:** *what actually happened? who fought you? what did you almost do
   instead? what did you get wrong?*
 
-Ask **one question at a time** and wait. Two questions is bewildering and they'll answer the
-easier one.
-
 Look facts up — files, git, dates, the résumé. Only ask what's in their head.
 
 Be relentless. Vague answers are where the material is. "It was a mess" is not a story;
 *what* was a mess, who made it, what did you do about it.
+
+## Asking in rounds
+
+A memory has a shape: an arc branches into beats, each beat into a decision, its opposition,
+its cost. Work that shape in **rounds**. The **frontier** is every question whose
+prerequisites you already have — the ones you can ask *now* without guessing at an answer you
+haven't heard. Ask the frontier in one round, numbered, then wait for their answers. A
+question whose answer depends on another question still open in this round belongs to a
+*later* round, not this one.
+
+Each answer reshapes the tree: settled beats push the frontier outward and unblock questions
+that depended on them. Recompute and ask the next round.
+
+**Keep a round to three to five questions, spread across different parts of the tree.** This
+is recall, not planning. A wall of ten questions about one paragraph makes people *summarise*
+instead of *remember* — they skim for the easy ones and answer in the register of a status
+update. If the frontier is wider than five, ask the sharpest and hold the rest; they'll still
+be on the frontier next round. If a round comes back thin or tired, go back to one question.
+
+Format each question:
+
+```
+❓ **Q1** — **<short title>**: <the question, plus why you're asking if it isn't obvious>
+
+➡️ <optional: a reading you're inviting them to reject — labelled as your guess>
+```
+
+**The ➡️ line is a provocation, never a recommended answer.** In a design review, suggesting
+the answer saves the user work. Here it contaminates the evidence: the entire product of this
+skill is what *they* remember, and a fluent guess of yours is the easiest thing in the world
+to nod along to. Same failure as rule 9's present-day artifact, arriving in your voice
+instead.
+
+- Use it for the worst reading of the facts (playbook 1) or a theory you want refuted
+  (playbook 9). Those work *by* being wrong, and the rebuttal is the material.
+- **Never use it for something they'd have to remember** — a date, a number, a headcount, a
+  system name, who was in the room, what the pushback was. Leave those bare. A blank is
+  recoverable; a plausible suggestion repeated back to you is not.
+- Nothing enters the file because you proposed it. Rule 1 applies to your own ➡️ lines first.
+
+**Facts are your job, never theirs.** When a frontier question needs something from the
+environment — a date in git, a line in the résumé, what a file actually says — dispatch a
+sub-agent to find it. Don't block the round on it: a running lookup is an unsettled
+prerequisite, so only the questions downstream of it wait. Ask the rest of the frontier now.
+The *decisions* and the *memories* are theirs; put those to them and wait.
 
 ## Hard rules
 
@@ -226,8 +268,9 @@ better than the theory would have been.
 1. **Read first.** The résumé, the relevant `background.md`, related stories. Facts you can
    look up are not questions.
 2. **Seed the file** from vetted text only. Gaps stay loudly gaps.
-3. **Interview.** One question, wait, write, repeat. Update the file as you go rather than at
-   the end — they correct what's on screen.
+3. **Interview in rounds.** Compute the frontier, ask it, wait, write, recompute. Update the
+   file after every round rather than at the end — they correct what's on screen, and a
+   written answer often reveals the next round's questions.
 4. **Resolve gaps explicitly.** `- [x] ~~question~~ Resolved YYYY-MM-DD: answer.` The gaps
    list is the queue for next time; leaving it honest is what makes the corpus resumable.
 5. **Stop when they defer.** If they say a topic is for another session, log it as a gap and
@@ -239,6 +282,10 @@ A story is done enough when it could survive an interviewer who wants to spend t
 on it: the setup has stakes, the decisions have alternatives and opposition, the numbers have
 sources, someone disagreed, something went wrong, and a real person somewhere in it is more
 than an obstacle.
+
+A session is done when the frontier is empty — every branch of the memory visited, nothing
+left silently assumed — or when they've had enough. Whatever the frontier still holds becomes
+the gaps list.
 
 Most stories will not get there in one session. That's fine. Depth accretes — the gaps list
 is the contract with the next session.
