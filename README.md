@@ -15,13 +15,14 @@ It's also how you stop forgetting your own career. Recall is triggered, not enum
 remember the thing you did five years ago only when something adjacent jogs it. The interview
 skill is built to do that jogging, and to write down what surfaces before it evaporates.
 
-## The three skills
+## The four skills
 
 | Skill | When | What it does |
 |---|---|---|
 | **`/career-corpus:bootstrap`** | once, at the start | Reads your existing résumé/LinkedIn, sets up the corpus, and generates a prioritized queue of stories worth extracting. Gets you from empty to "start with this one." |
 | **`/career-corpus:interview`** | corpus **in** | Interviews you about one memory and writes a vetted story file. Relentless, works in rounds of a few questions at a time, and it never lets a claim in that you can't defend. |
 | **`/career-corpus:render`** | corpus **out** | Reads the vetted corpus + a job description and produces a résumé entry, cover letter, or interview-prep answers — tailored to that role, sourced only from what the corpus vouches for. |
+| **`/career-corpus:compact`** | maintenance | Prunes the sediment interviews leave behind — resolved gaps, dated back-and-forth — while guarding the lines that keep renders honest: your ceilings, rendering decisions, and rejected readings. Run it when a gap list has become more archive than queue. |
 
 ### The skills learn your preferences
 
@@ -40,8 +41,8 @@ In Claude Code:
 /plugin install career-corpus@career-corpus-kit
 ```
 
-That's it — the three skills show up as `/career-corpus:bootstrap`, `/career-corpus:interview`,
-and `/career-corpus:render`. If the install summary says `Run /reload-plugins to activate.`,
+That's it — the skills show up as `/career-corpus:bootstrap`, `/career-corpus:interview`,
+`/career-corpus:render`, and `/career-corpus:compact`. If the install summary says `Run /reload-plugins to activate.`,
 run that. Later, `/plugin marketplace update career-corpus-kit` pulls new versions.
 
 <details>
