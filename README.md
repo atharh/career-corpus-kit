@@ -20,7 +20,7 @@ skill is built to do that jogging, and to write down what surfaces before it eva
 | Skill | When | What it does |
 |---|---|---|
 | **`/career-corpus:bootstrap`** | once, at the start | Reads your existing résumé/LinkedIn, sets up the corpus, and generates a prioritized queue of stories worth extracting. Gets you from empty to "start with this one." |
-| **`/career-corpus:interview`** | corpus **in** | Interviews you about one memory and writes a vetted story file. Relentless, one question at a time, and it never lets a claim in that you can't defend. |
+| **`/career-corpus:interview`** | corpus **in** | Interviews you about one memory and writes a vetted story file. Relentless, works in rounds of a few questions at a time, and it never lets a claim in that you can't defend. |
 | **`/career-corpus:render`** | corpus **out** | Reads the vetted corpus + a job description and produces a résumé entry, cover letter, or interview-prep answers — tailored to that role, sourced only from what the corpus vouches for. |
 
 ### The skills learn your preferences
