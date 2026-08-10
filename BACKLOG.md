@@ -95,35 +95,6 @@ The claim extractor is the hard part and is itself a judge — see above.
 
 ---
 
-## Privacy defaults, not privacy warnings
-
-**Deferred 2026-08-11**, from an external review. Every skill says the corpus and the
-application folder are sensitive. Nothing in the kit acts on it. A private remote is access
-control, and the two things most likely to hurt — an employer's confidential take-home, and a
-recruiter thread with other people's names in it — go straight into git history, where
-deleting them later doesn't delete them.
-
-Three separable pieces, cheapest first:
-
-- **`bootstrap` writes a corpus `.gitignore`.** It already creates `corpus/`; it can create
-  the ignore file in the same breath. Ignore `_inbox/` and `applications/**/_inbox/` by
-  default, and make tracking raw inbound the opt-in rather than the opt-out. This is the one
-  worth doing on its own even if the rest never happens.
-- **`apply` prefers a reference over a copy** for confidential employer material — a path or
-  a link with a classification and a delete-by date, rather than the brief itself in the repo.
-- **A short `PRIVACY.md`** on what belongs in the corpus, what never does, and what git
-  history does and doesn't let you take back.
-
-**And one honesty gap the warnings currently paper over:** "keep it in a private repo" reads
-as "it never leaves your machine", which is false the moment a hosted model reads a story
-file. Say so plainly somewhere the user meets early.
-
-**Why deferred rather than blocking:** a `.gitignore` the user didn't ask for is the kit
-writing policy into their repo, and the classification/retention machinery is a system where
-today there's a sentence. Ship the ignore file first and see whether anything else is wanted.
-
----
-
 ## Split the interview playbook out of the skill
 
 **Deferred 2026-08-11.** `interview/SKILL.md` is 343 lines and does four jobs: invariant
@@ -140,33 +111,26 @@ trip-wires that would catch a regression only cover `render`. Do it after there'
 watching.
 
 **Not to be confused with** the broader "extract shared policy into `skills/_shared/`"
-suggestion, which is a different and worse idea — see the drift-check entry below for why.
+suggestion, which is a different and worse idea — `evals/README.md` records why, under the
+policy drift check that replaced it.
 
 ---
 
-## A drift check for duplicated policy
+## Stable identifiers for rule cross-references
 
-**Deferred 2026-08-11.** The same blocks appear across skills nearly verbatim: the Lessons
-section, the `_inbox/` rule, the no-private-names rule, the sourcing rule. An external review
-read that as duplication to be extracted into shared policy files that each skill reads.
+**Deferred 2026-08-11**, when the policy drift check shipped. Rules are cited by number —
+`compact` cites `interview`'s rule 13, `render` cites its own rule 9. Tier 1 proves those
+references *resolve*; nothing proves they resolve to the same rule they did before someone
+inserted one above them. The reference stays green while silently changing meaning.
 
-**That refactor is the wrong fix.** A skill loads its own `SKILL.md`. A rule living in
-`_shared/TRUST.md` is in force only if the model reads the file, and a rule you *hope* got
-loaded is not a rule. Skills fire independently and must each stand alone; the repetition is
-the design.
+**Shape of a fix:** give load-bearing rules stable names — `CLAIM-SOURCE`, `SAY-ALOUD`,
+`INBOX-NOT-EVIDENCE` — and cite those. They survive reordering and read better at the call
+site than a number does.
 
-**The risk it names is still real, though.** It has already bitten once — `apply` rule 3 and
-`render` rule 1 both state the applications-are-not-a-source rule, and they state it
-differently enough that one of them contradicts its own workflow.
-
-**Shape of a fix:** mark the canonical copy of each repeated block, and add a static check
-that every other copy matches it. Drift becomes a red CI run instead of a slow divergence.
-Tier 1 already parses every skill file, so this is an assertion, not a new harness.
-
-**Related and smaller:** rule cross-references are numbers (`interview`'s rule 13). The
-checker proves they *resolve*; it can't prove they resolve to the same rule they did before
-someone inserted one above it. Stable names (`CLAIM-SOURCE`, `INBOX-NOT-EVIDENCE`) survive
-reordering and read better at the call site. Worth doing while touching the same files.
+**Why deferred:** it touches every rule list in the kit for a failure that hasn't happened
+yet, and the numbering check makes the loud version of it (two rule 6s) impossible already.
+Worth doing the next time those files are open anyway — the interview playbook split is the
+obvious moment.
 
 ---
 
