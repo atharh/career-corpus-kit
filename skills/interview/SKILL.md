@@ -144,6 +144,10 @@ vetted folder, get quoted in a résumé and defended in an interview. Leave inbo
 **pristine** — don't edit them; extraction may need redoing. And if raw material refers to
 *"the doc"* or any real artifact behind it, **that artifact is the better source.** Ask for it.
 
+The same status applies to `applications/<company>-<role>/_inbox/`, where the `apply` skill
+files recruiter mail and other inbound material. If something in there is a fact about the
+user, it earns its way in here like everything else — by them saying it, with a source.
+
 **11. Surface contradictions; never silently resolve them.** When two of the user's
 statements seem to conflict, that's a question for them, not a problem for you to fix. If you
 pick the version that seems defensible and quietly edit, two things go wrong: you make a

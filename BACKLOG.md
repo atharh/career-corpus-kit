@@ -31,3 +31,21 @@ middle. That's a real scenario, just not the common one.
 
 **Applies to `render` output too**, not only `prep` — a tailored résumé sitting in
 `applications/` has exactly the same problem.
+
+---
+
+## Example application folder
+
+**Deferred 2026-08-10**, when `apply` shipped. `examples/` shows corpus in and artifacts out,
+but not the folder an application actually accumulates — the JD, the fit check, the dated log,
+the inbound material. That folder is where most of the new skill's shape lives, and reading it
+would teach it faster than the SKILL.md does.
+
+**Why deferred:** it means fabricating a job posting *and* a recruiter email, in a repo whose
+first rule is "never invent". The existing example corpus is bounded by a per-file FICTIONAL
+banner and its own tree; a fake posting attributed to a fake company is a step further, and a
+fake recruiter email is a step further again. Worth doing carefully, not quickly.
+
+**If built:** the `fit.md` is the file to get right — specifically a requirement the example
+corpus genuinely cannot back, ending in "don't apply yet". A fit check where everything lines
+up teaches the opposite of the point.

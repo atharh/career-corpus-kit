@@ -108,6 +108,11 @@ Work **one file at a time**, and show the user what changed before moving on.
 ## Never
 
 - **Never compact `_inbox/`.** Raw material is pristine by design; extraction may need redoing.
+- **Never compact `applications/`.** This skill works on `corpus/` only. An application folder
+  is a dated record of what was actually claimed, sent and asked, and the dates *are* the
+  value — a rendered artifact tidied after the fact stops matching what the employer received.
+  If an application's log has grown long, that's history worth keeping; the folder is closed
+  when the thread closes, not pruned.
 - **Never compact `LESSONS.md`.** It is append-only by construction and small by design. If it
   genuinely outgrows itself, that's a conversation with the user, not a sweep.
 - **Never compact `through-lines.md`'s "where it doesn't hold" sections.** A through-line
