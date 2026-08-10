@@ -104,12 +104,17 @@ To scope it to one project instead, symlink the repo into that project's
    mkdir my-career && cd my-career && git init
    mkdir corpus
    ```
+   Private stops other *people* reading it. It doesn't mean the text stays on your machine —
+   a hosted model reads these files, which is how the kit works at all. [PRIVACY.md](PRIVACY.md)
+   covers what that means and what doesn't belong in a corpus.
 2. **Bootstrap from your résumé.** In Claude Code, from that repo:
    ```
    /career-corpus:bootstrap
    ```
-   Paste in your résumé (and anything else you have). It sets up the corpus, writes
-   `profile.md`, and hands you a ranked queue of the stories worth extracting first.
+   Paste in your résumé (and anything else you have). It writes a `.gitignore` first — every
+   `_inbox/` stays out of git, because raw recruiter mail and take-home briefs are the one
+   thing you don't want in history forever — then sets up the corpus, writes `profile.md`, and
+   hands you a ranked queue of the stories worth extracting first.
 3. **Fill it, one story at a time.**
    ```
    /career-corpus:interview the hardest project I led at <company>
