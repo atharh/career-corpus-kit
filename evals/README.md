@@ -19,7 +19,10 @@ cross-references that rot silently when a file is edited.
 The one that earns its keep is **rule-reference resolution**. `compact` cites the
 interview skill's rule 13; `render` cites its own rule 9. Insert a rule near the
 top of either list and those pointers quietly aim at the wrong rule, with nothing
-to notice. It also checks each numbered list runs `1..N` with no gaps, that every
+to notice. `playbook N` is checked the same way and matters more, because those
+references cross a file boundary — `interview/SKILL.md` cites techniques that
+live in `interview/REFERENCE.md`, and nothing else keeps the two renumbering in
+step. It also checks each numbered list runs `1..N` with no gaps, that every
 `/career-corpus:<skill>` mentioned exists, that relative links resolve, and that
 the example corpus keeps its `FICTIONAL` banners, its `sources:` blocks, and its
 `related:` targets.
