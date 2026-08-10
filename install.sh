@@ -44,9 +44,16 @@ fi
 
 cat <<'EOF'
 
-Done. Start a new Claude Code session to pick up the plugin, then:
+Done. Start a new Claude Code session to pick up the plugin.
+
+Two lanes. Build the corpus:
   1. create a PRIVATE repo with a corpus/ directory
-  2. run /career-corpus:bootstrap to seed it from your résumé
-  3. run /career-corpus:interview to fill in stories, one at a time
-  4. run /career-corpus:render when you need a résumé or cover letter
+  2. /career-corpus:bootstrap  seed it from your résumé, and rank what to extract
+  3. /career-corpus:interview  fill in stories, one at a time
+  4. /career-corpus:compact    prune old history out of story files, when they get heavy
+
+Then spend it, once you've found a role:
+  5. /career-corpus:apply      open the application and check the corpus against the JD
+  6. /career-corpus:render     the résumé and the cover letter
+  7. /career-corpus:prep       an interview pack, once a round is booked
 EOF
