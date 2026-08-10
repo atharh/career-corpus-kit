@@ -6,12 +6,19 @@ period: <what's actually known. "?" is a legitimate value. Don't guess.>
 status: <seed | drafted, partially fact-checked | drafted>
 related:
   - <other-story.md (why they must be read together)>
-facts_vetted:        # their own words — résumé, letters, or interview. Cite which.
+# These three record PROVENANCE, not proof. Nothing here means "independently
+# verified" — see "What 'vetted' means" in the interview skill.
+facts_vetted:        # they assert it themselves, and this file records where and when.
   - <fact> (source, date confirmed)
-facts_disputed:      # two sources disagree. Blocks rendering until resolved.
-  - <claim A> vs <claim B>. UNRESOLVED. Do not render either until settled.
-facts_unvetted:      # stated once, no independent source. Plausible ≠ true.
-  - <fact>
+facts_disputed:      # sources disagree about the size or shape of one claim.
+  - <claim A> vs <claim B>. UNRESOLVED. Neither value renders. A floor both
+    sources agree on may render once the user settles it in a RENDERING
+    DECISION below — never chosen by the model on its own.
+facts_unvetted:      # they said it, but their standing for it is weak: second-hand,
+                     # another person's private state, or a precise number resting on
+                     # an old memory with no artifact. Lower ceiling, not silence —
+                     # say why it's weak AND what may still be said.
+  - <fact> — <why the standing is weak>. <what may still be said, if anything.>
 sources:
   - <resume-file>.md (vetted)
   - interview with <user>, YYYY-MM-DD (vetted)

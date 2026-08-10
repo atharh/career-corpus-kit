@@ -241,6 +241,49 @@ Frontmatter holds facts that must not drift, split by provenance
 (`facts_vetted` / `facts_disputed` / `facts_unvetted` / `sources`). Prose holds the arc, in
 their voice, with beats as `##` subheads so they're addressable without being boxes.
 
+### What "vetted" means
+
+**The corpus vouches for provenance, not for truth.** `facts_vetted` does not mean checked,
+audited, or independently confirmed. It means: *the user asserts this themselves, and the file
+records where they said it and when.* Nothing in this kit verifies anything against the world,
+and it should not pretend otherwise.
+
+The example corpus shows how thin the line is. *"Sam built a nightly export into a separate
+reporting database"* sits in `facts_vetted` on the strength of a single 2026 interview about
+2016 work — nobody checked anything. *"Four minutes to under ten seconds"* sits in
+`facts_unvetted` and came out of **the same conversation, from the same memory**. What
+separates them isn't the source. It's that one is the shape of what happened, which a person
+can hold accurately for a decade, and the other is a precise figure, which nobody can.
+
+That sounds like a weak bar. It is the right one, because of what it buys in the room: the
+defence of a claim is *"that's my recollection, from this work, and here's the detail behind
+it"*. What makes that survive a follow-up is knowing whose claim it is and how firmly they
+made it — not a verification the interviewer can't see either. A corpus that tracked truth
+would be lying about what it can know. One that tracks standing tells you exactly how hard
+you can lean on each line.
+
+So the three blocks sort by **how well the user can stand behind it**, not by how likely it is
+to be true:
+
+- **`facts_vetted`** — they assert it directly, about their own work, and the source and date
+  are recorded. Renderable up to any ceiling the file sets.
+- **`facts_disputed`** — two sources disagree about one claim's size or shape, and the
+  disagreement is unresolved. Neither value renders. Where both sources agree on a floor
+  (*"80%" vs "about half"* both mean at least halved), that floor may render — **but only
+  once the user has settled it in a `RENDERING DECISION`.** Never pick the floor yourself; a
+  model choosing which version of a contested number to say is the whole failure this block
+  exists to prevent.
+- **`facts_unvetted`** — they said it, but their standing is weak. Second-hand (*their
+  recollection of what an EM said*), someone else's private state (*"two people told me they
+  were considering leaving"*), or a precise figure resting on a decade-old memory with no
+  artifact. **This is a lower ceiling, not silence.** Record why the standing is weak *and*
+  what may still be said: "fine as a personal recollection in an interview, never a résumé
+  line" is a more useful entry than the claim alone.
+
+When a fact moves between blocks — a dashboard turns up, a date gets pinned — say so and date
+it. The movement is evidence about the memory, and `prep` mines exactly these blocks for the
+questions an interviewer will push on.
+
 **Never use a STAR template.** Situation/Task/Action/Result produces dead checklist prose,
 they'll resent filling it in, and it's unnecessary — STAR can be rendered *from* good prose,
 but life can't be put back into prose born as a form.

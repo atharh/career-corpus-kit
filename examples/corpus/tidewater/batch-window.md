@@ -15,7 +15,9 @@ facts_vetted:
 facts_disputed:
   - "runtime after the fix: résumé says **'cut runtime 80%'**; interview 2026-03-02 says
     **'about half, honestly. Maybe a bit better on a good night.'** UNRESOLVED — LEANS HALF.
-    Do not render 80% until settled. See the rendering decision below."
+    Neither value renders on its own. Both sources do agree it came down by *at least* half,
+    and Sam has settled that floor in the rendering decision below — that, and nothing above
+    it, is what renders until a dashboard turns up."
 facts_unvetted:
   - "'we were about six weeks from breaching an SLA' — Sam's recollection of what their EM
     said at the time. No document. Do not put a breach claim in writing."
