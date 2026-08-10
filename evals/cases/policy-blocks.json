@@ -1,0 +1,102 @@
+{
+  "_comment": [
+    "Policy that is stated in more than one skill, and the exact sentences that must",
+    "not drift between the copies.",
+    "",
+    "A skill loads its own SKILL.md and nothing else, so shared policy has to be",
+    "repeated rather than extracted — a rule living in a file the model may not read",
+    "is not a rule. The repetition is deliberate. The drift is what this file stops.",
+    "",
+    "`invariants` are matched with whitespace collapsed, so rewrapping a paragraph is",
+    "not drift. Rewording one sentence in one skill is.",
+    "",
+    "See evals/README.md for how to add a block."
+  ],
+
+  "blocks": [
+    {
+      "id": "lessons-personalisation",
+      "policy": "How a skill accumulates the user's corrections in corpus/LESSONS.md",
+      "why": "Three skills write to one file in the user's private repo. If they disagree about where lessons live, whether they're append-only, or whether a skill may edit itself, the kit starts rewriting its own prompts in someone's corpus.",
+      "canonical": "render",
+      "invariants": [
+        "This skill ships generic. It gets sharper by accumulating the user's own corrections in `corpus/LESSONS.md` — in their **private** corpus repo, never in the kit.",
+        "**At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an additional rule for this user, on equal footing with the hard rules above.",
+        "append one dated line to `corpus/LESSONS.md`: the mistake, and the rule to apply next time. One line each. Append-only.",
+        "**Never edit this SKILL.md to record a lesson,** and never write lessons into the kit repo."
+      ],
+      "required_in": ["apply", "interview", "render"],
+      "exempt": {
+        "bootstrap": "Creates LESSONS.md and explains it once; runs before there is anything to correct.",
+        "compact": "Explicitly forbidden from touching LESSONS.md — pruning the scar tissue defeats it.",
+        "prep": "Declares render's hard rules apply unchanged rather than restating them."
+      }
+    },
+
+    {
+      "id": "inbox-not-evidence",
+      "policy": "_inbox/ is a queue of raw material, never a source",
+      "why": "The single rule the whole trust model rests on. It is stated in the skill that fills the inbox, the skill that renders past it, and the skill that opens an application with a recruiter writing into it. All three have to mean the same thing by it.",
+      "canonical": "interview",
+      "invariants": [
+        "Folder location is a truth claim",
+        "never rendered from and never cited as fact"
+      ],
+      "required_in": ["apply", "interview"],
+      "exempt": {
+        "bootstrap": "Points at the interview skill's rules rather than restating them.",
+        "compact": "Never reads _inbox/; it prunes vetted story files.",
+        "prep": "States the sharper application-specific version — a recruiter is selling a job.",
+        "render": "States it as the sourcing rule (see candidate-claim-sourcing), not the storage rule."
+      }
+    },
+
+    {
+      "id": "no-names-in-filenames",
+      "policy": "Private individuals' names stay out of filenames and folder names",
+      "why": "Both skills that name files after a human interaction repeat this, for the same reason: a filename is visible in a screen-share to someone who may work at that company.",
+      "canonical": "apply",
+      "invariants": [
+        "Roles in filenames, names in the body if the user wants them. Filenames get screenshotted, screen-shared and tab-completed in front of other people"
+      ],
+      "required_in": ["apply", "prep"],
+      "exempt": {
+        "bootstrap": "Creates no file named after a person.",
+        "compact": "Renames nothing.",
+        "interview": "Carries the broader no-names-anywhere rule for story bodies.",
+        "render": "Carries the broader no-names-anywhere rule for artifact prose."
+      }
+    },
+
+    {
+      "id": "candidate-claim-sourcing",
+      "policy": "A claim about the candidate comes from the vetted corpus and nowhere else",
+      "why": "This is the rule that broke. apply and render each stated it, differently enough that render's version contradicted render's own workflow — it barred reading the folder it was told to read. The distinction that keeps it coherent is candidate claims vs employer context, and both skills must draw it the same way.",
+      "canonical": "apply",
+      "invariants": [
+        "Never source a claim about the candidate from `applications/`"
+      ],
+      "required_in": ["apply"],
+      "exempt": {
+        "bootstrap": "Renders nothing.",
+        "compact": "Renders nothing.",
+        "interview": "Writes to the corpus rather than reading from applications/.",
+        "prep": "Declares render's hard rules apply unchanged rather than restating them.",
+        "render": "States the same rule as the three source domains — see the superseded list below for the wording it may not go back to."
+      }
+    }
+  ],
+
+  "superseded": [
+    {
+      "text": "Nothing in `applications/` is ever a source for a render",
+      "why": "Absolute and wrong. render must read jd.md and fit.md — that handoff is most of what apply exists to produce. The bar is on claims about the candidate, not on reading the folder.",
+      "replaced_by": "candidate-claim-sourcing"
+    },
+    {
+      "text": "Never render from `_inbox/`, and never from `applications/`",
+      "why": "Same absolute reading, in render's own rule 1. It contradicted workflow step 2 four screens below it.",
+      "replaced_by": "candidate-claim-sourcing"
+    }
+  ]
+}
