@@ -134,31 +134,6 @@ obvious moment.
 
 ---
 
-## Define what "vetted" means
-
-**Deferred 2026-08-11.** The story template's provenance taxonomy conflates two different
-properties. `facts_vetted` is defined as *their own words — résumé, letters, or interview*,
-and `facts_unvetted` as *stated once, no independent source*. So "vetted" currently means
-**the user said it and we wrote down where**, not **we checked it**. Every rule downstream —
-what may render, what a probe is, what a ceiling protects — hangs on that word, and the word
-carries the wrong implication to anyone reading it fresh.
-
-The kit's actual position is defensible and worth stating outright: *the corpus vouches for
-provenance, not for truth. It knows who claimed a thing and when. That's what makes a claim
-defensible under a follow-up question — not that it was independently verified.*
-
-**Shape of a fix:** one paragraph in the template and one in `interview`, defining the term
-rather than adding fields. Splitting it into `confirmed_by_user` / `independently_verified` /
-`renderable` is more taxonomy than the material supports.
-
-**One adjacent rule worth revisiting at the same time:** `facts_disputed` blocks *both*
-versions until settled. Sometimes the floor is safe — if one source says doubled and the
-other tripled, "more than doubled" is true under either. Decide whether the safe intersection
-may render with an explicit ceiling, or whether the whole fact stays blocked. Either is
-fine; right now the template says one thing and nobody has thought about the other.
-
----
-
 ## Coverage report, and a doctor for the corpus
 
 **Deferred 2026-08-11.** The kit ranks what to extract *next* by interview value, but never

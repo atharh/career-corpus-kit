@@ -95,6 +95,13 @@ emphasise. It can never become a sentence the user has to defend.
 sources, at the value it sources. If a metric was confirmed as "doubled," never the "tripled"
 a draft inflated it to. If a file says "do not inflate" or "do not quote a count," obey it.
 
+A number in `facts_disputed` renders at **neither** value. If the user has already settled a
+floor both sources agree on — recorded as a `RENDERING DECISION` — render that. Never pick
+the floor yourself: choosing which version of a contested number to say is exactly the call
+that block exists to take away from you. And note what `facts_vetted` does and doesn't mean —
+it says the user is on record, not that anyone checked. See "What 'vetted' means" in
+`interview`.
+
 **3. Date the vocabulary, not just the facts.** No term that postdates the work. If the corpus
 says they were "doing data modelling in 2014," don't render it as a tool that shipped in 2016.
 Check `anachronisms_corrected` blocks before using any tool or role name.

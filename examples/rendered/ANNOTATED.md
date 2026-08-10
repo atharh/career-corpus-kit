@@ -11,7 +11,7 @@ stopped it.
 
 | The tempting version | What shipped | What stopped it |
 |---|---|---|
-| "Cut pipeline runtime by 80%" | "roughly halving runtime" | `facts_disputed` in `batch-window.md` — the résumé said 80%, Sam said "about half", and Sam's own memory is the only source either number has. Rule: unresolved numbers don't render. |
+| "Cut pipeline runtime by 80%" | "roughly halving runtime" | `facts_disputed` in `batch-window.md` — the résumé said 80%, Sam said "about half", and Sam's own memory is the only source either number has. Neither value renders. What shipped is the floor both sources agree on, and only because Sam settled it in a `RENDERING DECISION` — the model doesn't get to pick which contested number to say. |
 | "Drove org-wide adoption of incremental processing" | "Two other teams later adopted the same pattern" | A ceiling in Sam's words: *"Two teams took it. Not the org. There are still batch jobs doing the exact same dumb thing today."* |
 | "Identified and resolved a critical architectural flaw" | "Diagnosed and fixed a nightly dispatch pipeline…" | A rejected reading, recorded as the model's error. Sam: *"I didn't spot a blind spot, I got woken up by it four times. I fixed the thing that was hurting me."* |
 | "Led the team responsible for six services" | "Led a rebuild of the on-call rotation" | A ceiling in `tidewater/background.md`: Sam has never had reports. *"I led the work. There's a difference and an EM interviewer will find it in about nine seconds."* |
