@@ -17,8 +17,12 @@ already there before asking for anything:
 | `jd.md` | `apply` | The posting verbatim, with URL and capture date. Read it; don't ask for the JD again. |
 | `fit.md` | `apply` | What the corpus backs, backs thinly, and can't back for this role. Most of the selection work. |
 | `application.md` | `apply` | Dated log — stage, contacts by role, next action. |
-| `_inbox/` | `apply` | Raw inbound. **Unvetted. Never render from it.** |
+| `_inbox/` | `apply` | Raw inbound. **Unvetted. Never a source for anything.** |
 | `interview-prep.md`, `01-…`–`05-…` | `prep` | The study pack for a booked interview. Not this skill's output. |
+
+Read all of it; source no *candidate claim* from any of it (SKILL.md rule 1). These files
+carry employer context and selection work, not evidence about the user. When `fit.md` names a
+story as backing a requirement, open that story and render the claim from there.
 
 If you keep a PDF build pipeline that globs top-level `*.md`, an `applications/` subfolder
 won't be swept into the baseline build — run the build with explicit paths for tailored

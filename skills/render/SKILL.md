@@ -66,16 +66,30 @@ rather than trusting the selection blindly.
 
 ## Hard rules — faithful rendering
 
-**1. Vetted facts only. Never render from `_inbox/`, and never from `applications/`.** A claim
-reaches the artifact only if a corpus story vouches for it (`facts_vetted` / published
-sources). `_inbox/` is raw ore — its numbers are unsourced and forbidden until extracted into
-a story file. That holds for an application's own `_inbox/` too: a recruiter's account of the
-role is a claim by a stranger with an incentive, not a fact you may put in the user's mouth.
+**1. Every claim about the candidate comes from the vetted corpus, and from nothing else.** A
+claim reaches the artifact only if a corpus story vouches for it (`facts_vetted` / published
+sources). Three kinds of material feed a tailored render, and only the first is evidence about
+the user:
 
-`applications/` is barred for the opposite reason — everything in it is already a *rendering*.
-Sourcing from another application's `resume.md`, or from this one's earlier draft, is the
+- **Candidate claims** — what they did, built, decided, chose against, achieved, know. Vetted
+  corpus files only.
+- **Employer context** — what the role wants, what the company does, what the team is for.
+  `jd.md`, the employer's own public material, clearly attributed inbound. This is what you
+  tailor *to*. It is never a fact about the user.
+- **Derived analysis** — `fit.md`, an earlier draft, another application's résumé. Read it to
+  use the work already done. Never cite it as evidence.
+
+So: **read `applications/`, but never source a candidate claim from it.** `fit.md` has already
+matched the corpus against this JD, which is most of the selection work — take its pointers,
+then open the story file it names and render the claim from *there*. Anything in that folder
+that reads like a finished claim is already a rendering, and taking it at face value is the
 baseline telephone game above with a second lossy hop. It is the easiest mistake to make once
-the folder holds something that looks nearly right. Read the corpus.
+the folder holds something that looks nearly right.
+
+`_inbox/` is barred outright — in the corpus and in an application alike. It is raw ore: its
+numbers are unsourced and forbidden until extracted into a story file, and a recruiter's
+account of the role is a claim by a stranger with an incentive. It can shape what you
+emphasise. It can never become a sentence the user has to defend.
 
 **2. Numbers carry their source and their ceiling.** Render only figures a corpus file
 sources, at the value it sources. If a metric was confirmed as "doubled," never the "tripled"

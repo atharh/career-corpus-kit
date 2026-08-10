@@ -114,12 +114,17 @@ stranger selling a job. It can shape what you *ask* and what you *prepare for*. 
 become a fact in a letter or an answer. If something in there is a fact about the **user**,
 it earns its way into the corpus through `interview`, like everything else.
 
-**3. Nothing in `applications/` is ever a source for a render.** Not another application's
-résumé, not this one's earlier draft, not `fit.md`. Renders source from the corpus. `render`
-already warns that tailoring from a baseline is a telephone game that loses exactly the
-material the JD needs; tailoring from *another application's tailored output* is that failure
-with a second lossy hop, and it is the single easiest mistake to make once the folder has a
-`resume.md` sitting in it that looks nearly right.
+**3. Never source a claim about the candidate from `applications/`.** The folder holds plenty
+a render legitimately needs — `jd.md` is what it tailors *to*, `fit.md` is most of the
+selection work already done — and `render` is meant to read all of it rather than ask the user
+to paste it again. What it may not do is take a *claim about the user* from here. Everything
+in this folder that reads like one is already a rendering: another application's résumé, this
+one's earlier draft, a line `fit.md` quoted while making its case. Follow the pointer back to
+the corpus story and render the claim from there. `render` warns that tailoring from a
+baseline is a telephone game that loses exactly the material the JD needs; tailoring from
+another application's output is that failure with a second lossy hop, and it is the single
+easiest mistake to make once the folder has a `resume.md` sitting in it that looks nearly
+right.
 
 **4. No individual's name in a filename or a folder name.** Roles in filenames, names in the
 body if the user wants them. Filenames get screenshotted, screen-shared and tab-completed in
