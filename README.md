@@ -67,17 +67,56 @@ That feedback loop — mistake → durable rule — is what makes a corpus setup
 
 ## Install
 
-In Claude Code:
+Add the marketplace, then install the plugin from it. You can do both from inside a Claude Code
+session or from your shell — same result, pick whichever you're already sitting in.
+
+**In Claude Code:**
 
 ```
 /plugin marketplace add atharh/career-corpus-kit
 /plugin install career-corpus@career-corpus-kit
 ```
 
+**From the shell:**
+
+```bash
+claude plugin marketplace add atharh/career-corpus-kit
+claude plugin install career-corpus@career-corpus-kit
+```
+
 That's it — the skills show up as `/career-corpus:bootstrap`, `/career-corpus:interview`,
 `/career-corpus:compact`, `/career-corpus:apply`, `/career-corpus:render`, and
 `/career-corpus:prep`. If the install summary says `Run /reload-plugins to activate.`,
-run that. Later, `/plugin marketplace update career-corpus-kit` pulls new versions.
+run that.
+
+## Update
+
+Two steps, and the second is the one that moves you to the new version. The marketplace is a
+git clone of this repo; refreshing it pulls new commits, and updating the plugin then installs
+from the refreshed clone.
+
+**In Claude Code:**
+
+```
+/plugin marketplace update career-corpus-kit
+```
+
+Then open `/plugin`, select `career-corpus`, and choose **Update now**. (There's no
+`/plugin update` slash command — the manager UI is the in-session path. Re-running
+`/plugin install` won't do it; it's a no-op when the plugin is already installed.)
+
+**From the shell:**
+
+```bash
+claude plugin marketplace update career-corpus-kit
+claude plugin update career-corpus@career-corpus-kit
+```
+
+Restart Claude Code — or run `/reload-plugins` — to load the new version.
+
+To see what you're on, run `claude plugin list`, or open `/plugin` in a session. Installed
+versions live in `~/.claude/plugins/cache/career-corpus-kit/career-corpus/<version>/`, so an
+old directory sticking around after an update is normal.
 
 <details>
 <summary>Or: install from a clone, without the marketplace</summary>
@@ -89,8 +128,15 @@ cd ~/career-corpus-kit
 ```
 
 `install.sh` symlinks the repo into `~/.claude/skills/career-corpus`, where Claude Code picks
-it up as a plugin, so a later `git pull` updates it. Same skill names either way. Don't use
-both paths at once — two plugins named `career-corpus` would provide the same skills.
+it up as a plugin. Updating is just:
+
+```bash
+cd ~/career-corpus-kit && git pull
+```
+
+The symlink means the new content is live immediately — no marketplace refresh, no plugin
+update, just `/reload-plugins` or a restart. Same skill names either way. Don't use both paths
+at once — two plugins named `career-corpus` would provide the same skills.
 
 To scope it to one project instead, symlink the repo into that project's
 `.claude/skills/career-corpus` and start Claude Code from the repo root.
