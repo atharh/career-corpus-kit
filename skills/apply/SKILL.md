@@ -143,6 +143,14 @@ names, private correspondence, and sometimes an employer's confidential material
 in the private corpus repo and nowhere else. Never paste its contents anywhere the user
 didn't ask for, and don't commit an employer's take-home brief to anything public.
 
+`_inbox/` is git-ignored by default — `bootstrap` writes that rule, and it is the reason
+inbound can be filed here at all without thinking about it each time. **For an employer's
+confidential material, prefer a reference over a copy:** the link, or the path to where it
+already lives, with the date, in `application.md`. That material is not the user's to store.
+If a local copy is genuinely needed to work on it, say plainly that it's staying outside the
+repo, and log what it is and when it gets deleted. A brief committed once is in history in
+every clone, and deleting the file later doesn't take it back — see `PRIVACY.md` in the kit.
+
 **8. Surface, don't decide.** Whether to apply with a named gap, whether a requirement is
 boilerplate, whether a stalled thread is dead — all the user's call. Give them the read and
 the reason, not the verdict.
