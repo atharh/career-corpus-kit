@@ -1,6 +1,6 @@
 ---
 name: render
-description: Render a résumé entry, cover letter, or interview-prep answers from the user's vetted career corpus, tailored to a target job description. The corpus-out counterpart to the career-corpus interview skill. Use when they want to write/tailor a résumé or cover letter, prep for an interview, or adapt their application to a specific role or JD.
+description: Render a résumé entry or cover letter from the user's vetted career corpus, tailored to a target job description. The corpus-out counterpart to the career-corpus interview skill. Use when they want to write or tailor a résumé or cover letter, or adapt their application to a specific role or JD. For a booked interview, use the career-corpus prep skill instead.
 ---
 
 # Career corpus — render
