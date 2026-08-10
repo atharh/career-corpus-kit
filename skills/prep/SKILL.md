@@ -17,7 +17,7 @@ not repeated here.
 ## When this fires, and what it needs
 
 The trigger is *"I have an interview"*, not *"I'm applying"*. That means inputs `render`
-doesn't have, and you should ask for them rather than guess:
+doesn't have:
 
 - **The JD**, and the recruiter's email or scheduling note — those often name the format, the
   rounds, the interviewers' roles, and sometimes the assessment criteria outright.
@@ -26,14 +26,30 @@ doesn't have, and you should ask for them rather than guess:
 - **The loop structure and the date.** How many rounds, with whom, over what period. The pack
   is a study plan as well as a document, and a plan needs a clock.
 
+**Read `applications/<company>-<role>/` before you ask for any of it.** The `apply` skill
+opened that folder and most of this is already sitting in it — `jd.md` is the posting
+verbatim, `_inbox/` holds the recruiter's mail and the scheduling note, `fit.md` already names
+what the corpus can't back for this role (which is a ready-made probe list, see `04` below),
+and `application.md` has the dates and who's involved. Ask only for what's genuinely missing,
+and file anything the user hands you now into `_inbox/` so the next round inherits it. If the
+folder doesn't exist, offer `/career-corpus:apply` to open it — a booked interview is exactly
+when the thread starts needing a memory.
+
+**But `_inbox/` is unvetted, and that matters more here than anywhere.** A recruiter is
+selling a job; their account of the team's scope, the role's remit or what the panel is
+looking for tells you what to *prepare for* and never what is *true*. Use it to aim the pack.
+Never let it become a claim in the user's mouth — the interviewer knows what the team actually
+does.
+
 If a round is with a named individual, keep that name **out of filenames**. Roles in the
 filename, names in the body if the user wants them. Filenames get shared, screenshotted, and
 tab-completed in front of other people.
 
 ## The pack
 
-One directory: `applications/<company>-<role>/`. Numbered so the reading order is the
-preparation order.
+It goes in the application's own directory, `applications/<company>-<role>/`, alongside the
+JD and the rendered artifacts — the same folder `apply` opened and `render` wrote into. Files
+are numbered so the reading order is the preparation order.
 
 | File | What it holds |
 |---|---|
@@ -80,9 +96,10 @@ Source probes from, in order of yield:
    short tenure, a domain they haven't worked in. These are asked in almost every loop and they
    are not in the corpus, because the corpus stores stories and these are facts about the
    résumé's silhouette.
-6. **What the JD wants that the corpus can't evidence.** The honest version of this answer is
-   nearly always "no, and here's the closest thing I have" — which lands far better than a
-   stretched analogy that collapses under one question.
+6. **What the JD wants that the corpus can't evidence.** If `apply` ran, `fit.md` has already
+   written this list — its "backs thinly" and "can't back" sections are probes with the work
+   done. The honest version of the answer is nearly always "no, and here's the closest thing I
+   have", which lands far better than a stretched analogy that collapses under one question.
 
 **Write the defence at spoken length, and never invent a strength to cover a gap.** If the true
 answer is "I haven't done that", the prep is *how to say that well and what to pivot to*, not a
@@ -120,10 +137,12 @@ sections at the top of `interview-prep.md`.
 
 ## After the interview — this is half the skill
 
-Run this again the same day, while it's fresh. Two outputs:
+Run this again the same day, while it's fresh. Three outputs:
 
 - **Update the pack** with what was actually asked, which answers landed, and which didn't.
   A later round with the same company inherits it.
+- **Add a dated line to `application.md`** — round, date, how it went, what happens next. The
+  log is what makes a thread readable six weeks later.
 - **Feed the misses back into the corpus.** Anything the user fumbled, couldn't source, or
   got asked and hadn't considered becomes a queue for `/career-corpus:interview` — and it is
   the highest-quality queue the corpus will ever get, because it comes from a real interviewer

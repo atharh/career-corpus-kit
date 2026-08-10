@@ -1,6 +1,6 @@
 ---
 name: render
-description: Render a résumé entry or cover letter from the user's vetted career corpus, tailored to a target job description. The corpus-out counterpart to the career-corpus interview skill. Use when they want to write or tailor a résumé or cover letter, or adapt their application to a specific role or JD. For a booked interview, use the career-corpus prep skill instead.
+description: Render a résumé entry or cover letter from the user's vetted career corpus, tailored to a target job description. The corpus-out counterpart to the career-corpus interview skill. Use when they want to write or tailor a résumé or cover letter, or adapt their application to a specific role or JD. To open and track a whole application, use the career-corpus apply skill; for a booked interview, use the career-corpus prep skill.
 ---
 
 # Career corpus — render
@@ -9,6 +9,10 @@ The `corpus/` directory is the source of truth. Résumés, cover letters, and in
 are **renderings** of it — never the other way round. This skill turns vetted corpus material
 into one of those artifacts, aimed at a specific role. Material gets *into* the corpus with
 the companion `interview` skill.
+
+Rendering a tailored artifact is one step inside an application that `apply` opens and owns.
+Baselines, self-reviews, promo packets and bios belong to no application; this skill handles
+those on its own.
 
 Every LLM can "write a résumé." The value here is **rendering faithfully** — saying only what
 the corpus vouches for, in the form the artifact needs, tailored to the job. The rules below
@@ -33,6 +37,13 @@ JD-specific evidence.
 aimed at *that* role. Write outputs to `applications/<company>-<role>/` so they stay separate
 from the baselines and from other applications.
 
+That folder belongs to the `apply` skill. **If it already exists, read it instead of asking
+the user to paste things again** — `jd.md` is the posting verbatim and `fit.md` already names
+what the corpus can and can't back for this role, which is most of the selection work done. If
+it doesn't exist and the user has a JD in hand, offer to open the application first
+(`/career-corpus:apply`) rather than dropping two files into a bare directory; the folder is
+where everything that arrives later has to go.
+
 **The rule that keeps tailoring honest: tailor from the CORPUS, not from the baseline.** The
 baseline is a starting point and a voice reference — read it to see the default and match
 their register — but pull facts, story *selection*, and *angling* from the corpus itself. A
@@ -55,9 +66,16 @@ rather than trusting the selection blindly.
 
 ## Hard rules — faithful rendering
 
-**1. Vetted facts only. Never render from `_inbox/`.** A claim reaches the artifact only if a
-corpus story vouches for it (`facts_vetted` / published sources). `_inbox/` is raw ore — its
-numbers are unsourced and forbidden until extracted into a story file.
+**1. Vetted facts only. Never render from `_inbox/`, and never from `applications/`.** A claim
+reaches the artifact only if a corpus story vouches for it (`facts_vetted` / published
+sources). `_inbox/` is raw ore — its numbers are unsourced and forbidden until extracted into
+a story file. That holds for an application's own `_inbox/` too: a recruiter's account of the
+role is a claim by a stranger with an incentive, not a fact you may put in the user's mouth.
+
+`applications/` is barred for the opposite reason — everything in it is already a *rendering*.
+Sourcing from another application's `resume.md`, or from this one's earlier draft, is the
+baseline telephone game above with a second lossy hop. It is the easiest mistake to make once
+the folder holds something that looks nearly right. Read the corpus.
 
 **2. Numbers carry their source and their ceiling.** Render only figures a corpus file
 sources, at the value it sources. If a metric was confirmed as "doubled," never the "tripled"
@@ -124,8 +142,9 @@ This skill ships generic. It gets sharper by accumulating the user's own correct
 
 1. **Decide the tier.** JD in hand → tailored (write to `applications/<company>-<role>/`). No
    JD → baseline (update the canonical repo file). Say which you're doing.
-2. **If tailored, read the JD first.** Name what the role actually rewards, in one or two
-   lines — that's the thesis.
+2. **If tailored, find the application folder.** If it exists, read `jd.md` and `fit.md` from
+   it; if it doesn't, offer `/career-corpus:apply` first. Then read the JD and name what the
+   role actually rewards, in one or two lines — that's the thesis.
 3. **Read the corpus** — `through-lines.md`, the relevant `background.md` and story files, and
    any `RENDERING DECISION` notes. For a tailored render, also read the closest baseline as a
    voice reference (but source facts from the corpus, not from it).

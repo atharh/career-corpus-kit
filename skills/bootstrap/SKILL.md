@@ -22,6 +22,9 @@ corpus/
   _inbox/            ← drop raw material here (old drafts, docs, reviews)
 ```
 
+Nothing else yet. `applications/` appears alongside `corpus/` the first time the user opens an
+application with the `apply` skill — don't create it here.
+
 ## Steps
 
 1. **Gather what exists.** Ask the user for their current résumé, LinkedIn text, an old CV,

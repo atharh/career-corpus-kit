@@ -8,7 +8,17 @@ Shared rules live in SKILL.md. This file is the shape each artifact takes.
 |---|---|---|
 | Résumé | `resume.md` | `applications/<company>-<role>/resume.md` |
 | Cover letter | `cover-letter-<family>.md` | `applications/<company>-<role>/cover-letter.md` |
-| Interview prep | — (per-role only) | `applications/<company>-<role>/interview-prep.md` |
+
+The tailored column lives inside a folder the `apply` skill opens and owns. Read what's
+already there before asking for anything:
+
+| File | Owner | What it is |
+|---|---|---|
+| `jd.md` | `apply` | The posting verbatim, with URL and capture date. Read it; don't ask for the JD again. |
+| `fit.md` | `apply` | What the corpus backs, backs thinly, and can't back for this role. Most of the selection work. |
+| `application.md` | `apply` | Dated log — stage, contacts by role, next action. |
+| `_inbox/` | `apply` | Raw inbound. **Unvetted. Never render from it.** |
+| `interview-prep.md`, `01-…`–`05-…` | `prep` | The study pack for a booked interview. Not this skill's output. |
 
 If you keep a PDF build pipeline that globs top-level `*.md`, an `applications/` subfolder
 won't be swept into the baseline build — run the build with explicit paths for tailored
@@ -57,6 +67,11 @@ turns single newlines into breaks, keep signature lines on their own lines.
 ---
 
 ## Interview-prep answers
+
+For a **booked** interview, `prep` owns this — it builds a whole pack against the employer's
+criteria and writes it into the application folder. What follows is the shape of a spoken
+answer on its own, for the ad-hoc case: rehearsing one story, or answering a question that
+arrived out of band. `prep` renders answers in this shape too.
 
 **Form:** spoken-shaped, longer than a bullet, structured but not robotic — stories that
 follow the flow an interview actually takes.
