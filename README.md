@@ -212,6 +212,11 @@ learned by getting it wrong, that keep every rendered line defensible in the roo
 - **Nothing is applied silently.** You see a diff with a reason per change, and every genuine
   judgment call is surfaced as yours to make.
 
+Those rules are tested, not just written down. [`evals/`](evals/) turns the seven rejected
+claims in `ANNOTATED.md` into assertions — a disputed number, a ceiling, a reading the user
+refuted, an attribution they have no standing for — and runs them, plus a set of static checks on
+the skills themselves, on every push. `./evals/run.sh` needs nothing but `python3`.
+
 ## Honest caveats
 
 - **The tailoring step is the least-tested part.** Selecting and angling stories from a real

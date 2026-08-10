@@ -1,0 +1,48 @@
+name: evals
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # The version-bump check diffs against the base, so we need history.
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Resolve base ref
+        id: base
+        run: |
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            echo "ref=origin/${{ github.base_ref }}" >> "$GITHUB_OUTPUT"
+          elif git rev-parse --verify --quiet HEAD~1 >/dev/null; then
+            echo "ref=HEAD~1" >> "$GITHUB_OUTPUT"
+          else
+            echo "ref=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Static checks
+        run: |
+          python3 evals/static_checks.py \
+            ${{ steps.base.outputs.ref && format('--base-ref {0}', steps.base.outputs.ref) || '' }}
+
+      - name: Trip-wires (offline)
+        run: python3 evals/tripwires.py
+
+# Live trip-wires are not run here. They need an API key and a full Claude Code
+# session per case, and renders are stochastic enough that a single run is noise.
+# Run them by hand before shipping a change to a skill's hard rules:
+#
+#   python3 evals/tripwires.py --mode live --runs 3
