@@ -67,6 +67,10 @@ Untested today, and not testable by grep:
 - Is the story *selection* the strongest evidence for this role, or just the first two files?
 - Does `fit.md` name a real gap, or paper one over with an adjacent story?
 - Does the prose read as the user, or as a model? (Rule 10 — currently unenforced.)
+- **Does `interview` actually read `REFERENCE.md` and compose rounds from the playbook?**
+  Moving it out of `SKILL.md` traded always-loaded for a pointer the model has to follow.
+  Static checks prove the pointer *resolves*; nothing proves it gets used, and the symptom
+  if it doesn't — blander questions — is exactly the kind a regex can't see.
 
 **Shape of a fix:** a rubric grader that answers specific yes/no questions with the corpus,
 the JD and the output in context — never a 1–10 score, which compresses away the reason. Run
@@ -95,27 +99,6 @@ The claim extractor is the hard part and is itself a judge — see above.
 
 ---
 
-## Split the interview playbook out of the skill
-
-**Deferred 2026-08-11.** `interview/SKILL.md` is 343 lines and does four jobs: invariant
-rules, round mechanics, the storage schema, and a nine-part interviewing playbook. Only the
-playbook is *technique* — the rest is contract. It loads on every invocation regardless.
-
-`render` already solved this: hard rules in `SKILL.md`, artifact specifics in `REFERENCE.md`.
-Same move — leave source rules, round/frontier mechanics, the file-update contract, and
-stop/resume in the skill; move the playbook to `interview/REFERENCE.md` and point at it from
-the step that actually needs it.
-
-**Why deferred:** it's a refactor of the most load-bearing file in the kit, and the live
-trip-wires that would catch a regression only cover `render`. Do it after there's something
-watching.
-
-**Not to be confused with** the broader "extract shared policy into `skills/_shared/`"
-suggestion, which is a different and worse idea — `evals/README.md` records why, under the
-policy drift check that replaced it.
-
----
-
 ## Stable identifiers for rule cross-references
 
 **Deferred 2026-08-11**, when the policy drift check shipped. Rules are cited by number —
@@ -129,8 +112,11 @@ site than a number does.
 
 **Why deferred:** it touches every rule list in the kit for a failure that hasn't happened
 yet, and the numbering check makes the loud version of it (two rule 6s) impossible already.
-Worth doing the next time those files are open anyway — the interview playbook split is the
-obvious moment.
+
+**The case got stronger when the playbook moved to `interview/REFERENCE.md`.** Those
+`playbook N` citations now cross a file boundary, which is where a silent renumber is most
+likely and hardest to eyeball. Tier 1 checks they resolve; it still can't check they mean the
+same thing they did.
 
 ---
 

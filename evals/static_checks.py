@@ -209,6 +209,41 @@ def check_rule_references(r: Report, rules: dict[str, set[int]]) -> None:
             )
 
 
+def check_playbook_references(r: Report) -> None:
+    """"playbook N" must resolve, the same way "rule N" does.
+
+    The interview playbook lives in REFERENCE.md and SKILL.md cites it by
+    number, so these references now cross a file boundary — nothing keeps the
+    two files renumbering in step.
+    """
+    playbooks: dict[str, set[int]] = {}
+    for d in skill_dirs():
+        ref = d / "REFERENCE.md"
+        if not ref.is_file():
+            continue
+        for head, nums in numbered_sections(ref.read_text()).items():
+            if "playbook" not in head.lower():
+                continue
+            r.check(
+                f"{ref.relative_to(ROOT)} — {head!r} is numbered 1..{len(nums)}",
+                nums == list(range(1, len(nums) + 1)),
+                f"got {nums}",
+            )
+            playbooks.setdefault(d.name, set()).update(nums)
+
+    for path in sorted((ROOT / "skills").rglob("*.md")):
+        owner = path.parent.name
+        if owner not in playbooks:
+            continue
+        for m in re.finditer(r"playbook (\d+)", path.read_text()):
+            n = int(m.group(1))
+            r.check(
+                f"{path.relative_to(ROOT)} — 'playbook {n}' resolves in {owner}",
+                n in playbooks[owner],
+                f"{owner} playbook has {sorted(playbooks[owner])}",
+            )
+
+
 def check_skill_cross_references(r: Report, names: list[str]) -> None:
     """Every /career-corpus:<skill> mentioned anywhere must exist."""
     for path in sorted([*(ROOT / "skills").rglob("*.md"), ROOT / "README.md"]):
@@ -419,6 +454,7 @@ def main() -> int:
     names = check_skill_frontmatter(r)
     rules = check_numbered_lists(r)
     check_rule_references(r, rules)
+    check_playbook_references(r)
     check_skill_cross_references(r, names)
     check_relative_links(r)
     check_root_docs(r)
