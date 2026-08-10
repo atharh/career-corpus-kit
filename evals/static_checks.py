@@ -25,7 +25,16 @@ ROOT = Path(__file__).resolve().parent.parent
 
 # Paths whose contents users actually load. Changing one requires a version bump;
 # see CLAUDE.md. Everything else (CI, .gitignore, this directory) is exempt.
-USER_VISIBLE = ("skills/", "README.md", "examples/", ".claude-plugin/marketplace.json")
+USER_VISIBLE = (
+    "skills/",
+    "README.md",
+    "PRIVACY.md",
+    "examples/",
+    ".claude-plugin/marketplace.json",
+)
+
+# Docs at the repo root that skills link to and users read.
+ROOT_DOCS = ("README.md", "PRIVACY.md")
 
 FICTIONAL = "FICTIONAL"
 
@@ -214,7 +223,13 @@ def check_skill_cross_references(r: Report, names: list[str]) -> None:
 
 def check_relative_links(r: Report) -> None:
     """Markdown links to files in this repo must resolve."""
-    for path in sorted([*(ROOT / "skills").rglob("*.md"), *(ROOT / "examples").rglob("*.md")]):
+    # A missing root doc is reported by check_root_docs, not crashed on here.
+    roots = [
+        *(ROOT / "skills").rglob("*.md"),
+        *(ROOT / "examples").rglob("*.md"),
+        *(p for d in ROOT_DOCS if (p := ROOT / d).is_file()),
+    ]
+    for path in sorted(roots):
         rel = path.relative_to(ROOT)
         for m in re.finditer(r"\[[^\]]+\]\(([^)#]+?)(?:#[^)]*)?\)", path.read_text()):
             target = m.group(1).strip()
@@ -225,6 +240,16 @@ def check_relative_links(r: Report) -> None:
                 (path.parent / target).exists(),
                 "no such file",
             )
+
+
+def check_root_docs(r: Report) -> None:
+    """The docs skills point users at must exist.
+
+    `bootstrap` and `apply` both send the user to PRIVACY.md. A dead pointer in
+    a prompt is worse than no pointer: the model cites a file that isn't there.
+    """
+    for d in ROOT_DOCS:
+        r.check(f"{d} exists", (ROOT / d).is_file(), "referenced by skills and USER_VISIBLE")
 
 
 def check_readme_lists_every_skill(r: Report, names: list[str]) -> None:
@@ -396,6 +421,7 @@ def main() -> int:
     check_rule_references(r, rules)
     check_skill_cross_references(r, names)
     check_relative_links(r)
+    check_root_docs(r)
     check_readme_lists_every_skill(r, names)
     check_policy_blocks(r, names)
     check_example_corpus(r)
