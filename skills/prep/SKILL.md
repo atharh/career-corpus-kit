@@ -41,9 +41,9 @@ looking for tells you what to *prepare for* and never what is *true*. Use it to 
 Never let it become a claim in the user's mouth — the interviewer knows what the team actually
 does.
 
-If a round is with a named individual, keep that name **out of filenames**. Roles in the
-filename, names in the body if the user wants them. Filenames get shared, screenshotted, and
-tab-completed in front of other people.
+If a round is with a named individual, keep that name **out of filenames**. Roles in
+filenames, names in the body if the user wants them. Filenames get screenshotted, screen-shared
+and tab-completed in front of other people.
 
 ## The pack
 

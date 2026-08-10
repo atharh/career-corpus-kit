@@ -24,6 +24,37 @@ to notice. It also checks each numbered list runs `1..N` with no gaps, that ever
 the example corpus keeps its `FICTIONAL` banners, its `sources:` blocks, and its
 `related:` targets.
 
+**Policy drift check.** Table in `cases/policy-blocks.json`. Four policies are
+stated in more than one skill — the Lessons block, `_inbox/`-is-not-evidence,
+no-names-in-filenames, and candidate-claim sourcing — and each entry pins the
+exact sentences that must not diverge between the copies.
+
+The repetition is deliberate and stays. A skill loads its own `SKILL.md` and
+nothing else, so a rule extracted into `_shared/TRUST.md` is in force only if the
+model happens to read that file, which turns a rule into a hope. What repetition
+costs is drift, and drift shipped: `apply` and `render` both stated the sourcing
+rule, differently enough that render's copy barred reading the very folder its
+own workflow four screens below told it to read. Two copies of the filename rule
+and two of the inbox rule had also quietly diverged in wording.
+
+Each block checks three things:
+
+- **every skill is classified** — either in `required_in`, or in `exempt` with a
+  written reason. Add a seventh skill and it fails four times until someone
+  decides, per policy, whether it repeats or is exempt. This is the half that
+  scales.
+- **required skills state the invariants verbatim**, with whitespace collapsed —
+  so rewrapping a paragraph is fine and rewording one sentence in one skill is
+  not.
+- **superseded wording never comes back.** The absolute phrasings that caused
+  the contradiction are listed with the reason they were wrong; if one
+  reappears anywhere in `skills/` or the README, the check fails and prints why.
+
+Adding a block: name the policy, say what breaks if the copies disagree, pick
+the canonical skill, and quote the invariant sentences from it. Then prove it
+can fail — reword the sentence in a non-canonical skill, confirm it fires, and
+revert.
+
 **Version-bump check** (needs `--base-ref`): if anything under `skills/`,
 `README.md`, or `examples/` changed and `plugin.json`'s version didn't, it fails.
 Installs are cached per version, so a user-visible change on an unchanged version

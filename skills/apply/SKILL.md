@@ -105,8 +105,8 @@ and `prep` needs the employer's own words months later to map a story bank to th
 Summarise in `fit.md` if you want a summary. Never summarise *into* `jd.md` — a paraphrase
 silently becomes the thing you prepare against.
 
-**2. `_inbox/` here means what `corpus/_inbox/` means: unvetted, never rendered from, never
-cited as fact.** Folder location is a truth claim — the same rule the `interview` skill
+**2. `_inbox/` here means what `corpus/_inbox/` means: unvetted, and never rendered from and
+never cited as fact.** Folder location is a truth claim — the same rule the `interview` skill
 applies to raw material applies here, and it bites harder, because inbound application
 material is *fluent and confident and written by someone with an incentive*. A recruiter's
 description of the team's scope, the role's remit, or how the last person did is a claim by a

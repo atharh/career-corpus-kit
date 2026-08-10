@@ -271,6 +271,85 @@ def check_example_corpus(r: Report) -> None:
                 )
 
 
+def squash(text: str) -> str:
+    """Collapse whitespace so a hard-wrapped sentence matches its one-line form.
+
+    The skills are wrapped at ~96 columns, so almost every invariant sentence
+    spans a line break. Rewrapping a paragraph is not drift; rewording it is.
+    """
+    return re.sub(r"\s+", " ", text)
+
+
+def check_policy_blocks(r: Report, names: list[str]) -> None:
+    """Policy stated in more than one skill must be stated identically.
+
+    A skill loads its own SKILL.md and nothing else, so shared policy is
+    repeated on purpose — extracting it into a file the model may not read
+    would turn a rule into a hope. What repetition costs is drift, and drift
+    has already shipped: `apply` and `render` both stated the claim-sourcing
+    rule, differently enough that render's copy barred reading the folder its
+    own workflow was told to read.
+
+    Table: evals/cases/policy-blocks.json.
+    """
+    path = ROOT / "evals" / "cases" / "policy-blocks.json"
+    try:
+        table = json.loads(path.read_text())
+    except Exception as e:  # noqa: BLE001
+        r.fail("policy-blocks.json parses", str(e))
+        return
+
+    skills = set(names)
+
+    for block in table.get("blocks", []):
+        bid = block["id"]
+        required = block.get("required_in", [])
+        exempt = block.get("exempt", {})
+
+        # Every skill is either required to carry the block or exempt with a
+        # reason. This is the half that catches a *new* skill: add one and it
+        # can't quietly opt out of policy it should be repeating.
+        classified = set(required) | set(exempt)
+        r.check(
+            f"policy {bid} — every skill is classified",
+            classified == skills,
+            f"unclassified: {sorted(skills - classified)}; unknown: {sorted(classified - skills)}",
+        )
+        r.check(
+            f"policy {bid} — canonical skill carries it",
+            block.get("canonical") in required,
+            f"canonical={block.get('canonical')!r} not in required_in={required}",
+        )
+        r.check(
+            f"policy {bid} — exempt skills give a reason",
+            all(v.strip() for v in exempt.values()),
+            "an empty reason is an undocumented exemption",
+        )
+
+        for skill in required:
+            if skill not in skills:
+                continue
+            body = squash((ROOT / "skills" / skill / "SKILL.md").read_text())
+            for inv in block["invariants"]:
+                r.check(
+                    f"policy {bid} — {skill} states {inv[:48]!r}…",
+                    squash(inv) in body,
+                    f"absent or reworded in skills/{skill}/SKILL.md",
+                )
+
+    # Wording that was wrong and got fixed. Left unguarded, the old phrasing
+    # comes back the next time someone tightens a sentence from memory.
+    targets = [*(ROOT / "skills").rglob("*.md"), ROOT / "README.md"]
+    for entry in table.get("superseded", []):
+        needle = squash(entry["text"])
+        hits = [str(p.relative_to(ROOT)) for p in targets if needle in squash(p.read_text())]
+        r.check(
+            f"superseded wording is gone: {entry['text'][:48]!r}…",
+            not hits,
+            f"found in {hits} — {entry['why']}",
+        )
+
+
 def check_version_bump(r: Report, base_ref: str, plugin: dict) -> None:
     """User-visible change without a version bump = a silent update.
 
@@ -318,6 +397,7 @@ def main() -> int:
     check_skill_cross_references(r, names)
     check_relative_links(r)
     check_readme_lists_every_skill(r, names)
+    check_policy_blocks(r, names)
     check_example_corpus(r)
 
     base = args.base_ref or os.environ.get("EVAL_BASE_REF")
