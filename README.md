@@ -15,14 +15,18 @@ It's also how you stop forgetting your own career. Recall is triggered, not enum
 remember the thing you did five years ago only when something adjacent jogs it. The interview
 skill is built to do that jogging, and to write down what surfaces before it evaporates.
 
-## The four skills
+## The five skills
 
 | Skill | When | What it does |
 |---|---|---|
 | **`/career-corpus:bootstrap`** | once, at the start | Reads your existing résumé/LinkedIn, sets up the corpus, and generates a prioritized queue of stories worth extracting. Gets you from empty to "start with this one." |
 | **`/career-corpus:interview`** | corpus **in** | Interviews you about one memory and writes a vetted story file. Relentless, works in rounds of a few questions at a time, and it never lets a claim in that you can't defend. |
-| **`/career-corpus:render`** | corpus **out** | Reads the vetted corpus + a job description and produces a résumé entry, cover letter, or interview-prep answers — tailored to that role, sourced only from what the corpus vouches for. |
+| **`/career-corpus:render`** | corpus **out** | Reads the vetted corpus + a job description and produces a résumé entry or cover letter — tailored to that role, sourced only from what the corpus vouches for. |
+| **`/career-corpus:prep`** | an interview is booked | Builds a prep pack for one specific interview: an opener, a story bank mapped to the employer's own hiring criteria, the probes they'll push on with defensible answers, and questions to ask them. Run it again afterwards to capture what was actually asked. |
 | **`/career-corpus:compact`** | maintenance | Prunes the sediment interviews leave behind — resolved gaps, dated back-and-forth — while guarding the lines that keep renders honest: your ceilings, rendering decisions, and rejected readings. Run it when a gap list has become more archive than queue. |
+
+`render` produces documents you **send**. `prep` produces a directory you **study** — and its
+second half feeds what you fumbled back into `interview`, which is where the loop closes.
 
 ### The skills learn your preferences
 
@@ -42,7 +46,7 @@ In Claude Code:
 ```
 
 That's it — the skills show up as `/career-corpus:bootstrap`, `/career-corpus:interview`,
-`/career-corpus:render`, and `/career-corpus:compact`. If the install summary says `Run /reload-plugins to activate.`,
+`/career-corpus:render`, `/career-corpus:prep`, and `/career-corpus:compact`. If the install summary says `Run /reload-plugins to activate.`,
 run that. Later, `/plugin marketplace update career-corpus-kit` pulls new versions.
 
 <details>
@@ -89,6 +93,13 @@ To scope it to one project instead, symlink the repo into that project's
    ```
    Without a JD, it produces a strong *baseline* you maintain as a checkpoint. With one, it
    tailors from the corpus for that specific role.
+5. **Prep when they call you back.**
+   ```
+   /career-corpus:prep loop booked for this role: <paste JD + recruiter email>
+   ```
+   Builds a study pack for that specific interview. Run it again the same day afterwards — what
+   you fumbled goes back into the corpus, and it's better material than any question a model
+   would have invented.
 
 ## What else you can do with it
 
@@ -97,9 +108,9 @@ most obvious thing to render from it. Each of these is just a prompt:
 
 - **Résumés and cover letters** — the default path.
   `/career-corpus:render tailor a résumé and cover letter for this JD: <paste>`
-- **Interview prep** — answers to the questions *this* role will ask, drawn only from what you
-  can defend under follow-up.
-  `/career-corpus:render interview prep for this JD: <paste> — behavioural answers, and flag any number I shouldn't quote`
+- **Interview prep** — a full pack for one booked interview, mapped to the employer's own
+  hiring criteria and including the questions they'll push back on.
+  `/career-corpus:prep I have a loop next week for this role: <paste JD + recruiter email>`
 - **Self-reviews and 360s** — performance season, written from your own evidence instead of a
   blank box at 11pm. Map the corpus onto whatever competency model your company uses.
   `/career-corpus:render a self-review for this cycle, grouped by these competencies: <paste rubric>`
@@ -112,11 +123,12 @@ most obvious thing to render from it. Each of these is just a prompt:
 - **LinkedIn, bios, speaker blurbs** — the same facts at a different compression.
   `/career-corpus:render a LinkedIn About section and a 60-word conference speaker bio`
 - **Post-interview capture** — the loop that compounds. Right after a real interview, record
-  what you were asked and where you had nothing good to say; it becomes next session's queue.
-  `/career-corpus:interview I got asked about <X> today and fumbled it — let's get a real answer on record`
+  what you were asked and where you had nothing good to say.
+  `/career-corpus:prep that interview is done — here's what they actually asked and where I fumbled`
 
 The last one is worth doing even when you don't get the job. A question you couldn't answer is
-the most precisely targeted gap you'll ever be handed.
+the most precisely targeted gap you'll ever be handed — better than anything a model would
+have guessed, because a real interviewer found it.
 
 ## See one before you build one
 
