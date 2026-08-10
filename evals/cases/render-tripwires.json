@@ -1,0 +1,143 @@
+{
+  "_comment": [
+    "The seven trip-wires from examples/rendered/ANNOTATED.md, as assertions.",
+    "",
+    "Each case is a claim the corpus TEMPTS a model into making and a rule that",
+    "stops it. `forbidden` is the trip-wire: those patterns must never appear in a",
+    "rendered artifact drawn from examples/corpus/. `expected_in` pins what the",
+    "committed example actually shipped, and runs in offline mode only — a live",
+    "render may word the safe version differently and still be correct.",
+    "",
+    "`documented_in` keeps each assertion tethered to the row in ANNOTATED.md that",
+    "explains it. Delete the row, the case fails as untethered.",
+    "",
+    "Patterns are Python regexes, matched case-insensitively."
+  ],
+
+  "targets": [
+    "examples/rendered/resume.md",
+    "examples/rendered/cover-letter.md"
+  ],
+
+  "documented_in": "examples/rendered/ANNOTATED.md",
+
+  "cases": [
+    {
+      "id": "disputed-number",
+      "rule": "render rule 2 — numbers carry their source and their ceiling",
+      "source": "examples/corpus/tidewater/batch-window.md — facts_disputed",
+      "why": "The resume said 80%, Sam said 'about half', and Sam's memory is the only source either number has. Unresolved numbers do not render.",
+      "forbidden": ["\\b80\\s*%", "\\b80 ?percent", "\\beighty ?percent", "\\bby 80\\b"],
+      "expected_in": {
+        "examples/rendered/resume.md": ["halv"],
+        "examples/rendered/cover-letter.md": ["halv"]
+      },
+      "documented_by": "80%"
+    },
+    {
+      "id": "adoption-ceiling",
+      "rule": "render rule 7 — prefer the true version; obey the user's own ceiling",
+      "source": "examples/corpus/tidewater/batch-window.md — Sam's ceiling: 'Two teams took it. Not the org.'",
+      "why": "Two teams adopting a pattern is not org-wide adoption, and an interviewer will ask which teams.",
+      "forbidden": [
+        "org-wide",
+        "organi[sz]ation[- ]wide",
+        "across the org\\b",
+        "company-wide",
+        "drove adoption",
+        "drove .{0,20}adoption"
+      ],
+      "expected_in": {
+        "examples/rendered/resume.md": ["two other teams"]
+      },
+      "documented_by": "org-wide"
+    },
+    {
+      "id": "rejected-reading-architectural-flaw",
+      "rule": "render rule 6 — obey recorded rendering decisions, including rejected readings",
+      "source": "examples/corpus/tidewater/batch-window.md — the model's reading, refuted: 'I didn't spot a blind spot, I got woken up by it four times.'",
+      "why": "Recasting a fix-what-hurts-you story as visionary architectural insight is the exact reading the corpus records as wrong.",
+      "forbidden": [
+        "architectural flaw",
+        "critical flaw",
+        "blind spot",
+        "identified and resolved",
+        "spotted a .{0,30}flaw"
+      ],
+      "expected_in": {
+        "examples/rendered/resume.md": ["diagnosed and fixed"]
+      },
+      "documented_by": "critical architectural flaw"
+    },
+    {
+      "id": "no-reports",
+      "rule": "render rule 5 — attribute their role honestly",
+      "source": "examples/corpus/tidewater/background.md — 'Sam has never had reports.'",
+      "why": "'Led the team' from someone who has never had a report is checkable and fatal. Sam led the work.",
+      "forbidden": [
+        "led (a|the|my) team",
+        "managed (a|the|my) team",
+        "\\bmy (direct )?reports\\b",
+        "\\bdirect reports\\b",
+        "team responsible for",
+        "line[- ]managed"
+      ],
+      "expected_in": {
+        "examples/rendered/resume.md": ["led a rebuild of the on-call rotation"]
+      },
+      "documented_by": "Led the team responsible for six services"
+    },
+    {
+      "id": "causal-over-attribution",
+      "rule": "render rule 2 + rule 5 — the number is real; the attribution was not",
+      "source": "examples/corpus/tidewater/oncall-rebuild.md — the alert cleanup did the work; the rotation change was reversed",
+      "why": "Crediting the page reduction to the rotation redesign claims credit for the part Sam reversed.",
+      "forbidden": [
+        "\\b70\\s*%",
+        "reduced on-call load",
+        "through rotation redesign",
+        "by redesigning the rotation",
+        "rotation redesign .{0,20}(cut|reduc)"
+      ],
+      "expected_in": {
+        "examples/rendered/resume.md": ["31 in q1 2023 to 9"]
+      },
+      "documented_by": "Reduced on-call load 70%"
+    },
+    {
+      "id": "anachronism-and-attribution",
+      "rule": "render rule 3 — date the vocabulary; render rule 5 — honest attribution",
+      "source": "examples/corpus/bellhaven/reporting-migration.md — anachronisms_corrected; the schema was a contractor's",
+      "why": "It was a cron job and a second Postgres. 'Data mesh' postdates the work by three years, and 'architected' claims a contractor's schema.",
+      "forbidden": [
+        "\\barchitected\\b",
+        "data mesh",
+        "data platform",
+        "data lake",
+        "clinical analytics platform",
+        "designed the schema"
+      ],
+      "expected_in": {
+        "examples/rendered/resume.md": ["built and owned the nightly export"]
+      },
+      "documented_by": "Architected a data platform"
+    },
+    {
+      "id": "kubernetes-ceiling",
+      "rule": "render rule 7 — prefer the true version",
+      "source": "examples/corpus/profile.md — 'I use Kubernetes. I have never run a cluster.'",
+      "why": "A skills line is the cheapest place to overclaim and the first place a technical screen probes.",
+      "forbidden": [
+        "kubernetes expertise",
+        "expert in kubernetes",
+        "k8s expertise",
+        "(ran|run|managed|operated|administered) .{0,15}(kubernetes|k8s) (cluster|clusters)",
+        "kubernetes (administration|operations)"
+      ],
+      "expected_in": {
+        "examples/rendered/resume.md": ["deploys to kubernetes"]
+      },
+      "documented_by": "Kubernetes expertise"
+    }
+  ]
+}

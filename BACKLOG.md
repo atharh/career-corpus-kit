@@ -49,3 +49,46 @@ fake recruiter email is a step further again. Worth doing carefully, not quickly
 **If built:** the `fit.md` is the file to get right — specifically a requirement the example
 corpus genuinely cannot back, ending in "don't apply yet". A fit check where everything lines
 up teaches the opposite of the point.
+
+**Now also blocking evals** — `evals/` has no cases for `apply` or `prep` because there's no
+application fixture to run them against.
+
+---
+
+## Judge layer for the evals
+
+**Deferred 2026-08-11**, when `evals/` shipped. Every assertion in there is a regex, which
+covers the rules that forbid a *string* and none of the rules that forbid a *judgement*.
+
+Untested today, and not testable by grep:
+
+- Is the thesis drawn from the JD, or lifted from the baseline? (`render`'s central claim, and
+  the part its own SKILL.md admits is least battle-tested.)
+- Is the story *selection* the strongest evidence for this role, or just the first two files?
+- Does `fit.md` name a real gap, or paper one over with an adjacent story?
+- Does the prose read as the user, or as a model? (Rule 10 — currently unenforced.)
+
+**Shape of a fix:** a rubric grader that answers specific yes/no questions with the corpus,
+the JD and the output in context — never a 1–10 score, which compresses away the reason. Run
+per-question, log the reason, require a majority across runs.
+
+**Why deferred:** the grep tier catches the failures that have actually happened, costs
+nothing, and runs on every push. A judge is a second stochastic system evaluating the first,
+and a flaky judge is worse than no judge — it teaches you to ignore red.
+
+---
+
+## Tier 3 — claim-diffing against a real corpus
+
+**Deferred 2026-08-11.** The fixture corpus has four stories. A real one has dozens, and
+selection pressure is the thing fixtures can't reproduce: with 30 stories, *which four* a
+render picks is most of the quality, and no assertion in `evals/` looks at that.
+
+**Why not just run the evals against the real corpus:** it moves while the skills that write
+to it are under test, so a changed render can't be attributed to the change. And it's private,
+so CI and contributors can never see it.
+
+**Shape of a fix:** run the same prompt at two kit versions against a *pinned commit* of a
+real corpus, extract the set of factual claims from each output, and diff the claim sets.
+Surfaces "v1.5 stopped selecting the batch-window story" instead of "600 words changed".
+The claim extractor is the hard part and is itself a judge — see above.
