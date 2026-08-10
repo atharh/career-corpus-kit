@@ -90,6 +90,34 @@ To scope it to one project instead, symlink the repo into that project's
    Without a JD, it produces a strong *baseline* you maintain as a checkpoint. With one, it
    tailors from the corpus for that specific role.
 
+## What else you can do with it
+
+Once the corpus exists, it's a sourced, dated record of your work — and a résumé is only the
+most obvious thing to render from it. Each of these is just a prompt:
+
+- **Résumés and cover letters** — the default path.
+  `/career-corpus:render tailor a résumé and cover letter for this JD: <paste>`
+- **Interview prep** — answers to the questions *this* role will ask, drawn only from what you
+  can defend under follow-up.
+  `/career-corpus:render interview prep for this JD: <paste> — behavioural answers, and flag any number I shouldn't quote`
+- **Self-reviews and 360s** — performance season, written from your own evidence instead of a
+  blank box at 11pm. Map the corpus onto whatever competency model your company uses.
+  `/career-corpus:render a self-review for this cycle, grouped by these competencies: <paste rubric>`
+- **Promotion packets** — a promo doc is a rubric plus evidence, and the corpus is the evidence.
+  The second half of this prompt is the valuable half.
+  `/career-corpus:render a promotion packet for <level> against this rubric: <paste> — and list every line I have no evidence for`
+- **Gap analysis before you apply** — find out what your corpus *can't* support yet, while
+  there's still time to do something about it.
+  `/career-corpus:render compare my corpus against this JD and list what it can't back up — don't write anything yet: <paste>`
+- **LinkedIn, bios, speaker blurbs** — the same facts at a different compression.
+  `/career-corpus:render a LinkedIn About section and a 60-word conference speaker bio`
+- **Post-interview capture** — the loop that compounds. Right after a real interview, record
+  what you were asked and where you had nothing good to say; it becomes next session's queue.
+  `/career-corpus:interview I got asked about <X> today and fumbled it — let's get a real answer on record`
+
+The last one is worth doing even when you don't get the job. A question you couldn't answer is
+the most precisely targeted gap you'll ever be handed.
+
 ## What makes the output trustworthy
 
 The value isn't "an AI wrote my résumé" — anything can do that. It's a set of rules, each
