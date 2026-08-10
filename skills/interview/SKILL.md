@@ -171,6 +171,40 @@ story gets bent to fit. The defence is that through-lines are *derived and falsi
 new evidence can demote them. Never let a through-line pick a story's framing; let the job
 description do that.
 
+**13. Apply the say-it-out-loud test — before you ask, and before you log a gap.** Depth is
+the point of a corpus, but *completeness* is not. This skill will drift toward archival
+completeness on its own, because every answer exposes three more askable questions and they
+all look reasonable written down.
+
+> **Would they ever say this out loud — in a bullet, a letter, or an interview answer?**
+
+- **Renders** — it goes in the artifact. Ask it.
+- **Defends** — they'd need it only if an interviewer challenges a claim **already on their
+  résumé**. Ask it when the claim is actually there.
+- **Neither** — **don't ask it, and don't write it down.** No gap, no note, nothing.
+
+*Neither* covers more than you'd think: headcounts and org charts, how long something took
+when nobody will ask, reconciling arithmetic that changes no claim, and the unfinished scene
+you're curious about because it's a good story. A real user objection, and it is the correct
+one: *"nobody really cares whether it was six engineers or seven, or whether the math adds
+up."*
+
+**The failure is structural, so the fix has to be too.** A gap gets logged because a question
+*exists*, not because an answer would change anything — and once logged it gets asked, by you
+or by the next session. So the gap list is not a to-do list of everything askable. **It is a
+queue of answers that would change something.** Prune it under this test, not just when it
+gets long.
+
+**And separate your work from theirs.** Dates, public PRs and bylines, blog posts, release
+histories, naming checks — those are lookups, they're yours (see *Facts are your job*), and
+they must never sit in a queue addressed to the user.
+
+**The counterweight, or this rule guts the playbook:** *demand the mistake* passes this test
+easily. "Tell me about a time you got it wrong" is asked in nearly every interview loop, so a
+story with no mistake in it has a hole exactly where a question is coming. Same for the cost,
+the opposition, and the person who lost. Those are *renders*. The test kills bookkeeping, not
+discomfort.
+
 ## Lessons — how this skill personalises to you
 
 This skill ships generic. It gets sharper by accumulating the user's own corrections in
@@ -234,9 +268,13 @@ question — the pushback, the constraint they were under, the thing they tried 
 > unglamorous middle. A correction is a data point, not a new thesis. Apply it locally; don't
 > re-plot the arc around it.
 
-**2. Cross-check the arithmetic.** Dates, durations, and role changes contradict each other
-constantly. "You shipped it in three months, but you also did the migration in your final
-months a year later — which was it?" often splits one muddled story into two clean ones.
+**2. Cross-check the arithmetic — but only where it changes a claim.** Dates, durations, and
+role changes contradict each other constantly. "You shipped it in three months, but you also
+did the migration in your final months a year later — which was it?" often splits one muddled
+story into two clean ones. **That's the version worth asking: the contradiction sits on the
+résumé, so an interviewer can see it too.** Reconciling a number nobody will ever ask about is
+bookkeeping wearing the costume of rigour — see rule 13. If the two versions produce the same
+bullet and the same spoken answer, let it go.
 
 **3. Interrogate the compressed phrase.** Find the phrase carrying the most weight and demand
 it decompress. "A two-year cross-functional deadlock involving three organizations" is
@@ -273,8 +311,13 @@ better than the theory would have been.
    written answer often reveals the next round's questions.
 4. **Resolve gaps explicitly.** `- [x] ~~question~~ Resolved YYYY-MM-DD: answer.` The gaps
    list is the queue for next time; leaving it honest is what makes the corpus resumable.
-5. **Stop when they defer.** If they say a topic is for another session, log it as a gap and
-   leave it. Don't ruin a productive thread by pushing.
+5. **Prune the queue as you go**, per rule 13. A gap that survives three sessions unasked is
+   usually not waiting for the right moment — it's failing the say-it-out-loud test and nobody
+   has said so. Delete it; git keeps it. **A deferred topic is different from a dead one:** if
+   they defer, log *what* was deferred in enough detail to resume, because "he said he'd made
+   mistakes here" with no topic attached is not resumable and will waste a future session.
+6. **Stop when they defer.** If they say a topic is for another session, log it and leave it.
+   Don't ruin a productive thread by pushing.
 
 ## What "done" looks like
 
@@ -283,9 +326,14 @@ on it: the setup has stakes, the decisions have alternatives and opposition, the
 sources, someone disagreed, something went wrong, and a real person somewhere in it is more
 than an obstacle.
 
-A session is done when the frontier is empty — every branch of the memory visited, nothing
-left silently assumed — or when they've had enough. Whatever the frontier still holds becomes
-the gaps list.
+**Note what that list does *not* include:** every fact about the arc. A story is done when it
+survives pressure, not when it's complete. Those are different targets and the second one is
+unreachable — you can always ask another question, and rule 13 exists because you will.
+
+A session is done when the frontier holds nothing that passes the say-it-out-loud test — or
+when they've had enough. What survives the test becomes the gaps list; what doesn't gets
+dropped, not parked.
 
 Most stories will not get there in one session. That's fine. Depth accretes — the gaps list
-is the contract with the next session.
+is the contract with the next session, and a short honest queue is worth more than a long
+thorough one nobody will work through.

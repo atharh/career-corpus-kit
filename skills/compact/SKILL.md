@@ -56,7 +56,14 @@ Stop and leave the line alone if it carries any of:
    a fact that looks vetted.
 6. **Anachronism corrections** — `anachronisms_corrected` blocks and any "he said X, the
    period term was Y" note. The wrong word creeps back the moment the correction is gone.
-7. **Open gaps.** Obviously. Including ones that have been open a long time.
+7. **Open gaps that would change a rendering.** Including ones that have been open a long
+   time — age is not evidence a question is dead. **The one exception, and it needs the user
+   in the room:** a gap that fails the interview skill's say-it-out-loud test (rule 13) is
+   sediment, not queue. Nobody will ever ask it, so no answer changes anything, and it sits
+   there making the real queue unreadable. Sweeping those is a *separate, named pass* — propose
+   the list, get agreement, then delete. Never fold it into a routine compaction, and never
+   sweep a gap that merely looks tedious: *demand the mistake*, the cost, and the opposition
+   all read as uncomfortable and all pass the test.
 8. **A supersession trail where the earlier version might return** — if the user gave two
    different numbers across sessions, keep both with dates. Drift is evidence.
 

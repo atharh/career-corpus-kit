@@ -118,6 +118,31 @@ most obvious thing to render from it. Each of these is just a prompt:
 The last one is worth doing even when you don't get the job. A question you couldn't answer is
 the most precisely targeted gap you'll ever be handed.
 
+## See one before you build one
+
+**[`examples/`](examples/)** holds a complete fictional corpus — one invented engineer, two
+invented companies, three stories — and the résumé and cover letter rendered from it.
+
+It's deliberately mid-flight rather than polished, because that's the state a real corpus is in
+almost always: open gaps, one number the corpus refuses to resolve on the user's behalf, a
+through-line the user withdrew, and a theory the model got wrong and had to record as its own
+error.
+
+If you read one file, read **[`examples/rendered/ANNOTATED.md`](examples/rendered/ANNOTATED.md)**.
+It puts seven lines the model wanted to write next to what actually shipped, and names the
+corpus rule that stopped each one:
+
+| The tempting version | What shipped |
+|---|---|
+| "Cut pipeline runtime by 80%" | "roughly halving runtime" |
+| "Drove org-wide adoption" | "Two other teams later adopted the same pattern" |
+| "Led the team responsible for six services" | "Led a rebuild of the on-call rotation" |
+| "Architected a data platform" | "Built and owned the nightly export and transform" |
+
+Every one of those was survivable on paper and unsurvivable in the room, because each invites a
+follow-up question the candidate can't answer. That gap is the entire thing this kit exists to
+close.
+
 ## What makes the output trustworthy
 
 The value isn't "an AI wrote my résumé" — anything can do that. It's a set of rules, each
