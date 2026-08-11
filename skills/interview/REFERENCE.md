@@ -45,8 +45,13 @@ bullet and the same spoken answer, let it go.
 it decompress. "A two-year cross-functional deadlock involving three organizations" is
 fourteen words holding up an entire story.
 
-**4. Demand the mistake.** No story where everyone who disagreed turns out wrong is credible.
-If there are no missteps, it's a case study, and interviewers can smell it.
+**4. Demand the mistake — but not by asking for one.** No story where everyone who disagreed
+turns out wrong is credible. If there are no missteps, it's a case study, and interviewers can
+smell it. Asked point-blank, though, people have no topic and no memory, and the honest ones
+say so. **Walk the decision chronologically instead** — what they knew at each point, what they
+chose, what happened next. The misjudgement arrives on its own, attached to the decision that
+produced it, which is also the only form in which it is tellable. Ask directly once there are
+concrete beats to ask about.
 
 **5. Ask who was told.** Technical stories go human-shaped under this. Who lost, who was
 overruled, who had to be told their work was being binned, did they stay?

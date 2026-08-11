@@ -96,7 +96,11 @@ and would have to defend in the room.
 
 **4. Numbers get a source or they don't go in.** For every quantitative claim: where did this
 come from? A dashboard? A review doc? Or a model's guess at what "kept growing" sounds like?
-Record the source next to the number, and record the ceiling — "do not inflate."
+Record the source next to the number, and record the ceiling — "do not inflate." **A limit the
+user volunteers unprompted is the strongest ceiling there is**, because it is offered against
+their own interest — *"two teams, not the org"*, *"it was already half-built"*. Record it as a
+ceiling the moment it is said. It is also the easiest one for a later session to quietly
+re-inflate, since the bigger version always reads better.
 
 **5. No names of non-public people. Ever. Roles only.** The corpus will describe real
 people's worst professional moments — layoffs, performance cases, conflicts, people who were
@@ -162,20 +166,33 @@ reconcile it. The reconciliation is usually more interesting than either version
 the drama-bias failure — see playbook 1 in `REFERENCE.md` — in a new place: resolving a
 tension yourself instead of letting them do it always risks inventing or destroying fact.)
 
-**11b. When an answer changes a claim that is already rendered, fix the rendering too.** Rule 11
-stops you resolving a contradiction between two of *their* statements. This is the other
-direction: a contradiction between what they just said and what a résumé or a live application
-**already claims**. Those are the expensive ones, because a rendered claim is one a reader has
-already believed.
+**11b. When an answer changes a claim that is already rendered, say so and mark it — don't fix
+it in passing.** Rule 11 stops you resolving a contradiction between two of *their* statements.
+This is the other direction: a contradiction between what they just said and what a résumé or a
+live application **already claims**. Those are the expensive ones, because a rendered claim is
+one a reader has already believed.
 
 **Recording the correction is not finishing it.** A corpus that has been updated correctly,
 sitting beside an artifact that still makes the old claim, is the worst available state: the
 corpus looks healthy, so nothing looks wrong, and the document people actually read is the wrong
-one. It will not heal on its own, because nothing re-reads a rendered artifact. So, in the same
-session: say it in the same breath ("that contradicts your résumé, which says X"), let them
-decide per rule 11, and then either apply their decision to the artifact before the session ends
-or write the pending change into the story file as an explicit unchecked gap naming the file and
-the line. Never leave it as *the corpus now knows*.
+one. It will not heal on its own, because nothing re-reads a rendered artifact. So say it in the
+same breath — *"that contradicts your résumé, which says X"* — and let them decide per rule 11.
+
+**But a correction to the corpus does not authorise editing the artifact.** One concern per
+change: the correction is a corpus change, and every artifact it invalidates is a separate,
+deliberate act the user asks for and sees. That holds for all three classes, and the middle one
+is where the damage actually happens —
+
+- **Submitted** — frozen permanently. It is evidence of what a reader saw. Supersede it with a
+  later revision; never rewrite it.
+- **In-flight** — re-rendered on request, with the diff shown. A session doing corpus work has
+  no business editing a live application it wandered into.
+- **Baseline** — refreshed as its own deliberate act, in its own commit, never bundled with the
+  corpus edits that prompted it.
+
+So what the session owes is the **marker, not the fix**: write the pending change into the story
+file as an explicit unchecked gap naming the artifact and the line, and offer the re-render as a
+separate step. Never leave it as *the corpus now knows*.
 
 **Once per corpus — not once per session — diff the whole résumé against the corpus.** Walk each
 rendered claim and ask what vouches for it *now*. Decisions get recorded correctly and then
