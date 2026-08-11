@@ -43,7 +43,10 @@ application with the `apply` skill — don't create it here.
    _inbox/
 
    # Rendered output. Rebuildable from the markdown, and carries contact details
-   # in a form that's easy to mis-attach.
+   # in a form that's easy to mis-attach. Re-rendering gives you the document
+   # again, not the bytes you sent.
+   #
+   # To keep one file deliberately:  git add -f <path>
    *.pdf
    *.docx
 

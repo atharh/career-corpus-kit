@@ -123,8 +123,10 @@ drafts, old design docs, coaching output from other chats, exported notes — go
 `corpus/_inbox/` and **is never rendered from and never cited as fact** — otherwise an AI
 draft's unsourced metric gets quoted in a résumé and defended in a room. Extract it into
 story files per rule 3, then delete it or move it to `_inbox/extracted/`; leave inbox files
-**pristine**, because extraction may need redoing. If raw material refers to *"the doc"*
-behind it, **that artifact is the better source** — ask for it. The same status applies to
+**pristine**, because extraction may need redoing. Pristine is not durable, though: `_inbox/` is
+git-ignored, so an inbox file has no history behind it and survives only as the working copy —
+extract as though this is the one pass that gets to read it. If raw material refers to *"the
+doc"* behind it, **that artifact is the better source** — ask for it. The same status applies to
 `applications/<company>-<role>/_inbox/`, where the `apply` skill files recruiter mail: a fact
 about the user sitting there earns its way in here like everything else, by them saying it.
 

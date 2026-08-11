@@ -184,6 +184,14 @@ a render drew on, the hash of what was actually sent, the URL a posting was capt
 one and it is gone — the posting 404s, the corpus moves on, and nothing on disk remembers. A
 pin is not a rollup; it records an input.
 
+**But a pin is a fingerprint, not a copy.** The `sha256` in a submitted artifact's frontmatter
+settles one question and only one: whether a file the user still has is the file that went out.
+It recovers nothing. `bootstrap`'s `.gitignore` keeps `*.pdf` and `*.docx` out of git, so by
+default the sent bytes survive only as the working copy and the pin outlives them — never
+describe the frontmatter as an archive of what a reader saw. A user who wants those bytes in
+history can `git add -f <the file that went out>` at the `sent` event. Offer it as their call at
+the moment it's live, never as a default: it trades away a privacy default `PRIVACY.md` sets out.
+
 So `application.md` carries no `status:` field: the last line of its log **is** the status, and
 a field beside the log is a second copy on its own schedule. And application-level state lives
 in `application.md`'s frontmatter, artifact-level state in each artifact's own — **no separate

@@ -31,6 +31,26 @@ So the safe order is: **extract first, commit second.** Drop material in `_inbox
 `/career-corpus:interview` to pull the facts into a vetted story file with sources, then
 delete the raw file. The story file is what you keep.
 
+## What staying out of history costs
+
+The `.gitignore` keeps two things out of git: every `_inbox/`, and rendered `*.pdf` and
+`*.docx`. Both are deliberate: raw inbound is other people's material, and a rendered file
+carries your contact details in a form that's easy to mis-attach. The cost is worth stating
+once, because nothing else in the kit makes up for it: an untracked file has no history. No
+earlier version to diff, nothing to restore, no copy anywhere but your working tree. Delete
+it, or lose the disk, and it is gone.
+
+So the durability of raw inbound is whatever your own backups give it, and "extraction may need
+redoing" assumes a file that nothing here guarantees will still be there. Extract early. The
+`sha256` a submitted artifact records is a fingerprint, not a backup — it tells you whether a
+file you still have is the one that went out, and says nothing at all once that file is gone.
+
+Decide per file rather than per rule. To keep one deliberately, `git add -f <path>` — and then
+it is in history for good, which is the section above. Most raw inbound should not be kept, and
+a rendered document can be re-rendered from the markdown, which *is* tracked. The one worth
+thinking about is the file you actually sent: if you want the exact bytes a reader saw,
+force-add that one and accept that it stays.
+
 ## An employer's confidential material
 
 A take-home brief, an internal document, an unannounced product detail — these are not yours
