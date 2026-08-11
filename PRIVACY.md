@@ -8,8 +8,8 @@ understanding before you paste anything in.
 ## Two classes of material
 
 **Durable and yours** — `corpus/`. Story files, `profile.md`, `through-lines.md`, the queue.
-Sensitive about you, but written to be kept: names of private individuals are already banned
-in story bodies, internal codenames are already banned, and every claim carries its source.
+Sensitive about you, but written to be kept: names of non-public people are already banned in
+story bodies, internal codenames are already banned, and every claim carries its source.
 This is what version control is *for*. Commit it.
 
 **Raw and other people's** — every `_inbox/`. A recruiter thread with someone's real name and
@@ -54,11 +54,18 @@ send to a model, it is too sensitive for the corpus, and the corpus is not where
 ## What never belongs in the corpus
 
 - Credentials, tokens, API keys, `.env` files. Nothing here needs them.
-- Private individuals' names — the skills enforce roles-only in story bodies, and no names in
-  filenames at all. Filenames get screenshotted and tab-completed in front of other people.
+- Other people's names — non-public third parties: colleagues, managers, interviewers,
+  recruiters. The skills enforce roles-only in story bodies, and no names in filenames at all,
+  because filenames get screenshotted and tab-completed in front of other people. Two things
+  are not covered by this: your own identity, which is the point of `profile.md`, and public
+  bylines — blog co-authors, conference speakers, anyone already named in public on the work.
 - Internal codenames and unannounced products. They mean nothing to a reader and may be
   confidential.
-- Anything under an NDA you'd have to think about.
+- Anything you aren't free to keep — material prohibited by a contract you've signed, by an
+  employer policy, by law, or by a confidentiality obligation you're under. This is the same
+  test as the section above, applied to the whole corpus rather than one take-home brief: if
+  you'd have to think about whether you're allowed to store it and send it to a model, that
+  hesitation is the answer.
 
 ## If something did get committed
 

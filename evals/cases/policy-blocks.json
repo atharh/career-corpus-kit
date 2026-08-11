@@ -29,7 +29,7 @@
       "exempt": {
         "bootstrap": "Creates LESSONS.md and explains it once; runs before there is anything to correct.",
         "compact": "Explicitly forbidden from touching LESSONS.md — pruning the scar tissue defeats it.",
-        "prep": "Declares render's hard rules apply unchanged rather than restating them."
+        "prep": "Inherits render's rules by pointer and writes no lessons of its own; the four it does restate are in prep-render-invariants."
       }
     },
 
@@ -81,8 +81,28 @@
         "bootstrap": "Renders nothing.",
         "compact": "Renders nothing.",
         "interview": "Writes to the corpus rather than reading from applications/.",
-        "prep": "Declares render's hard rules apply unchanged rather than restating them.",
+        "prep": "Carries the positive form of the rule under prep-render-invariants, not this folder-scoped bar.",
         "render": "States the same rule as the three source domains — see the superseded list below for the wording it may not go back to."
+      }
+    },
+
+    {
+      "id": "prep-render-invariants",
+      "policy": "The four render rules prep restates instead of inheriting by pointer",
+      "why": "prep declared render's whole rulebook applied by reference. Sibling skill loading is not guaranteed — a skill loads its own SKILL.md and nothing else — so the four protections that decide whether a pack is defensible in the room existed only as a pointer to a file the model may never open. The full rulebook still lives in render and is still inherited; these four are copied because they are the ones a prep pack fails on, and copying them is what makes them checkable here.",
+      "canonical": "render",
+      "invariants": [
+        "Every claim about the candidate comes from the vetted corpus, and from nothing else.",
+        "Numbers carry their source and their ceiling.",
+        "No names of non-public people. No internal codenames.",
+        "Obey recorded rendering decisions."
+      ],
+      "required_in": ["render", "prep"],
+      "exempt": {
+        "apply": "Opens the folder and runs the fit check; the artifacts themselves are render's and prep's.",
+        "bootstrap": "Renders nothing.",
+        "compact": "Renders nothing — it prunes the corpus these rules read from.",
+        "interview": "Writes the vetted claims these rules spend, and states its own capture-side versions."
       }
     }
   ],
