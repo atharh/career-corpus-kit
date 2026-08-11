@@ -22,6 +22,53 @@ public and stable, the scar tissue is private and belongs in the user's
 `corpus/LESSONS.md`. `evals/static_checks.py` bans gendered singular pronouns in
 `skills/` because leaked incident prose almost always carries one.
 
+## Promote — moving a rule up from a live corpus
+
+The method improves where it meets real material and breaks, which is inside somebody's
+private corpus. Moving what's learned there into the kit is the point; doing it without
+dragging the material along is the constraint. Call it **promote**, not sync: it is
+one-way, it is lossy, and most lessons should never make the trip.
+
+**Run it from here.** The kit session reads the corpus; a corpus session never writes
+the kit. That direction is the whole safeguard — see the section above for what happens
+when it reverses.
+
+**Read the lesson log and the corpus repo's own instructions, and nothing else.** Not
+story files, not `applications/`. Those hold the raw personal detail and a promote pass
+has no use for it. This matters more than it looks: the commit stays clean either way,
+but whatever gets read enters the session transcript. **Scoping the read is the privacy
+control, not scoping the write.** A `git log -p` on those two files since the last pass
+is the whole intake.
+
+Two gates, and a candidate needs both:
+
+- **Recurrence.** One instance is an anecdote. Promote what recurred across different
+  material — "third time now", "same family as" — because that is what will recur for a
+  stranger.
+- **Generalisation.** The test above: justifiable by reading the kit alone.
+
+**Check the kit first.** Much of it is already there under different wording, and a
+corpus's notes about the kit go stale fast. Trust this repo's files over any description
+of them.
+
+**Redact mechanically.** Port the claim and the move. Cut the instance — company,
+project, quoted speech, numbers. Keep the cross-references ("sibling to", "same family
+as"); they carry nothing private and they are the structure of the method. If a rule
+genuinely needs an example, write a fresh one or use the fictional corpus in `examples/`.
+**A lightly disguised instance is still a leak**, and it reads as one to anyone who knows
+the person. Before proposing: could a reader of this repo name the employer, the product,
+or the person? Then it isn't redacted.
+
+**Propose before landing**, with the diff, which skill file, why it generalises, and what
+it replaces. Verification is the usual `./evals/run.sh`, plus a grep of the diff for names
+that shouldn't be in it.
+
+**Record what you declined and why.** Otherwise every pass re-reads and re-argues the same
+entries, and the workflow gets more expensive each time. Ported rules need no record —
+they're in the skills. Declines and deferrals do. *Open question:* these currently have no
+home. `BACKLOG.md` fits badly, since it is for things worth building and says to delete
+rather than mark done. Decide before the second pass.
+
 ## Versioning
 
 Bump `version` in `.claude-plugin/plugin.json` on every user-visible change —
