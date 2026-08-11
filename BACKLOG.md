@@ -193,8 +193,8 @@ fixture above, and that one is already blocking evals. Do them in that order.
 
 State, not an idea — see `CLAUDE.md` for the workflow. Kept, not deleted.
 
-**Reviewed up to corpus commit `d2c6601` (2026-08-11), lesson log and repo instructions read
-in full.** Start the next pass from `git log -p d2c6601..HEAD -- <intake paths>`. Advance this
+**Reviewed up to corpus commit `e2e2c91` (2026-08-11), lesson log and repo instructions read
+in full.** Start the next pass from `git log -p e2e2c91..HEAD -- <intake paths>`. Advance this
 sha when a pass finishes, and don't replace it with a date — a date can't be diffed, and it
 misses amendments to older entries.
 
@@ -215,6 +215,14 @@ Ranked. Each was checked against the kit before being listed.
    claim in the same session draws no class distinction, so applied to a submitted artifact it
    destroys the evidence. **Fix that carve-out whether or not the rest lands.** Carries the
    `corpus_pin` question below.
+
+   ⚠️ **The carve-out has to cover all three classes, not just the frozen one.** Exempting only
+   submitted artifacts still licenses the failure the lifecycle rules were written for: a
+   correction landing in the corpus does not entitle a session to go and fix whatever else
+   carries the old claim, and the observed damage was to *in-flight* material edited in passing
+   during corpus work. So the rule is not "don't touch what was sent" — it is **one concern per
+   change**: a corpus correction is a corpus change, and every artifact it implies is a separate,
+   deliberate, shown-to-the-user act.
 2. **The direct ask for a mistake returns nothing.** *Demand the mistake* instructs the move
    that has been observed to fail: asked point-blank, people have no topic and no memory; asked
    what they actually did, step by step, the misjudgement arrives on its own, attached to the
@@ -240,6 +248,13 @@ Ranked. Each was checked against the kit before being listed.
    generalising" survives a follow-up; "designed a system" often doesn't.
 8. **Don't overshoot after a pushback.** One line: correcting an over-dramatic reading shouldn't
    flip to an under-claiming one.
+
+**Watching, not yet a candidate — a fit check should distinguish *absent* from *unwritten*.** A
+requirement the corpus can't back may be one the user never did, or one they did and never
+recorded, and those need opposite responses: don't apply, versus run an interview session. One
+observed instance, where the difference only surfaced after the interview. **Held deliberately
+under the recurrence gate** — let it happen twice. Noted here so the second instance is
+recognised rather than rediscovered.
 
 **Declined — do not re-propose.** A rule that was considered and rejected leaves no trace in
 the skills, so without this list every pass re-argues it, and the dangerous case is a
