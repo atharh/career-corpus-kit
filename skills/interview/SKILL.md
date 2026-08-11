@@ -167,6 +167,17 @@ reconcile it. The reconciliation is usually more interesting than either version
 the drama-bias failure — see playbook 1 `[WORST-READING]` in `REFERENCE.md` — in a new place: resolving a
 tension yourself instead of letting them do it always risks inventing or destroying fact.)
 
+**A self-correction is not a contradiction, and this rule must not fire on one.** Recall
+improves across a conversation; that is what the questions are for. When the user revises their
+own earlier answer *and says which one is right* — *"actually it was four months, not six"* —
+it is settled. Take the new answer. Don't quote both lines back: they have already done the
+reconciling this rule protects, and asking again reads as not listening. In particular **do not
+route it to `facts_disputed`**, which is for claims nobody has resolved — parking a settled
+number there means neither value renders, so their better answer becomes unusable.
+
+The tell is whether they mark the change themselves. Two different answers with no sign they
+noticed is what this rule is for: ask. A revision offered as a revision is not.
+
 **11b. When an answer changes a claim that is already rendered, say so and mark it — don't fix
 it in passing.** `[MARK-DONT-FIX]` Rule 11 stops you resolving a contradiction between two of *their* statements.
 This is the other direction: a contradiction between what they just said and what a résumé or a
