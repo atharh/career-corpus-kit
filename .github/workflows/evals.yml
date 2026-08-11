@@ -25,8 +25,17 @@ jobs:
       - name: Resolve base ref
         id: base
         run: |
+          # A push can carry several commits. HEAD~1 would diff only the last one and
+          # miss a user-visible change earlier in the same push, so use the push event's
+          # own before-SHA. It is all-zeros for a new branch, and can be unreachable
+          # after a force-push — fall back in both cases.
+          before='${{ github.event.before }}'
+          zero='0000000000000000000000000000000000000000'
           if [ "${{ github.event_name }}" = "pull_request" ]; then
             echo "ref=origin/${{ github.base_ref }}" >> "$GITHUB_OUTPUT"
+          elif [ -n "$before" ] && [ "$before" != "$zero" ] \
+               && git rev-parse --verify --quiet "$before^{commit}" >/dev/null; then
+            echo "ref=$before" >> "$GITHUB_OUTPUT"
           elif git rev-parse --verify --quiet HEAD~1 >/dev/null; then
             echo "ref=HEAD~1" >> "$GITHUB_OUTPUT"
           else

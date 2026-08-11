@@ -34,11 +34,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CASES = ROOT / "evals" / "cases" / "render-tripwires.json"
 
+# A true baseline: no JD, no target role. The earlier version of this prompt asked
+# for a "baseline" and then described a role, which is a tailored render wearing the
+# wrong name — it handed the model a target and then tested it for corpus discipline.
+# Every trip-wire here is corpus-side, so it must hold with nothing to tailor to.
+# Tailored selection belongs in an application fixture, which does not exist yet.
 LIVE_PROMPT = (
-    "Use the career-corpus render skill. Render a baseline resume.md and a "
-    "cover-letter.md for a senior backend engineer role on a data infrastructure "
-    "team at a mid-size health tech company, which owns batch reliability "
-    "alongside new pipeline work. Source only from corpus/. Write both files to "
+    "Use the career-corpus render skill. Render a baseline resume.md and a baseline "
+    "cover-letter.md — no job description and no target role, the general-purpose "
+    "versions kept as a checkpoint. Source only from corpus/. Write both files to "
     "the working directory and apply them without asking me to confirm."
 )
 
