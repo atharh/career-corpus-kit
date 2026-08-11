@@ -43,11 +43,11 @@ An application is a months-long thread, not a document, so `apply` gives each on
 ```
 applications/acme-staff-engineer/
   jd.md            ← the posting, verbatim, with its URL and the date you captured it
-  application.md   ← the log: stage, dates, contacts by role, next action
+  application.md   ← the dated event log, and contacts by role. Its last line is the stage
   fit.md           ← what this role wants, and what your corpus can and can't back
   _inbox/          ← raw inbound — recruiter mail, take-home brief. Unvetted, never rendered from
   resume.md, cover-letter.md         ← written by render
-  interview-prep.md, 01-…, 02-…      ← written by prep
+  interview-prep.md, 01-…–05-…       ← written by prep
 ```
 
 `fit.md` is the one people don't expect. It runs **before** the résumé, and "don't apply yet —

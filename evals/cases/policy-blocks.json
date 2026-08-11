@@ -94,6 +94,12 @@
       "replaced_by": "candidate-claim-sourcing"
     },
     {
+      "text": "contacts by role, next action",
+      "why": "Describes application.md as storing a stage and a next action, both of which rule 6 forbids: the stage is the last line of the log, and a stored next action is a to-do on its own schedule. This description drifted into three files — apply's own folder tree, render/REFERENCE.md's table, and the README — so the skill contradicted its own rule in the places a reader looks first.",
+      "replaced_by": "apply rule 6, and skills/apply/templates/application.md"
+    },
+
+    {
       "text": "Never render from `_inbox/`, and never from `applications/`",
       "why": "Same absolute reading, in render's own rule 1. It contradicted workflow step 2 four screens below it.",
       "replaced_by": "candidate-claim-sourcing"
