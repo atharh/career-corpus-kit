@@ -162,6 +162,26 @@ reconcile it. The reconciliation is usually more interesting than either version
 the drama-bias failure — see playbook 1 in `REFERENCE.md` — in a new place: resolving a
 tension yourself instead of letting them do it always risks inventing or destroying fact.)
 
+**11b. When an answer changes a claim that is already rendered, fix the rendering too.** Rule 11
+stops you resolving a contradiction between two of *their* statements. This is the other
+direction: a contradiction between what they just said and what a résumé or a live application
+**already claims**. Those are the expensive ones, because a rendered claim is one a reader has
+already believed.
+
+**Recording the correction is not finishing it.** A corpus that has been updated correctly,
+sitting beside an artifact that still makes the old claim, is the worst available state: the
+corpus looks healthy, so nothing looks wrong, and the document people actually read is the wrong
+one. It will not heal on its own, because nothing re-reads a rendered artifact. So, in the same
+session: say it in the same breath ("that contradicts your résumé, which says X"), let them
+decide per rule 11, and then either apply their decision to the artifact before the session ends
+or write the pending change into the story file as an explicit unchecked gap naming the file and
+the line. Never leave it as *the corpus now knows*.
+
+**Once per corpus — not once per session — diff the whole résumé against the corpus.** Walk each
+rendered claim and ask what vouches for it *now*. Decisions get recorded correctly and then
+silently fail to propagate, and the reader most likely to notice is the user looking at their own
+résumé, which is the review this kit exists to spare them.
+
 **12. Through-lines go in `corpus/through-lines.md`, never in the story that surfaced them.**
 Patterns spanning the whole career — recurring instincts, philosophies, repeated moves —
 belong to no single story and drift if copied into several. When a story evidences one, add
@@ -309,7 +329,7 @@ See `templates/story.md` for the skeleton.
 5. **Prune the queue as you go**, per rule 13. A gap that survives three sessions unasked is
    usually not waiting for the right moment — it's failing the say-it-out-loud test and nobody
    has said so. Delete it; git keeps it. **A deferred topic is different from a dead one:** if
-   they defer, log *what* was deferred in enough detail to resume, because "he said he'd made
+   they defer, log *what* was deferred in enough detail to resume, because "they said they'd made
    mistakes here" with no topic attached is not resumable and will waste a future session.
 6. **Stop when they defer.** If they say a topic is for another session, log it and leave it.
    Don't ruin a productive thread by pushing.

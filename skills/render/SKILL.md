@@ -33,6 +33,32 @@ Refresh a baseline when the corpus gains material that would change it. A baseli
 faithful-rendering rule below; it just selects the generally-strongest evidence instead of
 JD-specific evidence.
 
+⚠️ **Read that instruction again: it only points one way.** Every corpus session validates new
+claims, the baseline is the obvious place for them to land, and nothing in this skill has ever
+said *remove*. Left alone, a baseline stops being the strongest general version and becomes the
+union of everything ever vetted — at which point the strongest evidence is buried among the
+merely true, and a reader who stops early never reaches it. **A refresh that only ever adds is
+not a refresh.** Every baseline refresh reconsiders what is already there, not just what is new.
+
+**A bullet earns its slot on all three** — the hard rules below, applied at *selection* time
+rather than at writing time:
+
+- **A decision that was actually theirs** (rule 5). Being present while a team shipped is not a
+  slot.
+- **A mechanism specific enough that nobody else could have written the sentence** (rule 7). If
+  it would fit on a stranger's résumé unchanged, it is describing a job, not their work.
+- **An outcome or scope figure that survives one follow-up question** (rule 2). Failing this one
+  is the usual killer: an outcome nobody measured is the same defect as an unsourced number.
+
+Bullets that establish the **role and its scope are structural, not outcomes** — they answer
+"what was this person" rather than "what did they do", and they don't compete for outcome slots.
+A promotion or a change of role inside one company can need more than one.
+
+**Cutting costs nothing, and say so when the user hesitates.** The material stays in the corpus,
+and a tailored render pulls it straight back for a role that wants it — JD relevance admits a
+bullet the baseline cut, which is what the tiering is *for*. A claim is only lost if it was never
+extracted.
+
 **Tailored (with JD) — a per-application derivative.** Given a posting, produce a version
 aimed at *that* role. Write outputs to `applications/<company>-<role>/` so they stay separate
 from the baselines and from other applications.
@@ -131,6 +157,16 @@ research process into the sentence the reader sees.
 one-line reason per change. Flag genuine choices — accurate-but-different vs safe-but-vague
 wording, whether to include a team win, what to cut for length — as *the user's* call, not
 yours. Reconciling their own material is their decision, not yours.
+
+**On a baseline refresh, present the selection as a selection.** Not just what changed — what is
+in, what is out, and one line of why for each. Otherwise a cut looks like a loss instead of a
+choice, and "what to cut for length" quietly becomes your call rather than theirs.
+
+**How long an entry should run is theirs to set, and this skill states no number.** The first
+time it comes up, ask, and write the shape they accept into `corpus/LESSONS.md` — that file is
+where their preferences live, not this one. Afterwards hold to it without re-asking; reopen the
+question only when a refresh would exceed what they set. A number invented here would be a
+preference imposed on every user of the kit, which is exactly what that file exists to prevent.
 
 **10. Make it sound like the user, not a model — always, as the last step.** Rendered prose
 that reads as AI-written gets binned. Two moves, in order:

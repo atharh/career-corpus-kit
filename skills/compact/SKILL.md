@@ -52,9 +52,9 @@ Stop and leave the line alone if it carries any of:
    long; never remove the ruling.
 4. **⚠️ or 🔴 markers**, and anything they're attached to.
 5. **Provenance and vetting status** — `facts_unvetted`, `facts_disputed`, source lines,
-   "his account only", "not independently sourced". A fact that loses its provenance becomes
+   "their account only", "not independently sourced". A fact that loses its provenance becomes
    a fact that looks vetted.
-6. **Anachronism corrections** — `anachronisms_corrected` blocks and any "he said X, the
+6. **Anachronism corrections** — `anachronisms_corrected` blocks and any "they said X, the
    period term was Y" note. The wrong word creeps back the moment the correction is gone.
 7. **Open gaps that would change a rendering.** Including ones that have been open a long
    time — age is not evidence a question is dead. **The one exception, and it needs the user
