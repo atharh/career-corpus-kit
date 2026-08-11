@@ -93,6 +93,13 @@ discounted with it.
 Say which requirements you judged to be real and which you discarded as boilerplate, so the
 user can disagree. Every posting asks for ten years of a five-year-old technology.
 
+**A judgement in here is only as good as what you computed it from.** When a line of `fit.md`
+rests on a rendered artifact rather than on something the user said — a résumé bullet, an older
+cover letter — it inherits that artifact's errors, and a gap that is really a stale bullet reads
+exactly like a gap in the corpus. Confirm the input before the conclusion hardens into a
+section, because once it is written down the next reader treats it as a finding. Say which
+inputs a judgement rests on where it isn't obvious.
+
 Where the corpus is thin, the useful output is a **pointer, not a verdict**: *"nothing backs
 'led a platform migration' — the closest is `corpus/<company>/<story>.md`, and an interview
 session on <arc> would probably produce it."*
