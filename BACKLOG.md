@@ -3,6 +3,9 @@
 Things worth building that aren't built. Not a roadmap — a place ideas stop rotting in a chat
 log. Newest at the bottom; delete rather than mark done.
 
+The one exception is *Promote passes* at the bottom, which is state rather than an idea, and
+is kept rather than deleted.
+
 ---
 
 ## Pack staleness detection
@@ -183,3 +186,27 @@ to engineering and stop implying otherwise.
 
 **Why deferred:** a second example corpus is the same fabrication cost as the application
 fixture above, and that one is already blocking evals. Do them in that order.
+
+---
+
+## Promote passes
+
+State, not an idea — see `CLAUDE.md` for the workflow. Kept, not deleted.
+
+**Last pass: 2026-08-11.** Scope the next one to the corpus diff since that date.
+
+**Declined — do not re-propose.** A rule that was considered and rejected leaves no trace in
+the skills, so without this list every pass re-argues it, and the dangerous case is a
+*deliberate divergence* being quietly reverted to match the corpus that suggested it.
+
+- **"One structural slot per company for the role itself."** The kit deliberately allows more
+  than one: role and scope bullets are structural, don't compete for outcome slots, and a
+  promotion or role change inside one company needs a second. The divergence is intentional.
+
+**Deferred — real, blocked on a decision.** Application lifecycle with a per-application
+manifest recording a `corpus_pin`. It belongs to the pack-staleness entry at the top of this
+file, and *"a date is not a pin"* is that entry's own insight arriving from the other side. It
+collides with `apply` rule 6, *never store derived state*: a `status` field is exactly the
+status rollup that rule forbids, but a pin is not derived — it records an input, and unlike a
+status it cannot be recomputed later, which is the whole reason to write it down. **Settle
+whether rule 6 should name that distinction before porting any of it.**
