@@ -15,55 +15,53 @@ It's also how you stop forgetting your own career. Recall is triggered, not enum
 remember the thing you did five years ago only when something adjacent jogs it. The interview
 skill is built to do that jogging, and to write down what surfaces before it evaporates.
 
-## The six skills, in two lanes
+## Four things you'll do with it
 
-One lane builds the corpus. The other spends it, one job application at a time.
+Everything else in this README is detail under one of these.
 
-**Lane 1 — build the corpus**
-
-| Skill | When | What it does |
-|---|---|---|
-| **`/career-corpus:bootstrap`** | once, at the start | Reads your existing résumé/LinkedIn, sets up the corpus, and generates a prioritized queue of stories worth extracting. Gets you from empty to "start with this one." |
-| **`/career-corpus:interview`** | whenever a memory surfaces | Interviews you about one memory and writes a vetted story file. Relentless, works in rounds of a few questions at a time, and it never lets a claim in that you can't defend. |
-| **`/career-corpus:compact`** | maintenance | Prunes the sediment interviews leave behind — resolved gaps, dated back-and-forth — while guarding the lines that keep renders honest: your ceilings, rendering decisions, and rejected readings. Run it when a gap list has become more archive than queue. |
-
-**Lane 2 — run an application**
-
-| Skill | When | What it does |
-|---|---|---|
-| **`/career-corpus:apply`** | you found a role | Opens the application and owns it end to end. Captures the posting before it 404s, checks the corpus against the role *before* anything gets written, and holds everything that arrives afterwards — recruiter mail, take-home briefs, the outcome — in one folder. |
-| **`/career-corpus:render`** | you're writing the application | Reads the vetted corpus + the job description and produces a résumé entry or cover letter — tailored to that role, sourced only from what the corpus vouches for. |
-| **`/career-corpus:prep`** | an interview is booked | Builds a prep pack for that specific interview: an opener, a story bank mapped to the employer's own hiring criteria, the probes they'll push on with defensible answers, and questions to ask them. Run it again afterwards to capture what was actually asked. |
-
-`render` produces documents you **send**. `prep` produces a directory you **study** — and its
-second half feeds what you fumbled back into `interview`, which is where the loop closes.
-
-An application is a months-long thread, not a document, so `apply` gives each one a folder:
+**1. Build my corpus** — once, at the start.
 
 ```
-applications/acme-staff-engineer/
-  jd.md            ← the posting, verbatim, with its URL and the date you captured it
-  application.md   ← the dated event log, and contacts by role. Its last line is the stage
-  fit.md           ← what this role wants, and what your corpus can and can't back
-  _inbox/          ← raw inbound — recruiter mail, take-home brief. Unvetted, never rendered from
-  resume.md, cover-letter.md         ← written by render
-  interview-prep.md, 01-…–05-…       ← written by prep
+/career-corpus:bootstrap
 ```
 
-`fit.md` is the one people don't expect. It runs **before** the résumé, and "don't apply yet —
-nothing in your corpus backs the main thing they're asking for" is a valid answer. That's a
-cheaper thing to find out now than in the room.
+Paste in your résumé and anything else you have. You get the corpus structure, a `profile.md`,
+and a ranked queue of the stories worth extracting first — so you're never staring at an empty
+directory wondering where to begin.
 
-`render` also works outside a lane — baselines, self-reviews, promo packets, bios. Those belong
-to no application, so no folder gets opened for them.
+**2. Capture this memory** — the ongoing work, and where the depth comes from.
 
-### The skills learn your preferences
+```
+/career-corpus:interview the hardest project I led at <company>
+```
 
-They ship generic, but they sharpen to *you* over time. When you correct one in a way that
-generalises — a wording you won't use, a framing you reject, a repeated mistake — it appends a
-one-line rule to `corpus/LESSONS.md` in your **private** repo and reads it back at the start of
-every session. The method stays public and stable; your scar tissue stays private and personal.
-That feedback loop — mistake → durable rule — is what makes a corpus setup genuinely yours.
+One memory per session, turned into a vetted story file with sources, ceilings and open gaps.
+This is also where a real interview's misses land afterwards, which is the highest-quality
+material the corpus will ever get.
+
+**3. Work this application** — one role, end to end.
+
+```
+/career-corpus:apply <paste the posting, or its URL>
+```
+
+Opens a folder for the role, captures the posting before it 404s, and checks your corpus
+against it *before* anything gets written. From there it hands off on its own: the résumé and
+cover letter when you're ready to send, a study pack when an interview gets booked, and the
+outcome logged when it lands.
+
+**4. Maintain my corpus** — supervised, and rarer than the rest.
+
+```
+/career-corpus:compact
+```
+
+Prune the sediment interviews leave behind, and re-render a stale baseline rather than editing
+it by hand. Both show you a diff with a reason per change before anything moves.
+
+**You don't have to remember the commands.** Each skill advertises when it applies, so "help me
+capture what happened on the migration project" or "I have a loop next Tuesday" routes to the
+right one. The slash commands are the explicit form, useful when you want to be sure.
 
 ## Install
 
@@ -189,16 +187,11 @@ To scope it to one project instead, symlink the repo into that project's
    again the same day afterwards — what you fumbled goes back into the corpus, and it's better
    material than any question a model would have invented.
 
-## What else you can do with it
+## Beyond the résumé
 
 Once the corpus exists, it's a sourced, dated record of your work — and a résumé is only the
 most obvious thing to render from it. Each of these is just a prompt:
 
-- **Résumés and cover letters** — the default path.
-  `/career-corpus:apply <paste the posting>` then `/career-corpus:render`
-- **Interview prep** — a full pack for one booked interview, mapped to the employer's own
-  hiring criteria and including the questions they'll push back on.
-  `/career-corpus:prep I have a loop next week for this role: <paste JD + recruiter email>`
 - **Self-reviews and 360s** — performance season, written from your own evidence instead of a
   blank box at 11pm. Map the corpus onto whatever competency model your company uses.
   `/career-corpus:render a self-review for this cycle, grouped by these competencies: <paste rubric>`
@@ -218,6 +211,49 @@ most obvious thing to render from it. Each of these is just a prompt:
 The last one is worth doing even when you don't get the job. A question you couldn't answer is
 the most precisely targeted gap you'll ever be handed — better than anything a model would
 have guessed, because a real interviewer found it.
+
+## Reference: the six skills, in two lanes
+
+Underneath the four intentions, the kit is two lanes. One builds the corpus. The other spends
+it, one job application at a time.
+
+**Lane 1 — build the corpus**
+
+| Skill | When | What it does |
+|---|---|---|
+| **`/career-corpus:bootstrap`** | once, at the start | Reads your existing résumé/LinkedIn, sets up the corpus, and generates a prioritized queue of stories worth extracting. Gets you from empty to "start with this one." |
+| **`/career-corpus:interview`** | whenever a memory surfaces | Interviews you about one memory and writes a vetted story file. Relentless, works in rounds of a few questions at a time, and it never lets a claim in that you can't defend. |
+| **`/career-corpus:compact`** | maintenance | Prunes the sediment interviews leave behind — resolved gaps, dated back-and-forth — while guarding the lines that keep renders honest: your ceilings, rendering decisions, and rejected readings. Run it when a gap list has become more archive than queue. |
+
+**Lane 2 — run an application**
+
+| Skill | When | What it does |
+|---|---|---|
+| **`/career-corpus:apply`** | you found a role | Opens the application and owns it end to end. Captures the posting before it 404s, checks the corpus against the role *before* anything gets written, and holds everything that arrives afterwards — recruiter mail, take-home briefs, the outcome — in one folder. |
+| **`/career-corpus:render`** | you're writing the application | Reads the vetted corpus + the job description and produces a résumé entry or cover letter — tailored to that role, sourced only from what the corpus vouches for. |
+| **`/career-corpus:prep`** | an interview is booked | Builds a prep pack for that specific interview: an opener, a story bank mapped to the employer's own hiring criteria, the probes they'll push on with defensible answers, and questions to ask them. Run it again afterwards to capture what was actually asked. |
+
+`render` produces documents you **send**. `prep` produces a directory you **study** — and its
+second half feeds what you fumbled back into `interview`, which is where the loop closes.
+
+An application is a months-long thread, not a document, so `apply` gives each one a folder:
+
+```
+applications/acme-staff-engineer/
+  jd.md            ← the posting, verbatim, with its URL and the date you captured it
+  application.md   ← the dated event log, and contacts by role. Its last line is the stage
+  fit.md           ← what this role wants, and what your corpus can and can't back
+  _inbox/          ← raw inbound — recruiter mail, take-home brief. Unvetted, never rendered from
+  resume.md, cover-letter.md         ← written by render
+  interview-prep.md, 01-…–05-…       ← written by prep
+```
+
+`fit.md` is the one people don't expect. It runs **before** the résumé, and "don't apply yet —
+nothing in your corpus backs the main thing they're asking for" is a valid answer. That's a
+cheaper thing to find out now than in the room.
+
+`render` also works outside a lane — baselines, self-reviews, promo packets, bios. Those belong
+to no application, so no folder gets opened for them.
 
 ## See one before you build one
 
@@ -279,6 +315,14 @@ claim their own corpus forbids. It does not exercise the skills. A live mode doe
 fresh from the fixture corpus with a real session — but renders are stochastic, so it is opt-in
 and run by hand before a change to a skill's hard rules. `./evals/run.sh` needs nothing but
 `python3`.
+
+## The skills learn your preferences
+
+They ship generic, but they sharpen to *you* over time. When you correct one in a way that
+generalises — a wording you won't use, a framing you reject, a repeated mistake — it appends a
+one-line rule to `corpus/LESSONS.md` in your **private** repo and reads it back at the start of
+every session. The method stays public and stable; your scar tissue stays private and personal.
+That feedback loop — mistake → durable rule — is what makes a corpus setup genuinely yours.
 
 ## Honest caveats
 
