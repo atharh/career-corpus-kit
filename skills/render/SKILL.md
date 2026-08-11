@@ -103,7 +103,10 @@ the user:
   `jd.md`, the employer's own public material, clearly attributed inbound. This is what you
   tailor *to*. It is never a fact about the user.
 - **Derived analysis** — `fit.md`, an earlier draft, another application's résumé. Read it to
-  use the work already done. Never cite it as evidence.
+  use the work already done. Never cite it as evidence, and treat its conclusions as carrying
+  the error bars of whatever they were computed from: analysis calculated off a résumé inherits
+  that résumé's mistakes, so a confident-sounding gap or strength can be an artefact of a wrong
+  input rather than a finding about the user.
 
 So: **read `applications/`, but never source a candidate claim from it.** `fit.md` has already
 matched the corpus against this JD, which is most of the selection work — take its pointers,

@@ -65,3 +65,39 @@ philosophy. A single diagnosis applied in two places is often the seed of a thro
 **9. Offer a wrong theory, invite rejection.** A concrete reading they can push against beats
 an open question. The refutation — a comparison or distinction you didn't have — is frequently
 better than the theory would have been.
+
+**10. Establish who owned it before you write it down.** Work described in the first person is
+not always the speaker's, and the render skill can only attribute as honestly as this session
+recorded. Three tells, one family — each is a signal that ownership is still unestablished, and
+each has its own move:
+
+- **Grammar — "we" is unattributed until it's split.** It covers *I did this*, *I was on the
+  team that did this*, and *my org did this* equally well, and a summary will silently pick the
+  flattering reading. The move is to ask what the thing *did*, not whether it existed. "Did you
+  have a review process?" gets a yes from a process that never caught anything. "What did it
+  catch?" gets a memory, or gets nothing — and both are answers.
+- **Authority — a decision in the passive has no decider.** "It was decided to consolidate the
+  services" is compatible with them deciding, their manager deciding, or finance deciding, and
+  the reading you assume will be the strongest one available. Before writing any beat where a
+  decision is the point, ask who signed it, who paid for it, whose budget moved.
+- **Articulacy — fluency is not authorship.** Someone explains a system they merely operated
+  exactly as well as one they designed, often better, because explaining it was their job.
+  Detail reads as ownership and it isn't. So the trigger is counter-intuitive: **when a
+  mechanism is described well enough that you're ready to write it down, that is the moment to
+  ask who designed it.**
+
+The general shape: articulacy sets off the other two, because the fluent account is the one you
+stop questioning. Sibling to *chase the generic word* (playbook 6), which catches the opposite
+failure — there, vagueness hides that nothing happened; here, precision hides who it happened to.
+
+**11. Ask where a number came from, and don't cushion the ask.** Ask early, while the claim is
+still being formed rather than after it has been written down. Ask it plainly: where does that
+number come from — a dashboard, a postmortem, someone telling them? Not *"do you remember
+roughly?"*, which invites a reconstruction on the spot and produces a figure with no source
+that now has to be disputed later.
+
+**The question is itself the filter, and withdrawal is a win.** It either produces a claim with
+a source or removes one that would not have survived being asked about in a room. Don't soften
+it to protect a good number — a number nobody can source is a liability wearing the costume of
+an asset. Pairs with *cross-check the arithmetic* (playbook 2), which tests whether a number is
+consistent; this tests whether it exists.

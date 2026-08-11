@@ -39,7 +39,7 @@ question whose answer depends on another question still open in this round belon
 Each answer reshapes the tree: settled beats push the frontier outward and unblock questions
 that depended on them. Recompute and ask the next round.
 
-**Compose each round from the playbook in [REFERENCE.md](REFERENCE.md).** Nine techniques
+**Compose each round from the playbook in [REFERENCE.md](REFERENCE.md).** Eleven techniques
 ranked by what they actually produce; the top three do most of the work. Read it — the
 difference between a round that dislodges a memory and a round that collects a status update
 is entirely in how the questions are built, and none of that is in this file.
