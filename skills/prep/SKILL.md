@@ -60,7 +60,13 @@ are numbered so the reading order is the preparation order.
 | `04-probes-and-defences.md` | Where they'll push, and the answer. See below; this is the file that earns the pack. |
 | `05-questions-to-ask.md` | What to ask them, and what not to. |
 
-Skip files that don't apply. A 30-minute screen doesn't need six.
+Skip files that don't apply. A 30-minute screen doesn't need six — say in `interview-prep.md`
+which ones you skipped, so a later round doesn't read the gap as an oversight.
+
+Every file in the pack is a rendering, so every one of them opens with the artifact frontmatter
+block in [`../render/templates/artifact-frontmatter.md`](../render/templates/artifact-frontmatter.md).
+A pack is `in-flight` by definition: it belongs to a live application, and it gets re-rendered
+rather than edited when the corpus underneath it moves.
 
 ## `03` — map to their criteria, never to generic categories
 

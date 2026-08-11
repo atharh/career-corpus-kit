@@ -20,6 +20,13 @@ already there before asking for anything:
 | `_inbox/` | `apply` | Raw inbound. **Unvetted. Never evidence for a candidate claim** — attributed employer context and operational fact only. |
 | `interview-prep.md`, `01-…`–`05-…` | `prep` | The study pack for a booked interview. Not this skill's output. |
 
+**Every artifact this skill writes opens with the frontmatter block in
+[`templates/artifact-frontmatter.md`](templates/artifact-frontmatter.md)** — baseline and
+tailored alike, and `prep`'s pack files too. It records what a re-reader cannot reconstruct:
+the lifecycle state, the corpus commit the render read, the files it drew on, the date, and —
+once something has been sent — what went out. Fill the slots you know and leave the rest empty;
+a guessed pin is worse than none.
+
 Read all of it; source no *candidate claim* from any of it (SKILL.md rule 1). These files
 carry employer context and selection work, not evidence about the user. When `fit.md` names a
 story as backing a requirement, open that story and render the claim from there.
