@@ -193,16 +193,53 @@ fixture above, and that one is already blocking evals. Do them in that order.
 
 State, not an idea — see `CLAUDE.md` for the workflow. Kept, not deleted.
 
-**Reviewed up to corpus commit `d2c6601` (2026-08-11).** Start the next pass from
-`git log -p d2c6601..HEAD -- <intake paths>` in the corpus repo. Advance this sha when a pass
-finishes, and don't replace it with a date — a date can't be diffed, and it misses amendments
-to older entries.
+**Reviewed up to corpus commit `d2c6601` (2026-08-11), lesson log and repo instructions read
+in full.** Start the next pass from `git log -p d2c6601..HEAD -- <intake paths>`. Advance this
+sha when a pass finishes, and don't replace it with a date — a date can't be diffed, and it
+misses amendments to older entries.
 
-⚠️ **The pre-pin backlog has never been read directly.** The first pass worked from a curated
-standing-candidates summary written inside the corpus, not from the lesson log itself, so any
-entry predating that summary which its author didn't surface has still not been considered.
-The pin is honest about *new* material only. **A one-time full read of the lesson log is still
-owed**, and until it happens this section understates what's unreviewed.
+**Landed 2026-08-11:** the three attribution tells (grammar, authority, articulacy) as one
+playbook entry; provenance-of-a-number as another; derived conclusions inheriting their input's
+error bars, split across the skill that produces them and the skill that consumes them; a
+baseline refresh that reconsiders rather than only adds; and fixing a rendering in the same
+session as the correction that changed it.
+
+### Open candidates from the 2026-08-11 full read
+
+Ranked. Each was checked against the kit before being listed.
+
+1. **Artifact lifecycle — and it makes an already-shipped rule unsafe.** Three classes with
+   three rules: *submitted* (frozen permanently — it is evidence of what a reader saw),
+   *in-flight* (re-render on request, show the diff, own commit), *baseline* (deliberate act,
+   own commit, never bundled with corpus edits). The interview rule that says fix a rendered
+   claim in the same session draws no class distinction, so applied to a submitted artifact it
+   destroys the evidence. **Fix that carve-out whether or not the rest lands.** Carries the
+   `corpus_pin` question below.
+2. **The direct ask for a mistake returns nothing.** *Demand the mistake* instructs the move
+   that has been observed to fail: asked point-blank, people have no topic and no memory; asked
+   what they actually did, step by step, the misjudgement arrives on its own, attached to the
+   decision that produced it — which is also the only form in which it is tellable. Amend the
+   existing playbook entry rather than adding one.
+3. **A later answer supersedes an earlier one.** Recall improves across a conversation. The new
+   answer wins by default, but record the supersession with both dates rather than overwriting,
+   because the *shape* of the drift is itself evidence. The kit knows supersession only as
+   something `compact` must preserve, never as a capture rule.
+4. **Don't edit existing text to align it with new information when the edit changes meaning.**
+   Distinct trigger from surfacing a contradiction between two statements: here you are about to
+   rewrite text that already exists, and the reconciled-but-vaguer version deletes true
+   substance. Quote both lines and wait.
+5. **Where a rule lives, and the routing test.** A rule that isn't in a repo can't be diffed,
+   reviewed, or ported — so never hold one in a model's memory or a session summary. Routing:
+   would this rule still apply if the corpus were about someone else? Yes → the method. No →
+   the user's own lessons file. The kit says where to append and never says what belongs there.
+6. **A limit the user volunteers unprompted is a ceiling.** Strongest kind, since it is offered
+   against their own interest — and the easiest for a later session to quietly re-inflate
+   because the bigger version reads better.
+7. **Don't render hindsight as design intent.** Building something that became infrastructure is
+   not the same claim as having planned it that way. "Noticed their own work was worth
+   generalising" survives a follow-up; "designed a system" often doesn't.
+8. **Don't overshoot after a pushback.** One line: correcting an over-dramatic reading shouldn't
+   flip to an under-claiming one.
 
 **Declined — do not re-propose.** A rule that was considered and rejected leaves no trace in
 the skills, so without this list every pass re-argues it, and the dangerous case is a
