@@ -222,7 +222,9 @@ have guessed, because a real interviewer found it.
 ## See one before you build one
 
 **[`examples/`](examples/)** holds a complete fictional corpus — one invented engineer, two
-invented companies, three stories — and the résumé and cover letter rendered from it.
+invented companies, three stories — and the résumé and cover letter rendered from it. Alongside
+it, one whole fictional application: the posting, the fit check, the recruiter's email, the
+tailored artifacts, the interview pack and the rejection.
 
 It's deliberately mid-flight rather than polished, because that's the state a real corpus is in
 almost always: open gaps, one number the corpus refuses to resolve on the user's behalf, a
@@ -243,6 +245,11 @@ corpus rule that stopped each one:
 Every one of those was survivable on paper and unsurvivable in the room, because each invites a
 follow-up question the candidate can't answer. That gap is the entire thing this kit exists to
 close.
+
+The application folder makes the same argument at thread length, and it ends in a rejection on
+purpose. The fit check said *don't apply yet* on day two, named the one requirement the corpus
+could not back, and refused to cover it with the adjacent story sitting right there. Five weeks
+later that requirement is what the rejection cited.
 
 ## What makes the output trustworthy
 
