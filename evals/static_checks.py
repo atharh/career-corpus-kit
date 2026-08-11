@@ -196,11 +196,18 @@ def check_numbered_lists(r: Report) -> dict[str, set[str]]:
 
 
 def check_rule_references(r: Report, rules: dict[str, set[str]]) -> None:
-    """Every "rule N" mention must point at a rule that exists.
+    """A "rule N" mention must exist, and must not leave the file it lives in.
 
-    This is the check that catches a renumbering. `compact` cites the interview
-    skill's rule 13; `render` cites its own rule 9. Insert a rule near the top of
-    either list and those references silently start pointing somewhere else.
+    A number is only safe inside the list that defines it, where
+    `check_numbered_lists` has already made two rule 6s impossible. Cross a file
+    boundary and the number is pure fragility: insert a rule above the target and
+    every citation elsewhere still resolves, silently, to the wrong rule. So a
+    citation that leaves the file names the rule by its id and its short name
+    instead — see `check_rule_ids` — and a number that escapes fails here.
+
+    Rules are defined in `SKILL.md`, so "leaves the file" is two cases: any
+    "rule N" outside a `SKILL.md` at all, and one in a `SKILL.md` attributed to a
+    different skill.
     """
     for path in sorted((ROOT / "skills").rglob("*.md")):
         rel = path.relative_to(ROOT)
@@ -212,6 +219,12 @@ def check_rule_references(r: Report, rules: dict[str, set[str]]) -> None:
             # "the interview skill's ... (rule 13)" — attribute to the named skill.
             named = [s for s in rules if re.search(rf"\b{s}\b skill", context)]
             owner = named[-1] if named else owner_default
+            if path.name != "SKILL.md" or (owner and owner != path.parent.name):
+                r.fail(
+                    f"{rel} — 'rule {n}' cites {owner or 'a rule'} across a file boundary",
+                    "cite it by id and name instead; a number means nothing outside its own file",
+                )
+                continue
             if owner is None:
                 continue
             r.check(
@@ -222,58 +235,58 @@ def check_rule_references(r: Report, rules: dict[str, set[str]]) -> None:
 
 
 def check_playbook_references(r: Report) -> None:
-    """"playbook N" must resolve, the same way "rule N" does.
+    """"playbook N" must resolve, and must not leave REFERENCE.md.
 
-    The interview playbook lives in REFERENCE.md and SKILL.md cites it by
-    number, so these references now cross a file boundary — nothing keeps the
-    two files renumbering in step.
+    Playbooks are numbered in REFERENCE.md, so a number cited from SKILL.md or a
+    template carries exactly the fragility a rule number does across a boundary.
+    Same convention, same enforcement: outside the file that numbers them, a
+    playbook is named by its id.
     """
-    playbooks: dict[str, set[str]] = {}
     for d in skill_dirs():
         ref = d / "REFERENCE.md"
         if not ref.is_file():
             continue
-        for head, labels in numbered_sections(ref.read_text()).items():
+        labels: set[str] = set()
+        for head, found in numbered_sections(ref.read_text()).items():
             if "playbook" not in head.lower():
                 continue
-            nums = [int(n) for n in labels if n.isdigit()]
+            nums = [int(n) for n in found if n.isdigit()]
             r.check(
                 f"{ref.relative_to(ROOT)} — {head!r} is numbered 1..{len(nums)}",
                 nums == list(range(1, len(nums) + 1)),
                 f"got {nums}",
             )
-            playbooks.setdefault(d.name, set()).update(labels)
-
-    for path in sorted((ROOT / "skills").rglob("*.md")):
-        owner = path.parent.name
-        if owner not in playbooks:
+            labels.update(found)
+        if not labels:
             continue
-        for m in re.finditer(r"playbook (\d+[a-z]?)", path.read_text()):
-            n = m.group(1)
-            r.check(
-                f"{path.relative_to(ROOT)} — 'playbook {n}' resolves in {owner}",
-                n in playbooks[owner],
-                f"{owner} playbook has {sorted(playbooks[owner])}",
-            )
+        for path in sorted(d.rglob("*.md")):
+            rel = path.relative_to(ROOT)
+            for m in re.finditer(r"playbook (\d+[a-z]?)", path.read_text()):
+                n = m.group(1)
+                if path != ref:
+                    r.fail(
+                        f"{rel} — 'playbook {n}' cites {d.name} across a file boundary",
+                        "cite it by id instead; a number means nothing outside REFERENCE.md",
+                    )
+                    continue
+                r.check(
+                    f"{rel} — 'playbook {n}' resolves",
+                    n in labels,
+                    f"{d.name} playbook has {sorted(labels)}",
+                )
 
 
 RULE_ID = re.compile(r"`\[([A-Z][A-Z0-9-]+)\]`")
 
 
 def check_rule_ids(r: Report) -> None:
-    """A cross-boundary citation must name the rule, not just its number.
+    """A cross-boundary citation names the rule by a stable id, and it must resolve.
 
-    `check_rule_references` proves a cited number *exists*. It cannot prove the
-    number still means what the citing file thought it meant — insert a rule
-    above it and the reference stays green while silently changing target. That
-    is invisible exactly where it is most likely: `compact` citing `interview`,
-    a template citing the skill beside it, `SKILL.md` citing its own
-    `REFERENCE.md`.
-
-    So rules cited across a file or skill boundary carry a stable id, written
-    `[ID]` after the rule's bold heading, and every citation of that rule names
-    the id alongside the number. Then a renumber fails loudly here, and the
-    failure names the number the citation should now use.
+    Ids are written `[ID]` after the rule's bold heading and never move when the
+    list is renumbered, which is why every citation that leaves a file uses one
+    (`check_rule_references` and `check_playbook_references` reject the numbers
+    that used to do this job). This check is the other half: an id is defined
+    once kit-wide, and a citation of one that no longer exists fails loudly.
 
     Rules cited only inside their own file keep bare numbers on purpose. The
     loud version of that failure — two rule 6s — is already impossible under
@@ -328,20 +341,6 @@ def check_rule_ids(r: Report) -> None:
                 f"{rel} — rule id {rid} resolves",
                 rid in defs,
                 f"known: {sorted(defs)}",
-            )
-            if rid not in defs:
-                continue
-            # "rule 13 `[SAY-ALOUD]`" / "playbook 6 `[GENERIC-WORD]`" — the
-            # number is a reading aid, and this is what keeps it honest.
-            head = text[max(0, m.start() - 40) : m.start()]
-            cited = re.search(r"(?:rule|playbook)\s+(\d+[a-z]?)\s*$", head)
-            if not cited:
-                continue
-            want = defs[rid][1]
-            r.check(
-                f"{rel} — {rid} is cited as {cited.group(1)} and is rule {want}",
-                cited.group(1) == want,
-                f"renumbered: {rid} is now rule {want}, not {cited.group(1)}",
             )
 
 

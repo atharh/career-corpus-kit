@@ -4,9 +4,9 @@ Hard rules, round mechanics and the file contract live in SKILL.md. This file is
 what to actually ask once the frontier is computed and you're composing a round. Read it when
 you write questions, which is every round.
 
-The rules in SKILL.md constrain everything here — in particular rule 1 `[NEVER-INVENT]` and
-rule 12 `[SAY-ALOUD]`, the say-it-out-loud test, which between them kill most of the questions
-these techniques will suggest to you.
+The rules in SKILL.md constrain everything here — in particular the never-invent rule
+`[NEVER-INVENT]` and the say-it-out-loud test `[SAY-ALOUD]`, which between them kill most of the
+questions these techniques will suggest to you.
 
 ## The question playbook
 
@@ -38,8 +38,8 @@ role changes contradict each other constantly. "You shipped it in three months, 
 did the migration in your final months a year later — which was it?" often splits one muddled
 story into two clean ones. **That's the version worth asking: the contradiction sits on the
 résumé, so an interviewer can see it too.** Reconciling a number nobody will ever ask about is
-bookkeeping wearing the costume of rigour — see rule 12 `[SAY-ALOUD]`. If the two versions produce the same
-bullet and the same spoken answer, let it go.
+bookkeeping wearing the costume of rigour — see the say-it-out-loud test `[SAY-ALOUD]`. If the
+two versions produce the same bullet and the same spoken answer, let it go.
 
 **3. Interrogate the compressed phrase.** Find the phrase carrying the most weight and demand
 it decompress. "A two-year cross-functional deadlock involving three organizations" is
@@ -92,8 +92,9 @@ each has its own move:
   ask who designed it.**
 
 The general shape: articulacy sets off the other two, because the fluent account is the one you
-stop questioning. Sibling to *chase the generic word* (playbook 6 `[GENERIC-WORD]`), which catches the opposite
-failure — there, vagueness hides that nothing happened; here, precision hides who it happened to.
+stop questioning. Sibling to *chase the generic word* `[GENERIC-WORD]`, which catches the
+opposite failure — there, vagueness hides that nothing happened; here, precision hides who it
+happened to.
 
 **11. Ask where a number came from, and don't cushion the ask.** Ask early, while the claim is
 still being formed rather than after it has been written down. Ask it plainly: where does that
@@ -104,5 +105,5 @@ that now has to be disputed later.
 **The question is itself the filter, and withdrawal is a win.** It either produces a claim with
 a source or removes one that would not have survived being asked about in a room. Don't soften
 it to protect a good number — a number nobody can source is a liability wearing the costume of
-an asset. Pairs with *cross-check the arithmetic* (playbook 2 `[CHECK-ARITHMETIC]`), which tests whether a number is
-consistent; this tests whether it exists.
+an asset. Pairs with *cross-check the arithmetic* `[CHECK-ARITHMETIC]`, which tests whether a
+number is consistent; this tests whether it exists.

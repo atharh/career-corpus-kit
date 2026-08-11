@@ -16,16 +16,19 @@ Python 3, standard library only. No install step.
 `static_checks.py`. Tests the kit itself: manifests, skill frontmatter, and the
 cross-references that rot silently when a file is edited.
 
-The one that earns its keep is **rule-reference resolution**. `compact` cites the
-interview skill's rule 13; `render` cites its own rule 9. Insert a rule near the
-top of either list and those pointers quietly aim at the wrong rule, with nothing
-to notice. `playbook N` is checked the same way and matters more, because those
-references cross a file boundary — `interview/SKILL.md` cites techniques that
-live in `interview/REFERENCE.md`, and nothing else keeps the two renumbering in
-step. It also checks each numbered list runs `1..N` with no gaps, that every
-`/career-corpus:<skill>` mentioned exists, that relative links resolve, and that
-the example corpus keeps its `FICTIONAL` banners, its `sources:` blocks, and its
-`related:` targets.
+The one that earns its keep is **rule-reference resolution**, and it enforces a
+convention rather than just verifying one. A rule number is safe only inside the
+file that numbers it, where a `1..N` list can't hold two rule 6s. Anywhere else
+it is fragility: insert a rule near the top of a list and every citation
+elsewhere still resolves, silently, to the wrong rule. So a citation that crosses
+a file or skill boundary names the rule by its stable id and its short name —
+"the say-it-out-loud test `[SAY-ALOUD]`" — and a bare `rule N` or `playbook N`
+that leaves its own file *fails*, which is what makes the fragile form
+impossible rather than merely discouraged. Ids are checked for uniqueness
+kit-wide and for resolution. It also checks each numbered list runs `1..N` with
+no gaps, that every `/career-corpus:<skill>` mentioned exists, that relative
+links resolve, and that the example corpus keeps its `FICTIONAL` banners, its
+`sources:` blocks, and its `related:` targets.
 
 **Policy drift check.** Table in `cases/policy-blocks.json`. Four policies are
 stated in more than one skill — the Lessons block, `_inbox/`-is-not-evidence,

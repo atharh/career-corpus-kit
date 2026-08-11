@@ -68,9 +68,9 @@ are what renderings are built from.>
 
 ## Gaps — the interview queue
 
-<Only questions whose answers would change a bullet, a letter, or a spoken answer — rule 12 `[SAY-ALOUD]`.
-Not everything you'd like to know. If it fails that test, don't write it here; delete it.
-Lookups you can do yourself are never gaps.>
+<Only questions whose answers would change a bullet, a letter, or a spoken answer — the
+say-it-out-loud test `[SAY-ALOUD]`. Not everything you'd like to know. If it fails that test,
+don't write it here; delete it. Lookups you can do yourself are never gaps.>
 
 - [x] ~~<resolved question>~~ Resolved YYYY-MM-DD: <the answer, briefly>.
 - [ ] **<the sharpest unanswered question, in bold>**
