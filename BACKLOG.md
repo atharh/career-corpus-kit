@@ -10,55 +10,53 @@ is kept rather than deleted.
 
 ## Pack staleness detection
 
-**Deferred 2026-08-10.** A rendered artifact is a snapshot of a corpus that keeps moving, and
-nothing currently notices when the two diverge.
+**Raised 2026-08-10. Declined at the design stage 2026-08-12 — parked, not dropped.**
 
-**The concrete case that raised it:** a résumé claim was withdrawn from a corpus during an
-interview session, and an interview prep pack written weeks earlier still carried it. It was
-caught by hand, because someone happened to be editing the file that day. Nothing would have
-caught it otherwise.
+A rendered artifact is a snapshot of a corpus that keeps moving, and nothing notices when the
+two diverge. **The case that raised it:** a claim was withdrawn from a corpus during an
+interview session, and a prep pack written weeks earlier still carried it. Caught by hand,
+because someone happened to be editing that file the same day.
 
-**The shape of a fix**, roughly:
+**What shipped instead, in release B:** each artifact records its `corpus_pin` and its full
+source list. That is the half that cannot be added retroactively, and it earns its place as a
+record of what a render read whether or not anything ever consumes it — `apply` rule 6.
 
-- Rendered packs record which corpus files and which specific claims each section drew on,
-  probably in frontmatter.
-- Re-running `prep` (or a `--check` mode) reports what changed underneath: withdrawn claims,
-  numbers whose ceilings moved, stories that gained a `RENDERING DECISION` since.
-- Loudest signal reserved for **withdrawn or shrunk** claims, since those are the ones that
-  turn into a false statement in a room rather than merely a stale one.
+**Why the consuming half was declined.** A full design was written and thrown away. The checker
+is small; the contract it needs is not — a digest and a risk snapshot per source, stamped on
+every render forever, as a breaking change to the artifact format, to serve a check one person
+runs across a handful of live artifacts. It also aims at the wrong lane. An application in
+flight is the case already in the user's head: the folder was opened, the render was just made,
+`application.md` says what came from where, and the fix is a manual edit the design forbids the
+tool from making anyway. One caught instance is an anecdote — the same recurrence gate
+`CLAUDE.md` applies to promotes.
 
-**Why it's deferred rather than dropped:** regenerating a pack from scratch before each
-interview is cheap and mostly solves it. The failure only bites when a pack is reused for a
-later round, or when several applications are live at once and a correction lands in the
-middle. That's a real scenario, just not the common one.
+**Two conclusions worth keeping, so a later pass doesn't re-derive them:**
 
-**Applies to `render` output too**, not only `prep` — a tailored résumé sitting in
-`applications/` has exactly the same problem.
+- **A commit range cannot be the comparison.** `jd.md` and `fit.md` are written and rendered
+  from before anything is committed, so a pin routinely points at a commit where the declared
+  sources do not exist yet — and the commit that lands the artifact lands its sources with it.
+  Any real version compares per-source content digests, not `pin..HEAD`.
+- **The cheap 90% needs no new contract.** `sources:` already holds paths. *Which artifacts
+  cite this file?* is a grep over artifact frontmatter, answered at the moment a story file is
+  edited — which is the only moment memory doesn't already cover.
 
-### Scope correction — the baseline is the worse case
+**What would revive it:** a second missed correction, one that reuse actually carried into a
+room; or enough long-lived artifacts accumulating that the reverse lookup above stops being
+enough.
 
-This entry was scoped to packs and tailored output, and judged uncommon on the grounds that
-regenerating before each interview is cheap. The **baseline** was outside that scope and is the
-worse case: it is long-lived by design, nothing regenerates it from scratch, and it is the
-artifact most likely to be sent.
+### The baseline remains the worse case
 
-Two failures follow from it, and they share one cause:
-
-- **Recorded decisions don't propagate.** A `RENDERING DECISION` can sit correct in the corpus
-  for weeks while the baseline keeps making the old claim. Recording feels like finishing.
-- **The baseline accumulates.** Every session validates new claims and the baseline is where
-  they land; nothing ever removes one.
-
-**The root cause is one asymmetry: several paths write to an artifact and none prune or
-re-verify it.** Worth treating as one problem rather than two.
+Distinct from detection, and still true. A baseline is long-lived by design, nothing
+regenerates it from scratch, and it is the artifact most likely to be sent. Two failures follow
+from one asymmetry — **several paths write to an artifact and none prune or re-verify it**:
+a `RENDERING DECISION` can sit correct in the corpus for weeks while the baseline keeps making
+the old claim, and every session that validates a new claim adds to the baseline while nothing
+ever removes one.
 
 **A partial fix shipped as discipline** — selection rules and a refresh-reconsiders-everything
-instruction in `render`, and `interview` rule 11b (fix the rendering in the same session; diff
-the whole résumé against the corpus once per corpus). **Its limit is honest and worth stating:
-discipline fails silently, depends on whoever is driving a session, and is judgement rather than
-string — so `evals/` cannot test it** (see *Judge layer for the evals*). That makes the tooling
-case stronger, not weaker, and its highest-value target is the baseline rather than the packs.
-If the corpus doctor below gets built, this belongs inside it.
+instruction in `render`, plus `interview` rule 11b. **Its limit is worth stating: discipline
+fails silently, depends on whoever is driving a session, and is judgement rather than string —
+so `evals/` cannot test it** (see *Judge layer for the evals*).
 
 ---
 
