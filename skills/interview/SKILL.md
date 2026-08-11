@@ -61,7 +61,7 @@ Format each question:
 **The ➡️ line is a provocation, never a recommended answer.** In a design review, suggesting
 the answer saves the user work. Here it contaminates the evidence: the entire product of this
 skill is what *they* remember, and a fluent guess of yours is the easiest thing in the world
-to nod along to. Same failure as rule 9's present-day artifact, arriving in your voice
+to nod along to. Same failure as rule 8's present-day artifact, arriving in your voice
 instead.
 
 - Use it for the worst reading of the facts (playbook 1 `[WORST-READING]` in `REFERENCE.md`) or
@@ -116,12 +116,7 @@ duplicates the setup across files, where it drifts. **Split only when evidence f
 different role, a different year, a different central decision. When that happens, cross-link
 both ways — the connection between two stories is usually the insight.
 
-**7. Mark your own inferences as yours.** If you propose a reading they didn't offer, label
-it in the file as your inference, dated, and say it must be confirmed or rejected before
-rendering. When they reject it, record the rejection *and their reasoning* — the refutation
-is often better material than the theory was.
-
-**8. Check the vocabulary's age, not just the numbers.** Claims decay two ways: numbers
+**7. Check the vocabulary's age, not just the numbers.** Claims decay two ways: numbers
 drift, and **words modernise**. Someone with a long career applying to today's roles has a
 newer, better-sounding name for every old thing they did — and reaching for it is honest,
 automatic, and falsifiable. Watch for terms that postdate the work: *microservices* (were
@@ -137,14 +132,14 @@ true *and stronger*, because it says they had the idea before the tooling existe
 The substance almost always survives. Record the correction in an `anachronisms_corrected`
 block so the modern word can't creep back in.
 
-**9. Beware present-day artifacts.** If the user shows you a current project as "context" for
+**8. Beware present-day artifacts.** If the user shows you a current project as "context" for
 an old story, it is a **lens, not a source** — it tells you what to ask, never what happened.
 A vivid, articulate, well-structured artifact sitting beside a thin ten-year-old memory will
 colonise it, and you'll both nod along because the shape is right. The contamination is real,
 it is fast, and it arrives in exactly the vocabulary you just read. Use the current artifact
 to know what to *ask*. Never to know the answer.
 
-**10. `_inbox/` is a queue, not a source. Folder location is a truth claim.** A file in
+**9. `_inbox/` is a queue, not a source. Folder location is a truth claim.** A file in
 `corpus/<company>/` asserts *vetted, sourced, provenance-checked*. Raw material — pasted
 drafts, old design docs, coaching output from other chats, exported notes — goes in
 `corpus/_inbox/` and **is never rendered from and never cited as fact.** Extract it into
@@ -158,37 +153,45 @@ The same status applies to `applications/<company>-<role>/_inbox/`, where the `a
 files recruiter mail and other inbound material. If something in there is a fact about the
 user, it earns its way in here like everything else — by them saying it, with a source.
 
-**11. Surface contradictions; never silently resolve them.** When two of the user's
-statements seem to conflict, that's a question for them, not a problem for you to fix. If you
-pick the version that seems defensible and quietly edit, two things go wrong: you make a
-factual call that was theirs to make, and you often delete true substance because the "safer"
-version is vaguer. Quote both lines back, name why they seem to conflict, and let them
-reconcile it. The reconciliation is usually more interesting than either version. (This is
-the drama-bias failure — see playbook 1 `[WORST-READING]` in `REFERENCE.md` — in a new place: resolving a
-tension yourself instead of letting them do it always risks inventing or destroying fact.)
+**10. Surface the change; never resolve it silently.** `[MARK-DONT-FIX]` Recorded material —
+a line in a story file, a claim in a rendered artifact, a reading nobody has confirmed yet —
+changes by a decision the user makes and sees. Whatever the trigger, the move is the same:
+**show what stands, show what would replace it, name what prompted the change, and let them
+choose.** Settling it yourself makes a factual call that was theirs, and the version a model
+settles on is reliably the vaguer one — the wording that accommodates everything commits to
+nothing. Four cases.
 
-**A self-correction is not a contradiction, and this rule must not fire on one.** Recall
-improves across a conversation; that is what the questions are for. When the user revises their
-own earlier answer *and says which one is right* — *"actually it was four months, not six"* —
-it is settled. Take the new answer. Don't quote both lines back: they have already done the
-reconciling this rule protects, and asking again reads as not listening. In particular **do not
-route it to `facts_disputed`**, which is for claims nobody has resolved — parking a settled
-number there means neither value renders, so their better answer becomes unusable.
+**a. Two of their own statements conflict.** Quote both lines back, name why they seem to
+conflict, and let them reconcile it. The reconciliation is usually more interesting than either
+version. (This is the drama-bias failure — see playbook 1 `[WORST-READING]` in `REFERENCE.md` —
+in a new place: resolving a tension yourself instead of letting them do it always risks
+inventing or destroying fact.)
 
-The tell is whether they mark the change themselves. Two different answers with no sign they
-noticed is what this rule is for: ask. A revision offered as a revision is not.
+*A self-correction is not a conflict, and this case must not fire on one.* Recall improves
+across a conversation; that is what the questions are for. When the user revises their own
+earlier answer *and says which one is right* — *"actually it was four months, not six"* — it is
+settled. Take the new answer; quoting both lines back reads as not listening when they have
+already done the reconciling. In particular **do not route it to `facts_disputed`**, which is
+for claims nobody has resolved — parking a settled number there means neither value renders, so
+their better answer becomes unusable. The tell is whether they mark the change themselves: two
+answers with no sign they noticed is what this case is for, and a revision offered as a revision
+is not.
 
-**11b. When an answer changes a claim that is already rendered, say so and mark it — don't fix
-it in passing.** `[MARK-DONT-FIX]` Rule 11 stops you resolving a contradiction between two of *their* statements.
-This is the other direction: a contradiction between what they just said and what a résumé or a
+**b. The reading is yours, not theirs.** If you propose a reading they didn't offer, label it in
+the file as your inference, dated, and say it must be confirmed or rejected before rendering.
+When they reject it, record the rejection *and their reasoning* — the refutation is often better
+material than the theory was.
+
+**c. The change invalidates something already rendered.** Case (a) is a conflict between two of
+*their* statements; this is the other direction — what they just said against what a résumé or a
 live application **already claims**. Those are the expensive ones, because a rendered claim is
-one a reader has already believed.
+one a reader has already believed. Say it in the same breath — *"that contradicts your résumé,
+which says X"* — and let them decide.
 
 **Recording the correction is not finishing it.** A corpus that has been updated correctly,
 sitting beside an artifact that still makes the old claim, is the worst available state: the
 corpus looks healthy, so nothing looks wrong, and the document people actually read is the wrong
-one. It will not heal on its own, because nothing re-reads a rendered artifact. So say it in the
-same breath — *"that contradicts your résumé, which says X"* — and let them decide per rule 11.
+one. It will not heal on its own, because nothing re-reads a rendered artifact.
 
 **But a correction to the corpus does not authorise editing the artifact.** One concern per
 change: the correction is a corpus change, and every artifact it invalidates is a separate,
@@ -211,19 +214,22 @@ rendered claim and ask what vouches for it *now*. Decisions get recorded correct
 silently fail to propagate, and the reader most likely to notice is the user looking at their own
 résumé, which is the review this kit exists to spare them.
 
-**11c. Before you rewrite a line that already exists, show the line and its replacement.** New
-information usually *adds* rather than contradicts, so rule 11 never fires — and the tidy move
-is to fold the new detail into the sentence already on disk. That edit is where substance goes
-quietly missing, because the version that accommodates everything is the version that commits
-to nothing. **If the proposed line says less than the one it replaces, it is not a fix.**
+**d. The change rewrites a line already on disk.** New information usually *adds* rather than
+contradicts, so case (a) never fires — and the tidy move is to fold the new detail into the
+sentence already written. That edit is where substance goes quietly missing. **If the proposed
+line says less than the one it replaces, it is not a fix.** And **adding a sentence beside the
+original usually beats reconciling both into one** — a detail that looked like clutter is what
+answers the third follow-up, and once merged away it is not recoverable from the merged version.
 
-Quote the current line and the proposed one, name what prompted the change, and let the user
-choose. **Adding a sentence beside the original usually beats reconciling both into one** — a
-detail that looked like clutter is what answers the third follow-up, and once merged away it is
-not recoverable from the merged version. Rule 11 explains why the safer-sounding wording is the
-dangerous one; this is that same failure reached without a contradiction to warn you.
+**The trigger is meaning, not keystrokes.** A decision round is owed when the edit could change
+fact, specificity, provenance, emphasis, or a recorded rendering decision — *"led the
+migration"* narrowed to *"led one workstream of the migration"* is that edit, and so is dropping
+the source beside a number. A mechanical, meaning-preserving correction is not: a typo, a
+rewrap, a repaired clause. Make those and move on. They still appear in the session's visible
+diff, which is where the user reviews them, and demanding a decision round for each one buries
+the changes that need one.
 
-**12. Through-lines go in `corpus/through-lines.md`, never in the story that surfaced them.**
+**11. Through-lines go in `corpus/through-lines.md`, never in the story that surfaced them.**
 Patterns spanning the whole career — recurring instincts, philosophies, repeated moves —
 belong to no single story and drift if copied into several. When a story evidences one, add
 the instance *there* and leave a pointer *here*. Three rules keep that file honest rather
@@ -241,7 +247,7 @@ story gets bent to fit. The defence is that through-lines are *derived and falsi
 new evidence can demote them. Never let a through-line pick a story's framing; let the job
 description do that.
 
-**13. Apply the say-it-out-loud test — before you ask, and before you log a gap.** `[SAY-ALOUD]` Depth is
+**12. Apply the say-it-out-loud test — before you ask, and before you log a gap.** `[SAY-ALOUD]` Depth is
 the point of a corpus, but *completeness* is not. This skill will drift toward archival
 completeness on its own, because every answer exposes three more askable questions and they
 all look reasonable written down.
@@ -302,8 +308,8 @@ Context nests, and each layer is written exactly once:
 ```
 corpus/
   profile.md              ← career spine: years, education, contact, skills
-  through-lines.md        ← cross-career findings. See rule 12.
-  _inbox/                 ← raw, unextracted material. NEVER a source. See rule 10.
+  through-lines.md        ← cross-career findings. See rule 11.
+  _inbox/                 ← raw, unextracted material. NEVER a source. See rule 9.
   <company>/
     background.md         ← company context every story here assumes
     <story>.md            ← one arc, one central decision
@@ -373,7 +379,7 @@ See `templates/story.md` for the skeleton.
    reveals the next round's questions.
 4. **Resolve gaps explicitly.** `- [x] ~~question~~ Resolved YYYY-MM-DD: answer.` The gaps
    list is the queue for next time; leaving it honest is what makes the corpus resumable.
-5. **Prune the queue as you go**, per rule 13. A gap that survives three sessions unasked is
+5. **Prune the queue as you go**, per rule 12. A gap that survives three sessions unasked is
    usually not waiting for the right moment — it's failing the say-it-out-loud test and nobody
    has said so. Delete it; git keeps it. **A deferred topic is different from a dead one:** if
    they defer, log *what* was deferred in enough detail to resume, because "they said they'd made
@@ -390,7 +396,7 @@ than an obstacle.
 
 **Note what that list does *not* include:** every fact about the arc. A story is done when it
 survives pressure, not when it's complete. Those are different targets and the second one is
-unreachable — you can always ask another question, and rule 13 exists because you will.
+unreachable — you can always ask another question, and rule 12 exists because you will.
 
 A session is done when the frontier holds nothing that passes the say-it-out-loud test — or
 when they've had enough. What survives the test becomes the gaps list; what doesn't gets
