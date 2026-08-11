@@ -263,10 +263,15 @@ learned by getting it wrong, that keep every rendered line defensible in the roo
 - **Nothing is applied silently.** You see a diff with a reason per change, and every genuine
   judgment call is surfaced as yours to make.
 
-Those rules are tested, not just written down. [`evals/`](evals/) turns the seven rejected
-claims in `ANNOTATED.md` into assertions — a disputed number, a ceiling, a reading the user
-refuted, an attribution they have no standing for — and runs them, plus a set of static checks on
-the skills themselves, on every push. `./evals/run.sh` needs nothing but `python3`.
+Those rules are written down *and* checked. [`evals/`](evals/) turns the seven rejected claims in
+`ANNOTATED.md` into assertions — a disputed number, a ceiling, a reading the user refuted, an
+attribution they have no standing for — and runs them against the committed example output on
+every push, alongside static checks on the skills themselves. Be precise about what that covers:
+CI checks repository policy and the shipped artifacts, which catches the examples drifting into a
+claim their own corpus forbids. It does not exercise the skills. A live mode does — it renders
+fresh from the fixture corpus with a real session — but renders are stochastic, so it is opt-in
+and run by hand before a change to a skill's hard rules. `./evals/run.sh` needs nothing but
+`python3`.
 
 ## Honest caveats
 
