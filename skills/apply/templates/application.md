@@ -3,7 +3,7 @@ company: <Company, as the posting names it>
 role: <Role, as the posting titles it>
 opened: <YYYY-MM-DD>
 found_via: <job board | referral | inbound | the company's own careers page>
-# No status: field. The last line of the log is the status — see the apply skill's rule 6 `[NO-ROLLUP]`.
+# No status: field. The last line of the log is the status — see apply's no-rollup rule `[NO-ROLLUP]`.
 contacts:            # optional — roles, not names, unless the user wants them
   - <role>: <channel>
 ---
@@ -13,7 +13,7 @@ contacts:            # optional — roles, not names, unless the user wants them
 ## Log
 
 <Append-only. One dated line per event, oldest at the top. Never edit a line that is already
-here; add another — see the apply skill's rule 5 `[LOG-APPEND-ONLY]`.>
+here; add another — see the apply skill's append-only-log rule `[LOG-APPEND-ONLY]`.>
 
 <Event vocabulary — these nine, and nothing else. Something that fits none of them is usually
 two events:>

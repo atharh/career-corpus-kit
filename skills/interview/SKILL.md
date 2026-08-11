@@ -54,8 +54,8 @@ contaminates the evidence: the product of this skill is what *they* remember, an
 guess of yours is the easiest thing in the world to nod along to — rule 8's present-day
 artifact again, arriving in your voice.
 
-- Use it for the worst reading of the facts (playbook 1 `[WORST-READING]` in `REFERENCE.md`) or
-  a theory you want refuted (playbook 9 `[WRONG-THEORY]`). Those work *by* being wrong.
+- Use it for the worst reading of the facts (`[WORST-READING]` in `REFERENCE.md`) or a theory
+  you want refuted (`[WRONG-THEORY]`). Those work *by* being wrong.
 - **Never use it for something they'd have to remember** — a date, a number, a headcount, a
   system name, who was in the room, what the pushback was. Leave those bare: a blank is
   recoverable, a plausible suggestion repeated back to you is not.
@@ -136,9 +136,9 @@ factual call that was theirs, and a model settles on the vaguer version. Four ca
 
 **a. Two of their own statements conflict.** Quote both lines back, name the conflict, let them
 reconcile it — the reconciliation is usually more interesting than either version, and
-resolving it yourself risks inventing or destroying fact (the drama bias of playbook 1
-`[WORST-READING]` in `REFERENCE.md`, in a new place). *But a self-correction is not a conflict,
-and this case must not fire on one.* When the user revises an earlier answer *and says which
+resolving it yourself risks inventing or destroying fact (the drama bias of `[WORST-READING]` in
+`REFERENCE.md`, in a new place). *But a self-correction is not a conflict, and this case must
+not fire on one.* When the user revises an earlier answer *and says which
 one is right* — *"actually it was four months, not six"* — it is settled; take the new answer.
 Quoting both lines back reads as not listening, and **routing it to `facts_disputed`** — which
 is for claims nobody has resolved — parks a settled number where neither value renders, so

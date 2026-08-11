@@ -20,6 +20,7 @@ whatever [REFERENCE.md](../REFERENCE.md) says that artifact's shape is.>
 <Each slot records something that cannot be reconstructed later: which corpus a render read,
 which files it drew on, what actually went out. Nothing here is a rollup of state held
 elsewhere. Lifecycle is the exception and it is not derived either — it is a property of this
-file, and it decides what may be done to it (the interview skill's rule 10 `[MARK-DONT-FIX]`): a `submitted` artifact is
-frozen evidence of what a reader saw, an `in-flight` one is re-rendered on request with the
-diff shown, a `baseline` one is refreshed as its own deliberate act.>
+file, and it decides what may be done to it (the interview skill's surface-the-change rule
+`[MARK-DONT-FIX]`): a `submitted` artifact is frozen evidence of what a reader saw, an
+`in-flight` one is re-rendered on request with the diff shown, a `baseline` one is refreshed as
+its own deliberate act.>

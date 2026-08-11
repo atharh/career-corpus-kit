@@ -27,9 +27,10 @@ the lifecycle state, the corpus commit the render read, the files it drew on, th
 once something has been sent — what went out. Fill the slots you know and leave the rest empty;
 a guessed pin is worse than none.
 
-Read all of it; source no *candidate claim* from any of it (SKILL.md rule 1 `[CLAIM-SOURCE]`). These files
-carry employer context and selection work, not evidence about the user. When `fit.md` names a
-story as backing a requirement, open that story and render the claim from there.
+Read all of it; source no *candidate claim* from any of it — SKILL.md's claim-sourcing rule
+`[CLAIM-SOURCE]`. These files carry employer context and selection work, not evidence about the
+user. When `fit.md` names a story as backing a requirement, open that story and render the claim
+from there.
 
 If you keep a PDF build pipeline that globs top-level `*.md`, an `applications/` subfolder
 won't be swept into the baseline build — run the build with explicit paths for tailored
