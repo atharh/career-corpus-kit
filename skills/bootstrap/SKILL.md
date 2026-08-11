@@ -73,8 +73,10 @@ application with the `apply` skill — don't create it here.
    `QUEUE.md` as a checklist.
 5. **Seed, don't fill.** Do NOT write story files yet. Bootstrap sets up the queue; the
    interview skill writes the stories, one at a time, with the user in the room.
-6. **Create `LESSONS.md`** — an empty file with a one-line header explaining that the skills
-   append corrections here to personalise over time.
+6. **Create `LESSONS.md`** — an empty file whose header says both what the skills do with it
+   and what belongs in it: they append the user's corrections here to personalise over time,
+   and a rule that would still hold if the corpus were about someone else is not one of them —
+   that one belongs to the method, and stays out of this file.
 7. **Hand off.** Point at the top of the queue: *"Your highest-value story looks like <X>. Run
    `/career-corpus:interview <X>` to start."*
 

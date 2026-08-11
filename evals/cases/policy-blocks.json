@@ -23,6 +23,8 @@
         "This skill ships generic. It gets sharper by accumulating the user's own corrections in `corpus/LESSONS.md` — in their **private** corpus repo, never in the kit.",
         "**At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an additional rule for this user, on equal footing with the hard rules above.",
         "append one dated line to `corpus/LESSONS.md`: the mistake, and the rule to apply next time. One line each. Append-only.",
+        "**Route it before you write it: would this rule still hold if the corpus were about someone else?**",
+        "a rule nobody can diff is a rule nobody can review, port, or undo",
         "**Never edit this SKILL.md to record a lesson,** and never write lessons into the kit repo."
       ],
       "required_in": ["apply", "interview", "render"],
