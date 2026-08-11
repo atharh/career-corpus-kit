@@ -145,13 +145,14 @@ Summarise in `fit.md` if you want a summary. Never summarise *into* `jd.md` — 
 silently becomes the thing you prepare against.
 
 **2. `_inbox/` here means what `corpus/_inbox/` means: unvetted, and never rendered from and
-never cited as fact.** Folder location is a truth claim — the same rule the `interview` skill
-applies to raw material applies here, and it bites harder, because inbound application
-material is *fluent and confident and written by someone with an incentive*. A recruiter's
-description of the team's scope, the role's remit, or how the last person did is a claim by a
-stranger selling a job. It can shape what you *ask* and what you *prepare for*. It can never
-become a fact in a letter or an answer. If something in there is a fact about the **user**,
-it earns its way into the corpus through `interview`, like everything else.
+never cited as fact.** `[INBOX-NOT-EVIDENCE]` Folder location is a truth claim — the same rule
+the `interview` skill applies to raw material applies here, and it bites harder, because
+inbound application material is *fluent and confident and written by someone with an
+incentive*. A recruiter's description of the team's scope, the role's remit, or how the last
+person did is a claim by a stranger selling a job. It can shape what you *ask* and what you
+*prepare for*. It can never become a fact in a letter or an answer. If something in there is a
+fact about the **user**, it earns its way into the corpus through `interview`, like everything
+else.
 
 **3. Never source a claim about the candidate from `applications/`.** The folder holds plenty
 a render legitimately needs — `jd.md` is what it tailors *to*, `fit.md` is most of the

@@ -57,7 +57,7 @@
   "inbox_claims": [
     {
       "id": "team-scope",
-      "rule": "apply rule 2 / render rule 1 — _inbox/ is never evidence, and a recruiter's account of the team's remit is a claim by a stranger with an incentive",
+      "rule": "apply `[INBOX-NOT-EVIDENCE]` / render `[CLAIM-SOURCE]` — _inbox/ is never evidence, and a recruiter's account of the team's remit is a claim by a stranger with an incentive",
       "why": "The panel knows what their own team does. Repeating the recruiter's number back to them is a sentence the candidate has to defend and cannot.",
       "must_appear": ["forty services", "everything downstream of the booking API"],
       "forbidden": [
@@ -69,7 +69,7 @@
     },
     {
       "id": "seat-and-headcount",
-      "rule": "apply rule 2 — attributed employer context may aim the prep, never become fact",
+      "rule": "apply `[INBOX-NOT-EVIDENCE]` — attributed employer context may aim the prep, never become fact",
       "why": "Whether the seat is new and what headcount comes with it are the recruiter's selling points. Planning out loud around either one asserts something nobody has verified.",
       "must_appear": ["newly created seat", "headcount of six"],
       "forbidden": ["newly created (seat|role|position)", "headcount of six"],
