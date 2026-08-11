@@ -91,8 +91,9 @@ Read the JD's real requirements (not its boilerplate) against the corpus, and gi
 claims and only one of them is yours to make. A requirement the corpus can't back may be one
 the user never did, or one they did and never recorded — *absent* versus *unwritten* — and the
 two need opposite responses: don't apply, versus book an interview session. This file records
-what it can see and asks; picking between them is a call about someone's career, which rule 8
-says is theirs. Say which you suspect and why, as a question.
+what it can see and asks; picking between them is a call about someone's career, which the
+surface-don't-decide rule `[SURFACE-DONT-DECIDE]` says is theirs. Say which you suspect and
+why, as a question.
 
 **The third state is the point, and "don't apply yet" is a valid result.** A requirement with
 nothing behind it doesn't get solved by rendering harder at it; it gets solved by an
@@ -138,13 +139,13 @@ without ever being `routed`.
 
 ## Hard rules
 
-**1. Capture the posting before it rots.** `[CAPTURE-POSTING]` Postings are pulled, edited and 404'd within weeks,
-and `prep` needs the employer's own words months later to map a story bank to their criteria.
-`jd.md` holds the text **verbatim**, with the source URL and the capture date at the top.
-Summarise in `fit.md` if you want a summary. Never summarise *into* `jd.md` — a paraphrase
-silently becomes the thing you prepare against.
+**Capture the posting before it rots.** `[CAPTURE-POSTING]` Postings are pulled, edited and
+404'd within weeks, and `prep` needs the employer's own words months later to map a story bank
+to their criteria. `jd.md` holds the text **verbatim**, with the source URL and the capture date
+at the top. Summarise in `fit.md` if you want a summary. Never summarise *into* `jd.md` — a
+paraphrase silently becomes the thing you prepare against.
 
-**2. `_inbox/` here means what `corpus/_inbox/` means: unvetted, and never rendered from and
+**`_inbox/` here means what `corpus/_inbox/` means: unvetted, and never rendered from and
 never cited as fact.** `[INBOX-NOT-EVIDENCE]` Folder location is a truth claim — the same rule
 the `interview` skill applies to raw material applies here, and it bites harder, because
 inbound application material is *fluent and confident and written by someone with an
@@ -154,44 +155,45 @@ person did is a claim by a stranger selling a job. It can shape what you *ask* a
 fact about the **user**, it earns its way into the corpus through `interview`, like everything
 else.
 
-**3. Never source a claim about the candidate from `applications/`.** The folder holds plenty
-a render legitimately needs — `jd.md` is what it tailors *to*, `fit.md` is most of the
-selection work already done — and `render` is meant to read all of it rather than ask the user
-to paste it again. What it may not do is take a *claim about the user* from here. Everything
-in this folder that reads like one is already a rendering: another application's résumé, this
-one's earlier draft, a line `fit.md` quoted while making its case. Follow the pointer back to
-the corpus story and render the claim from there. `render` warns that tailoring from a
-baseline is a telephone game that loses exactly the material the JD needs; tailoring from
+**Never source a claim about the candidate from `applications/`.** `[NOT-FROM-APPLICATIONS]` The
+folder holds plenty a render legitimately needs — `jd.md` is what it tailors *to*, `fit.md` is
+most of the selection work already done — and `render` is meant to read all of it rather than
+ask the user to paste it again. What it may not do is take a *claim about the user* from here.
+Everything in this folder that reads like one is already a rendering: another application's
+résumé, this one's earlier draft, a line `fit.md` quoted while making its case. Follow the
+pointer back to the corpus story and render the claim from there. `render` warns that tailoring
+from a baseline is a telephone game that loses exactly the material the JD needs; tailoring from
 another application's output is that failure with a second lossy hop, and it is the single
-easiest mistake to make once the folder has a `resume.md` sitting in it that looks nearly
-right.
+easiest mistake to make once the folder has a `resume.md` sitting in it that looks nearly right.
 
-**4. No individual's name in a filename or a folder name.** Roles in filenames, names in the
-body if the user wants them. Filenames get screenshotted, screen-shared and tab-completed in
-front of other people — including, eventually, in front of someone from that company.
+**No individual's name in a filename or a folder name.** `[NO-NAMES-IN-FILENAMES]` Roles in
+filenames, names in the body if the user wants them. Filenames get screenshotted, screen-shared
+and tab-completed in front of other people — including, eventually, in front of someone from
+that company.
 
-**5. The folder is the memory; the log is dated and append-only.** `[LOG-APPEND-ONLY]` Don't rewrite history in
-`application.md` when a stage changes — add a line. What you believed on the 12th matters when
-you're working out on the 30th why nobody replied.
+**The folder is the memory; the log is dated and append-only.** `[LOG-APPEND-ONLY]` Don't
+rewrite history in `application.md` when a stage changes — add a line. What you believed on the
+12th matters when you're working out on the 30th why nobody replied.
 
-**6. Store inputs and events; never store a rollup.** `[NO-ROLLUP]` The test is whether it can be recomputed
-from what's already on disk. An open-application count, a "3 live, 1 stalled" summary line, a
-`status:` field beside a log that already ends in the current stage — all recomputable, so all
-of them rot silently and then lie. Read the folders and compute those each time.
+**Store inputs and events; never store a rollup.** `[NO-ROLLUP]` The test is whether it can be
+recomputed from what's already on disk. An open-application count, a "3 live, 1 stalled" summary
+line, a `status:` field beside a log that already ends in the current stage — all recomputable,
+so all of them rot silently and then lie. Read the folders and compute those each time.
 
-**The other half of the split is the part that gets skipped.** Some things cannot be
-reconstructed later, and those get written down at the moment they are true: the corpus commit
-a render drew on, the hash of what was actually sent, the URL a posting was captured from. Lose
-one and it is gone — the posting 404s, the corpus moves on, and nothing on disk remembers. A
-pin is not a rollup; it records an input.
+**The other half of the split is the part that gets skipped.** `[PIN-THE-INPUTS]` Some things
+cannot be reconstructed later, and those get written down at the moment they are true: the
+corpus commit a render drew on, the hash of what was actually sent, the URL a posting was
+captured from. Lose one and it is gone — the posting 404s, the corpus moves on, and nothing on
+disk remembers. A pin is not a rollup; it records an input.
 
-**But a pin is a fingerprint, not a copy.** The `sha256` in a submitted artifact's frontmatter
-settles one question and only one: whether a file the user still has is the file that went out.
-It recovers nothing. `bootstrap`'s `.gitignore` keeps `*.pdf` and `*.docx` out of git, so by
-default the sent bytes survive only as the working copy and the pin outlives them — never
-describe the frontmatter as an archive of what a reader saw. A user who wants those bytes in
-history can `git add -f <the file that went out>` at the `sent` event. Offer it as their call at
-the moment it's live, never as a default: it trades away a privacy default `PRIVACY.md` sets out.
+**But a pin is a fingerprint, not a copy.** `[PIN-NOT-ARCHIVE]` The `sha256` in a submitted
+artifact's frontmatter settles one question and only one: whether a file the user still has is
+the file that went out. It recovers nothing. `bootstrap`'s `.gitignore` keeps `*.pdf` and
+`*.docx` out of git, so by default the sent bytes survive only as the working copy and the pin
+outlives them — never describe the frontmatter as an archive of what a reader saw. A user who
+wants those bytes in history can `git add -f <the file that went out>` at the `sent` event.
+Offer it as their call at the moment it's live, never as a default: it trades away a privacy
+default `PRIVACY.md` sets out.
 
 So `application.md` carries no `status:` field: the last line of its log **is** the status, and
 a field beside the log is a second copy on its own schedule. And application-level state lives
@@ -199,10 +201,10 @@ in `application.md`'s frontmatter, artifact-level state in each artifact's own �
 manifest file**, because a file whose only job is to repeat another file's state goes stale
 without anything noticing.
 
-**7. This folder is the most sensitive thing in the repo.** It holds other people's real
-names, private correspondence, and sometimes an employer's confidential material. It belongs
-in the private corpus repo and nowhere else. Never paste its contents anywhere the user
-didn't ask for, and don't commit an employer's take-home brief to anything public.
+**This folder is the most sensitive thing in the repo.** `[FOLDER-IS-SENSITIVE]` It holds other
+people's real names, private correspondence, and sometimes an employer's confidential material.
+It belongs in the private corpus repo and nowhere else. Never paste its contents anywhere the
+user didn't ask for, and don't commit an employer's take-home brief to anything public.
 
 `_inbox/` is git-ignored by default — `bootstrap` writes that rule, and it is the reason
 inbound can be filed here at all without thinking about it each time. **For an employer's
@@ -212,9 +214,9 @@ If a local copy is genuinely needed to work on it, say plainly that it's staying
 repo, and log what it is and when it gets deleted. A brief committed once is in history in
 every clone, and deleting the file later doesn't take it back — see `PRIVACY.md` in the kit.
 
-**8. Surface, don't decide.** Whether to apply with a named gap, whether a requirement is
-boilerplate, whether a stalled thread is dead — all the user's call. Give them the read and
-the reason, not the verdict.
+**Surface, don't decide.** `[SURFACE-DONT-DECIDE]` Whether to apply with a named gap, whether a
+requirement is boilerplate, whether a stalled thread is dead — all the user's call. Give them
+the read and the reason, not the verdict.
 
 ## Lessons — how this skill personalises to you
 

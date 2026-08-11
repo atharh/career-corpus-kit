@@ -149,153 +149,6 @@ def check_skill_frontmatter(r: Report) -> list[str]:
     return names
 
 
-def numbered_sections(text: str) -> dict[str, list[str]]:
-    """Map section heading -> the **N.** list labels found under it.
-
-    Labels are strings, not ints, so a sub-lettered label like `11b` is seen
-    rather than silently truncated to `11` — first so the citation checks can't
-    validate it against a different rule, and now so
-    check_no_sublettered_rules can reject it outright.
-    """
-    out: dict[str, list[str]] = {}
-    parts = re.split(r"^(#{2,} .*)$", text, flags=re.M)
-    for i in range(1, len(parts), 2):
-        head, body = parts[i].strip(), parts[i + 1]
-        nums = re.findall(r"^\*\*(\d+[a-z]?)\. ", body, re.M)
-        if nums:
-            out[head] = nums
-    return out
-
-
-def check_numbered_lists(r: Report) -> dict[str, set[str]]:
-    """Numbered rule lists must run 1..N with no gaps or repeats.
-
-    Editing a rule list by hand is how you get two rule 6s, and every later
-    cross-reference then points at the wrong rule.
-
-    Contiguity is asserted over the plain integers only. A suffixed rule sits
-    outside the sequence — check_no_sublettered_rules rejects it on its own
-    grounds — but it still joins the set of labels a citation may resolve
-    against, so its citations stay checkable until it is gone.
-    """
-    per_skill: dict[str, set[str]] = {}
-    for d in skill_dirs():
-        text = (d / "SKILL.md").read_text()
-        rel = (d / "SKILL.md").relative_to(ROOT)
-        seen: set[str] = set()
-        for head, labels in numbered_sections(text).items():
-            nums = [int(n) for n in labels if n.isdigit()]
-            r.check(
-                f"{rel} — {head!r} is numbered 1..{len(nums)}",
-                nums == list(range(1, len(nums) + 1)),
-                f"got {nums}",
-            )
-            seen.update(labels)
-        per_skill[d.name] = seen
-    return per_skill
-
-
-def check_no_sublettered_rules(r: Report) -> None:
-    """A sub-lettered rule label ("11b") is accretion wearing a number.
-
-    The suffix existed to dodge renumbering, and renumbering is now cheap:
-    cross-boundary citations go by stable id, and a stale within-file number
-    fails the citation checks. A qualification that cannot earn its own number
-    is a case of the rule it qualifies and belongs inside it. See CLAUDE.md,
-    "Consolidate — when a rulebook grows".
-    """
-    for path in sorted((ROOT / "skills").rglob("*.md")):
-        rel = path.relative_to(ROOT)
-        for head, labels in numbered_sections(path.read_text()).items():
-            bad = [n for n in labels if not n.isdigit()]
-            r.check(
-                f"{rel} — {head!r} has no sub-lettered rules",
-                not bad,
-                f"found {bad} — give it its own number or fold it into the rule it qualifies",
-            )
-
-
-def check_rule_references(r: Report, rules: dict[str, set[str]]) -> None:
-    """A "rule N" mention must exist, and must not leave the file it lives in.
-
-    A number is only safe inside the list that defines it, where
-    `check_numbered_lists` has already made two rule 6s impossible. Cross a file
-    boundary and the number is pure fragility: insert a rule above the target and
-    every citation elsewhere still resolves, silently, to the wrong rule. So a
-    citation that leaves the file names the rule by its id and its short name
-    instead — see `check_rule_ids` — and a number that escapes fails here.
-
-    Rules are defined in `SKILL.md`, so "leaves the file" is two cases: any
-    "rule N" outside a `SKILL.md` at all, and one in a `SKILL.md` attributed to a
-    different skill.
-    """
-    for path in sorted((ROOT / "skills").rglob("*.md")):
-        rel = path.relative_to(ROOT)
-        text = path.read_text()
-        owner_default = path.parent.name if path.parent.name in rules else None
-        for m in re.finditer(r"rule (\d+[a-z]?)", text):
-            n = m.group(1)
-            context = text[max(0, m.start() - 120) : m.start()]
-            # "the interview skill's ... (rule 13)" — attribute to the named skill.
-            named = [s for s in rules if re.search(rf"\b{s}\b skill", context)]
-            owner = named[-1] if named else owner_default
-            if path.name != "SKILL.md" or (owner and owner != path.parent.name):
-                r.fail(
-                    f"{rel} — 'rule {n}' cites {owner or 'a rule'} across a file boundary",
-                    "cite it by id and name instead; a number means nothing outside its own file",
-                )
-                continue
-            if owner is None:
-                continue
-            r.check(
-                f"{rel} — 'rule {n}' resolves in {owner}",
-                n in rules[owner],
-                f"{owner} has rules {sorted(rules[owner])}",
-            )
-
-
-def check_playbook_references(r: Report) -> None:
-    """"playbook N" must resolve, and must not leave REFERENCE.md.
-
-    Playbooks are numbered in REFERENCE.md, so a number cited from SKILL.md or a
-    template carries exactly the fragility a rule number does across a boundary.
-    Same convention, same enforcement: outside the file that numbers them, a
-    playbook is named by its id.
-    """
-    for d in skill_dirs():
-        ref = d / "REFERENCE.md"
-        if not ref.is_file():
-            continue
-        labels: set[str] = set()
-        for head, found in numbered_sections(ref.read_text()).items():
-            if "playbook" not in head.lower():
-                continue
-            nums = [int(n) for n in found if n.isdigit()]
-            r.check(
-                f"{ref.relative_to(ROOT)} — {head!r} is numbered 1..{len(nums)}",
-                nums == list(range(1, len(nums) + 1)),
-                f"got {nums}",
-            )
-            labels.update(found)
-        if not labels:
-            continue
-        for path in sorted(d.rglob("*.md")):
-            rel = path.relative_to(ROOT)
-            for m in re.finditer(r"playbook (\d+[a-z]?)", path.read_text()):
-                n = m.group(1)
-                if path != ref:
-                    r.fail(
-                        f"{rel} — 'playbook {n}' cites {d.name} across a file boundary",
-                        "cite it by id instead; a number means nothing outside REFERENCE.md",
-                    )
-                    continue
-                r.check(
-                    f"{rel} — 'playbook {n}' resolves",
-                    n in labels,
-                    f"{d.name} playbook has {sorted(labels)}",
-                )
-
-
 def citing_files_outside_skills() -> list[Path]:
     """The files outside `skills/` that cite skill rules.
 
@@ -307,76 +160,126 @@ def citing_files_outside_skills() -> list[Path]:
     return sorted([*(ROOT / "examples").rglob("*.md"), *(ROOT / "evals" / "cases").glob("*.json")])
 
 
-def check_citations_outside_skills(r: Report) -> None:
-    """A numbered citation outside `skills/` is the same fragility, one tree further out.
+def check_numbered_citations(r: Report) -> None:
+    """A rule is addressed by its id. There are no numbers left to cite.
 
-    `check_rule_references` bars a rule number from leaving the file that numbers
-    it; this applies that bar where the number has left `skills/` entirely.
-    Nothing out here renumbers with the skill, so a stale citation stays green
-    while pointing at whatever rule inherited its number.
+    Rule lists carry no numbers, so "rule 9" resolves against nothing at all —
+    and the failure it used to cause was silent: a within-file citation pointed
+    at whatever rule currently held that position, so inserting one rule above it
+    retargeted the citation with every check still green. One addressing scheme
+    removes the class.
 
-    Fixture files are exempt, and the `FICTIONAL` banner is the line: a file under
-    `examples/` that carries one is an invented artifact, and its prose is its own
-    rather than documentation of this kit — a story that mentions rule 4 of some
-    invented policy is not making a claim about `skills/`. `check_example_corpus`
-    requires that banner on every fixture file, so the two checks meet with
-    nothing uncovered between them. Ids are checked everywhere regardless; a
-    citation that resolves cannot go stale.
+    Scanned wherever a rule can be cited: `skills/`, the docs and fixtures under
+    `examples/`, and the eval case tables. Fixture files are exempt, and the
+    `FICTIONAL` banner is the line: a file under `examples/` that carries one is
+    an invented artifact whose prose is its own rather than documentation of this
+    kit — a story that mentions rule 4 of some invented policy is not making a
+    claim about `skills/`. `check_example_corpus` requires that banner on every
+    fixture file, so the two checks meet with nothing uncovered between them.
+
+    Plain-numbered lists stay legal, and so do references to them: their numbers
+    are execution order, not addresses — "step 2" of a workflow means the second
+    thing you do, and it stays true however the rule lists are edited.
     """
-    for path in citing_files_outside_skills():
+    for path in [*sorted((ROOT / "skills").rglob("*.md")), *citing_files_outside_skills()]:
         text = path.read_text()
         if path.suffix == ".md" and FICTIONAL in text:
             continue
-        hits = [m.group(0) for m in re.finditer(r"\b(rule|playbook) (\d+[a-z]?)\b", text, re.I)]
+        hits = [m.group(0) for m in re.finditer(r"\b(rules?|playbooks?) (\d+[a-z]?)\b", text, re.I)]
         r.check(
             f"{path.relative_to(ROOT)} — cites rules by id, not by number",
             not hits,
-            f"found {hits} — cite by id and name instead, `[LIKE-THIS]`; see check_rule_ids",
+            f"found {hits} — cite by name and id instead, `[LIKE-THIS]`; see check_rule_ids",
         )
 
 
 RULE_ID = re.compile(r"`\[([A-Z][A-Z0-9-]+)\]`")
 
+# A rule heading, matched against a whole paragraph and anchored to its start,
+# so a bold phrase mid-sentence can never read as one — `**pristine**` opens a
+# line whenever the paragraph happens to wrap that way, and opening a paragraph
+# is the bar. The heading may carry single `*` emphasis and may wrap over lines,
+# but never over a blank one.
+RULE_HEAD = re.compile(r"\A\*\*((?:(?!\n\n)[^*]|\*(?!\*))+?)\*\*")
+
+# Sections whose paragraphs are rules. Everything else in a skill is prose.
+RULE_SECTION = re.compile(r"hard rules|rules specific to|playbook", re.I)
+
+
+def rule_paragraphs(text: str) -> list[tuple[int, str, str]]:
+    """Every rule in the file: (offset, section heading, paragraph).
+
+    A **rule** is a paragraph inside a rule section — `## Hard rules`, `## Rules
+    specific to …`, `## The question playbook` — that opens with a bold heading
+    at the left margin. That is the whole detection rule, and it is what makes
+    "every rule carries an id" checkable now that the numbers are gone.
+
+    One exception: a lettered sub-case (`**a. …**`) is a branch of the rule above
+    it rather than a rule of its own, and shares that rule's id. Bullets,
+    blockquotes and indented prose are not paragraphs at the left margin, so they
+    never qualify either.
+    """
+    out: list[tuple[int, str, str]] = []
+    parts = re.split(r"^(#{2,} .*)$", text, flags=re.M)
+    pos = len(parts[0])
+    for i in range(1, len(parts), 2):
+        head, body = parts[i], parts[i + 1]
+        pos += len(head)
+        if RULE_SECTION.search(head):
+            at = pos
+            for para in re.split(r"(\n[ \t]*\n)", body):
+                if not para.startswith("\n"):
+                    m = RULE_HEAD.match(para)
+                    if m and not re.match(r"[a-z]\. ", m.group(1)):
+                        out.append((at, head.strip(), para))
+                at += len(para)
+        pos += len(body)
+    return out
+
 
 def check_rule_ids(r: Report) -> None:
-    """A cross-boundary citation names the rule by a stable id, and it must resolve.
+    """Every rule carries a stable id, defined once, and every citation resolves.
 
-    Ids are written `[ID]` after the rule's bold heading and never move when the
-    list is renumbered, which is why every citation that leaves a file uses one
-    (`check_rule_references` and `check_playbook_references` reject the numbers
-    that used to do this job). This check is the other half: an id is defined
-    once kit-wide, and a citation of one that no longer exists fails loudly.
+    Three bars, and they compose into one addressing scheme:
 
-    Rules cited only inside their own file keep bare numbers on purpose. The
-    loud version of that failure — two rule 6s — is already impossible under
-    `check_numbered_lists`, and tagging every rule in the kit would be churn
-    for a failure that cannot happen.
+    - **Coverage.** Every rule — see `rule_paragraphs` for what counts as one —
+      is tagged, whether or not anything cites it yet. Tagging only the cited
+      ones means adding a citation edits the file being cited, which is how a
+      rule ends up cited by position instead.
+    - **Uniqueness.** An id is defined once kit-wide, so a citation is never
+      ambiguous about which rule it names.
+    - **Resolution.** Every `[ID]` written anywhere in `skills/`, in `examples/`,
+      or in the eval case tables names a rule that still exists. Delete a rule
+      and its citations fail loudly instead of pointing at nothing.
 
-    Ids are defined in `skills/` and cited from there and from the files
-    `citing_files_outside_skills` names, which are held to the same bar: an id
-    that stopped existing has to fail wherever it is written down.
+    A definition is the id tag immediately following a rule's bold heading. It is
+    positional on purpose: an id written mid-sentence is a citation, and the two
+    must not be confusable, or a citation of a deleted rule would define it.
     """
-    # id -> (path, label). A definition is an id sitting immediately after the
-    # closing `**` of a rule's bold heading — not merely on the same line, since
-    # a long heading wraps and the tag then lands on the next one.
     defs: dict[str, tuple[Path, str]] = {}
     spans: dict[Path, list[tuple[int, int]]] = {}
     dupes: list[str] = []
     for path in sorted((ROOT / "skills").rglob("*.md")):
-        text = path.read_text()
-        for m in re.finditer(r"^\*\*(\d+[a-z]?)\. ", text, re.M):
-            close = text.find("**", m.end())
-            if close == -1:
+        rel = path.relative_to(ROOT)
+        for at, _section, para in rule_paragraphs(path.read_text()):
+            m = RULE_HEAD.match(para)
+            assert m is not None
+            label = squash(m.group(1))[:56]
+            tag = re.match(r"\s*`\[([A-Z][A-Z0-9-]+)\]`", para[m.end() :])
+            if not r.check(
+                f"{rel} — rule {label!r} carries an id",
+                tag is not None,
+                "every rule in a rule list is tagged `[LIKE-THIS]`, cited or not",
+            ):
                 continue
-            tag = re.match(r"\s*`\[([A-Z][A-Z0-9-]+)\]`", text[close + 2 :])
-            if not tag:
-                continue
+            assert tag is not None
             rid = tag.group(1)
             if rid in defs:
                 dupes.append(rid)
-            defs[rid] = (path, m.group(1))
-            start = close + 2 + tag.start()
-            spans.setdefault(path, []).append((start, close + 2 + tag.end()))
+            defs[rid] = (path, label)
+            spans.setdefault(path, []).append(
+                (at + m.end() + tag.start(), at + m.end() + tag.end())
+            )
 
     r.check(
         "rule ids are unique kit-wide",
@@ -386,7 +289,7 @@ def check_rule_ids(r: Report) -> None:
 
     for rid, (path, label) in sorted(defs.items()):
         r.check(
-            f"rule id {rid} — defined once, at {path.relative_to(ROOT)} rule {label}",
+            f"rule id {rid} — defined once, at {path.relative_to(ROOT)} {label!r}",
             rid not in dupes,
             "a second definition makes every citation ambiguous",
         )
@@ -490,8 +393,8 @@ def check_example_corpus(r: Report) -> None:
         rel = path.relative_to(ROOT)
         text = path.read_text()
 
-        # Rule 10 in the interview skill: folder location is a truth claim.
-        # Fabricated career content must announce itself on every single file.
+        # `[INBOX-QUEUE]` in the interview skill: folder location is a truth
+        # claim. Fabricated career content announces itself on every file.
         if rel.name != "README.md":
             r.check(f"{rel} carries a FICTIONAL banner", FICTIONAL in text, "no banner")
 
@@ -636,11 +539,7 @@ def main() -> int:
 
     plugin = check_manifests(r)
     names = check_skill_frontmatter(r)
-    rules = check_numbered_lists(r)
-    check_no_sublettered_rules(r)
-    check_rule_references(r, rules)
-    check_playbook_references(r)
-    check_citations_outside_skills(r)
+    check_numbered_citations(r)
     check_rule_ids(r)
     check_skill_cross_references(r, names)
     check_relative_links(r)

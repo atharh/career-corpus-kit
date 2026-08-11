@@ -117,9 +117,10 @@ def scan(text: str, patterns: list[str]) -> list[str]:
 def check_templates_conform(r: Report, spec: dict, fixture: Path) -> None:
     """Every owned file carries the frontmatter its template declares, and no rollup.
 
-    `apply` rule 6: state that can be recomputed from what is already on disk is
-    not stored. A `status:` field beside an append-only log is the canonical
-    instance — the last line of the log already is the status.
+    `apply`'s no-rollup rule `[NO-ROLLUP]`: state that can be recomputed from
+    what is already on disk is not stored. A `status:` field beside an
+    append-only log is the canonical instance — the last line of the log already
+    is the status.
     """
     banned = spec["banned_frontmatter_keys"]
     for name, tmpl_rel in spec["templates"].items():
@@ -141,7 +142,7 @@ def check_templates_conform(r: Report, spec: dict, fixture: Path) -> None:
             r.check(
                 f"{name} has no {key!r} rollup field",
                 key not in keys,
-                f"apply rule 6 — {key} is recomputable from the log; a second copy drifts",
+                f"apply `[NO-ROLLUP]` — {key} is recomputable from the log; a second copy drifts",
             )
 
 
@@ -197,10 +198,11 @@ def check_event_vocabulary(r: Report, spec: dict, fixture: Path) -> None:
 
 
 def check_jd_boundary(r: Report, fixture: Path) -> None:
-    """The verbatim boundary is what makes `apply` rule 1 checkable.
+    """The verbatim boundary is what makes `[CAPTURE-POSTING]` checkable.
 
-    Rule 1 forbids summarising into jd.md. Without a marked boundary that is an
-    intention; with one, anything that drifts in around the posting is visible.
+    That rule forbids summarising into jd.md. Without a marked boundary that is
+    an intention; with one, anything that drifts in around the posting is
+    visible.
     """
     text = (fixture / "jd.md").read_text()
     nb, ne = text.count(BEGIN), text.count(END)
@@ -220,7 +222,7 @@ def check_jd_boundary(r: Report, fixture: Path) -> None:
     r.check(
         "jd.md ends at the END marker",
         text[j + len(END) :].strip() == "",
-        "commentary after the boundary belongs in fit.md — rule 1",
+        "commentary after the boundary belongs in fit.md — apply `[CAPTURE-POSTING]`",
     )
 
 
@@ -282,13 +284,13 @@ def check_artifact_frontmatter(r: Report, spec: dict, fixture: Path) -> None:
         for key in required:
             r.check(f"{name} has artifact key {key!r}", key in keys, "declared by the template")
         for key in spec["banned_frontmatter_keys"]:
-            r.check(f"{name} has no {key!r} rollup field", key not in keys, "apply rule 6")
+            r.check(f"{name} has no {key!r} rollup field", key not in keys, "apply `[NO-ROLLUP]`")
 
         life = scalar(fm, "lifecycle")
         r.check(
             f"{name} lifecycle is one of {sorted(lifecycles)}",
             life in lifecycles,
-            f"got {life!r} — the interview skill's rule 11b names exactly these three",
+            f"got {life!r} — interview `[MARK-DONT-FIX]` names exactly these three",
         )
         gen = scalar(fm, "generated") or ""
         r.check(f"{name} generated: is a date", bool(DATE.match(gen)), f"got {gen!r}")

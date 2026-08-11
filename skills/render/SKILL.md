@@ -43,11 +43,13 @@ not a refresh.** Every baseline refresh reconsiders what is already there, not j
 **A bullet earns its slot on all three** — the hard rules below, applied at *selection* time
 rather than at writing time:
 
-- **A decision that was actually theirs** (rule 5). Being present while a team shipped is not a
-  slot.
-- **A mechanism specific enough that nobody else could have written the sentence** (rule 7). If
-  it would fit on a stranger's résumé unchanged, it is describing a job, not their work.
-- **An outcome or scope figure that survives one follow-up question** (rule 2). Failing this one
+- **A decision that was actually theirs** — honest attribution `[HONEST-ATTRIBUTION]`. Being
+  present while a team shipped is not a slot.
+- **A mechanism specific enough that nobody else could have written the sentence** — the true
+  version `[TRUE-VERSION]`. If it would fit on a stranger's résumé unchanged, it is describing
+  a job, not their work.
+- **An outcome or scope figure that survives one follow-up question** — a number's source and
+  ceiling `[NUMBER-CEILING]`. Failing this one
   is the usual killer: an outcome nobody measured is the same defect as an unsourced number.
 
 Bullets that establish the **role and its scope are structural, not outcomes** — they answer
@@ -87,15 +89,15 @@ render each through the lens that fits. One story can be "aligned three orgs" fo
 role and "engineering judgment under pressure" for a staff role — same facts, different face.
 
 ⚠️ **This thesis-from-JD step is the least battle-tested part of the system.** Treat early
-tailored output as a strong first draft, and lean on the diff-and-decide review (rule 9)
-rather than trusting the selection blindly.
+tailored output as a strong first draft, and lean on the diff-and-decide review
+`[SHOW-THE-DIFF]` rather than trusting the selection blindly.
 
 ## Hard rules — faithful rendering
 
-**1. Every claim about the candidate comes from the vetted corpus, and from nothing else.**
-`[CLAIM-SOURCE]` A claim reaches the artifact only if a corpus story vouches for it (`facts_vetted` / published
-sources). Three kinds of material feed a tailored render, and only the first is evidence about
-the user:
+**Every claim about the candidate comes from the vetted corpus, and from nothing else.**
+`[CLAIM-SOURCE]` A claim reaches the artifact only if a corpus story vouches for it
+(`facts_vetted` / published sources). Three kinds of material feed a tailored render, and only
+the first is evidence about the user:
 
 - **Candidate claims** — what they did, built, decided, chose against, achieved, know. Vetted
   corpus files only.
@@ -122,7 +124,7 @@ unsourced and forbidden until extracted into a story file, and a recruiter's acc
 is a claim by a stranger with an incentive, never a verified fact about the company or the user.
 It can shape what you emphasise. It can never become a sentence the user has to defend.
 
-**2. Numbers carry their source and their ceiling.** `[NUMBER-CEILING]` Render only figures a
+**Numbers carry their source and their ceiling.** `[NUMBER-CEILING]` Render only figures a
 corpus file sources, at the value it sources. If a metric was confirmed as "doubled," never the
 "tripled" a draft inflated it to. If a file says "do not inflate" or "do not quote a count,"
 obey it.
@@ -134,56 +136,59 @@ that block exists to take away from you. And note what `facts_vetted` does and d
 it says the user is on record, not that anyone checked. See "What 'vetted' means" in
 `interview`.
 
-**3. Date the vocabulary, not just the facts.** `[DATE-VOCABULARY]` No term that postdates the
+**Date the vocabulary, not just the facts.** `[DATE-VOCABULARY]` No term that postdates the
 work. If the corpus says they were "doing data modelling in 2014," don't render it as a tool
 that shipped in 2016. Check `anachronisms_corrected` blocks before using any tool or role name.
 
-**4. No names of non-public people. No internal codenames.** Roles, not names ("a senior
-engineer," not the person). Say "the company's service catalog," not the internal project
-codename; "~10 teams," not the internal team names. Internal names mean nothing to a reader
-and may be confidential. Public bylines (blog co-authors, conference talks) are fine.
+**No names of non-public people. No internal codenames.** `[NO-NAMES-CODENAMES]` Roles, not
+names ("a senior engineer," not the person). Say "the company's service catalog," not the
+internal project codename; "~10 teams," not the internal team names. Internal names mean nothing
+to a reader and may be confidential. Public bylines (blog co-authors, conference talks) are
+fine.
 
-**5. Attribute their role honestly.** `[HONEST-ATTRIBUTION]` Match the corpus `role:` /
+**Attribute their role honestly.** `[HONEST-ATTRIBUTION]` Match the corpus `role:` /
 `authorship:` exactly. Idea + prototype + sponsorship renders as "proposed and prototyped; the
 team delivered" — never "I built." Being one author of five is not sole authorship.
 Over-claiming is checkable and fatal.
 
-**And don't render hindsight as design intent.** Building something that later became
-infrastructure is not the same claim as having planned it that way, and the corpus rarely says
-the second one. "Noticed their own work was worth generalising" survives the follow-up question;
-"designed a platform" invites one they can't answer. Outcome the user didn't foresee is still
-theirs — credit it as what it was.
+**And don't render hindsight as design intent.** `[NOT-HINDSIGHT]` Building something that later
+became infrastructure is not the same claim as having planned it that way, and the corpus rarely
+says the second one. "Noticed their own work was worth generalising" survives the follow-up
+question; "designed a platform" invites one they can't answer. Outcome the user didn't foresee
+is still theirs — credit it as what it was.
 
-**6. Obey recorded rendering decisions.** `[OBEY-DECISIONS]` The corpus stores calls the user
+**Obey recorded rendering decisions.** `[OBEY-DECISIONS]` The corpus stores calls the user
 has already made — which framing to use, what not to cite, wording still pending. Search the
 relevant files for `RENDERING DECISION` / `⚠️` notes and honor them. Don't relitigate a settled
 call.
 
-**7. Prefer the true version.** `[TRUE-VERSION]` The accurate version is stronger than the
+**Prefer the true version.** `[TRUE-VERSION]` The accurate version is stronger than the
 inflated one essentially every time. "Built a format others filled, still in use years later"
 beats "wrote 50 modules." Reach for precision, not superlatives.
 
-**8. Keep provenance in the corpus, not in the prose.** Track "how we know this" in corpus
-frontmatter. The artifact itself gets clean, confident claims — no hedges that leak the
-research process into the sentence the reader sees.
+**Keep provenance in the corpus, not in the prose.** `[PROVENANCE-NOT-PROSE]` Track "how we know
+this" in corpus frontmatter. The artifact itself gets clean, confident claims — no hedges that
+leak the research process into the sentence the reader sees.
 
-**9. Surface diffs and decisions; never silently apply.** Show current → proposed with a
-one-line reason per change. Flag genuine choices — accurate-but-different vs safe-but-vague
-wording, whether to include a team win, what to cut for length — as *the user's* call, not
-yours. Reconciling their own material is their decision, not yours.
+**Surface diffs and decisions; never silently apply.** `[SHOW-THE-DIFF]` Show current → proposed
+with a one-line reason per change. Flag genuine choices — accurate-but-different vs
+safe-but-vague wording, whether to include a team win, what to cut for length — as *the user's*
+call, not yours. Reconciling their own material is their decision, not yours.
 
-**On a baseline refresh, present the selection as a selection.** Not just what changed — what is
-in, what is out, and one line of why for each. Otherwise a cut looks like a loss instead of a
-choice, and "what to cut for length" quietly becomes your call rather than theirs.
+**On a baseline refresh, present the selection as a selection.** `[SELECTION-AS-SELECTION]` Not
+just what changed — what is in, what is out, and one line of why for each. Otherwise a cut looks
+like a loss instead of a choice, and "what to cut for length" quietly becomes your call rather
+than theirs.
 
-**How long an entry should run is theirs to set, and this skill states no number.** The first
-time it comes up, ask, and write the shape they accept into `corpus/LESSONS.md` — that file is
-where their preferences live, not this one. Afterwards hold to it without re-asking; reopen the
-question only when a refresh would exceed what they set. A number invented here would be a
-preference imposed on every user of the kit, which is exactly what that file exists to prevent.
+**How long an entry should run is theirs to set, and this skill states no number.**
+`[LENGTH-IS-THEIRS]` The first time it comes up, ask, and write the shape they accept into
+`corpus/LESSONS.md` — that file is where their preferences live, not this one. Afterwards hold
+to it without re-asking; reopen the question only when a refresh would exceed what they set. A
+number invented here would be a preference imposed on every user of the kit, which is exactly
+what that file exists to prevent.
 
-**10. Make it sound like the user, not a model — always, as the last step.** Rendered prose
-that reads as AI-written gets binned. Two moves, in order:
+**Make it sound like the user, not a model — always, as the last step.** `[THEIR-VOICE]`
+Rendered prose that reads as AI-written gets binned. Two moves, in order:
 - **Use the user's own recorded voice.** The corpus captures how they actually talk — their
   quotes, blunt phrasings, the concrete scenes. Pull those in rather than smoothing them into
   competent generic prose. A generic humanizer strips AI tells but can't *invent* their voice;
