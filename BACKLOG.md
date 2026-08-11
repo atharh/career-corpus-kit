@@ -193,7 +193,16 @@ fixture above, and that one is already blocking evals. Do them in that order.
 
 State, not an idea — see `CLAUDE.md` for the workflow. Kept, not deleted.
 
-**Last pass: 2026-08-11.** Scope the next one to the corpus diff since that date.
+**Reviewed up to corpus commit `d2c6601` (2026-08-11).** Start the next pass from
+`git log -p d2c6601..HEAD -- <intake paths>` in the corpus repo. Advance this sha when a pass
+finishes, and don't replace it with a date — a date can't be diffed, and it misses amendments
+to older entries.
+
+⚠️ **The pre-pin backlog has never been read directly.** The first pass worked from a curated
+standing-candidates summary written inside the corpus, not from the lesson log itself, so any
+entry predating that summary which its author didn't surface has still not been considered.
+The pin is honest about *new* material only. **A one-time full read of the lesson log is still
+owed**, and until it happens this section understates what's unreviewed.
 
 **Declined — do not re-propose.** A rule that was considered and rejected leaves no trace in
 the skills, so without this list every pass re-argues it, and the dangerous case is a
