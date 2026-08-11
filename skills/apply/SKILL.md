@@ -15,12 +15,12 @@ It owns the folder. `render` and `prep` write *into* it.
 ```
 applications/<company>-<role>/
   jd.md            ← the posting, verbatim, with its URL and the date you captured it
-  application.md   ← the log: stage, dates, contacts by role, next action
+  application.md   ← the dated event log, and contacts by role. The last line is the stage
   fit.md           ← what this role wants, and what the corpus can and can't back
   _inbox/          ← raw inbound — recruiter mail, take-home brief, notes. UNVETTED.
   resume.md        ┐
   cover-letter.md  ┘ written by /career-corpus:render
-  interview-prep.md, 01-…, 02-… ← written by /career-corpus:prep
+  interview-prep.md, 01-…–05-… ← written by /career-corpus:prep, numbered, some skipped
 ```
 
 One folder per **application**, not per company. Two roles at the same company are two
