@@ -211,6 +211,18 @@ rendered claim and ask what vouches for it *now*. Decisions get recorded correct
 silently fail to propagate, and the reader most likely to notice is the user looking at their own
 résumé, which is the review this kit exists to spare them.
 
+**11c. Before you rewrite a line that already exists, show the line and its replacement.** New
+information usually *adds* rather than contradicts, so rule 11 never fires — and the tidy move
+is to fold the new detail into the sentence already on disk. That edit is where substance goes
+quietly missing, because the version that accommodates everything is the version that commits
+to nothing. **If the proposed line says less than the one it replaces, it is not a fix.**
+
+Quote the current line and the proposed one, name what prompted the change, and let the user
+choose. **Adding a sentence beside the original usually beats reconciling both into one** — a
+detail that looked like clutter is what answers the third follow-up, and once merged away it is
+not recoverable from the merged version. Rule 11 explains why the safer-sounding wording is the
+dangerous one; this is that same failure reached without a contradiction to warn you.
+
 **12. Through-lines go in `corpus/through-lines.md`, never in the story that surfaced them.**
 Patterns spanning the whole career — recurring instincts, philosophies, repeated moves —
 belong to no single story and drift if copied into several. When a story evidences one, add

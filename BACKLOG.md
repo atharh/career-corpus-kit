@@ -261,15 +261,25 @@ lifecycle state and — once sent — a hash of what went out. **Staleness check
 logic are not built**; only the slots to hold their inputs are, which is the half that cannot be
 added retroactively.
 
-### Open candidates from the 2026-08-11 full read
+### Candidates from the 2026-08-11 full read — all resolved
 
-Ranked. Each was checked against the kit before being listed. Landed ones are struck from this
-list; the numbering is left alone so the release note above still resolves.
+**None open.** Candidates 1, 2, 6, 7 landed in release A; 8 was already in the kit; 3 was
+declined (see below); 4 and 5 landed 2026-08-12. The numbering is left alone so the release
+notes above still resolve. A fresh pass starts from the sha in *Promote passes*, not from here.
 
-4. **Don't edit existing text to align it with new information when the edit changes meaning.**
-   Distinct trigger from surfacing a contradiction between two statements: here you are about to
-   rewrite text that already exists, and the reconciled-but-vaguer version deletes true
-   substance. Quote both lines and wait.
+**Landed 2026-08-12 — don't silently rewrite existing text (candidate 4).** New `interview`
+rule 11c: before rewriting a line that already exists, show the line and its replacement, and
+if the proposed version says less than the one it replaces, it is not a fix. Filed as 11c
+rather than a new number because it completes the family — 11 is a contradiction between two of
+the user's statements, 11b is one against a rendered artifact, 11c is an amendment where
+*nothing* contradicts and the substance drains out anyway.
+
+**Why it wasn't a restatement of rule 11**, which is the objection it had to survive: rule 11
+fires on a conflict and already names the vagueness harm. 11c's trigger is the case where
+nothing conflicts, so rule 11 never engages — new information that merely *adds*, folded
+tidily into the sentence already on disk. It cites rule 11 for the reason rather than repeating
+it. `interview` also had no counterpart to `render` rule 9 (*surface diffs; never silently
+apply*) for corpus text, which is the hole it fills.
 
 **Landed 2026-08-12 — where a rule lives, and the routing test (candidate 5).** The three skills
 that append to `corpus/LESSONS.md` now route a correction before writing it: *would this rule
