@@ -62,24 +62,44 @@ If the corpus doctor below gets built, this belongs inside it.
 
 ---
 
-## Example application folder
+## Live mode for the application-lane evals
 
-**Deferred 2026-08-10**, when `apply` shipped. `examples/` shows corpus in and artifacts out,
-but not the folder an application actually accumulates — the JD, the fit check, the dated log,
-the inbound material. That folder is where most of the new skill's shape lives, and reading it
-would teach it faster than the SKILL.md does.
+**Deferred 2026-08-11**, when the application fixture and tier 3 shipped. Tier 3 is offline
+only, and offline mode has the same limit the trip-wires already admit to: **it pins the
+example, it does not test the skills.** Every tier-3 assertion would still pass if `apply`'s
+inbox rule were deleted tomorrow, because the committed fixture would not change.
 
-**Why deferred:** it means fabricating a job posting *and* a recruiter email, in a repo whose
-first rule is "never invent". The existing example corpus is bounded by a per-file FICTIONAL
-banner and its own tree; a fake posting attributed to a fake company is a step further, and a
-fake recruiter email is a step further again. Worth doing carefully, not quickly.
+Tier 2 solved this with a live mode that renders fresh from `examples/corpus/` and asserts over
+the output. The analogue here is harder in one specific way: a live application run has to
+*write a folder*, across three skills and several turns, from a starting state that is a JD and
+an inbox file rather than a one-line prompt. The interesting assertions — did `prep` promote a
+recruiter's claim, did `fit.md` name the gap or paper over it — are exactly the ones that need
+the live run.
 
-**If built:** the `fit.md` is the file to get right — specifically a requirement the example
-corpus genuinely cannot back, ending in "don't apply yet". A fit check where everything lines
-up teaches the opposite of the point.
+**Shape of a fix:** seed a temp dir with `examples/corpus/`, the fictional `jd.md` and the
+recruiter note, run `prep` against it, and reuse the tier-3 trip-wire patterns unchanged. The
+conformance half stays offline; only the trip-wire half needs a model.
 
-**Now also blocking evals** — `evals/` has no cases for `apply` or `prep` because there's no
-application fixture to run them against.
+**Why deferred:** the fixture had to exist first, and the offline half is what stops the example
+itself rotting, which is the failure that has actually happened in this repo.
+
+---
+
+## Artifact lifecycle has no state for a finished thread
+
+**Deferred 2026-08-11**, noticed while writing the fixture. Lifecycle is `baseline` /
+`in-flight` / `submitted`, which is a statement about *what may be done to the file* — and on
+that reading it is right, and the three states are load-bearing in `interview` rule 11b.
+
+But a prep pack for an application that ended in a rejection is still `in-flight`, forever,
+because none of the three fits and there is nothing to re-render it for. The smell is small and
+the fix is not obviously a fourth state: "the thread is closed" is a property of
+`application.md`'s log, which already ends in an `outcome` event, and duplicating it into every
+artifact's frontmatter is the rollup `apply` rule 6 forbids.
+
+**Probably the honest answer is that nothing is wrong** and `in-flight` means "not frozen, not a
+baseline". Recorded because the next person to read the fixture will notice it too, and a
+deliberate divergence with no trace gets re-litigated.
 
 ---
 
@@ -110,9 +130,10 @@ and a flaky judge is worse than no judge — it teaches you to ignore red.
 
 ---
 
-## Tier 3 — claim-diffing against a real corpus
+## Claim-diffing against a real corpus
 
-**Deferred 2026-08-11.** The fixture corpus has four stories. A real one has dozens, and
+**Deferred 2026-08-11.** Was called "tier 3" when it was written; tier 3 is now the application
+fixture, so it is named for what it does instead. The fixture corpus has four stories. A real one has dozens, and
 selection pressure is the thing fixtures can't reproduce: with 30 stories, *which four* a
 render picks is most of the quality, and no assertion in `evals/` looks at that.
 
@@ -159,10 +180,17 @@ no stories, résumé claims with nothing decompressing them, interview dimension
 one story, stories being spent across several live applications at once, and skills in
 `profile.md` no story cites.
 
-The same reader answers a second question as the format evolves: missing files, dangling
+The same reader answers a second question as the format evolves: absent files, dangling
 `related:` links, inbox files that got tracked by accident, application artifacts older than
 the corpus they drew on. That last one **is** the pack-staleness entry at the top of this
 file — if a doctor gets built, staleness is a check inside it rather than a separate feature.
+
+⚠️ **The tracked-`_inbox/` check has one exemption and it must be written into the check, not
+discovered by it.** `examples/applications/*/_inbox/` is committed on purpose — `examples/` is
+not a corpus, the skills never read it, and a fixture with no unvetted material in it cannot
+demonstrate the rule that unvetted material is never evidence. The exemption is the path,
+`examples/**/_inbox/`, and the fixture file carries a banner saying so. A doctor that "fixes"
+it deletes the only trap tier 3 has for the recruiter-claim assertions.
 
 **Why deferred:** it's the first thing here that reads the user's whole corpus and renders a
 judgement about it, which is a bigger surface than any current skill. And half its value
@@ -212,6 +240,16 @@ under honest attribution. Candidate 8 turned out to be **already in the kit** �
 failure-mode block ends with *"don't overshoot the other way"* — so it was recorded, not written.
 Candidate 1's `corpus_pin` question stays open and belongs to *Pack staleness detection*.
 
+**Landed 2026-08-11, release B** — the application lane got its templates, a worked fixture and
+eval cases, and three things parked below landed with them. `apply` rule 6 now names the split
+between a recomputable rollup and an unrecoverable input, and says out loud that
+`application.md` carries no `status:` field and that there is no separate manifest. `fit.md`
+records `no-corpus-evidence` rather than `missing`, and asks rather than deciding which of
+*absent* and *unwritten* it is. Artifact frontmatter carries the `corpus_pin`, the sources, the
+lifecycle state and — once sent — a hash of what went out. **Staleness checking and hashing
+logic are not built**; only the slots to hold their inputs are, which is the half that cannot be
+added retroactively.
+
 ### Open candidates from the 2026-08-11 full read
 
 Ranked. Each was checked against the kit before being listed. Landed ones are struck from this
@@ -229,20 +267,13 @@ list; the numbering is left alone so the release note above still resolves.
    reviewed, or ported — so never hold one in a model's memory or a session summary. Routing:
    would this rule still apply if the corpus were about someone else? Yes → the method. No →
    the user's own lessons file. The kit says where to append and never says what belongs there.
-**Watching, not yet a candidate — a fit check should distinguish *absent* from *unwritten*.** A
-requirement the corpus can't back may be one the user never did, or one they did and never
-recorded, and those need opposite responses: don't apply, versus run an interview session. One
-observed instance, where the difference only surfaced after the interview. **Held deliberately
-under the recurrence gate** — let it happen twice. Noted here so the second instance is
-recognised rather than rediscovered.
-
-⚠️ **There is a version of this that doesn't need the recurrence gate at all**, raised by the
-external review and worth writing down before it is lost. Argue it from the kit rather than from
-the instance: the kit never takes a call that is the user's, and *absent* versus *unwritten* is
-exactly such a call. So `fit.md` classifies what it can see — **no corpus evidence** — and then
-asks, rather than guessing which of the two it is and picking a response. That passes the
-justifiable-by-reading-the-kit-alone test on its own, and it needs no second instance. It is a
-change to what `fit.md` records, so it lands with the application templates, not before them.
+**Landed, release B — a fit check distinguishes *absent* from *unwritten* by refusing to.** The
+recurrence-gated version of this (one observed instance, wait for a second) turned out not to be
+needed: the kit-internal argument stands on its own, which is that the kit never takes a call
+that is the user's and *absent* versus *unwritten* is exactly such a call. `fit.md` now records
+`no-corpus-evidence`, never `missing`, and asks. Left here rather than deleted because the
+*gated* version is still sitting in the corpus, and a later pass that reads it without this note
+will re-derive it and wonder why the kit disagrees.
 
 **Declined — do not re-propose.** A rule that was considered and rejected leaves no trace in
 the skills, so without this list every pass re-argues it, and the dangerous case is a
@@ -252,18 +283,15 @@ the skills, so without this list every pass re-argues it, and the dangerous case
   than one: role and scope bullets are structural, don't compete for outcome slots, and a
   promotion or role change inside one company needs a second. The divergence is intentional.
 
-**Deferred — real, and no longer blocked.** Application lifecycle with a per-application
-manifest recording a `corpus_pin`. It belongs to the pack-staleness entry at the top of this
-file, and *"a date is not a pin"* is that entry's own insight arriving from the other side. It
-collided with `apply` rule 6, *never store derived state*: a `status` field is exactly the
-status rollup that rule forbids, but a pin is not derived — it records an input, and unlike a
-status it cannot be recomputed later, which is the whole reason to write it down.
+**Landed, release B — application lifecycle and the `corpus_pin`.** This arrived as a request
+for a per-application manifest and collided with `apply` rule 6, *never store derived state*.
+Settled on the distinction the entry had already half found: *rule 6 bars recomputable rollups,
+not unrecoverable inputs.* Rule 6 now says that in the skill. The pin, the hash of what was sent
+and the captured JD URL are stored because they cannot be reconstructed; "three applications
+live" is not, because it can. And there is **no separate manifest** — artifact-level state in
+the artifact's own frontmatter, application-level in `application.md`'s, because a file whose
+only job is to repeat another file's state goes stale on its own schedule.
 
-**Settled 2026-08-11**, by the external review, on the distinction this entry had already half
-found: *rule 6 bars recomputable rollups, not unrecoverable inputs.* Store what cannot be
-reconstructed later — the `corpus_pin`, the hash of what was actually sent, the captured JD URL.
-Don't store what can — "three applications live". Rule 6 should name that split when the
-templates land. The remaining open question is only where the pin lives, and the review's answer
-is worth taking: **no separate manifest.** Artifact-level state in the artifact's own
-frontmatter, application-level in `application.md`'s. A file whose only job is to repeat another
-file's state goes stale on its own schedule.
+The consuming half — noticing that a pin has gone stale — is still unbuilt and still belongs to
+*Pack staleness detection* at the top of this file. What release B added is the record it will
+need, which is the part that cannot be added retroactively.
