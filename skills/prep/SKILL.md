@@ -9,10 +9,22 @@ description: Build an interview prep pack for one scheduled interview — an ope
 scheduled interview, and then captures what happened afterwards.
 
 It is the corpus pointed at a room you're about to walk into. Everything it writes is a
-rendering, so **every hard rule in `render`'s SKILL.md applies here unchanged** — vetted facts
-only, numbers carry their ceilings, no names of private people, obey recorded rendering
-decisions, and make it sound like the user as the last step. Read that file; those rules are
-not repeated here.
+rendering, so **every hard rule in `render`'s SKILL.md applies here unchanged** — including
+dated vocabulary, honest attribution, and making it sound like the user as the last step. Read
+that file. The rulebook is not repeated here.
+
+Four of those rules *are* repeated, in render's own words. A skill loads its own `SKILL.md` and
+nothing else, so a protection that exists only as a pointer to another file is a hope rather
+than a rule — and these four are the ones a prep pack fails on:
+
+- **Every claim about the candidate comes from the vetted corpus, and from nothing else.**
+  `_inbox/` is not the corpus, and that matters more here than anywhere — see below.
+- **Numbers carry their source and their ceiling.** A figure in `facts_disputed` is spoken at
+  neither value.
+- **No names of non-public people. No internal codenames.** In the pack's prose, not only its
+  filenames.
+- **Obey recorded rendering decisions.** A call the user has already settled doesn't reopen
+  because a room might reward the other version.
 
 ## When this fires, and what it needs
 
