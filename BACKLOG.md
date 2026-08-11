@@ -274,10 +274,15 @@ list; the numbering is left alone so the release note above still resolves.
    Distinct trigger from surfacing a contradiction between two statements: here you are about to
    rewrite text that already exists, and the reconciled-but-vaguer version deletes true
    substance. Quote both lines and wait.
-5. **Where a rule lives, and the routing test.** A rule that isn't in a repo can't be diffed,
-   reviewed, or ported — so never hold one in a model's memory or a session summary. Routing:
-   would this rule still apply if the corpus were about someone else? Yes → the method. No →
-   the user's own lessons file. The kit says where to append and never says what belongs there.
+
+**Landed 2026-08-12 — where a rule lives, and the routing test (candidate 5).** The three skills
+that append to `corpus/LESSONS.md` now route a correction before writing it: *would this rule
+still hold if the corpus were about someone else?* Yes and it is the method, so it stays out of
+one person's file; no and it is theirs. Both halves carry the reason the kit cares — a rule kept
+in a session summary or a model's memory is in no file at all, and a rule nobody can diff is a
+rule nobody can review, port, or undo. `bootstrap` writes the same test into `LESSONS.md`'s own
+header, which is where a user reads what belongs in the file. Pinned as two invariants under
+`lessons-personalisation` so the three copies can't drift.
 
 **Landed 2026-08-12, release B — a fit check distinguishes *absent* from *unwritten* by
 refusing to.** The recurrence-gated version of this (one observed instance, wait for a second)

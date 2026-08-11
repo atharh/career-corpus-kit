@@ -262,6 +262,12 @@ This skill ships generic. It gets sharper by accumulating the user's own correct
 - **After the user corrects you in a way that generalises** — a preference, a repeated
   mistake, a framing they reject — append one dated line to `corpus/LESSONS.md`: the mistake,
   and the rule to apply next time. One line each. Append-only.
+- **Route it before you write it: would this rule still hold if the corpus were about someone
+  else?** If yes, it belongs to the method — say so and leave it, rather than filing a general
+  rule under one person's name. If no, it is this user's, and `corpus/LESSONS.md` is where it
+  goes. Either way it goes in a *file*: a rule kept in a session summary or a model's memory
+  is in neither place, and **a rule nobody can diff is a rule nobody can review, port, or
+  undo.**
 - **Never edit this SKILL.md to record a lesson,** and never write lessons into the kit repo.
   The method stays stable and shareable; the scar tissue stays private and personal. A skill
   that rewrites itself bloats and drifts.
