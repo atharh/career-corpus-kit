@@ -32,6 +32,31 @@ middle. That's a real scenario, just not the common one.
 **Applies to `render` output too**, not only `prep` — a tailored résumé sitting in
 `applications/` has exactly the same problem.
 
+### Scope correction — the baseline is the worse case
+
+This entry was scoped to packs and tailored output, and judged uncommon on the grounds that
+regenerating before each interview is cheap. The **baseline** was outside that scope and is the
+worse case: it is long-lived by design, nothing regenerates it from scratch, and it is the
+artifact most likely to be sent.
+
+Two failures follow from it, and they share one cause:
+
+- **Recorded decisions don't propagate.** A `RENDERING DECISION` can sit correct in the corpus
+  for weeks while the baseline keeps making the old claim. Recording feels like finishing.
+- **The baseline accumulates.** Every session validates new claims and the baseline is where
+  they land; nothing ever removes one.
+
+**The root cause is one asymmetry: several paths write to an artifact and none prune or
+re-verify it.** Worth treating as one problem rather than two.
+
+**A partial fix shipped as discipline** — selection rules and a refresh-reconsiders-everything
+instruction in `render`, and `interview` rule 11b (fix the rendering in the same session; diff
+the whole résumé against the corpus once per corpus). **Its limit is honest and worth stating:
+discipline fails silently, depends on whoever is driving a session, and is judgement rather than
+string — so `evals/` cannot test it** (see *Judge layer for the evals*). That makes the tooling
+case stronger, not weaker, and its highest-value target is the baseline rather than the packs.
+If the corpus doctor below gets built, this belongs inside it.
+
 ---
 
 ## Example application folder

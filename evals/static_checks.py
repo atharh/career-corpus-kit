@@ -277,6 +277,27 @@ def check_relative_links(r: Report) -> None:
             )
 
 
+def check_no_gendered_pronouns(r: Report) -> None:
+    """Skills address a generic user as "they". A "he" or "she" is leaked autobiography.
+
+    Every skill tells the model to keep the user's corrections in their private
+    `corpus/LESSONS.md` and never in the kit. The way that rule gets broken is a
+    session writing up its own incident as method, and incident prose carries the
+    pronoun of the person it happened to. Nothing else here catches a leak, because
+    the numbers and vocabulary it also drags in are impossible to match generically.
+    This one marker is cheap and it is present nearly every time.
+    """
+    banned = re.compile(r"\b(he|him|his|she|her|hers)\b", re.I)
+    for path in sorted((ROOT / "skills").rglob("*.md")):
+        rel = path.relative_to(ROOT)
+        hits = sorted({m.group(0).lower() for m in banned.finditer(path.read_text())})
+        r.check(
+            f"{rel} — no gendered singular pronouns",
+            not hits,
+            f"found {hits} — say 'they'; if it is a real incident, it belongs in corpus/LESSONS.md",
+        )
+
+
 def check_root_docs(r: Report) -> None:
     """The docs skills point users at must exist.
 
@@ -457,6 +478,7 @@ def main() -> int:
     check_playbook_references(r)
     check_skill_cross_references(r, names)
     check_relative_links(r)
+    check_no_gendered_pronouns(r)
     check_root_docs(r)
     check_readme_lists_every_skill(r, names)
     check_policy_blocks(r, names)
