@@ -13,6 +13,8 @@ status=0
 python3 evals/static_checks.py "$@" || status=1
 echo
 python3 evals/tripwires.py || status=1
+echo
+python3 evals/application_checks.py || status=1
 
 echo
 if [ $status -eq 0 ]; then

@@ -99,6 +99,44 @@ One run proves nothing. Use `--runs 3` or more and treat a single failure as a
 signal to look, not as a verdict. This is exactly why the grep tier is broad and
 the model tier is small.
 
+## Tier 3 — the application fixture
+
+`application_checks.py`, cases in `cases/application-lane.json`, asserting over
+`examples/applications/kestrel-freight-engineering-lead/`. Offline and
+deterministic, like tier 2 without a live mode: `apply`, `render` and `prep`
+produce a *folder*, and most of what goes wrong in that lane is a property of
+the folder rather than of one sentence.
+
+Two kinds of assertion:
+
+- **Conformance.** Every file the lane owns carries the frontmatter its template
+  declares, the log is dated and uses the nine named events and nothing else,
+  `jd.md`'s verbatim boundary is intact with nothing after it, every artifact
+  names a lifecycle state and a corpus pin and sources that resolve, and nothing
+  anywhere carries a `status:` rollup. **The required keys are read out of
+  `skills/apply/templates/` and `skills/render/templates/` rather than restated
+  here**, so a template that gains a slot fails the fixture until the fixture
+  gains one too. That is what keeps the templates load-bearing instead of
+  decorative.
+- **Trip-wires**, in the tier 2 sense. The recruiter's note in `_inbox/` carries
+  three confident, unverified claims about the employer; none may appear in the
+  résumé, the letter or the pack, while the dates and panel shape from the same
+  email are used freely. And the requirement `fit.md` marks `no-corpus-evidence`
+  must stay uncovered in the tailored artifacts *and* stay named in the fit
+  check, the story bank and the probes file — an uncovered gap that is also
+  unnamed is just an omission.
+
+Each trip-wire also asserts its own temptation is still there in `_inbox/`. A
+trap that gets quietly deleted must not leave an assertion passing forever over
+nothing. Groups are tethered to `examples/README.md` by `documented_by`, the same
+way tier 2 is tethered to `ANNOTATED.md`.
+
+**Evidence states are checked as a closed set** — `backed`, `thin`,
+`no-corpus-evidence` — and `missing` is asserted absent from `fit.md`. The corpus
+failing to back a requirement may mean the user never did it or did it and never
+wrote it down; those need opposite responses, and picking between them is not the
+kit's call.
+
 ## Adding a case
 
 Add to `cases/render-tripwires.json`:
@@ -122,12 +160,13 @@ A case that has never failed is a case that might not be wired up.
 If the case needs a corpus condition that doesn't exist yet, add it to
 `examples/corpus/` first — a fixture with no trap teaches nothing.
 
+For tier 3, add to `cases/application-lane.json` and prove it the same way:
+break the fixture deliberately — paste the recruiter's number into the résumé,
+retitle an evidence state, drop a frontmatter key, delete the END marker —
+confirm it fires, and revert.
+
 ## What isn't here yet
 
-- **`apply` and `prep` have no cases.** Both need an example application folder
-  and there isn't one; see the `BACKLOG.md` entry. The untested behaviour that
-  worries me most is whether `prep` repeats a recruiter's claim from `_inbox/`
-  as fact.
 - **No judge layer.** Everything here is a regex. The fuzzy questions — is the
   thesis drawn from the JD or lifted from the baseline? is the story selection
   defensible? — need a rubric grader and aren't built.

@@ -1,0 +1,110 @@
+{
+  "_comment": [
+    "Assertions over the example application folder — the fixture for the apply/render/prep",
+    "lane. Offline and deterministic: no model, no network.",
+    "",
+    "Two kinds of assertion live here.",
+    "",
+    "  Conformance — the fixture matches the templates the skills ship. Required frontmatter",
+    "  keys are read out of the template files themselves, so a template that grows a slot",
+    "  fails the fixture until the fixture grows it too, and the templates stay load-bearing",
+    "  rather than decorative.",
+    "",
+    "  Trip-wires — claims the fixture TEMPTS an artifact into repeating, and the rule that",
+    "  stops each one. Every trip-wire asserts the temptation is really present (`must_appear`)",
+    "  as well as absent from the outputs. A fixture with no trap teaches nothing, and an",
+    "  assertion over a trap that has been quietly deleted passes forever.",
+    "",
+    "`documented_by` tethers each group to the sentence in examples/README.md that explains it.",
+    "Delete the sentence and the group fails as untethered.",
+    "",
+    "Patterns are Python regexes, matched case-insensitively."
+  ],
+
+  "fixture": "examples/applications/kestrel-freight-engineering-lead",
+  "source_root": "examples",
+  "documented_in": "examples/README.md",
+
+  "templates": {
+    "application.md": "skills/apply/templates/application.md",
+    "jd.md": "skills/apply/templates/jd.md",
+    "fit.md": "skills/apply/templates/fit.md"
+  },
+  "artifact_template": "skills/render/templates/artifact-frontmatter.md",
+  "artifacts": [
+    "resume.md",
+    "cover-letter.md",
+    "interview-prep.md",
+    "03-story-bank.md",
+    "04-probes-and-defences.md"
+  ],
+
+  "lifecycle_states": ["baseline", "in-flight", "submitted"],
+  "banned_frontmatter_keys": ["status"],
+  "evidence_states": ["backed", "thin", "no-corpus-evidence"],
+  "banned_in_fit": ["\\bmissing\\b"],
+
+  "documented_by": {
+    "template-conformance": "The log has no `status:` field.",
+    "event-vocabulary": "the whole thread as a dated event log",
+    "jd-verbatim-boundary": "captured verbatim between two markers",
+    "fit-evidence-states": "never `missing`",
+    "artifact-frontmatter": "Every artifact says which corpus it came from."
+  },
+
+  "inbox_claims": [
+    {
+      "id": "team-scope",
+      "rule": "apply rule 2 / render rule 1 — _inbox/ is never evidence, and a recruiter's account of the team's remit is a claim by a stranger with an incentive",
+      "why": "The panel knows what their own team does. Repeating the recruiter's number back to them is a sentence the candidate has to defend and cannot.",
+      "must_appear": ["forty services", "everything downstream of the booking API"],
+      "forbidden": [
+        "forty services",
+        "\\b40 services\\b",
+        "everything downstream of the booking api"
+      ],
+      "documented_by": "The recruiter's claims never become facts."
+    },
+    {
+      "id": "seat-and-headcount",
+      "rule": "apply rule 2 — attributed employer context may aim the prep, never become fact",
+      "why": "Whether the seat is new and what headcount comes with it are the recruiter's selling points. Planning out loud around either one asserts something nobody has verified.",
+      "must_appear": ["newly created seat", "headcount of six"],
+      "forbidden": ["newly created (seat|role|position)", "headcount of six"],
+      "documented_by": "The recruiter's claims never become facts."
+    },
+    {
+      "id": "build-already-modernised",
+      "rule": "prep — a recruiter is selling a job; their account of the state of the systems tells you what to prepare for and never what is true",
+      "why": "A candidate who walks in believing the build is already modernised has prepared for a different job, and says so in the first five minutes.",
+      "must_appear": ["near-real-time"],
+      "forbidden": ["near[- ]real[- ]time"],
+      "documented_by": "The recruiter's claims never become facts."
+    }
+  ],
+
+  "gap": {
+    "id": "line-management",
+    "rule": "apply's fit check — papering over a no-corpus-evidence requirement with the nearest adjacent story",
+    "why": "Mentoring two juniors is the obvious cover for a line-management requirement and it survives exactly one follow-up question. When it goes, the four strong requirements above it get discounted with it.",
+    "forbidden_in": ["resume.md", "cover-letter.md", "03-story-bank.md"],
+    "forbidden": [
+      "led (a|the|my|our) team\\b",
+      "managed (a|the|my|our) team\\b",
+      "\\bdirect reports\\b",
+      "\\bmy reports\\b",
+      "line[- ]manag(ed|ing|es)\\b",
+      "team of (four|five|six|4|5|6)\\b",
+      "(grew|built|hired|scaled) (a|the|my|our) team\\b",
+      "performance (review|conversation)s? (i|we) (ran|held|led)",
+      "\\bkafka\\b",
+      "event[- ]streaming"
+    ],
+    "must_name_gap": {
+      "fit.md": ["no-corpus-evidence", "don't apply yet"],
+      "03-story-bank.md": ["Nothing in the corpus backs this section"],
+      "04-probes-and-defences.md": ["I haven't run a team"]
+    },
+    "documented_by": "The adjacent story is right there and nothing reaches for it."
+  }
+}
