@@ -149,41 +149,53 @@ def check_skill_frontmatter(r: Report) -> list[str]:
     return names
 
 
-def numbered_sections(text: str) -> dict[str, list[int]]:
-    """Map section heading -> the **N.** list numbers found under it."""
-    out: dict[str, list[int]] = {}
+def numbered_sections(text: str) -> dict[str, list[str]]:
+    """Map section heading -> the **N.** list labels found under it.
+
+    Labels are strings, not ints, because a list may carry an interstitial rule
+    like `11b` — inserted to sit beside 11 without renumbering everything after
+    it. Reading those as ints dropped them from every downstream check, and the
+    citation regex then matched the `11` in "rule 11b" and validated it against
+    a different rule.
+    """
+    out: dict[str, list[str]] = {}
     parts = re.split(r"^(#{2,} .*)$", text, flags=re.M)
     for i in range(1, len(parts), 2):
         head, body = parts[i].strip(), parts[i + 1]
-        nums = [int(m) for m in re.findall(r"^\*\*(\d+)\. ", body, re.M)]
+        nums = re.findall(r"^\*\*(\d+[a-z]?)\. ", body, re.M)
         if nums:
             out[head] = nums
     return out
 
 
-def check_numbered_lists(r: Report) -> dict[str, set[int]]:
+def check_numbered_lists(r: Report) -> dict[str, set[str]]:
     """Numbered rule lists must run 1..N with no gaps or repeats.
 
     Editing a rule list by hand is how you get two rule 6s, and every later
     cross-reference then points at the wrong rule.
+
+    Contiguity is asserted over the plain integers only. A suffixed rule is
+    deliberately outside the sequence — that is what the suffix is *for* — but
+    it still joins the set of labels a citation may resolve against.
     """
-    per_skill: dict[str, set[int]] = {}
+    per_skill: dict[str, set[str]] = {}
     for d in skill_dirs():
         text = (d / "SKILL.md").read_text()
         rel = (d / "SKILL.md").relative_to(ROOT)
-        seen: set[int] = set()
-        for head, nums in numbered_sections(text).items():
+        seen: set[str] = set()
+        for head, labels in numbered_sections(text).items():
+            nums = [int(n) for n in labels if n.isdigit()]
             r.check(
                 f"{rel} — {head!r} is numbered 1..{len(nums)}",
                 nums == list(range(1, len(nums) + 1)),
                 f"got {nums}",
             )
-            seen.update(nums)
+            seen.update(labels)
         per_skill[d.name] = seen
     return per_skill
 
 
-def check_rule_references(r: Report, rules: dict[str, set[int]]) -> None:
+def check_rule_references(r: Report, rules: dict[str, set[str]]) -> None:
     """Every "rule N" mention must point at a rule that exists.
 
     This is the check that catches a renumbering. `compact` cites the interview
@@ -194,8 +206,8 @@ def check_rule_references(r: Report, rules: dict[str, set[int]]) -> None:
         rel = path.relative_to(ROOT)
         text = path.read_text()
         owner_default = path.parent.name if path.parent.name in rules else None
-        for m in re.finditer(r"rule (\d+)", text):
-            n = int(m.group(1))
+        for m in re.finditer(r"rule (\d+[a-z]?)", text):
+            n = m.group(1)
             context = text[max(0, m.start() - 120) : m.start()]
             # "the interview skill's ... (rule 13)" — attribute to the named skill.
             named = [s for s in rules if re.search(rf"\b{s}\b skill", context)]
@@ -216,31 +228,120 @@ def check_playbook_references(r: Report) -> None:
     number, so these references now cross a file boundary — nothing keeps the
     two files renumbering in step.
     """
-    playbooks: dict[str, set[int]] = {}
+    playbooks: dict[str, set[str]] = {}
     for d in skill_dirs():
         ref = d / "REFERENCE.md"
         if not ref.is_file():
             continue
-        for head, nums in numbered_sections(ref.read_text()).items():
+        for head, labels in numbered_sections(ref.read_text()).items():
             if "playbook" not in head.lower():
                 continue
+            nums = [int(n) for n in labels if n.isdigit()]
             r.check(
                 f"{ref.relative_to(ROOT)} — {head!r} is numbered 1..{len(nums)}",
                 nums == list(range(1, len(nums) + 1)),
                 f"got {nums}",
             )
-            playbooks.setdefault(d.name, set()).update(nums)
+            playbooks.setdefault(d.name, set()).update(labels)
 
     for path in sorted((ROOT / "skills").rglob("*.md")):
         owner = path.parent.name
         if owner not in playbooks:
             continue
-        for m in re.finditer(r"playbook (\d+)", path.read_text()):
-            n = int(m.group(1))
+        for m in re.finditer(r"playbook (\d+[a-z]?)", path.read_text()):
+            n = m.group(1)
             r.check(
                 f"{path.relative_to(ROOT)} — 'playbook {n}' resolves in {owner}",
                 n in playbooks[owner],
                 f"{owner} playbook has {sorted(playbooks[owner])}",
+            )
+
+
+RULE_ID = re.compile(r"`\[([A-Z][A-Z0-9-]+)\]`")
+
+
+def check_rule_ids(r: Report) -> None:
+    """A cross-boundary citation must name the rule, not just its number.
+
+    `check_rule_references` proves a cited number *exists*. It cannot prove the
+    number still means what the citing file thought it meant — insert a rule
+    above it and the reference stays green while silently changing target. That
+    is invisible exactly where it is most likely: `compact` citing `interview`,
+    a template citing the skill beside it, `SKILL.md` citing its own
+    `REFERENCE.md`.
+
+    So rules cited across a file or skill boundary carry a stable id, written
+    `[ID]` after the rule's bold heading, and every citation of that rule names
+    the id alongside the number. Then a renumber fails loudly here, and the
+    failure names the number the citation should now use.
+
+    Rules cited only inside their own file keep bare numbers on purpose. The
+    loud version of that failure — two rule 6s — is already impossible under
+    `check_numbered_lists`, and tagging every rule in the kit would be churn
+    for a failure that cannot happen.
+    """
+    # id -> (path, label). A definition is an id sitting immediately after the
+    # closing `**` of a rule's bold heading — not merely on the same line, since
+    # a long heading wraps and the tag then lands on the next one.
+    defs: dict[str, tuple[Path, str]] = {}
+    spans: dict[Path, list[tuple[int, int]]] = {}
+    dupes: list[str] = []
+    for path in sorted((ROOT / "skills").rglob("*.md")):
+        text = path.read_text()
+        for m in re.finditer(r"^\*\*(\d+[a-z]?)\. ", text, re.M):
+            close = text.find("**", m.end())
+            if close == -1:
+                continue
+            tag = re.match(r"\s*`\[([A-Z][A-Z0-9-]+)\]`", text[close + 2 :])
+            if not tag:
+                continue
+            rid = tag.group(1)
+            if rid in defs:
+                dupes.append(rid)
+            defs[rid] = (path, m.group(1))
+            start = close + 2 + tag.start()
+            spans.setdefault(path, []).append((start, close + 2 + tag.end()))
+
+    r.check(
+        "rule ids are unique kit-wide",
+        not dupes,
+        f"defined more than once: {sorted(set(dupes))}",
+    )
+
+    for rid, (path, label) in sorted(defs.items()):
+        r.check(
+            f"rule id {rid} — defined once, at {path.relative_to(ROOT)} rule {label}",
+            rid not in dupes,
+            "a second definition makes every citation ambiguous",
+        )
+
+    # Citations: every other occurrence of an id, anywhere in the kit.
+    for path in sorted((ROOT / "skills").rglob("*.md")):
+        rel = path.relative_to(ROOT)
+        text = path.read_text()
+        defined = spans.get(path, [])
+        for m in RULE_ID.finditer(text):
+            if any(a <= m.start() < b for a, b in defined):
+                continue
+            rid = m.group(1)
+            r.check(
+                f"{rel} — rule id {rid} resolves",
+                rid in defs,
+                f"known: {sorted(defs)}",
+            )
+            if rid not in defs:
+                continue
+            # "rule 13 `[SAY-ALOUD]`" / "playbook 6 `[GENERIC-WORD]`" — the
+            # number is a reading aid, and this is what keeps it honest.
+            head = text[max(0, m.start() - 40) : m.start()]
+            cited = re.search(r"(?:rule|playbook)\s+(\d+[a-z]?)\s*$", head)
+            if not cited:
+                continue
+            want = defs[rid][1]
+            r.check(
+                f"{rel} — {rid} is cited as {cited.group(1)} and is rule {want}",
+                cited.group(1) == want,
+                f"renumbered: {rid} is now rule {want}, not {cited.group(1)}",
             )
 
 
@@ -476,6 +577,7 @@ def main() -> int:
     rules = check_numbered_lists(r)
     check_rule_references(r, rules)
     check_playbook_references(r)
+    check_rule_ids(r)
     check_skill_cross_references(r, names)
     check_relative_links(r)
     check_no_gendered_pronouns(r)

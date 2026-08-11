@@ -138,7 +138,7 @@ without ever being `routed`.
 
 ## Hard rules
 
-**1. Capture the posting before it rots.** Postings are pulled, edited and 404'd within weeks,
+**1. Capture the posting before it rots.** `[CAPTURE-POSTING]` Postings are pulled, edited and 404'd within weeks,
 and `prep` needs the employer's own words months later to map a story bank to their criteria.
 `jd.md` holds the text **verbatim**, with the source URL and the capture date at the top.
 Summarise in `fit.md` if you want a summary. Never summarise *into* `jd.md` — a paraphrase
@@ -169,11 +169,11 @@ right.
 body if the user wants them. Filenames get screenshotted, screen-shared and tab-completed in
 front of other people — including, eventually, in front of someone from that company.
 
-**5. The folder is the memory; the log is dated and append-only.** Don't rewrite history in
+**5. The folder is the memory; the log is dated and append-only.** `[LOG-APPEND-ONLY]` Don't rewrite history in
 `application.md` when a stage changes — add a line. What you believed on the 12th matters when
 you're working out on the 30th why nobody replied.
 
-**6. Store inputs and events; never store a rollup.** The test is whether it can be recomputed
+**6. Store inputs and events; never store a rollup.** `[NO-ROLLUP]` The test is whether it can be recomputed
 from what's already on disk. An open-application count, a "3 live, 1 stalled" summary line, a
 `status:` field beside a log that already ends in the current stage — all recomputable, so all
 of them rot silently and then lie. Read the folders and compute those each time.
