@@ -152,11 +152,10 @@ def check_skill_frontmatter(r: Report) -> list[str]:
 def numbered_sections(text: str) -> dict[str, list[str]]:
     """Map section heading -> the **N.** list labels found under it.
 
-    Labels are strings, not ints, because a list may carry an interstitial rule
-    like `11b` — inserted to sit beside 11 without renumbering everything after
-    it. Reading those as ints dropped them from every downstream check, and the
-    citation regex then matched the `11` in "rule 11b" and validated it against
-    a different rule.
+    Labels are strings, not ints, so a sub-lettered label like `11b` is seen
+    rather than silently truncated to `11` — first so the citation checks can't
+    validate it against a different rule, and now so
+    check_no_sublettered_rules can reject it outright.
     """
     out: dict[str, list[str]] = {}
     parts = re.split(r"^(#{2,} .*)$", text, flags=re.M)
@@ -174,9 +173,10 @@ def check_numbered_lists(r: Report) -> dict[str, set[str]]:
     Editing a rule list by hand is how you get two rule 6s, and every later
     cross-reference then points at the wrong rule.
 
-    Contiguity is asserted over the plain integers only. A suffixed rule is
-    deliberately outside the sequence — that is what the suffix is *for* — but
-    it still joins the set of labels a citation may resolve against.
+    Contiguity is asserted over the plain integers only. A suffixed rule sits
+    outside the sequence — check_no_sublettered_rules rejects it on its own
+    grounds — but it still joins the set of labels a citation may resolve
+    against, so its citations stay checkable until it is gone.
     """
     per_skill: dict[str, set[str]] = {}
     for d in skill_dirs():
@@ -193,6 +193,26 @@ def check_numbered_lists(r: Report) -> dict[str, set[str]]:
             seen.update(labels)
         per_skill[d.name] = seen
     return per_skill
+
+
+def check_no_sublettered_rules(r: Report) -> None:
+    """A sub-lettered rule label ("11b") is accretion wearing a number.
+
+    The suffix existed to dodge renumbering, and renumbering is now cheap:
+    cross-boundary citations go by stable id, and a stale within-file number
+    fails the citation checks. A qualification that cannot earn its own number
+    is a case of the rule it qualifies and belongs inside it. See CLAUDE.md,
+    "Consolidate — when a rulebook grows".
+    """
+    for path in sorted((ROOT / "skills").rglob("*.md")):
+        rel = path.relative_to(ROOT)
+        for head, labels in numbered_sections(path.read_text()).items():
+            bad = [n for n in labels if not n.isdigit()]
+            r.check(
+                f"{rel} — {head!r} has no sub-lettered rules",
+                not bad,
+                f"found {bad} — give it its own number or fold it into the rule it qualifies",
+            )
 
 
 def check_rule_references(r: Report, rules: dict[str, set[str]]) -> None:
@@ -574,6 +594,7 @@ def main() -> int:
     plugin = check_manifests(r)
     names = check_skill_frontmatter(r)
     rules = check_numbered_lists(r)
+    check_no_sublettered_rules(r)
     check_rule_references(r, rules)
     check_playbook_references(r)
     check_rule_ids(r)
