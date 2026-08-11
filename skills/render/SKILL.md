@@ -219,7 +219,9 @@ This skill ships generic. It gets sharper by accumulating the user's own correct
 4. **Select** the 2–4 stories that are the strongest evidence — for the JD if tailored, in
    general if baseline. Leave the rest out; a résumé cuts as much as it adds.
 5. **Render** in the artifact's shape — see [REFERENCE.md](REFERENCE.md) for résumé / cover
-   letter / interview-prep specifics.
+   letter / interview-prep specifics, and
+   [templates/artifact-frontmatter.md](templates/artifact-frontmatter.md) for the block every
+   artifact opens with.
 6. **Present as a reviewable diff**, decisions flagged, before applying anything.
 7. **On approval**, apply. If a PDF pipeline is present, rebuild and confirm the page count.
 

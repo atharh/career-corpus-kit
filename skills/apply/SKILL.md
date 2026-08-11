@@ -27,6 +27,11 @@ One folder per **application**, not per company. Two roles at the same company a
 threads with two JDs, two letters and two loops; the only thing they share is background
 reading, and that already lives in the corpus.
 
+Minimal templates for the three files this skill owns are in [`templates/`](templates/). They
+are the shape, not a form: a field with nothing true to put in it stays empty rather than
+getting a guess. Rendered artifacts carry their own frontmatter block, which belongs to the
+skill that writes them — see [`../render/templates/artifact-frontmatter.md`](../render/templates/artifact-frontmatter.md).
+
 ## Where this sits
 
 The kit has two lanes. `bootstrap` → `interview` → `compact` builds the corpus. `apply` →
@@ -74,16 +79,22 @@ action per thread, and name the ones that have gone quiet. Compute it; never sto
 
 ## The fit check — `fit.md`
 
-Read the JD's real requirements (not its boilerplate) against the corpus, and write down three
-things:
+Read the JD's real requirements (not its boilerplate) against the corpus, and give each one an
+**evidence state**, which is exactly one of three:
 
-- **What the corpus backs well** — the requirement, and the story file that is evidence for it.
-  Name the file. A requirement with a named file behind it needs no further work.
-- **What it backs thinly** — there's something adjacent, but it would fold under a second
-  question.
-- **What it can't back at all.**
+- **`backed`** — a story file is evidence for it. Name the file. A requirement with a named
+  file behind it needs no further work.
+- **`thin`** — there's something adjacent, but it would fold under a second question.
+- **`no-corpus-evidence`** — nothing in the corpus speaks to it.
 
-**The third list is the point, and "don't apply yet" is a valid result.** A requirement with
+**Call the third one `no-corpus-evidence` and never `missing`**, because those are different
+claims and only one of them is yours to make. A requirement the corpus can't back may be one
+the user never did, or one they did and never recorded — *absent* versus *unwritten* — and the
+two need opposite responses: don't apply, versus book an interview session. This file records
+what it can see and asks; picking between them is a call about someone's career, which rule 8
+says is theirs. Say which you suspect and why, as a question.
+
+**The third state is the point, and "don't apply yet" is a valid result.** A requirement with
 nothing behind it doesn't get solved by rendering harder at it; it gets solved by an
 `interview` session, or by deciding to apply anyway with the gap named and a plan for the
 question. Both are fine. Papering over it with the nearest adjacent story is not — that story
@@ -103,6 +114,27 @@ inputs a judgement rests on where it isn't obvious.
 Where the corpus is thin, the useful output is a **pointer, not a verdict**: *"nothing backs
 'led a platform migration' — the closest is `corpus/<company>/<story>.md`, and an interview
 session on <arc> would probably produce it."*
+
+## The log's event vocabulary
+
+`application.md` is a dated, append-only list of events, and the events are named from a fixed
+set so a thread can be read at a glance six weeks later. Nine of them:
+
+| Event | What it marks |
+|---|---|
+| `opened` | The posting was captured and the folder created. |
+| `fit-checked` | `fit.md` was written or revised, and what the user decided off the back of it. |
+| `rendered` | An artifact was produced or re-rendered. |
+| `sent` | The application went out. Record what actually went out, including the form-only fields this folder doesn't hold. |
+| `inbound` | Something arrived and was filed in `_inbox/`. Name the file. |
+| `scheduled` | A round was booked. |
+| `interviewed` | A round happened. |
+| `outcome` | Offer, rejection, or the user withdrawing. Say which, and quote any reason given. |
+| `routed` | Something this thread exposed went back to the corpus queue. |
+
+Something that fits none of them is usually two events. A fixed vocabulary is also what lets a
+reader — or a check — see at a glance that a thread was never `sent`, or was `interviewed`
+without ever being `routed`.
 
 ## Hard rules
 
@@ -141,9 +173,22 @@ front of other people — including, eventually, in front of someone from that c
 `application.md` when a stage changes — add a line. What you believed on the 12th matters when
 you're working out on the 30th why nobody replied.
 
-**6. Never store derived state.** No open-application counts, no "3 live, 1 stalled" summary
-line, no status rollup file. It rots silently and then it lies. Read the folders and compute
-it each time.
+**6. Store inputs and events; never store a rollup.** The test is whether it can be recomputed
+from what's already on disk. An open-application count, a "3 live, 1 stalled" summary line, a
+`status:` field beside a log that already ends in the current stage — all recomputable, so all
+of them rot silently and then lie. Read the folders and compute those each time.
+
+**The other half of the split is the part that gets skipped.** Some things cannot be
+reconstructed later, and those get written down at the moment they are true: the corpus commit
+a render drew on, the hash of what was actually sent, the URL a posting was captured from. Lose
+one and it is gone — the posting 404s, the corpus moves on, and nothing on disk remembers. A
+pin is not a rollup; it records an input.
+
+So `application.md` carries no `status:` field: the last line of its log **is** the status, and
+a field beside the log is a second copy on its own schedule. And application-level state lives
+in `application.md`'s frontmatter, artifact-level state in each artifact's own — **no separate
+manifest file**, because a file whose only job is to repeat another file's state goes stale
+without anything noticing.
 
 **7. This folder is the most sensitive thing in the repo.** It holds other people's real
 names, private correspondence, and sometimes an employer's confidential material. It belongs
