@@ -92,8 +92,8 @@ rather than trusting the selection blindly.
 
 ## Hard rules — faithful rendering
 
-**1. Every claim about the candidate comes from the vetted corpus, and from nothing else.** A
-claim reaches the artifact only if a corpus story vouches for it (`facts_vetted` / published
+**1. Every claim about the candidate comes from the vetted corpus, and from nothing else.**
+`[CLAIM-SOURCE]` A claim reaches the artifact only if a corpus story vouches for it (`facts_vetted` / published
 sources). Three kinds of material feed a tailored render, and only the first is evidence about
 the user:
 

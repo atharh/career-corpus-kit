@@ -64,8 +64,9 @@ skill is what *they* remember, and a fluent guess of yours is the easiest thing 
 to nod along to. Same failure as rule 9's present-day artifact, arriving in your voice
 instead.
 
-- Use it for the worst reading of the facts (playbook 1 in `REFERENCE.md`) or a theory you
-  want refuted (playbook 9). Those work *by* being wrong, and the rebuttal is the material.
+- Use it for the worst reading of the facts (playbook 1 `[WORST-READING]` in `REFERENCE.md`) or
+  a theory you want refuted (playbook 9 `[WRONG-THEORY]`). Those work *by* being wrong, and the
+  rebuttal is the material.
 - **Never use it for something they'd have to remember** — a date, a number, a headcount, a
   system name, who was in the room, what the pushback was. Leave those bare. A blank is
   recoverable; a plausible suggestion repeated back to you is not.
@@ -79,7 +80,7 @@ The *decisions* and the *memories* are theirs; put those to them and wait.
 
 ## Hard rules
 
-**1. Never invent.** Every line traces to something they said or wrote. If you're not sure
+**1. Never invent.** `[NEVER-INVENT]` Every line traces to something they said or wrote. If you're not sure
 they said it, it's a gap, not a sentence. They will defend this material in interviews — a
 plausible detail you supplied is a landmine with their name on it.
 
@@ -163,11 +164,11 @@ pick the version that seems defensible and quietly edit, two things go wrong: yo
 factual call that was theirs to make, and you often delete true substance because the "safer"
 version is vaguer. Quote both lines back, name why they seem to conflict, and let them
 reconcile it. The reconciliation is usually more interesting than either version. (This is
-the drama-bias failure — see playbook 1 in `REFERENCE.md` — in a new place: resolving a
+the drama-bias failure — see playbook 1 `[WORST-READING]` in `REFERENCE.md` — in a new place: resolving a
 tension yourself instead of letting them do it always risks inventing or destroying fact.)
 
 **11b. When an answer changes a claim that is already rendered, say so and mark it — don't fix
-it in passing.** Rule 11 stops you resolving a contradiction between two of *their* statements.
+it in passing.** `[MARK-DONT-FIX]` Rule 11 stops you resolving a contradiction between two of *their* statements.
 This is the other direction: a contradiction between what they just said and what a résumé or a
 live application **already claims**. Those are the expensive ones, because a rendered claim is
 one a reader has already believed.
@@ -217,7 +218,7 @@ story gets bent to fit. The defence is that through-lines are *derived and falsi
 new evidence can demote them. Never let a through-line pick a story's framing; let the job
 description do that.
 
-**13. Apply the say-it-out-loud test — before you ask, and before you log a gap.** Depth is
+**13. Apply the say-it-out-loud test — before you ask, and before you log a gap.** `[SAY-ALOUD]` Depth is
 the point of a corpus, but *completeness* is not. This skill will drift toward archival
 completeness on its own, because every answer exposes three more askable questions and they
 all look reasonable written down.

@@ -147,24 +147,36 @@ The claim extractor is the hard part and is itself a judge — see above.
 
 ---
 
-## Stable identifiers for rule cross-references
+## Two numbered lists in `apply/SKILL.md`, both starting at 1
 
-**Deferred 2026-08-11**, when the policy drift check shipped. Rules are cited by number —
-`compact` cites `interview`'s rule 13, `render` cites its own rule 9. Tier 1 proves those
-references *resolve*; nothing proves they resolve to the same rule they did before someone
-inserted one above them. The reference stays green while silently changing meaning.
+**Raised 2026-08-12**, while adding stable rule ids. `apply/SKILL.md` carries `## Stages`
+(1–7) and `## Hard rules` (1–8). `check_rule_references` merges every numbered list in a file
+into one set per skill, so *"the apply skill's rule 6"* resolves green whether it means stage 6
+(*Prep*) or hard rule 6 (*never store a rollup*). Both exist; only one is meant.
 
-**Shape of a fix:** give load-bearing rules stable names — `CLAIM-SOURCE`, `SAY-ALOUD`,
-`INBOX-NOT-EVIDENCE` — and cite those. They survive reordering and read better at the call
-site than a number does.
+**The three live citations were fixed by naming them** — `CAPTURE-POSTING`, `LOG-APPEND-ONLY`
+and `NO-ROLLUP` now appear alongside the number, and the id check pins each to its real rule.
+The residual is any *future* citation written as a bare number, which is still unscoped.
 
-**Why deferred:** it touches every rule list in the kit for a failure that hasn't happened
-yet, and the numbering check makes the loud version of it (two rule 6s) impossible already.
+**Shape of a fix, if it recurs:** scope `check_rule_references` by section heading, so a
+citation has to say which list it means, or drop the numbers from `## Stages` — they are read
+as a sequence rather than cited as rules. **Not done now** because both options force rewording
+across a skill's main structure for a failure the ids already cover at every current call site.
 
-**The case got stronger when the playbook moved to `interview/REFERENCE.md`.** Those
-`playbook N` citations now cross a file boundary, which is where a silent renumber is most
-likely and hardest to eyeball. Tier 1 checks they resolve; it still can't check they mean the
-same thing they did.
+---
+
+## Stable identifiers for rule cross-references — *landed 2026-08-12, kept for the boundary*
+
+The `[ID]` scheme covers the ~13 references that cross a file or skill boundary, and nothing
+else. Rules cited only within their own file keep bare numbers on purpose: `check_numbered_lists`
+already makes the loud failure (two rule 6s) impossible there, and tagging every rule in the kit
+is churn for a failure that cannot happen.
+
+**The line worth not re-litigating** is where that boundary sits. A later pass that reads
+`render/SKILL.md` citing its own rules 2, 5, 7 and 9 as bare numbers will read it as an
+oversight. It isn't — those are same-file, and the judge review that prompted this work asked
+explicitly for ids only where references cross boundaries. Widen it only if a same-file citation
+actually goes stale.
 
 ---
 
