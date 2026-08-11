@@ -217,13 +217,18 @@ This skill ships generic. It gets sharper by accumulating the user's own correct
 - **After the user corrects this skill in a way that generalises** — how they name folders,
   which requirements they consider boilerplate, a company they won't apply to — append one
   dated line to `corpus/LESSONS.md`: the mistake, and the rule to apply next time. One line
-  each. Append-only.
+  each. Nothing already in the file is deleted.
 - **Route it before you write it: would this rule still hold if the corpus were about someone
   else?** If yes, it belongs to the method — say so and leave it, rather than filing a general
   rule under one person's name. If no, it is this user's, and `corpus/LESSONS.md` is where it
   goes. Either way it goes in a *file*: a rule kept in a session summary or a model's memory
   is in neither place, and **a rule nobody can diff is a rule nobody can review, port, or
   undo.**
+- **When a lesson proves wrong, retire it rather than appending its opposite.** Two entries
+  that contradict each other both arrive with equal footing in every later session. Retire in
+  the session where the lesson misfired and only on the user's explicit say-so, by marking the
+  entry in place: `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>`. A struck entry is
+  history and is never applied again.
 - **Never edit this SKILL.md to record a lesson,** and never write lessons into the kit repo.
 
 ## What "good" looks like
