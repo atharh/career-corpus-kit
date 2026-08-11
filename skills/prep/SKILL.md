@@ -9,13 +9,17 @@ description: Build an interview prep pack for one scheduled interview — an ope
 scheduled interview, and then captures what happened afterwards.
 
 It is the corpus pointed at a room you're about to walk into. Everything it writes is a
-rendering, so **every hard rule in `render`'s SKILL.md applies here unchanged** — including
-dated vocabulary, honest attribution, and making it sound like the user as the last step. Read
-that file. The rulebook is not repeated here.
+rendering, so **`render`'s full rulebook governs every file in the pack** — dated vocabulary,
+honest attribution, preferring the true version, obeying settled calls, sounding like the user
+as the last step, showing a diff before applying. A session gets that rulebook exactly one way:
+by reading [`../render/SKILL.md`](../render/SKILL.md), which is the first step of the pack below
+and is not optional.
 
-Four of those rules *are* repeated, in render's own words. A skill loads its own `SKILL.md` and
-nothing else, so a protection that exists only as a pointer to another file is a hope rather
-than a rule — and these four are the ones a prep pack fails on:
+Four of those rules are restated here, in render's own words. A skill loads its own `SKILL.md`
+and nothing else, so a rule held only behind a pointer holds only as well as the pointer gets
+followed. These four are the ones a prep pack most often fails on, so they are copied down —
+they bind even if that read gets skipped, and the rest of the rulebook is why the read is a
+step and not a suggestion:
 
 - **Every claim about the candidate comes from the vetted corpus, and from nothing else.**
   `_inbox/` is not the corpus, and that matters more here than anywhere — see below.
@@ -59,9 +63,14 @@ and tab-completed in front of other people.
 
 ## The pack
 
-It goes in the application's own directory, `applications/<company>-<role>/`, alongside the
-JD and the rendered artifacts — the same folder `apply` opened and `render` wrote into. Files
-are numbered so the reading order is the preparation order.
+**Step one, before any file below exists: read [`../render/SKILL.md`](../render/SKILL.md) in
+full.** Every file in the pack is a rendering, and render's hard rules are what make one
+defensible in the room. The four restated at the top of this file are the common failures, not
+the rulebook. Do this once per session, before writing the first pack file.
+
+The pack goes in the application's own directory, `applications/<company>-<role>/`, alongside
+the JD and the rendered artifacts — the same folder `apply` opened and `render` wrote into.
+Files are numbered so the reading order is the preparation order.
 
 | File | What it holds |
 |---|---|
