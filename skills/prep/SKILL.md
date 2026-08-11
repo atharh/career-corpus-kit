@@ -139,28 +139,30 @@ retired six months ago.
 
 ## Rules specific to prep
 
-**1. Bullets and a first line, never a script.** Give the opening sentence and the beats. A
-written-out answer gets memorised and then *sounds* memorised, and it collapses the moment the
-question arrives in a slightly different shape.
+**Bullets and a first line, never a script.** `[NO-SCRIPT]` Give the opening sentence and the
+beats. A written-out answer gets memorised and then *sounds* memorised, and it collapses the
+moment the question arrives in a slightly different shape.
 
-**2. Spend the stories deliberately.** Track which story serves which criterion and which
-question type. One anecdote reused across three answers in a single loop is a tell — it reads
-as a candidate with one good year. Where a story must serve twice, note which *lens* each use
-takes, and make sure they're genuinely different.
+**Spend the stories deliberately.** `[SPEND-STORIES]` Track which story serves which criterion
+and which question type. One anecdote reused across three answers in a single loop is a tell —
+it reads as a candidate with one good year. Where a story must serve twice, note which *lens*
+each use takes, and make sure they're genuinely different.
 
-**3. Carry the mistake into the room.** The corpus keeps the failure in each story precisely so
-this file can use it. Prep the mistake as an answer, not as damage control.
+**Carry the mistake into the room.** `[CARRY-MISTAKE]` The corpus keeps the failure in each
+story precisely so this file can use it. Prep the mistake as an answer, not as damage control.
 
-**4. Prep the follow-up, not just the answer.** For each story, the second and third questions
-are usually already written down as that story's gaps. Answer down to depth three.
+**Prep the follow-up, not just the answer.** `[DEPTH-THREE]` For each story, the second and
+third questions are usually already written down as that story's gaps. Answer down to depth
+three.
 
-**5. The homework is part of the pack.** If there's a take-home, a presentation, or a
-"prepare a case" instruction, it goes in `interview-prep.md` with the dates, not in a separate
-mental note. It is the single most skippable and least skippable part of a loop.
+**The homework is part of the pack.** `[HOMEWORK-IN-PACK]` If there's a take-home, a
+presentation, or a "prepare a case" instruction, it goes in `interview-prep.md` with the dates,
+not in a separate mental note. It is the single most skippable and least skippable part of a
+loop.
 
-**6. Say what you don't have.** A pack that reads as though the candidate is strong on
-everything is a pack that hasn't been read against the criteria properly. Name the weak
-sections at the top of `interview-prep.md`.
+**Say what you don't have.** `[NAME-THE-WEAK]` A pack that reads as though the candidate is
+strong on everything is a pack that hasn't been read against the criteria properly. Name the
+weak sections at the top of `interview-prep.md`.
 
 ## After the interview — this is half the skill
 

@@ -32,7 +32,7 @@ depends on another still open in this round belongs to a *later* round. Each ans
 the tree, pushing the frontier outward. Recompute, ask again.
 
 **Compose each round from the playbook in [REFERENCE.md](REFERENCE.md)** — eleven techniques
-ranked by what they actually produce, the top three doing most of the work. Read it every
+in rank order, the first three doing most of the work. Read it every
 round: the difference between dislodging a memory and collecting a status update is entirely
 in how the questions are built, and none of that is in this file.
 
@@ -51,15 +51,16 @@ Format each question:
 
 **The ➡️ line is a provocation, never a recommended answer.** Suggesting the answer
 contaminates the evidence: the product of this skill is what *they* remember, and a fluent
-guess of yours is the easiest thing in the world to nod along to — rule 8's present-day
-artifact again, arriving in your voice.
+guess of yours is the easiest thing in the world to nod along to — the present-day artifact of
+the lens-not-source rule `[LENS-NOT-SOURCE]` again, arriving in your voice.
 
 - Use it for the worst reading of the facts (`[WORST-READING]` in `REFERENCE.md`) or a theory
   you want refuted (`[WRONG-THEORY]`). Those work *by* being wrong.
 - **Never use it for something they'd have to remember** — a date, a number, a headcount, a
   system name, who was in the room, what the pushback was. Leave those bare: a blank is
   recoverable, a plausible suggestion repeated back to you is not.
-- Nothing enters the file because you proposed it. Rule 1 applies to your own ➡️ lines first.
+- Nothing enters the file because you proposed it. The never-invent rule `[NEVER-INVENT]`
+  applies to your own ➡️ lines first.
 
 **Facts are your job, never theirs.** When a frontier question needs something from the
 environment, dispatch a sub-agent, and don't block the round on it — a running lookup is an
@@ -68,61 +69,62 @@ unsettled prerequisite, so only the questions downstream of it wait. The *decisi
 
 ## Hard rules
 
-**1. Never invent.** `[NEVER-INVENT]` Every line traces to something they said or wrote. If
+**Never invent.** `[NEVER-INVENT]` Every line traces to something they said or wrote. If
 you're not sure they said it, it's a gap, not a sentence — they will defend this material in
 interviews, and a plausible detail you supplied is a landmine with their name on it.
 
-**2. Seed from vetted text only.** Open a story by writing what the résumé and cover letters
-already say, and nothing else. Everything absent becomes an explicit gap, and the gaps are the
-interview queue. Never write prose in their voice to fill space.
+**Seed from vetted text only.** `[SEED-VETTED]` Open a story by writing what the résumé and
+cover letters already say, and nothing else. Everything absent becomes an explicit gap, and the
+gaps are the interview queue. Never write prose in their voice to fill space.
 
-**3. Pasted drafts are unvetted, including their own.** A draft from a prior chat with another
-AI is a *rendering*, not raw material — an essay shape, an arc, a moral. Take the substance
-and the opinions, drop the framing, and treat every number as suspect until they confirm it:
-rendered prose inflates a one-time "traffic doubled after launch" into "tripled month over
-month", a compounding claim they never made and would have to defend in the room.
+**Pasted drafts are unvetted, including their own.** `[DRAFTS-UNVETTED]` A draft from a prior
+chat with another AI is a *rendering*, not raw material — an essay shape, an arc, a moral. Take
+the substance and the opinions, drop the framing, and treat every number as suspect until they
+confirm it: rendered prose inflates a one-time "traffic doubled after launch" into "tripled
+month over month", a compounding claim they never made and would have to defend in the room.
 
-**4. Numbers get a source or they don't go in.** For every quantitative claim: where did it
-come from — a dashboard, a review doc, or a model's guess at what "kept growing" sounds like?
-Record the source beside the number, and record the ceiling — "do not inflate." **A limit the
-user volunteers unprompted is the strongest ceiling there is**, because it is offered against
-their own interest (*"two teams, not the org"*). Record it the moment it is said; the bigger
-version always reads better to a later session, which is how ceilings quietly re-inflate.
+**Numbers get a source or they don't go in.** `[NUMBER-SOURCE]` For every quantitative claim:
+where did it come from — a dashboard, a review doc, or a model's guess at what "kept growing"
+sounds like? Record the source beside the number, and record the ceiling — "do not inflate." **A
+limit the user volunteers unprompted is the strongest ceiling there is**, because it is offered
+against their own interest (*"two teams, not the org"*). Record it the moment it is said; the
+bigger version always reads better to a later session, which is how ceilings quietly re-inflate.
 
-**5. No names of non-public people. Ever. Roles only.** The corpus describes real people's
-worst professional moments, and the user would never say those names in an interview anyway —
-"a senior engineer on the platform team" carries the story fine. The repo stays private
+**No names of non-public people. Ever. Roles only.** `[ROLES-ONLY]` The corpus describes real
+people's worst professional moments, and the user would never say those names in an interview
+anyway — "a senior engineer on the platform team" carries the story fine. The repo stays private
 permanently, and it should never name a private individual even so.
 
-**6. Don't pre-split a story by decision type.** One arc, one file, even when it holds four
-decisions. Splitting a project into "the architecture decision" and "the conflict decision"
+**Don't pre-split a story by decision type.** `[ONE-ARC]` One arc, one file, even when it holds
+four decisions. Splitting a project into "the architecture decision" and "the conflict decision"
 bakes the lens into storage, and the lens can't be known until a JD is in hand. **Split only
 when evidence forces it:** a different role, a different year, a different central decision —
 then cross-link both ways, because the connection between two stories is usually the insight.
 
-**7. Check the vocabulary's age, not just the numbers.** Numbers drift; words also modernise.
-Someone with a long career has a newer, better-sounding name for every old thing they did, and
-reaching for it is honest, automatic, and falsifiable: they cannot fix it by remembering
-harder, and an interviewer checks the label against a public release history. Watch terms
-that postdate the work — *microservices* (were they just services?), *SRE*, *observability*,
-*data mesh*, *MLOps*, a tool named years before it existed. **If a term postdates the work,
-date the term. The fix is never to delete the claim — it's to restate it.** "I used <modern
-tool> in 2014" is false and checkable; "I was doing the thing <modern tool> would later
-formalise" is true *and stronger*, because they had the idea before the tooling existed to
-name it. Record the correction in an `anachronisms_corrected` block so the modern word can't
-creep back in.
+**Check the vocabulary's age, not just the numbers.** `[DATE-THE-TERM]` Numbers drift; words
+also modernise. Someone with a long career has a newer, better-sounding name for every old thing
+they did, and reaching for it is honest, automatic, and falsifiable: they cannot fix it by
+remembering harder, and an interviewer checks the label against a public release history. Watch
+terms that postdate the work — *microservices* (were they just services?), *SRE*,
+*observability*, *data mesh*, *MLOps*, a tool named years before it existed. **If a term
+postdates the work, date the term. The fix is never to delete the claim — it's to restate it.**
+"I used <modern tool> in 2014" is false and checkable; "I was doing the thing <modern tool>
+would later formalise" is true *and stronger*, because they had the idea before the tooling
+existed to name it. Record the correction in an `anachronisms_corrected` block so the modern
+word can't creep back in.
 
-**8. Beware present-day artifacts.** A current project offered as "context" for an old story
-is a **lens, not a source** — it tells you what to ask, never what happened. A vivid,
-well-structured artifact beside a thin ten-year-old memory will colonise it, in exactly the
-vocabulary you just read, and the shape will feel right to both of you.
+**Beware present-day artifacts.** `[LENS-NOT-SOURCE]` A current project offered as "context" for
+an old story is a **lens, not a source** — it tells you what to ask, never what happened. A
+vivid, well-structured artifact beside a thin ten-year-old memory will colonise it, in exactly
+the vocabulary you just read, and the shape will feel right to both of you.
 
-**9. `_inbox/` is a queue, not a source. Folder location is a truth claim.** A file in
-`corpus/<company>/` asserts *vetted, sourced, provenance-checked*. Raw material — pasted
+**`_inbox/` is a queue, not a source. Folder location is a truth claim.** `[INBOX-QUEUE]` A file
+in `corpus/<company>/` asserts *vetted, sourced, provenance-checked*. Raw material — pasted
 drafts, old design docs, coaching output from other chats, exported notes — goes in
 `corpus/_inbox/` and **is never rendered from and never cited as fact** — otherwise an AI
-draft's unsourced metric gets quoted in a résumé and defended in a room. Extract it into
-story files per rule 3, then delete it or move it to `_inbox/extracted/`; leave inbox files
+draft's unsourced metric gets quoted in a résumé and defended in a room. Extract it into story
+files per the pasted-drafts rule `[DRAFTS-UNVETTED]`, then delete it or move it to
+`_inbox/extracted/`; leave inbox files
 **pristine**, because extraction may need redoing. Pristine is not durable, though: `_inbox/` is
 git-ignored, so an inbox file has no history behind it and survives only as the working copy —
 extract as though this is the one pass that gets to read it. If raw material refers to *"the
@@ -130,7 +132,7 @@ doc"* behind it, **that artifact is the better source** — ask for it. The same
 `applications/<company>-<role>/_inbox/`, where the `apply` skill files recruiter mail: a fact
 about the user sitting there earns its way in here like everything else, by them saying it.
 
-**10. Surface the change; never resolve it silently.** `[MARK-DONT-FIX]` Recorded material —
+**Surface the change; never resolve it silently.** `[MARK-DONT-FIX]` Recorded material —
 a line in a story file, a claim in a rendered artifact, a reading nobody has confirmed yet —
 changes only by a decision the user makes and sees: **show what stands, show what would
 replace it, name what prompted the change, and let them choose.** Settling it yourself makes a
@@ -175,17 +177,17 @@ less than the one it replaces, it is not a fix**, and **adding a sentence beside
 beats merging both into one**: the detail that looked like clutter answers the third follow-up
 and is not recoverable from the merged version.
 
-**The trigger is meaning, not keystrokes.** A decision round is owed when the edit could change
-fact, specificity, provenance, emphasis, or a recorded rendering decision — *"led the
-migration"* narrowed to *"led one workstream"*, or a source dropped from beside a number. A
-typo, a rewrap, a repaired clause is not; make those and move on, since they show in the
-session's diff anyway and demanding a round for each buries the ones that need it.
+**The trigger is meaning, not keystrokes.** `[MEANING-NOT-KEYSTROKES]` A decision round is owed
+when the edit could change fact, specificity, provenance, emphasis, or a recorded rendering
+decision — *"led the migration"* narrowed to *"led one workstream"*, or a source dropped from
+beside a number. A typo, a rewrap, a repaired clause is not; make those and move on, since they
+show in the session's diff anyway and demanding a round for each buries the ones that need it.
 
-**11. Through-lines go in `corpus/through-lines.md`, never in the story that surfaced them.**
-Patterns spanning the whole career — recurring instincts, philosophies, repeated moves —
-belong to no single story and drift if copied into several. When a story evidences one, add
-the instance *there* and leave a pointer *here*. Three rules keep that file honest rather than
-flattering:
+**Through-lines go in `corpus/through-lines.md`, never in the story that surfaced them.**
+`[THROUGH-LINES-FILE]` Patterns spanning the whole career — recurring instincts, philosophies,
+repeated moves — belong to no single story and drift if copied into several. When a story
+evidences one, add the instance *there* and leave a pointer *here*. Three rules keep that file
+honest rather than flattering:
 
 - **Every instance carries a file citation.** No claim without evidence.
 - **Every through-line has a "where it doesn't hold" section.** A pattern with no
@@ -196,7 +198,7 @@ A stored through-line can quietly become a lens every story gets bent to fit. Th
 that they are *derived and falsifiable*, and new evidence can demote them. Never let one pick
 a story's framing; let the job description do that.
 
-**12. Apply the say-it-out-loud test — before you ask, and before you log a gap.**
+**Apply the say-it-out-loud test — before you ask, and before you log a gap.**
 `[SAY-ALOUD]` Depth is the point of a corpus; *completeness* is not. This skill drifts toward
 archival completeness on its own: every answer exposes three more askable questions, and they
 all look reasonable written down.
@@ -213,16 +215,17 @@ when nobody will ask, arithmetic that changes no claim, the unfinished scene you
 about because it's a good story. Lookups belong to neither pile — they're yours (see *Facts
 are your job*), and must never sit in a queue addressed to the user.
 
-**The failure is structural, so the fix has to be too.** A gap gets logged because a question
-*exists*, not because an answer would change anything, and once logged it gets asked — by you
-or the next session. So the gap list is not a to-do list of everything askable. **It is a queue
-of answers that would change something.** Prune it under this test, not only when it runs long.
+**The failure is structural, so the fix has to be too.** `[QUEUE-NOT-CATALOGUE]` A gap gets
+logged because a question *exists*, not because an answer would change anything, and once logged
+it gets asked — by you or the next session. So the gap list is not a to-do list of everything
+askable. **It is a queue of answers that would change something.** Prune it under this test, not
+only when it runs long.
 
-**The counterweight, or this rule guts the playbook:** *demand the mistake* passes this test
-easily — "tell me about a time you got it wrong" is asked in nearly every interview loop, so a
-story with no mistake in it has a hole exactly where a question is coming. Same for the cost,
-the opposition, and the person who lost. Those are *renders*: the test kills bookkeeping, not
-discomfort.
+**The counterweight, or this rule guts the playbook:** `[DISCOMFORT-RENDERS]` *demand the
+mistake* passes this test easily — "tell me about a time you got it wrong" is asked in nearly
+every interview loop, so a story with no mistake in it has a hole exactly where a question is
+coming. Same for the cost, the opposition, and the person who lost. Those are *renders*: the
+test kills bookkeeping, not discomfort.
 
 ## Lessons — how this skill personalises to you
 
@@ -256,8 +259,8 @@ Context nests, and each layer is written exactly once:
 ```
 corpus/
   profile.md              ← career spine: years, education, contact, skills
-  through-lines.md        ← cross-career findings. See rule 11.
-  _inbox/                 ← raw, unextracted material. NEVER a source. See rule 9.
+  through-lines.md        ← cross-career findings. See `[THROUGH-LINES-FILE]`.
+  _inbox/                 ← raw, unextracted material. NEVER a source. See `[INBOX-QUEUE]`.
   <company>/
     background.md         ← company context every story here assumes
     <story>.md            ← one arc, one central decision
@@ -315,7 +318,8 @@ interviewer will push on.
    reveals the next round's questions.
 4. **Resolve gaps explicitly.** `- [x] ~~question~~ Resolved YYYY-MM-DD: answer.` The gaps
    list is the queue for next time; leaving it honest is what makes the corpus resumable.
-5. **Prune the queue as you go**, per rule 12. A gap that survives three sessions unasked is
+5. **Prune the queue as you go**, per the say-it-out-loud test `[SAY-ALOUD]`. A gap that
+   survives three sessions unasked is
    usually failing the say-it-out-loud test with nobody saying so; delete it, git keeps it.
    **A deferred topic is different from a dead one:** log *what* was deferred in enough detail
    to resume — "they said they'd made mistakes here" with no topic wastes a future session.
@@ -329,7 +333,8 @@ on it: the setup has stakes, the decisions have alternatives and opposition, the
 sources, someone disagreed, something went wrong, and a real person somewhere in it is more
 than an obstacle. **Note what that list does *not* include:** every fact about the arc. A
 story is done when it survives pressure, not when it's complete — the second target is
-unreachable, and rule 12 exists because you will keep finding another question.
+unreachable, and the say-it-out-loud test `[SAY-ALOUD]` exists because you will keep finding
+another question.
 
 A session is done when the frontier holds nothing that passes the say-it-out-loud test, or
 when they've had enough. What survives the test becomes the gaps list; what doesn't gets

@@ -16,24 +16,31 @@ Python 3, standard library only. No install step.
 `static_checks.py`. Tests the kit itself: manifests, skill frontmatter, and the
 cross-references that rot silently when a file is edited.
 
-The one that earns its keep is **rule-reference resolution**, and it enforces a
-convention rather than just verifying one. A rule number is safe only inside the
-file that numbers it, where a `1..N` list can't hold two rule 6s. Anywhere else
-it is fragility: insert a rule near the top of a list and every citation
-elsewhere still resolves, silently, to the wrong rule. So a citation that crosses
-a file or skill boundary names the rule by its stable id and its short name —
-"the say-it-out-loud test `[SAY-ALOUD]`" — and a bare `rule N` or `playbook N`
-that leaves its own file *fails*, which is what makes the fragile form
-impossible rather than merely discouraged. Ids are checked for uniqueness
-kit-wide and for resolution, and both bars reach past `skills/` to the two other
-places that cite rules — the docs under `examples/` and these case tables, which
-are the citations furthest from the list they name and so the ones a renumbering
-strands first. Fixture files are exempt from the number bar, since a fictional
-artifact's prose is its own; the `FICTIONAL` banner is the line. It also checks
-each numbered list runs `1..N` with
-no gaps, that every `/career-corpus:<skill>` mentioned exists, that relative
-links resolve, and that the example corpus keeps its `FICTIONAL` banners, its
-`sources:` blocks, and its `related:` targets.
+The one that earns its keep is **rule-id resolution**, and it enforces a
+convention rather than just verifying one. Rules are addressed by a stable id
+written `[LIKE-THIS]` after the rule's bold heading, and cited by name and id —
+"the say-it-out-loud test `[SAY-ALOUD]`". Numbers are not an address: a rule
+list carries none, and a `rule N` citation anywhere in `skills/`, `examples/` or
+these case tables *fails*. That bar is what makes the fragile form impossible
+rather than merely discouraged, and the form it replaced failed silently — a
+citation of "rule 9" resolved against whatever rule currently sat ninth, so
+inserting one rule above it retargeted the citation with every check green.
+
+Three bars, and they compose: **every rule is tagged**, whether or not anything
+cites it yet — so adding a citation never means editing the file being cited;
+**an id is defined once** kit-wide; and **every `[ID]` resolves**, wherever it is
+written. Resolution reaches past `skills/` to the two other places that cite
+rules — the docs under `examples/` and these case tables, which are the citations
+furthest from the rule they name. A rule is detected structurally: a paragraph
+inside a hard-rule or playbook section that opens with a bold heading at the left
+margin, excluding lettered sub-cases, which belong to the rule above them.
+Fixture files are exempt from the number bar, since a fictional artifact's prose
+is its own; the `FICTIONAL` banner is the line. Plain-numbered lists stay legal
+and unscanned — their numbers are execution order, not an address.
+
+It also checks that every `/career-corpus:<skill>` mentioned exists, that
+relative links resolve, and that the example corpus keeps its `FICTIONAL`
+banners, its `sources:` blocks, and its `related:` targets.
 
 **Policy drift check.** Table in `cases/policy-blocks.json`. Four policies are
 stated in more than one skill — the Lessons block, `_inbox/`-is-not-evidence,
