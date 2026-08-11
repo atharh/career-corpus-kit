@@ -204,30 +204,19 @@ error bars, split across the skill that produces them and the skill that consume
 baseline refresh that reconsiders rather than only adds; and fixing a rendering in the same
 session as the correction that changed it.
 
+**Landed 2026-08-11, release A** — candidates 1, 2, 6 and 7 below, prompted by an external
+review that independently reached candidate 1 and rated it P0. Rule 11b now marks rather than
+fixes, and carries the three classes; *Demand the mistake* walks the decision chronologically
+first; an unprompted limit is named as the strongest ceiling; hindsight-as-design-intent sits
+under honest attribution. Candidate 8 turned out to be **already in the kit** — playbook 1's
+failure-mode block ends with *"don't overshoot the other way"* — so it was recorded, not written.
+Candidate 1's `corpus_pin` question stays open and belongs to *Pack staleness detection*.
+
 ### Open candidates from the 2026-08-11 full read
 
-Ranked. Each was checked against the kit before being listed.
+Ranked. Each was checked against the kit before being listed. Landed ones are struck from this
+list; the numbering is left alone so the release note above still resolves.
 
-1. **Artifact lifecycle — and it makes an already-shipped rule unsafe.** Three classes with
-   three rules: *submitted* (frozen permanently — it is evidence of what a reader saw),
-   *in-flight* (re-render on request, show the diff, own commit), *baseline* (deliberate act,
-   own commit, never bundled with corpus edits). The interview rule that says fix a rendered
-   claim in the same session draws no class distinction, so applied to a submitted artifact it
-   destroys the evidence. **Fix that carve-out whether or not the rest lands.** Carries the
-   `corpus_pin` question below.
-
-   ⚠️ **The carve-out has to cover all three classes, not just the frozen one.** Exempting only
-   submitted artifacts still licenses the failure the lifecycle rules were written for: a
-   correction landing in the corpus does not entitle a session to go and fix whatever else
-   carries the old claim, and the observed damage was to *in-flight* material edited in passing
-   during corpus work. So the rule is not "don't touch what was sent" — it is **one concern per
-   change**: a corpus correction is a corpus change, and every artifact it implies is a separate,
-   deliberate, shown-to-the-user act.
-2. **The direct ask for a mistake returns nothing.** *Demand the mistake* instructs the move
-   that has been observed to fail: asked point-blank, people have no topic and no memory; asked
-   what they actually did, step by step, the misjudgement arrives on its own, attached to the
-   decision that produced it — which is also the only form in which it is tellable. Amend the
-   existing playbook entry rather than adding one.
 3. **A later answer supersedes an earlier one.** Recall improves across a conversation. The new
    answer wins by default, but record the supersession with both dates rather than overwriting,
    because the *shape* of the drift is itself evidence. The kit knows supersession only as
@@ -240,21 +229,20 @@ Ranked. Each was checked against the kit before being listed.
    reviewed, or ported — so never hold one in a model's memory or a session summary. Routing:
    would this rule still apply if the corpus were about someone else? Yes → the method. No →
    the user's own lessons file. The kit says where to append and never says what belongs there.
-6. **A limit the user volunteers unprompted is a ceiling.** Strongest kind, since it is offered
-   against their own interest — and the easiest for a later session to quietly re-inflate
-   because the bigger version reads better.
-7. **Don't render hindsight as design intent.** Building something that became infrastructure is
-   not the same claim as having planned it that way. "Noticed their own work was worth
-   generalising" survives a follow-up; "designed a system" often doesn't.
-8. **Don't overshoot after a pushback.** One line: correcting an over-dramatic reading shouldn't
-   flip to an under-claiming one.
-
 **Watching, not yet a candidate — a fit check should distinguish *absent* from *unwritten*.** A
 requirement the corpus can't back may be one the user never did, or one they did and never
 recorded, and those need opposite responses: don't apply, versus run an interview session. One
 observed instance, where the difference only surfaced after the interview. **Held deliberately
 under the recurrence gate** — let it happen twice. Noted here so the second instance is
 recognised rather than rediscovered.
+
+⚠️ **There is a version of this that doesn't need the recurrence gate at all**, raised by the
+external review and worth writing down before it is lost. Argue it from the kit rather than from
+the instance: the kit never takes a call that is the user's, and *absent* versus *unwritten* is
+exactly such a call. So `fit.md` classifies what it can see — **no corpus evidence** — and then
+asks, rather than guessing which of the two it is and picking a response. That passes the
+justifiable-by-reading-the-kit-alone test on its own, and it needs no second instance. It is a
+change to what `fit.md` records, so it lands with the application templates, not before them.
 
 **Declined — do not re-propose.** A rule that was considered and rejected leaves no trace in
 the skills, so without this list every pass re-argues it, and the dangerous case is a
@@ -264,10 +252,18 @@ the skills, so without this list every pass re-argues it, and the dangerous case
   than one: role and scope bullets are structural, don't compete for outcome slots, and a
   promotion or role change inside one company needs a second. The divergence is intentional.
 
-**Deferred — real, blocked on a decision.** Application lifecycle with a per-application
+**Deferred — real, and no longer blocked.** Application lifecycle with a per-application
 manifest recording a `corpus_pin`. It belongs to the pack-staleness entry at the top of this
 file, and *"a date is not a pin"* is that entry's own insight arriving from the other side. It
-collides with `apply` rule 6, *never store derived state*: a `status` field is exactly the
+collided with `apply` rule 6, *never store derived state*: a `status` field is exactly the
 status rollup that rule forbids, but a pin is not derived — it records an input, and unlike a
-status it cannot be recomputed later, which is the whole reason to write it down. **Settle
-whether rule 6 should name that distinction before porting any of it.**
+status it cannot be recomputed later, which is the whole reason to write it down.
+
+**Settled 2026-08-11**, by the external review, on the distinction this entry had already half
+found: *rule 6 bars recomputable rollups, not unrecoverable inputs.* Store what cannot be
+reconstructed later — the `corpus_pin`, the hash of what was actually sent, the captured JD URL.
+Don't store what can — "three applications live". Rule 6 should name that split when the
+templates land. The remaining open question is only where the pin lives, and the review's answer
+is worth taking: **no separate manifest.** Artifact-level state in the artifact's own
+frontmatter, application-level in `application.md`'s. A file whose only job is to repeat another
+file's state goes stale on its own schedule.
