@@ -32,7 +32,7 @@
       "exempt": {
         "bootstrap": "Creates LESSONS.md and explains it once, retirement included; runs before there is anything to correct.",
         "compact": "Explicitly forbidden from touching LESSONS.md — pruning the scar tissue defeats it, and a wrong entry is retired where it misfired.",
-        "prep": "Inherits render's rules by pointer and writes no lessons of its own; the four it does restate are in prep-render-invariants."
+        "prep": "Sends the session to read render's SKILL.md for the rulebook and writes no lessons of its own; the four rules it restates are in prep-render-invariants."
       }
     },
 
@@ -91,8 +91,8 @@
 
     {
       "id": "prep-render-invariants",
-      "policy": "The four render rules prep restates instead of inheriting by pointer",
-      "why": "prep declared render's whole rulebook applied by reference. Sibling skill loading is not guaranteed — a skill loads its own SKILL.md and nothing else — so the four protections that decide whether a pack is defensible in the room existed only as a pointer to a file the model may never open. The full rulebook still lives in render and is still inherited; these four are copied because they are the ones a prep pack fails on, and copying them is what makes them checkable here.",
+      "policy": "The four render rules prep restates rather than leaving to its read of render's SKILL.md",
+      "why": "render's whole rulebook governs a prep pack, and sibling skill loading is not guaranteed — a skill loads its own SKILL.md and nothing else — so prep carries that inheritance as an explicit step: read render's SKILL.md before writing any pack file. These four are copied on top of the step because they are the ones a prep pack fails on. A copy still binds if the read gets skipped, and it is what makes them checkable here.",
       "canonical": "render",
       "invariants": [
         "Every claim about the candidate comes from the vetted corpus, and from nothing else.",
