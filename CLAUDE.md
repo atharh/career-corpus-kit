@@ -47,9 +47,18 @@ Two gates, and a candidate needs both:
   stranger.
 - **Generalisation.** The test above: justifiable by reading the kit alone.
 
-**Check the kit first.** Much of it is already there under different wording, and a
-corpus's notes about the kit go stale fast. Trust this repo's files over any description
-of them.
+**Pin a commit, not a date.** Record the corpus sha you reviewed up to, and start the next
+pass from `git log -p <sha>..HEAD -- <intake paths>`. A date can't be diffed and doesn't say
+which of several same-day commits it means. A sha also catches the case a date scan misses
+entirely: an **amendment to an older entry**, which never appears in a list of new entries and
+usually means a rule got broader — which is exactly what porting wants.
+
+**Check the kit first, and check the clone rather than the cache.** Much of the kit is already
+there under different wording, and a corpus's notes about it go stale fast. Two copies carry a
+version and they disagree — the development clone, and
+`~/.claude/plugins/cache/<marketplace>/<plugin>/<version>/`, which is what a running session
+actually loads and which lags. **The loaded copy governs a session; the clone is what gets
+ported.** Read the clone, or a rule already landed and unreleased looks like a gap.
 
 **Redact mechanically.** Port the claim and the move. Cut the instance — company,
 project, quoted speech, numbers. Keep the cross-references ("sibling to", "same family
