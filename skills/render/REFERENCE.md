@@ -17,7 +17,7 @@ already there before asking for anything:
 | `jd.md` | `apply` | The posting verbatim, with URL and capture date. Read it; don't ask for the JD again. |
 | `fit.md` | `apply` | What the corpus backs, backs thinly, and can't back for this role. Most of the selection work. |
 | `application.md` | `apply` | Dated log — stage, contacts by role, next action. |
-| `_inbox/` | `apply` | Raw inbound. **Unvetted. Never a source for anything.** |
+| `_inbox/` | `apply` | Raw inbound. **Unvetted. Never evidence for a candidate claim** — attributed employer context and operational fact only. |
 | `interview-prep.md`, `01-…`–`05-…` | `prep` | The study pack for a booked interview. Not this skill's output. |
 
 Read all of it; source no *candidate claim* from any of it (SKILL.md rule 1). These files

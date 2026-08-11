@@ -115,10 +115,12 @@ that reads like a finished claim is already a rendering, and taking it at face v
 baseline telephone game above with a second lossy hop. It is the easiest mistake to make once
 the folder holds something that looks nearly right.
 
-`_inbox/` is barred outright — in the corpus and in an application alike. It is raw ore: its
-numbers are unsourced and forbidden until extracted into a story file, and a recruiter's
-account of the role is a claim by a stranger with an incentive. It can shape what you
-emphasise. It can never become a sentence the user has to defend.
+`_inbox/` is **never evidence for a candidate claim** — in the corpus and in an application
+alike. It may supply attributed employer context and operational fact: what the role is said to
+want, when the interview is, what format it takes. Nothing more. It is raw ore: its numbers are
+unsourced and forbidden until extracted into a story file, and a recruiter's account of the role
+is a claim by a stranger with an incentive, never a verified fact about the company or the user.
+It can shape what you emphasise. It can never become a sentence the user has to defend.
 
 **2. Numbers carry their source and their ceiling.** Render only figures a corpus file
 sources, at the value it sources. If a metric was confirmed as "doubled," never the "tripled"
@@ -143,6 +145,12 @@ and may be confidential. Public bylines (blog co-authors, conference talks) are 
 **5. Attribute their role honestly.** Match the corpus `role:` / `authorship:` exactly. Idea
 + prototype + sponsorship renders as "proposed and prototyped; the team delivered" — never "I
 built." Being one author of five is not sole authorship. Over-claiming is checkable and fatal.
+
+**And don't render hindsight as design intent.** Building something that later became
+infrastructure is not the same claim as having planned it that way, and the corpus rarely says
+the second one. "Noticed their own work was worth generalising" survives the follow-up question;
+"designed a platform" invites one they can't answer. Outcome the user didn't foresee is still
+theirs — credit it as what it was.
 
 **6. Obey recorded rendering decisions.** The corpus stores calls the user has already made —
 which framing to use, what not to cite, wording still pending. Search the relevant files for
