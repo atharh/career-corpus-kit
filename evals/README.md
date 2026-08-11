@@ -25,7 +25,12 @@ a file or skill boundary names the rule by its stable id and its short name —
 "the say-it-out-loud test `[SAY-ALOUD]`" — and a bare `rule N` or `playbook N`
 that leaves its own file *fails*, which is what makes the fragile form
 impossible rather than merely discouraged. Ids are checked for uniqueness
-kit-wide and for resolution. It also checks each numbered list runs `1..N` with
+kit-wide and for resolution, and both bars reach past `skills/` to the two other
+places that cite rules — the docs under `examples/` and these case tables, which
+are the citations furthest from the list they name and so the ones a renumbering
+strands first. Fixture files are exempt from the number bar, since a fictional
+artifact's prose is its own; the `FICTIONAL` banner is the line. It also checks
+each numbered list runs `1..N` with
 no gaps, that every `/career-corpus:<skill>` mentioned exists, that relative
 links resolve, and that the example corpus keeps its `FICTIONAL` banners, its
 `sources:` blocks, and its `related:` targets.

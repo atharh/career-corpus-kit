@@ -296,6 +296,45 @@ def check_playbook_references(r: Report) -> None:
                 )
 
 
+def citing_files_outside_skills() -> list[Path]:
+    """The files outside `skills/` that cite skill rules.
+
+    Two places. `examples/` documents the rules to a reader, and the eval case
+    tables in `evals/cases/` name the rule each assertion is testing. Both cite
+    rules from about as far away as it is possible to get, and neither was
+    scanned until a renumbering made the gap obvious.
+    """
+    return sorted([*(ROOT / "examples").rglob("*.md"), *(ROOT / "evals" / "cases").glob("*.json")])
+
+
+def check_citations_outside_skills(r: Report) -> None:
+    """A numbered citation outside `skills/` is the same fragility, one tree further out.
+
+    `check_rule_references` bars a rule number from leaving the file that numbers
+    it; this applies that bar where the number has left `skills/` entirely.
+    Nothing out here renumbers with the skill, so a stale citation stays green
+    while pointing at whatever rule inherited its number.
+
+    Fixture files are exempt, and the `FICTIONAL` banner is the line: a file under
+    `examples/` that carries one is an invented artifact, and its prose is its own
+    rather than documentation of this kit — a story that mentions rule 4 of some
+    invented policy is not making a claim about `skills/`. `check_example_corpus`
+    requires that banner on every fixture file, so the two checks meet with
+    nothing uncovered between them. Ids are checked everywhere regardless; a
+    citation that resolves cannot go stale.
+    """
+    for path in citing_files_outside_skills():
+        text = path.read_text()
+        if path.suffix == ".md" and FICTIONAL in text:
+            continue
+        hits = [m.group(0) for m in re.finditer(r"\b(rule|playbook) (\d+[a-z]?)\b", text, re.I)]
+        r.check(
+            f"{path.relative_to(ROOT)} — cites rules by id, not by number",
+            not hits,
+            f"found {hits} — cite by id and name instead, `[LIKE-THIS]`; see check_rule_ids",
+        )
+
+
 RULE_ID = re.compile(r"`\[([A-Z][A-Z0-9-]+)\]`")
 
 
@@ -312,6 +351,10 @@ def check_rule_ids(r: Report) -> None:
     loud version of that failure — two rule 6s — is already impossible under
     `check_numbered_lists`, and tagging every rule in the kit would be churn
     for a failure that cannot happen.
+
+    Ids are defined in `skills/` and cited from there and from the files
+    `citing_files_outside_skills` names, which are held to the same bar: an id
+    that stopped existing has to fail wherever it is written down.
     """
     # id -> (path, label). A definition is an id sitting immediately after the
     # closing `**` of a rule's bold heading — not merely on the same line, since
@@ -349,7 +392,7 @@ def check_rule_ids(r: Report) -> None:
         )
 
     # Citations: every other occurrence of an id, anywhere in the kit.
-    for path in sorted((ROOT / "skills").rglob("*.md")):
+    for path in [*sorted((ROOT / "skills").rglob("*.md")), *citing_files_outside_skills()]:
         rel = path.relative_to(ROOT)
         text = path.read_text()
         defined = spans.get(path, [])
@@ -597,6 +640,7 @@ def main() -> int:
     check_no_sublettered_rules(r)
     check_rule_references(r, rules)
     check_playbook_references(r)
+    check_citations_outside_skills(r)
     check_rule_ids(r)
     check_skill_cross_references(r, names)
     check_relative_links(r)

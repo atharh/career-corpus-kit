@@ -122,9 +122,10 @@ unsourced and forbidden until extracted into a story file, and a recruiter's acc
 is a claim by a stranger with an incentive, never a verified fact about the company or the user.
 It can shape what you emphasise. It can never become a sentence the user has to defend.
 
-**2. Numbers carry their source and their ceiling.** Render only figures a corpus file
-sources, at the value it sources. If a metric was confirmed as "doubled," never the "tripled"
-a draft inflated it to. If a file says "do not inflate" or "do not quote a count," obey it.
+**2. Numbers carry their source and their ceiling.** `[NUMBER-CEILING]` Render only figures a
+corpus file sources, at the value it sources. If a metric was confirmed as "doubled," never the
+"tripled" a draft inflated it to. If a file says "do not inflate" or "do not quote a count,"
+obey it.
 
 A number in `facts_disputed` renders at **neither** value. If the user has already settled a
 floor both sources agree on — recorded as a `RENDERING DECISION` — render that. Never pick
@@ -133,18 +134,19 @@ that block exists to take away from you. And note what `facts_vetted` does and d
 it says the user is on record, not that anyone checked. See "What 'vetted' means" in
 `interview`.
 
-**3. Date the vocabulary, not just the facts.** No term that postdates the work. If the corpus
-says they were "doing data modelling in 2014," don't render it as a tool that shipped in 2016.
-Check `anachronisms_corrected` blocks before using any tool or role name.
+**3. Date the vocabulary, not just the facts.** `[DATE-VOCABULARY]` No term that postdates the
+work. If the corpus says they were "doing data modelling in 2014," don't render it as a tool
+that shipped in 2016. Check `anachronisms_corrected` blocks before using any tool or role name.
 
 **4. No names of non-public people. No internal codenames.** Roles, not names ("a senior
 engineer," not the person). Say "the company's service catalog," not the internal project
 codename; "~10 teams," not the internal team names. Internal names mean nothing to a reader
 and may be confidential. Public bylines (blog co-authors, conference talks) are fine.
 
-**5. Attribute their role honestly.** Match the corpus `role:` / `authorship:` exactly. Idea
-+ prototype + sponsorship renders as "proposed and prototyped; the team delivered" — never "I
-built." Being one author of five is not sole authorship. Over-claiming is checkable and fatal.
+**5. Attribute their role honestly.** `[HONEST-ATTRIBUTION]` Match the corpus `role:` /
+`authorship:` exactly. Idea + prototype + sponsorship renders as "proposed and prototyped; the
+team delivered" — never "I built." Being one author of five is not sole authorship.
+Over-claiming is checkable and fatal.
 
 **And don't render hindsight as design intent.** Building something that later became
 infrastructure is not the same claim as having planned it that way, and the corpus rarely says
@@ -152,13 +154,14 @@ the second one. "Noticed their own work was worth generalising" survives the fol
 "designed a platform" invites one they can't answer. Outcome the user didn't foresee is still
 theirs — credit it as what it was.
 
-**6. Obey recorded rendering decisions.** The corpus stores calls the user has already made —
-which framing to use, what not to cite, wording still pending. Search the relevant files for
-`RENDERING DECISION` / `⚠️` notes and honor them. Don't relitigate a settled call.
+**6. Obey recorded rendering decisions.** `[OBEY-DECISIONS]` The corpus stores calls the user
+has already made — which framing to use, what not to cite, wording still pending. Search the
+relevant files for `RENDERING DECISION` / `⚠️` notes and honor them. Don't relitigate a settled
+call.
 
-**7. Prefer the true version.** The accurate version is stronger than the inflated one
-essentially every time. "Built a format others filled, still in use years later" beats "wrote
-50 modules." Reach for precision, not superlatives.
+**7. Prefer the true version.** `[TRUE-VERSION]` The accurate version is stronger than the
+inflated one essentially every time. "Built a format others filled, still in use years later"
+beats "wrote 50 modules." Reach for precision, not superlatives.
 
 **8. Keep provenance in the corpus, not in the prose.** Track "how we know this" in corpus
 frontmatter. The artifact itself gets clean, confident claims — no hedges that leak the

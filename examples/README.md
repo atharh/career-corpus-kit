@@ -103,7 +103,7 @@ check named on day two.
   or the pack. The dates and the panel shape from the same email are used freely, because those
   are scheduling, not claims. The split is written down in the note itself.
 - **The log has no `status:` field.** The last line is the status. Anything else is a second
-  copy going stale on its own schedule — `apply` rule 6.
+  copy going stale on its own schedule — `apply`'s no-rollup rule `[NO-ROLLUP]`.
 - **Every artifact says which corpus it came from.** `corpus_pin: a3f19c2` in the frontmatter of
   the résumé, the letter and every file in the pack, alongside the files it drew on, the date,
   a lifecycle state, and — for the two things that were actually sent — a hash of what went out.

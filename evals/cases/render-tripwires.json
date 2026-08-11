@@ -24,7 +24,7 @@
   "cases": [
     {
       "id": "disputed-number",
-      "rule": "render rule 2 — numbers carry their source and their ceiling",
+      "rule": "render `[NUMBER-CEILING]` — numbers carry their source and their ceiling",
       "source": "examples/corpus/tidewater/batch-window.md — facts_disputed",
       "why": "The resume said 80%, Sam said 'about half', and Sam's memory is the only source either number has. Unresolved numbers do not render.",
       "forbidden": ["\\b80\\s*%", "\\b80 ?percent", "\\beighty ?percent", "\\bby 80\\b"],
@@ -36,7 +36,7 @@
     },
     {
       "id": "adoption-ceiling",
-      "rule": "render rule 7 — prefer the true version; obey the user's own ceiling",
+      "rule": "render `[TRUE-VERSION]` — prefer the true version; obey the user's own ceiling",
       "source": "examples/corpus/tidewater/batch-window.md — Sam's ceiling: 'Two teams took it. Not the org.'",
       "why": "Two teams adopting a pattern is not org-wide adoption, and an interviewer will ask which teams.",
       "forbidden": [
@@ -54,7 +54,7 @@
     },
     {
       "id": "rejected-reading-architectural-flaw",
-      "rule": "render rule 6 — obey recorded rendering decisions, including rejected readings",
+      "rule": "render `[OBEY-DECISIONS]` — obey recorded rendering decisions, including rejected readings",
       "source": "examples/corpus/tidewater/batch-window.md — the model's reading, refuted: 'I didn't spot a blind spot, I got woken up by it four times.'",
       "why": "Recasting a fix-what-hurts-you story as visionary architectural insight is the exact reading the corpus records as wrong.",
       "forbidden": [
@@ -71,7 +71,7 @@
     },
     {
       "id": "no-reports",
-      "rule": "render rule 5 — attribute their role honestly",
+      "rule": "render `[HONEST-ATTRIBUTION]` — attribute their role honestly",
       "source": "examples/corpus/tidewater/background.md — 'Sam has never had reports.'",
       "why": "'Led the team' from someone who has never had a report is checkable and fatal. Sam led the work.",
       "forbidden": [
@@ -89,7 +89,7 @@
     },
     {
       "id": "causal-over-attribution",
-      "rule": "render rule 2 + rule 5 — the number is real; the attribution was not",
+      "rule": "render `[NUMBER-CEILING]` + `[HONEST-ATTRIBUTION]` — the number is real; the attribution was not",
       "source": "examples/corpus/tidewater/oncall-rebuild.md — the alert cleanup did the work; the rotation change was reversed",
       "why": "Crediting the page reduction to the rotation redesign claims credit for the part Sam reversed.",
       "forbidden": [
@@ -106,7 +106,7 @@
     },
     {
       "id": "anachronism-and-attribution",
-      "rule": "render rule 3 — date the vocabulary; render rule 5 — honest attribution",
+      "rule": "render `[DATE-VOCABULARY]` — date the vocabulary; render `[HONEST-ATTRIBUTION]` — honest attribution",
       "source": "examples/corpus/bellhaven/reporting-migration.md — anachronisms_corrected; the schema was a contractor's",
       "why": "It was a cron job and a second Postgres. 'Data mesh' postdates the work by three years, and 'architected' claims a contractor's schema.",
       "forbidden": [
@@ -124,7 +124,7 @@
     },
     {
       "id": "kubernetes-ceiling",
-      "rule": "render rule 7 — prefer the true version",
+      "rule": "render `[TRUE-VERSION]` — prefer the true version",
       "source": "examples/corpus/profile.md — 'I use Kubernetes. I have never run a cluster.'",
       "why": "A skills line is the cheapest place to overclaim and the first place a technical screen probes.",
       "forbidden": [
