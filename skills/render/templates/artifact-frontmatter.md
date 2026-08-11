@@ -24,3 +24,8 @@ file, and it decides what may be done to it (the interview skill's surface-the-c
 `[MARK-DONT-FIX]`): a `submitted` artifact is frozen evidence of what a reader saw, an
 `in-flight` one is re-rendered on request with the diff shown, a `baseline` one is refreshed as
 its own deliberate act.>
+
+<`sha256` identifies the sent bytes; it does not keep them. It settles whether a file still on
+disk is the one that went out, and says nothing at all once that file is gone: rendered `*.pdf`
+and `*.docx` are git-ignored by default, so keeping the bytes themselves is a separate,
+deliberate `git add -f` — the user's privacy call, not this template's.>
