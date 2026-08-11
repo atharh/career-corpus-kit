@@ -99,6 +99,28 @@ rules need no record — they're in the skills. Declines do, and not only to sav
 a rule rejected on purpose leaves no trace, so the next pass reads it again, sees the kit
 disagreeing with the corpus, and quietly reverts a deliberate divergence.
 
+## Consolidate — when a rulebook grows
+
+The skills grow the way scar tissue does: an incident earns a rule, the next incident
+qualifies it, and the qualification lands as a sub-rule beside the rule it qualifies,
+because inserting properly would mean renumbering. That is how one principle ends up
+wearing four numbers — and a model follows a dozen sharp rules better than it follows
+twice that many hedged with counterweights and exceptions. The corpus gets `compact`
+to fight this; the kit gets this section.
+
+Two triggers, one mechanical and one a judgment call:
+
+- **A sub-lettered rule ("11b") never lands.** `evals/static_checks.py` fails on one.
+  The suffix existed to dodge renumbering, and renumbering is now cheap: citations
+  that cross a file boundary go by stable id, and a stale within-file number fails
+  the checks. Either the new rule earns its own number at the right place in the
+  list, or it is a case of an existing rule and belongs inside it.
+- **Patching a rule around its own text is a consolidation pass, not an append.**
+  When a change would add a qualification, a counterweight, or a second
+  justification to a rule that already carries one, restate the rule so it covers
+  the new case — in fewer words than the append would have cost. New rules and
+  wording fixes are exempt; the trigger is a rule being amended for the second time.
+
 ## Versioning
 
 Bump `version` in `.claude-plugin/plugin.json` on every user-visible change —
