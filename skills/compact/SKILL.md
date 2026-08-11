@@ -113,8 +113,10 @@ Work **one file at a time**, and show the user what changed before moving on.
   value — a rendered artifact tidied after the fact stops matching what the employer received.
   If an application's log has grown long, that's history worth keeping; the folder is closed
   when the thread closes, not pruned.
-- **Never compact `LESSONS.md`.** It is append-only by construction and small by design. If it
-  genuinely outgrows itself, that's a conversation with the user, not a sweep.
+- **Never compact `LESSONS.md`.** It is small by design, and an entry that proved wrong is
+  retired where it misfired — struck through and dated, with the user's approval, by the skill
+  that was applying it — never swept here. If it genuinely outgrows itself, that's a
+  conversation with the user, not a sweep.
 - **Never compact `through-lines.md`'s "where it doesn't hold" sections.** A through-line
   without its counter-examples is hagiography — the counter-example *is* the rule.
 - **Never run unsupervised**, in a loop, or across the whole corpus in one pass. This is a

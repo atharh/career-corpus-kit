@@ -17,20 +17,21 @@
     {
       "id": "lessons-personalisation",
       "policy": "How a skill accumulates the user's corrections in corpus/LESSONS.md",
-      "why": "Three skills write to one file in the user's private repo. If they disagree about where lessons live, whether they're append-only, or whether a skill may edit itself, the kit starts rewriting its own prompts in someone's corpus.",
+      "why": "Three skills write to one file in the user's private repo. If they disagree about where lessons live, how a wrong one is retired, or whether a skill may edit itself, the kit starts rewriting its own prompts in someone's corpus. The retirement markup has to be one form: every session parses it, and a form only one skill knows is a live rule everywhere else.",
       "canonical": "render",
       "invariants": [
         "This skill ships generic. It gets sharper by accumulating the user's own corrections in `corpus/LESSONS.md` — in their **private** corpus repo, never in the kit.",
         "**At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an additional rule for this user, on equal footing with the hard rules above.",
-        "append one dated line to `corpus/LESSONS.md`: the mistake, and the rule to apply next time. One line each. Append-only.",
+        "append one dated line to `corpus/LESSONS.md`: the mistake, and the rule to apply next time. One line each. Nothing already in the file is deleted.",
         "**Route it before you write it: would this rule still hold if the corpus were about someone else?**",
         "a rule nobody can diff is a rule nobody can review, port, or undo",
+        "**When a lesson proves wrong, retire it rather than appending its opposite.** Two entries that contradict each other both arrive with equal footing in every later session. Retire in the session where the lesson misfired and only on the user's explicit say-so, by marking the entry in place: `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>`. A struck entry is history and is never applied again.",
         "**Never edit this SKILL.md to record a lesson,** and never write lessons into the kit repo."
       ],
       "required_in": ["apply", "interview", "render"],
       "exempt": {
-        "bootstrap": "Creates LESSONS.md and explains it once; runs before there is anything to correct.",
-        "compact": "Explicitly forbidden from touching LESSONS.md — pruning the scar tissue defeats it.",
+        "bootstrap": "Creates LESSONS.md and explains it once, retirement included; runs before there is anything to correct.",
+        "compact": "Explicitly forbidden from touching LESSONS.md — pruning the scar tissue defeats it, and a wrong entry is retired where it misfired.",
         "prep": "Inherits render's rules by pointer and writes no lessons of its own; the four it does restate are in prep-render-invariants."
       }
     },
@@ -110,6 +111,11 @@
   ],
 
   "superseded": [
+    {
+      "text": "One line each. Append-only.",
+      "why": "Read as a bar on ever marking an entry, which left a lesson that proved wrong with no exit but a contradicting entry beside it — two rules of equal footing in every later session. The file still only grows; a wrong entry is struck in place instead.",
+      "replaced_by": "lessons-personalisation"
+    },
     {
       "text": "Nothing in `applications/` is ever a source for a render",
       "why": "Absolute and wrong. render must read jd.md and fit.md — that handoff is most of what apply exists to produce. The bar is on claims about the candidate, not on reading the folder.",

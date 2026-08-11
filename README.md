@@ -321,7 +321,9 @@ and run by hand before a change to a skill's hard rules. `./evals/run.sh` needs 
 They ship generic, but they sharpen to *you* over time. When you correct one in a way that
 generalises — a wording you won't use, a framing you reject, a repeated mistake — it appends a
 one-line rule to `corpus/LESSONS.md` in your **private** repo and reads it back at the start of
-every session. The method stays public and stable; your scar tissue stays private and personal.
+every session. A rule that turns out wrong is retired, not deleted: with your approval it gets
+struck through with the date and a reason, and stops being applied. The method stays public and
+stable; your scar tissue stays private and personal.
 That feedback loop — mistake → durable rule — is what makes a corpus setup genuinely yours.
 
 ## Honest caveats

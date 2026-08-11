@@ -76,7 +76,10 @@ application with the `apply` skill — don't create it here.
 6. **Create `LESSONS.md`** — an empty file whose header says both what the skills do with it
    and what belongs in it: they append the user's corrections here to personalise over time,
    and a rule that would still hold if the corpus were about someone else is not one of them —
-   that one belongs to the method, and stays out of this file.
+   that one belongs to the method, and stays out of this file. The header also states how a
+   lesson leaves: one that proves wrong is retired on the user's say-so by marking it in place
+   — `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>` — and a struck entry is no
+   longer applied. Nothing in the file is ever deleted.
 7. **Hand off.** Point at the top of the queue: *"Your highest-value story looks like <X>. Run
    `/career-corpus:interview <X>` to start."*
 
