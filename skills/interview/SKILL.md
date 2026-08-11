@@ -31,7 +31,7 @@ haven't heard. Ask the frontier in one round, numbered, then wait; a question wh
 depends on another still open in this round belongs to a *later* round. Each answer reshapes
 the tree, pushing the frontier outward. Recompute, ask again.
 
-**Compose each round from the playbook in [REFERENCE.md](REFERENCE.md)** — eleven techniques
+**Compose each round from the playbook in [REFERENCE.md](REFERENCE.md)** — techniques
 in rank order, the first three doing most of the work. Read it every
 round: the difference between dislodging a memory and collecting a status update is entirely
 in how the questions are built, and none of that is in this file.
