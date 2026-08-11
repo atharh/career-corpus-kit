@@ -266,10 +266,6 @@ added retroactively.
 Ranked. Each was checked against the kit before being listed. Landed ones are struck from this
 list; the numbering is left alone so the release note above still resolves.
 
-3. **A later answer supersedes an earlier one.** Recall improves across a conversation. The new
-   answer wins by default, but record the supersession with both dates rather than overwriting,
-   because the *shape* of the drift is itself evidence. The kit knows supersession only as
-   something `compact` must preserve, never as a capture rule.
 4. **Don't edit existing text to align it with new information when the edit changes meaning.**
    Distinct trigger from surfacing a contradiction between two statements: here you are about to
    rewrite text that already exists, and the reconciled-but-vaguer version deletes true
@@ -299,6 +295,23 @@ the skills, so without this list every pass re-argues it, and the dangerous case
 - **"One structural slot per company for the role itself."** The kit deliberately allows more
   than one: role and scope bullets are structural, don't compete for outcome slots, and a
   promotion or role change inside one company needs a second. The divergence is intentional.
+
+- **A supersession trail — recording the earlier answer when a later one replaces it**
+  (candidate 3, declined 2026-08-12). The proposal was that the new answer wins but both are
+  kept with dates, "because the shape of the drift is itself evidence." **It fails the kit's own
+  leave test.** Drift evidence is calibration about one person — how often their corrections
+  proved right, which numbers they revise downward — and the *Promote* section of `CLAUDE.md`
+  names that shape as the canonical thing not to port. It also earns nothing at the point of
+  use: a render needs the current value, and the superseded one reaches no artifact ever.
+
+  **What was real in it, and shipped instead:** rule 11 could misfire on a self-correction —
+  quoting the user's own revision back at them, or worse, parking a claim they had just settled
+  in `facts_disputed`, where neither value renders. Rule 11 now says a self-correction is not a
+  contradiction, and gives the tell: whether the user marks the change themselves. That is
+  subtractive, needs no storage, and is defensible without knowing whose corpus it came from.
+
+  **Do not re-derive the trail** from `compact` rule 8. That rule preserves a supersession trail
+  *if one exists*; it is not evidence that something should write one.
 
 **Landed, release B — application lifecycle and the `corpus_pin`.** This arrived as a request
 for a per-application manifest and collided with `apply` rule 6, *never store derived state*.
