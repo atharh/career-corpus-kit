@@ -211,20 +211,39 @@ lands only once there are dozens of stories.
 
 ## The examples are all engineering
 
-**Deferred 2026-08-11.** The fixture corpus is two backend companies. The playbook reaches
-for services, incidents, on-call, migrations, PRs and dashboards when it wants a concrete
-example. The plugin keywords say `career`.
+**Deferred 2026-08-11. Still undecided 2026-08-12** — it is a positioning call, not a task, and
+nothing downstream should be planned until it is made.
 
-The method generalises — decisions, opposition, cost, and a number are not engineering
-concepts. The *language* doesn't. Someone in design, sales, research or people management
-reads the examples and correctly concludes this wasn't built for them.
+**The mismatch: the metadata promises a general career tool and the examples deliver a backend
+engineering one.** Plugin keywords are `resume`, `cv`, `cover-letter`, `interview-prep`,
+`job-search`, `career`, `writing`, and the description says "your work history" — nothing names
+a discipline. `examples/` is one invented engineer, two invented backend companies, and an
+application fixture for a staff engineering role.
 
-**Two honest options, and they're different products:** add a second short example corpus in
-another discipline and neutralise the playbook's default vocabulary, or narrow the positioning
-to engineering and stop implying otherwise.
+**The skills themselves are cleaner than this entry first claimed**, and the correction matters
+because it changes the cost of one option. Re-counted 2026-08-12: about a dozen lines across all
+six skills carry engineering vocabulary, and most are illustrative rather than structural — *"a
+dashboard, a postmortem, someone telling them"*, *"a senior engineer on the platform team"*, and
+a list of terms used as anachronism examples. Neutralising that is an afternoon, not a rewrite.
+The concentration is in `examples/`, which is also the first thing a reader opens.
 
-**Why deferred:** a second example corpus is the same fabrication cost as the application
-fixture above, and that one is already blocking evals. Do them in that order.
+The method generalises — decisions, opposition, cost, and a sourced number are not engineering
+concepts. The *examples* don't, and a reader in design, sales, research or people management
+correctly concludes this wasn't built for them before reaching a single rule.
+
+**Two options, and they are different products:**
+
+- **Narrow the positioning.** Say in the README and the plugin description that this is built
+  for technical careers. An afternoon of wording. Honest, and it stops disappointing people who
+  don't fit; the cost is choosing a smaller audience deliberately.
+- **Build one credible second-domain corpus.** One discipline, fabricated to the standard of the
+  existing fixture, plus the vocabulary sweep above. Same fabrication cost as the application
+  fixture. **It has to be convincing or it is worse than the current state** — a thin example in
+  a second discipline reads as a claim the kit can't back. Explicitly *not* a gallery of shallow
+  examples across four fields.
+
+**Why it can't be delegated:** it is a question about who this is for. Both answers are
+defensible on the material, so nothing in the repo decides it.
 
 ---
 
