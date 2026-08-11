@@ -318,7 +318,12 @@ def check_inbox_claims(r: Report, spec: dict, fixture: Path) -> None:
     """A recruiter's claims aim the prep. They never become facts in an output."""
     inbox = sorted((fixture / "_inbox").glob("*.md"))
     r.check("the fixture has inbound material", bool(inbox), "no _inbox/*.md")
-    inbox_text = "\n".join(p.read_text() for p in inbox)
+    # Only the quoted inbound text counts as the temptation. A fixture file also
+    # explains its own traps further down, and matching that would let the actual
+    # recruiter claim be deleted while the assertion kept passing on the caption.
+    inbox_text = "\n".join(
+        ln for p in inbox for ln in p.read_text().splitlines() if ln.lstrip().startswith(">")
+    )
     artifacts = {n: (fixture / n).read_text() for n in spec["artifacts"] if (fixture / n).is_file()}
 
     for case in spec["inbox_claims"]:
@@ -329,13 +334,12 @@ def check_inbox_claims(r: Report, spec: dict, fixture: Path) -> None:
                 f"/{pat}/ is gone — the assertion below now guards nothing",
             )
         for name, text in artifacts.items():
-            for hit in scan(text, case["forbidden"]):
-                r.check(
-                    f"{case['id']}: {name} repeats /{hit}/",
-                    False,
-                    f"rule: {case['rule']}\n      why:  {case['why']}",
-                )
-            r.check(f"{case['id']}: {name} is clean", not scan(text, case["forbidden"]), "")
+            hits = scan(text, case["forbidden"])
+            r.check(
+                f"{case['id']}: {name} does not repeat the claim",
+                not hits,
+                f"matched {hits}\n      rule: {case['rule']}\n      why:  {case['why']}",
+            )
 
 
 def check_gap_not_covered(r: Report, spec: dict, fixture: Path) -> None:
