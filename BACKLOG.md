@@ -64,7 +64,7 @@ If the corpus doctor below gets built, this belongs inside it.
 
 ## Live mode for the application-lane evals
 
-**Deferred 2026-08-11**, when the application fixture and tier 3 shipped. Tier 3 is offline
+**Deferred 2026-08-12**, when the application fixture and tier 3 shipped. Tier 3 is offline
 only, and offline mode has the same limit the trip-wires already admit to: **it pins the
 example, it does not test the skills.** Every tier-3 assertion would still pass if `apply`'s
 inbox rule were deleted tomorrow, because the committed fixture would not change.
@@ -87,7 +87,7 @@ itself rotting, which is the failure that has actually happened in this repo.
 
 ## Artifact lifecycle has no state for a finished thread
 
-**Deferred 2026-08-11**, noticed while writing the fixture. Lifecycle is `baseline` /
+**Deferred 2026-08-12**, noticed while writing the fixture. Lifecycle is `baseline` /
 `in-flight` / `submitted`, which is a statement about *what may be done to the file* — and on
 that reading it is right, and the three states are load-bearing in `interview` rule 11b.
 
@@ -133,9 +133,10 @@ and a flaky judge is worse than no judge — it teaches you to ignore red.
 ## Claim-diffing against a real corpus
 
 **Deferred 2026-08-11.** Was called "tier 3" when it was written; tier 3 is now the application
-fixture, so it is named for what it does instead. The fixture corpus has four stories. A real one has dozens, and
-selection pressure is the thing fixtures can't reproduce: with 30 stories, *which four* a
-render picks is most of the quality, and no assertion in `evals/` looks at that.
+fixture, so it is named for what it does instead. The fixture corpus has four stories. A real
+one has dozens, and selection pressure is the thing fixtures can't reproduce: with 30
+stories, *which four* a render picks is most of the quality, and no assertion in `evals/`
+looks at that.
 
 **Why not just run the evals against the real corpus:** it moves while the skills that write
 to it are under test, so a changed render can't be attributed to the change. And it's private,
@@ -240,7 +241,7 @@ under honest attribution. Candidate 8 turned out to be **already in the kit** �
 failure-mode block ends with *"don't overshoot the other way"* — so it was recorded, not written.
 Candidate 1's `corpus_pin` question stays open and belongs to *Pack staleness detection*.
 
-**Landed 2026-08-11, release B** — the application lane got its templates, a worked fixture and
+**Landed 2026-08-12, release B** — the application lane got its templates, a worked fixture and
 eval cases, and three things parked below landed with them. `apply` rule 6 now names the split
 between a recomputable rollup and an unrecoverable input, and says out loud that
 `application.md` carries no `status:` field and that there is no separate manifest. `fit.md`
@@ -267,13 +268,14 @@ list; the numbering is left alone so the release note above still resolves.
    reviewed, or ported — so never hold one in a model's memory or a session summary. Routing:
    would this rule still apply if the corpus were about someone else? Yes → the method. No →
    the user's own lessons file. The kit says where to append and never says what belongs there.
-**Landed, release B — a fit check distinguishes *absent* from *unwritten* by refusing to.** The
-recurrence-gated version of this (one observed instance, wait for a second) turned out not to be
-needed: the kit-internal argument stands on its own, which is that the kit never takes a call
-that is the user's and *absent* versus *unwritten* is exactly such a call. `fit.md` now records
-`no-corpus-evidence`, never `missing`, and asks. Left here rather than deleted because the
-*gated* version is still sitting in the corpus, and a later pass that reads it without this note
-will re-derive it and wonder why the kit disagrees.
+
+**Landed 2026-08-12, release B — a fit check distinguishes *absent* from *unwritten* by
+refusing to.** The recurrence-gated version of this (one observed instance, wait for a second)
+turned out not to be needed: the kit-internal argument stands on its own, which is that the kit
+never takes a call that is the user's and *absent* versus *unwritten* is exactly such a call.
+`fit.md` now records `no-corpus-evidence`, never `missing`, and asks. Left here rather than
+deleted because the *gated* version is still sitting in the corpus, and a later pass that reads
+it without this note will re-derive it and wonder why the kit disagrees.
 
 **Declined — do not re-propose.** A rule that was considered and rejected leaves no trace in
 the skills, so without this list every pass re-argues it, and the dangerous case is a
