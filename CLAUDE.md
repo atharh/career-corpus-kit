@@ -33,19 +33,40 @@ one-way, it is lossy, and most lessons should never make the trip.
 the kit. That direction is the whole safeguard — see the section above for what happens
 when it reverses.
 
-**Read the lesson log and the corpus repo's own instructions, and nothing else.** Not
-story files, not `applications/`. Those hold the raw personal detail and a promote pass
-has no use for it. This matters more than it looks: the commit stays clean either way,
-but whatever gets read enters the session transcript. **Scoping the read is the privacy
-control, not scoping the write.** A `git log -p` on those two files since the last pass
-is the whole intake.
+**The intake is three files, and nothing else:**
+
+| Read | Yields | Rate |
+|---|---|---|
+| the corpus's **lesson log** | dated, one-lesson-each entries — interview technique, attribution traps, how to ask | high; most entries generalise |
+| the corpus repo's **own instructions** | rules about the repo and its artifacts — lifecycle, commits, manifests | medium, and these are the *design* ports |
+| the corpus's **work backlog** | parked designs written up before they were built, often with their own known weaknesses | low volume, high value — port the design, not the parking |
+
+**Not story files, not `applications/`.** Those hold the raw personal detail and a promote
+pass has no use for it. Per-fact markers in a story file are calls about one person's career;
+read them only if a whole *class* of them implies a mechanism the kit lacks. This matters more
+than it looks: the commit stays clean either way, but whatever gets read enters the session
+transcript. **Scoping the read is the privacy control, not scoping the write.**
 
 Two gates, and a candidate needs both:
 
 - **Recurrence.** One instance is an anecdote. Promote what recurred across different
   material — "third time now", "same family as" — because that is what will recur for a
   stranger.
-- **Generalisation.** The test above: justifiable by reading the kit alone.
+- **Generalisation.** Two questions, at two stages. Of the entry: *would this still be true
+  for someone with a completely different career?* Of the rule you'd write from it: the test
+  above — justifiable by reading the kit alone.
+
+Sorting entries against that first question gives three piles, and **the middle one is the
+biggest**:
+
+- **Port** — the entry names a *tell* and a *move*: an observable signal in how someone
+  talks, and a specific thing to do about it. That has nothing to do with whose corpus it is.
+- **Leave** — the entry is calibration for one person: which numbers they round up, what
+  their files are called, how often their corrections have proved right. That last shape is
+  the trap, because the *rule* is portable while the evidence for it is private, and the kit
+  would get the rule with no evidence at all.
+- **In between, and usually** — a portable rule welded to the instance that proves it. Keep
+  the opening claim and the move; bin the paragraph in the middle.
 
 **Pin a commit, not a date.** Record the corpus sha you reviewed up to, and start the next
 pass from `git log -p <sha>..HEAD -- <intake paths>`. A date can't be diffed and doesn't say
