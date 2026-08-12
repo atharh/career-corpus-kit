@@ -93,8 +93,8 @@ or the person? Then it isn't redacted.
 it replaces. Verification is the usual `./evals/run.sh`, plus a grep of the diff for names
 that shouldn't be in it.
 
-**Record what you declined and why**, in the *Promote passes* section at the bottom of
-`BACKLOG.md`, along with the date of the pass so the next one can scope its diff. Ported
+**Record what you declined and why**, in `PROMOTE.md`, and advance the cursor sha there so
+the next pass can scope its diff. Ported
 rules need no record — they're in the skills. Declines do, and not only to save effort:
 a rule rejected on purpose leaves no trace, so the next pass reads it again, sees the kit
 disagreeing with the corpus, and quietly reverts a deliberate divergence.
