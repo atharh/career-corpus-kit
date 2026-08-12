@@ -179,28 +179,21 @@ weak sections at the top of `interview-prep.md`.
 
 ## Lessons — how this skill personalises to you
 
-This skill ships generic. It gets sharper by accumulating the user's own corrections in
-`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit.
+This skill ships generic and sharpens by accumulating the user's own corrections in
+`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit. Never edit this
+SKILL.md to record a lesson: the method stays stable and shareable; the scar tissue stays
+private and personal.
 
 - **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
   additional rule for this user, on equal footing with the hard rules above.
-- **After the user corrects a pack in a way that generalises** — a framing they reject, a
-  claim they won't make, an answer they'd never give that way — append one dated line to
-  `corpus/LESSONS.md`: the mistake, and the rule to apply next time. One line each. Nothing
-  already in the file is deleted.
-- **Route it before you write it: would this rule still hold if the corpus were about someone
-  else?** If yes, it belongs to the method — say so and leave it, rather than filing a general
-  rule under one person's name. If no, it is this user's, and `corpus/LESSONS.md` is where it
-  goes. Either way it goes in a *file*: a rule kept in a session summary or a model's memory
-  is in neither place, and **a rule nobody can diff is a rule nobody can review, port, or
-  undo.**
-- **When a lesson proves wrong, retire it rather than appending its opposite.** Two entries
-  that contradict each other both arrive with equal footing in every later session. Retire in
-  the session where the lesson misfired and only on the user's explicit say-so, by marking the
-  entry in place: `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>`. A struck entry is
-  history and is never applied again.
-- **Never edit this SKILL.md to record a lesson,** and never write lessons into the kit repo.
-  The method stays stable and shareable; the scar tissue stays private and personal.
+- **After a correction that generalises, append one dated line**: the mistake, and the rule to
+  apply next time. Route it first — a rule that would still hold if the corpus were about
+  someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
+  rule nobody can diff is a rule nobody can review, port, or undo.
+- **Retire a lesson that proves wrong rather than appending its opposite** — in the session
+  where it misfired, only on the user's explicit say-so, by striking it in place:
+  `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>`. A struck entry is history, never
+  applied again; nothing already in the file is deleted.
 
 ## After the interview — this is half the skill
 

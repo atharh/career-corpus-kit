@@ -12,7 +12,6 @@
     "",
     "See evals/README.md for how to add a block."
   ],
-
   "blocks": [
     {
       "id": "lessons-personalisation",
@@ -20,21 +19,24 @@
       "why": "Four skills write to one file in the user's private repo. If they disagree about where lessons live, how a wrong one is retired, or whether a skill may edit itself, the kit starts rewriting its own prompts in someone's corpus. The retirement markup has to be one form: every session parses it, and a form only one skill knows is a live rule everywhere else.",
       "canonical": "render",
       "invariants": [
-        "This skill ships generic. It gets sharper by accumulating the user's own corrections in `corpus/LESSONS.md` — in their **private** corpus repo, never in the kit.",
+        "This skill ships generic and sharpens by accumulating the user's own corrections in `corpus/LESSONS.md` — in their **private** corpus repo, never in the kit.",
+        "Never edit this SKILL.md to record a lesson: the method stays stable and shareable; the scar tissue stays private and personal.",
         "**At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an additional rule for this user, on equal footing with the hard rules above.",
-        "append one dated line to `corpus/LESSONS.md`: the mistake, and the rule to apply next time. One line each. Nothing already in the file is deleted.",
-        "**Route it before you write it: would this rule still hold if the corpus were about someone else?**",
+        "**After a correction that generalises, append one dated line**: the mistake, and the rule to apply next time. Route it first — a rule that would still hold if the corpus were about someone else belongs to the method, not this file.",
         "a rule nobody can diff is a rule nobody can review, port, or undo",
-        "**When a lesson proves wrong, retire it rather than appending its opposite.** Two entries that contradict each other both arrive with equal footing in every later session. Retire in the session where the lesson misfired and only on the user's explicit say-so, by marking the entry in place: `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>`. A struck entry is history and is never applied again.",
-        "**Never edit this SKILL.md to record a lesson,** and never write lessons into the kit repo."
+        "**Retire a lesson that proves wrong rather than appending its opposite** — in the session where it misfired, only on the user's explicit say-so, by striking it in place: `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>`. A struck entry is history, never applied again; nothing already in the file is deleted."
       ],
-      "required_in": ["apply", "interview", "prep", "render"],
+      "required_in": [
+        "apply",
+        "interview",
+        "prep",
+        "render"
+      ],
       "exempt": {
         "bootstrap": "Creates LESSONS.md and explains it once, retirement included; runs before there is anything to correct.",
         "compact": "Explicitly forbidden from touching LESSONS.md — pruning the scar tissue defeats it, and a wrong entry is retired where it misfired."
       }
     },
-
     {
       "id": "inbox-not-evidence",
       "policy": "_inbox/ is a queue of raw material, never a source",
@@ -44,7 +46,10 @@
         "Folder location is a truth claim",
         "never rendered from and never cited as fact"
       ],
-      "required_in": ["apply", "interview"],
+      "required_in": [
+        "apply",
+        "interview"
+      ],
       "exempt": {
         "bootstrap": "Points at the interview skill's rules rather than restating them.",
         "compact": "Never reads _inbox/; it prunes vetted story files.",
@@ -52,7 +57,6 @@
         "render": "States it as the sourcing rule (see candidate-claim-sourcing), not the storage rule."
       }
     },
-
     {
       "id": "no-names-in-filenames",
       "policy": "Private individuals' names stay out of filenames and folder names",
@@ -61,7 +65,10 @@
       "invariants": [
         "Roles in filenames, names in the body if the user wants them. Filenames get screenshotted, screen-shared and tab-completed in front of other people"
       ],
-      "required_in": ["apply", "prep"],
+      "required_in": [
+        "apply",
+        "prep"
+      ],
       "exempt": {
         "bootstrap": "Creates no file named after a person.",
         "compact": "Renames nothing.",
@@ -69,7 +76,6 @@
         "render": "Carries the broader no-names-anywhere rule for artifact prose."
       }
     },
-
     {
       "id": "candidate-claim-sourcing",
       "policy": "A claim about the candidate comes from the vetted corpus and nowhere else",
@@ -78,7 +84,9 @@
       "invariants": [
         "Never source a claim about the candidate from `applications/`"
       ],
-      "required_in": ["apply"],
+      "required_in": [
+        "apply"
+      ],
       "exempt": {
         "bootstrap": "Renders nothing.",
         "compact": "Renders nothing.",
@@ -87,7 +95,6 @@
         "render": "States the same rule as the three source domains — see the superseded list below for the wording it may not go back to."
       }
     },
-
     {
       "id": "prep-render-invariants",
       "policy": "The render rules prep carries as its own execution contract, instead of a mandatory read of render's SKILL.md",
@@ -105,7 +112,10 @@
         "Surface diffs and decisions; never silently apply.",
         "Make it sound like the user, not a model — always, as the last step."
       ],
-      "required_in": ["render", "prep"],
+      "required_in": [
+        "render",
+        "prep"
+      ],
       "exempt": {
         "apply": "Opens the folder and runs the fit check; the artifacts themselves are render's and prep's.",
         "bootstrap": "Renders nothing.",
@@ -114,7 +124,6 @@
       }
     }
   ],
-
   "superseded": [
     {
       "text": "A session gets that rulebook exactly one way",
@@ -136,7 +145,6 @@
       "why": "Describes application.md as storing a stage and a next action, both of which apply's no-rollup rule `[NO-ROLLUP]` forbids: the stage is the last line of the log, and a stored next action is a to-do on its own schedule. This description drifted into three files — apply's own folder tree, render/REFERENCE.md's table, and the README — so the skill contradicted its own rule in the places a reader looks first.",
       "replaced_by": "`[NO-ROLLUP]`, and skills/apply/templates/application.md"
     },
-
     {
       "text": "Never render from `_inbox/`, and never from `applications/`",
       "why": "Same absolute reading, in render's own claim-sourcing rule `[CLAIM-SOURCE]`. It contradicted workflow step 2 four screens below it.",
