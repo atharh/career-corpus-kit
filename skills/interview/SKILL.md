@@ -139,43 +139,37 @@ replace it, name what prompted the change, and let them choose.** Settling it yo
 factual call that was theirs, and a model settles on the vaguer version. Four cases.
 
 **a. Two of their own statements conflict.** Quote both lines back, name the conflict, let them
-reconcile it — the reconciliation is usually more interesting than either version, and
-resolving it yourself risks inventing or destroying fact (the drama bias of `[WORST-READING]` in
-`REFERENCE.md`, in a new place). *But a self-correction is not a conflict, and this case must
-not fire on one.* When the user revises an earlier answer *and says which
-one is right* — *"actually it was four months, not six"* — it is settled; take the new answer.
-Quoting both lines back reads as not listening, and **routing it to `facts_disputed`** — which
-is for claims nobody has resolved — parks a settled number where neither value renders, so
-their better answer becomes unusable. The tell is whether they mark the change themselves.
+reconcile it — the reconciliation is usually more interesting than either version, and resolving
+it yourself risks inventing or destroying fact. *But a self-correction is not a conflict, and
+this case must not fire on one.* When they revise an earlier answer *and say which one is
+right* — *"actually it was four months, not six"* — it is settled; take the new answer. Quoting
+it back reads as not listening, and routing it to `facts_disputed` parks a settled number where
+neither value renders. The tell is whether they mark the change themselves.
 
 **b. The reading is yours, not theirs.** Label it in the file as your inference, dated, to be
 confirmed or rejected before rendering. Record a rejection *and their reasoning*; the
 refutation is often better material than the theory was.
 
-**c. The change invalidates something already rendered** — not two of *their* statements, but
-what they just said against what a résumé or a live application **already claims**. Expensive,
-because a rendered claim is one a reader has already believed. Say it in the same breath —
-*"that contradicts your résumé, which says X"* — and let them decide. **But a correction to the
-corpus does not authorise editing the artifact.** One concern per change:
-
-- **Submitted** — frozen evidence of what a reader saw. Supersede it, never rewrite it.
-- **In-flight** — re-rendered on request, with the diff shown. This is where the damage
-  happens: a session doing corpus work has no business editing a live application.
-- **Baseline** — refreshed as its own deliberate act, in its own commit.
-
-So the session owes the **marker, not the fix**: an unchecked gap in the story file naming the
-artifact and the line, re-render offered separately. Never leave it as *the corpus now knows* —
-a corrected corpus beside an artifact still making the old claim is the worst state available,
-because the corpus looks healthy while the document people read is wrong, and nothing re-reads
-a rendered artifact. And **once per corpus — not once per session — diff the whole résumé
-against the corpus**, asking of each claim what vouches for it *now*.
+**c. The change invalidates something already rendered** — what they just said against what a
+résumé or a live application **already claims**. Expensive, because a rendered claim is one a
+reader has already believed. Say it in the same breath — *"that contradicts your résumé, which
+says X"* — and let them decide; a correction to the corpus never authorises editing the
+artifact. One concern per change: a **submitted** artifact is frozen evidence of what a reader
+saw — supersede it, never rewrite it; an **in-flight** one is re-rendered on request, with the
+diff shown — a session doing corpus work has no business editing a live application; a
+**baseline** is refreshed as its own deliberate act, in its own commit. The session owes the
+**marker, not the fix**: an unchecked gap in the story file naming the artifact and the line,
+re-render offered separately. Never leave it as *the corpus now knows* — a corrected corpus
+beside an artifact still making the old claim looks healthy while the document people read is
+wrong, and nothing re-reads a rendered artifact. And **once per corpus — not once per session —
+diff the whole résumé against the corpus**, asking of each claim what vouches for it *now*.
 
 **d. The change rewrites a line already on disk.** New information usually *adds* rather than
-contradicts, so case (a) never fires and the tidy move is to fold the detail into the sentence
-already written — which is where substance goes quietly missing. **If the proposed line says
-less than the one it replaces, it is not a fix**, and **adding a sentence beside the original
-beats merging both into one**: the detail that looked like clutter answers the third follow-up
-and is not recoverable from the merged version.
+contradicts, and the tidy move — folding the detail into the sentence already written — is where
+substance goes quietly missing. **If the proposed line says less than the one it replaces, it
+is not a fix**, and **adding a sentence beside the original beats merging both into one**: the
+detail that looked like clutter answers the third follow-up and is not recoverable from the
+merged version.
 
 **The trigger is meaning, not keystrokes.** `[MEANING-NOT-KEYSTROKES]` A decision round is owed
 when the edit could change fact, specificity, provenance, emphasis, or a recorded rendering
@@ -208,24 +202,19 @@ all look reasonable written down.
 - **Renders** — it goes in the artifact. Ask it.
 - **Defends** — they'd need it only if an interviewer challenges a claim **already on their
   résumé**. Ask it when the claim is actually there.
-- **Neither** — **don't ask it, and don't write it down.** No gap, no note, nothing.
+- **Neither** — **don't ask it, and don't write it down.** No gap, no note, nothing. This
+  pile is bigger than it looks: headcounts and org charts, how long something took when nobody
+  will ask, arithmetic that changes no claim, the unfinished scene you're curious about because
+  it's a good story. Lookups belong to neither pile — they're yours (see *Facts are your
+  job*), and must never sit in a queue addressed to the user.
 
-*Neither* covers more than you'd think: headcounts and org charts, how long something took
-when nobody will ask, arithmetic that changes no claim, the unfinished scene you're curious
-about because it's a good story. Lookups belong to neither pile — they're yours (see *Facts
-are your job*), and must never sit in a queue addressed to the user.
-
-**The failure is structural, so the fix has to be too.** `[QUEUE-NOT-CATALOGUE]` A gap gets
-logged because a question *exists*, not because an answer would change anything, and once logged
-it gets asked — by you or the next session. So the gap list is not a to-do list of everything
-askable. **It is a queue of answers that would change something.** Prune it under this test, not
-only when it runs long.
-
-**The counterweight, or this rule guts the playbook:** `[DISCOMFORT-RENDERS]` *demand the
-mistake* passes this test easily — "tell me about a time you got it wrong" is asked in nearly
-every interview loop, so a story with no mistake in it has a hole exactly where a question is
-coming. Same for the cost, the opposition, and the person who lost. Those are *renders*: the
-test kills bookkeeping, not discomfort.
+The same test governs the gap list: a gap gets logged because a question *exists*, not because
+an answer would change anything, and once logged it gets asked — by you or the next session. So
+the list is **a queue of answers that would change something**, not a catalogue of everything
+askable; prune it under this test, not only when it runs long. And the test kills bookkeeping,
+not discomfort — *demand the mistake* passes it easily, because "tell me about a time you got
+it wrong" is asked in nearly every interview loop, and so are the cost, the opposition, and the
+person who lost. A story with no mistake in it has a hole exactly where a question is coming.
 
 ## Lessons — how this skill personalises to you
 
