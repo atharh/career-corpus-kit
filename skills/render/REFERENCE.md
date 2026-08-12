@@ -60,8 +60,9 @@ bullets.
 
 ## Cover letter
 
-**Form:** prose, one page. ~350–600 words; one page is a hard ceiling. If a build pipeline
-turns single newlines into breaks, keep signature lines on their own lines.
+**Form:** prose, one page. ~350–600 words; one page is a hard ceiling, and a ceiling is not a
+target — shorter reads stronger. If a build pipeline turns single newlines into breaks, keep
+signature lines on their own lines.
 
 **What the letter is for.** The résumé already carries the evidence; the letter answers three
 questions, in order: who the user is, why they are writing to *this* company, and why they
@@ -73,8 +74,9 @@ this at us, or does everyone get this letter?
   work** — what this employer is buying and why they're it. Not "I've done many things." A
   posting speaks in two registers: what the job is (what gets built, owned, fixed) and how the
   company likes to work (values, culture, method statements). A thesis can come from the JD
-  and still come from the wrong part of it — tailor to the job, and let the second register
-  calibrate tone at most.
+  and still come from the wrong part of it. The test for which register is which: ask what
+  this person will be doing on a Wednesday. Weight the letter there; the second register
+  earns a clause, not a beat.
 - **Don't mirror the posting's structure.** If a reader with the posting open can reconstruct
   which requirement each paragraph is discharging — its lines quoted back at it, paragraph
   weight copied from the posting's emphasis, bridges like "you say X" — the letter reads as a
@@ -95,11 +97,15 @@ this at us, or does everyone get this letter?
   cut Z" is evidence; "owned the platform" is a job description. A decision to kill or
   discard something is often the strongest line in the letter. Attribution rules as
   everywhere: `[HONEST-ATTRIBUTION]`, `[TRUE-VERSION]`.
+- **Don't restate the résumé.** The reader has it. The letter carries what a bullet cannot:
+  why the user did it that way, and what they were thinking at the time. A sentence that
+  would survive unchanged as a résumé bullet is in the wrong document.
 - **Honest framing device or none.** A neat opener that outruns the facts ("done it twice" when
   one instance only half-qualifies) will break under one interview question. Reframe to what's
   defensible word-for-word.
-- **Close briefly.** No throat-clearing, no "I would welcome the opportunity" boilerplate if a
-  plainer line is truer to their voice.
+- **Close briefly, and put the practical facts there.** Location, timezone, availability —
+  the close and nowhere else. No throat-clearing, no "I would welcome the opportunity"
+  boilerplate if a plainer line is truer to their voice.
 
 ---
 
