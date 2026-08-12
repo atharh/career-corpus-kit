@@ -32,6 +32,14 @@ the corpus that suggested it.
   themselves. **Don't re-derive the trail** from `compact`'s keep-list: that rule preserves a
   supersession trail *if one exists*; it is not evidence that anything should write one.
 
+- **The 350–450 word target for cover letters** (declined 2026-08-13). The corpus's "What a
+  cover letter is for" section sets it as "a good target for these" — *these* being one
+  person's letters, which is the tell: it is calibration, not method. The kit keeps the wide
+  form range (~350–600, ceiling not target, shorter reads stronger) and leaves the tighter
+  number where preferences live. The rest of that corpus section ported in the same pass —
+  the Wednesday test, don't-restate-the-résumé, practical facts in the close — so a future
+  pass seeing the kit diverge only on the number is seeing a decision, not an omission.
+
 - **The recurrence-gated version of *absent* vs. *unwritten* is still sitting in the corpus.**
   The kit shipped the ungated version in release B — `fit.md` records `no-corpus-evidence`,
   never `missing`, and asks — because the kit-internal argument stands on its own: the kit
