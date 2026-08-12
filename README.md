@@ -9,7 +9,7 @@ letter paragraph, and a spoken interview answer are the same fact compressed to 
 different lengths. Most people author the compressed bullet and throw away the source — so
 when an interviewer pushes, there's nothing underneath. This kit inverts that. You author your
 career once, at full depth, in Markdown story files. Everything you send is *rendered* from
-that corpus on demand and tailored to the specific role.
+that corpus, tailored to the specific role.
 
 It's also how you stop forgetting your own career. Recall is triggered, not enumerated — you
 remember the thing you did five years ago only when something adjacent jogs it. The interview
@@ -36,8 +36,8 @@ directory wondering where to begin.
 ```
 
 One memory per session, turned into a vetted story file with sources, ceilings and open gaps.
-This is also where a real interview's misses land afterwards, which is the highest-quality
-material the corpus will ever get.
+This is also where a real interview's misses land afterwards — the highest-quality material
+the corpus will ever get.
 
 **3. Work this application** — one role, end to end.
 
@@ -61,12 +61,12 @@ it by hand. Both show you a diff with a reason per change before anything moves.
 
 **You don't have to remember the commands.** Each skill advertises when it applies, so "help me
 capture what happened on the migration project" or "I have a loop next Tuesday" routes to the
-right one. The slash commands are the explicit form, useful when you want to be sure.
+right one. The slash commands are the explicit form, for when you want to be sure.
 
 ## Install
 
-Add the marketplace, then install the plugin from it. You can do both from inside a Claude Code
-session or from your shell — same result, pick whichever you're already sitting in.
+Add the marketplace, then install the plugin from it — from inside a Claude Code session or
+from your shell, same result.
 
 **In Claude Code:**
 
@@ -82,39 +82,10 @@ claude plugin marketplace add atharh/career-corpus-kit
 claude plugin install career-corpus@career-corpus-kit
 ```
 
-That's it — the skills show up as `/career-corpus:bootstrap`, `/career-corpus:interview`,
-`/career-corpus:compact`, `/career-corpus:apply`, `/career-corpus:render`, and
-`/career-corpus:prep`. If the install summary says `Run /reload-plugins to activate.`,
+The skills show up as `/career-corpus:bootstrap`, `/career-corpus:interview`,
+`/career-corpus:apply`, `/career-corpus:render`, `/career-corpus:prep`, and
+`/career-corpus:compact`. If the install summary says `Run /reload-plugins to activate.`,
 run that.
-
-## Update
-
-Two steps, and the second is the one that moves you to the new version. The marketplace is a
-git clone of this repo; refreshing it pulls new commits, and updating the plugin then installs
-from the refreshed clone.
-
-**In Claude Code:**
-
-```
-/plugin marketplace update career-corpus-kit
-```
-
-Then open `/plugin`, select `career-corpus`, and choose **Update now**. (There's no
-`/plugin update` slash command — the manager UI is the in-session path. Re-running
-`/plugin install` won't do it; it's a no-op when the plugin is already installed.)
-
-**From the shell:**
-
-```bash
-claude plugin marketplace update career-corpus-kit
-claude plugin update career-corpus@career-corpus-kit
-```
-
-Restart Claude Code — or run `/reload-plugins` — to load the new version.
-
-To see what you're on, run `claude plugin list`, or open `/plugin` in a session. Installed
-versions live in `~/.claude/plugins/cache/career-corpus-kit/career-corpus/<version>/`, so an
-old directory sticking around after an update is normal.
 
 <details>
 <summary>Or: install from a clone, without the marketplace</summary>
@@ -140,52 +111,51 @@ To scope it to one project instead, symlink the repo into that project's
 `.claude/skills/career-corpus` and start Claude Code from the repo root.
 </details>
 
-## Quick start
+## Set up your corpus
 
-1. **Make a private repo for your corpus.** It will contain real details about you and, in
-   roles-only form, about people you've worked with. Keep it private, permanently.
-   ```bash
-   mkdir my-career && cd my-career && git init
-   mkdir corpus
-   ```
-   Private stops other *people* reading it. It doesn't mean the text stays on your machine —
-   a hosted model reads these files, which is how the kit works at all. [PRIVACY.md](PRIVACY.md)
-   covers what that means and what doesn't belong in a corpus.
-2. **Bootstrap from your résumé.** In Claude Code, from that repo:
-   ```
-   /career-corpus:bootstrap
-   ```
-   Paste in your résumé (and anything else you have). It writes a `.gitignore` first — every
-   `_inbox/` stays out of git, because raw recruiter mail and take-home briefs are the one
-   thing you don't want in history forever — then sets up the corpus, writes `profile.md`, and
-   hands you a ranked queue of the stories worth extracting first.
-3. **Fill it, one story at a time.**
-   ```
-   /career-corpus:interview the hardest project I led at <company>
-   ```
-   Answer the questions. It writes a story file under `corpus/<company>/`, marks every open
-   thread as a gap, and stops when you're out of energy. Come back and do another whenever a
-   memory surfaces. Depth accretes.
-4. **Open the application when you find a role.**
-   ```
-   /career-corpus:apply <paste the posting, or its URL>
-   ```
-   Creates `applications/<company>-<role>/`, saves the posting before it disappears, and tells
-   you what your corpus can and can't back for this role — while there's still time to do
-   something about it.
-5. **Render what you're sending.**
-   ```
-   /career-corpus:render tailor a résumé and cover letter for this application
-   ```
-   It reads the JD from the folder and writes back into it. Without a JD at all, it produces a
-   strong *baseline* you maintain as a checkpoint.
-6. **Prep when they call you back.**
-   ```
-   /career-corpus:prep loop booked — here are the dates and the recruiter's note
-   ```
-   Builds a study pack for that specific interview, using what's already in the folder. Run it
-   again the same day afterwards — what you fumbled goes back into the corpus, and it's better
-   material than any question a model would have invented.
+Your corpus lives in its own repo. Make it private, permanently — it will contain real details
+about you and, in roles-only form, about people you've worked with.
+
+```bash
+mkdir my-career && cd my-career && git init
+```
+
+Private stops other *people* reading it. It doesn't mean the text stays on your machine — a
+hosted model reads these files, which is how the kit works at all. [PRIVACY.md](PRIVACY.md)
+covers what that means and what doesn't belong in a corpus.
+
+From that repo, run `/career-corpus:bootstrap` and follow its handoff. It writes a
+`.gitignore` before anything else — every `_inbox/` stays out of git, because raw recruiter
+mail and take-home briefs are the one thing you don't want in history forever. Everything
+after that is one of the four intentions above.
+
+## Updating later
+
+The marketplace is a git clone of this repo: refreshing it pulls new commits, and updating the
+plugin then installs from the refreshed clone. Both steps are needed — the second is the one
+that moves you to the new version.
+
+**In Claude Code:**
+
+```
+/plugin marketplace update career-corpus-kit
+```
+
+Then open `/plugin`, select `career-corpus`, and choose **Update now**. (There's no `/plugin
+update` slash command, and re-running `/plugin install` is a no-op while the plugin is
+already installed.)
+
+**From the shell:**
+
+```bash
+claude plugin marketplace update career-corpus-kit
+claude plugin update career-corpus@career-corpus-kit
+```
+
+Restart Claude Code — or run `/reload-plugins` — to load the new version. `claude plugin list`
+shows what you're on. Installed versions live in
+`~/.claude/plugins/cache/career-corpus-kit/career-corpus/<version>/`, so an old directory
+sticking around after an update is normal.
 
 ## Beyond the résumé
 
@@ -209,8 +179,7 @@ most obvious thing to render from it. Each of these is just a prompt:
   `/career-corpus:prep that interview is done — here's what they actually asked and where I fumbled`
 
 The last one is worth doing even when you don't get the job. A question you couldn't answer is
-the most precisely targeted gap you'll ever be handed — better than anything a model would
-have guessed, because a real interviewer found it.
+the most precisely targeted gap you'll ever be handed — a real interviewer found it for you.
 
 ## Reference: the six skills, in two lanes
 
@@ -258,9 +227,9 @@ to no application, so no folder gets opened for them.
 ## See one before you build one
 
 **[`examples/`](examples/)** holds a complete fictional corpus — one invented engineer, two
-invented companies, three stories — and the résumé and cover letter rendered from it. Alongside
-it, one whole fictional application: the posting, the fit check, the recruiter's email, the
-tailored artifacts, the interview pack and the rejection.
+invented companies, three stories — with the résumé and cover letter rendered from it, and one
+whole fictional application: the posting, the fit check, the recruiter's email, the tailored
+artifacts, the interview pack and the rejection.
 
 It's deliberately mid-flight rather than polished, because that's the state a real corpus is in
 almost always: open gaps, one number the corpus refuses to resolve on the user's behalf, a
@@ -268,7 +237,7 @@ through-line the user withdrew, and a theory the model got wrong and had to reco
 error.
 
 If you read one file, read **[`examples/rendered/ANNOTATED.md`](examples/rendered/ANNOTATED.md)**.
-It puts seven lines the model wanted to write next to what actually shipped, and names the
+It puts the lines the model wanted to write next to what actually shipped, and names the
 corpus rule that stopped each one:
 
 | The tempting version | What shipped |
@@ -306,15 +275,14 @@ learned by getting it wrong, that keep every rendered line defensible in the roo
 - **Nothing is applied silently.** You see a diff with a reason per change, and every genuine
   judgment call is surfaced as yours to make.
 
-Those rules are written down *and* checked. [`evals/`](evals/) turns the seven rejected claims in
+Those rules are written down *and* checked. [`evals/`](evals/) turns the rejected claims in
 `ANNOTATED.md` into assertions — a disputed number, a ceiling, a reading the user refuted, an
 attribution they have no standing for — and runs them against the committed example output on
-every push, alongside static checks on the skills themselves. Be precise about what that covers:
-CI checks repository policy and the shipped artifacts, which catches the examples drifting into a
-claim their own corpus forbids. It does not exercise the skills. A live mode does — it renders
-fresh from the fixture corpus with a real session — but renders are stochastic, so it is opt-in
-and run by hand before a change to a skill's hard rules. `./evals/run.sh` needs nothing but
-`python3`.
+every push, alongside static checks on the skills themselves. CI covers repository policy and
+the shipped artifacts, so it catches an example drifting into a claim its own corpus forbids;
+it does not exercise the skills. A live mode does — it renders fresh from the fixture corpus
+in a real session — and because renders are stochastic it's opt-in, run by hand before a
+change to a skill's hard rules. `./evals/run.sh` needs nothing but `python3`.
 
 ## The skills learn your preferences
 
@@ -323,17 +291,17 @@ generalises — a wording you won't use, a framing you reject, a repeated mistak
 one-line rule to `corpus/LESSONS.md` in your **private** repo and reads it back at the start of
 every session. A rule that turns out wrong is retired, not deleted: with your approval it gets
 struck through with the date and a reason, and stops being applied. The method stays public and
-stable; your scar tissue stays private and personal.
-That feedback loop — mistake → durable rule — is what makes a corpus setup genuinely yours.
+stable; your scar tissue stays private and personal. That feedback loop — mistake → durable
+rule — is what makes a corpus setup genuinely yours.
 
 ## Honest caveats
 
 - **The tailoring step is the least-tested part.** Selecting and angling stories from a real
   job description is the newest capability here; treat early tailored drafts as strong first
-  drafts and review the diff, don't trust the selection blindly.
+  drafts and review the diff rather than trusting the selection blindly.
 - **It's only as good as your corpus.** The skills can't invent depth. The work is sitting for
-  the interviews. That work is also the entire point — it's what nobody else will do, and it's
-  why the output isn't generic.
+  the interviews — which is also the entire point: it's what nobody else will do, and it's why
+  the output isn't generic.
 
 ## A note on where this came from
 
