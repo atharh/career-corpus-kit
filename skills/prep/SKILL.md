@@ -9,26 +9,41 @@ description: Build an interview prep pack for one scheduled interview — an ope
 scheduled interview, and then captures what happened afterwards.
 
 It is the corpus pointed at a room you're about to walk into. Everything it writes is a
-rendering, so **`render`'s full rulebook governs every file in the pack** — dated vocabulary,
-honest attribution, preferring the true version, obeying settled calls, sounding like the user
-as the last step, showing a diff before applying. A session gets that rulebook exactly one way:
-by reading [`../render/SKILL.md`](../render/SKILL.md), which is the first step of the pack below
-and is not optional.
+rendering, and the rules that make a rendering defensible are stated here, in the contract
+below. A skill loads its own `SKILL.md` and nothing else, so a rule held only behind a pointer
+holds only as well as the pointer gets followed — the contract is copied from `render` in
+render's own words, and a drift check holds every copied sentence to the original.
+[`../render/SKILL.md`](../render/SKILL.md) stays the canonical statement, alongside the
+machinery a pack has no use for — baseline upkeep, résumé selection, cover-letter shape, PDF
+output. Consult it when producing something to **send**; building a pack does not require the
+read.
 
-Four of those rules are restated here, in render's own words. A skill loads its own `SKILL.md`
-and nothing else, so a rule held only behind a pointer holds only as well as the pointer gets
-followed. These four are the ones a prep pack most often fails on, so they are copied down —
-they bind even if that read gets skipped, and the rest of the rulebook is why the read is a
-step and not a suggestion:
+## The rendering contract
 
 - **Every claim about the candidate comes from the vetted corpus, and from nothing else.**
-  `_inbox/` is not the corpus, and that matters more here than anywhere — see below.
-- **Numbers carry their source and their ceiling.** A figure in `facts_disputed` is spoken at
-  neither value.
-- **No names of non-public people. No internal codenames.** In the pack's prose, not only its
-  filenames.
-- **Obey recorded rendering decisions.** A call the user has already settled doesn't reopen
-  because a room might reward the other version.
+  (`[CLAIM-SOURCE]`) `_inbox/` is not the corpus, and that matters more here than anywhere —
+  see below.
+- **Numbers carry their source and their ceiling.** (`[NUMBER-CEILING]`) A figure in
+  `facts_disputed` is spoken at neither value.
+- **Date the vocabulary, not just the facts.** (`[DATE-VOCABULARY]`) No term that postdates
+  the work. Check `anachronisms_corrected` blocks before using any tool or role name.
+- **Attribute their role honestly.** (`[HONEST-ATTRIBUTION]`) Match the corpus `role:` /
+  `authorship:` exactly. And don't render hindsight as design intent. (`[NOT-HINDSIGHT]`)
+- **Prefer the true version.** (`[TRUE-VERSION]`) The accurate version is stronger than the
+  inflated one essentially every time — and it is the one the user can defend at depth three.
+- **No names of non-public people. No internal codenames.** (`[NO-NAMES-CODENAMES]`) In the
+  pack's prose, not only its filenames.
+- **Obey recorded rendering decisions.** (`[OBEY-DECISIONS]`) A call the user has already
+  settled doesn't reopen because a room might reward the other version.
+- **Surface diffs and decisions; never silently apply.** (`[SHOW-THE-DIFF]`) Genuine choices
+  are the user's call, not yours.
+- **Make it sound like the user, not a model — always, as the last step.** (`[THEIR-VOICE]`)
+  Pull their recorded voice from the corpus first; a humanizing pass finishes, it doesn't
+  invent.
+
+One render rule is left out on purpose: `[PROVENANCE-NOT-PROSE]` keeps hedges out of artifacts
+you send, but a pack is study material and *should* show its seams — `[NAME-THE-WEAK]` below
+depends on it.
 
 ## When this fires, and what it needs
 
@@ -63,10 +78,8 @@ and tab-completed in front of other people.
 
 ## The pack
 
-**Step one, before any file below exists: read [`../render/SKILL.md`](../render/SKILL.md) in
-full.** Every file in the pack is a rendering, and render's hard rules are what make one
-defensible in the room. The four restated at the top of this file are the common failures, not
-the rulebook. Do this once per session, before writing the first pack file.
+Every file below is a rendering, bound by the contract at the top of this file — that is what
+makes it defensible in the room.
 
 The pack goes in the application's own directory, `applications/<company>-<role>/`, alongside
 the JD and the rendered artifacts — the same folder `apply` opened and `render` wrote into.
@@ -163,6 +176,31 @@ loop.
 **Say what you don't have.** `[NAME-THE-WEAK]` A pack that reads as though the candidate is
 strong on everything is a pack that hasn't been read against the criteria properly. Name the
 weak sections at the top of `interview-prep.md`.
+
+## Lessons — how this skill personalises to you
+
+This skill ships generic. It gets sharper by accumulating the user's own corrections in
+`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit.
+
+- **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
+  additional rule for this user, on equal footing with the hard rules above.
+- **After the user corrects a pack in a way that generalises** — a framing they reject, a
+  claim they won't make, an answer they'd never give that way — append one dated line to
+  `corpus/LESSONS.md`: the mistake, and the rule to apply next time. One line each. Nothing
+  already in the file is deleted.
+- **Route it before you write it: would this rule still hold if the corpus were about someone
+  else?** If yes, it belongs to the method — say so and leave it, rather than filing a general
+  rule under one person's name. If no, it is this user's, and `corpus/LESSONS.md` is where it
+  goes. Either way it goes in a *file*: a rule kept in a session summary or a model's memory
+  is in neither place, and **a rule nobody can diff is a rule nobody can review, port, or
+  undo.**
+- **When a lesson proves wrong, retire it rather than appending its opposite.** Two entries
+  that contradict each other both arrive with equal footing in every later session. Retire in
+  the session where the lesson misfired and only on the user's explicit say-so, by marking the
+  entry in place: `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>`. A struck entry is
+  history and is never applied again.
+- **Never edit this SKILL.md to record a lesson,** and never write lessons into the kit repo.
+  The method stays stable and shareable; the scar tissue stays private and personal.
 
 ## After the interview — this is half the skill
 
