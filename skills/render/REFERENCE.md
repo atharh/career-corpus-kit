@@ -16,7 +16,7 @@ already there before asking for anything:
 |---|---|---|
 | `jd.md` | `apply` | The posting verbatim, with URL and capture date. Read it; don't ask for the JD again. |
 | `fit.md` | `apply` | What the corpus backs, backs thinly, and can't back for this role. Most of the selection work. |
-| `application.md` | `apply` | Dated, append-only event log, and contacts by role. Its last line is the stage; there is no `status:` field to read. |
+| `application.md` | `apply` | The thread's event log and contacts, in the format `apply` owns. Read it for where the thread stands. |
 | `_inbox/` | `apply` | Raw inbound. **Unvetted. Never evidence for a candidate claim** — attributed employer context and operational fact only. |
 | `interview-prep.md`, `01-…`–`05-…` | `prep` | The study pack for a booked interview. Not this skill's output. |
 
