@@ -223,9 +223,12 @@ private and personal.
 
 1. **Decide the tier.** JD in hand → tailored (write to `applications/<company>-<role>/`). No
    JD → baseline (update the canonical repo file). Say which you're doing.
-2. **If tailored, find the application folder.** If it exists, read `jd.md` and `fit.md` from
-   it; if it doesn't, offer `/career-corpus:apply` first. Then read the JD and name what the
-   role actually rewards, in one or two lines — that's the thesis.
+2. **If tailored, find the application folder.** With more than one live application and none
+   named — by the user or by the session's own context — list them and ask; never guess,
+   because a render against the wrong JD looks exactly like a correct one. If the folder
+   exists, read `jd.md` and `fit.md` from it; if it doesn't, offer `/career-corpus:apply`
+   first. Then read the JD and name what the role actually rewards, in one or two lines —
+   that's the thesis.
 3. **Read the corpus** — `through-lines.md`, the relevant `background.md` and story files, and
    any `RENDERING DECISION` notes. For a tailored render, also read the closest baseline as a
    voice reference (but source facts from the corpus, not from it).
