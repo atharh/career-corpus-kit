@@ -25,6 +25,10 @@ file, and it decides what may be done to it (the interview skill's surface-the-c
 `in-flight` one is re-rendered on request with the diff shown, a `baseline` one is refreshed as
 its own deliberate act.>
 
+<This block is repository-only, because raw Markdown is not a sending format: what goes out is
+a PDF, a DOCX, or body text pasted into a form — never this file itself. When handing over
+paste-ready text, hand over the body alone; the block above never reaches a reader.>
+
 <`sha256` identifies the sent bytes; it does not keep them. It settles whether a file still on
 disk is the one that went out, and says nothing at all once that file is gone: rendered `*.pdf`
 and `*.docx` are git-ignored by default, so keeping the bytes themselves is a separate,

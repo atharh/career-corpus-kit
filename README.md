@@ -224,6 +224,10 @@ cheaper thing to find out now than in the room.
 `render` also works outside a lane — baselines, self-reviews, promo packets, bios. Those belong
 to no application, so no folder gets opened for them.
 
+The `.md` files are the repository copies, and raw Markdown is not a sending format. What goes
+out is a PDF, a DOCX, or the body pasted into a form — so the provenance frontmatter every
+rendered artifact opens with never reaches an employer.
+
 ## See one before you build one
 
 **[`examples/`](examples/)** holds a complete fictional corpus — one invented engineer, two
