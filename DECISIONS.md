@@ -102,3 +102,15 @@ in it cannot demonstrate the rule that unvetted material is never evidence. A do
 
 **Reopens on:** corpora with dozens of stories, where "what should I work on?" stops being
 answerable by reading `QUEUE.md`.
+
+---
+
+## Raw Markdown is not a sendable artifact
+
+**Settled 2026-08-12.** Rendered artifacts carry provenance and lifecycle frontmatter — right
+for the repository copy, wrong for an employer's eyes. The sending paths are PDF, DOCX, or
+body text pasted into a form; the artifact-frontmatter template and the README both say so,
+and a paste hands over the body alone. No export pipeline gets built for this — stripping a
+frontmatter block is not a feature.
+
+**Reopens on:** a real sending path that consumes the Markdown file itself.
