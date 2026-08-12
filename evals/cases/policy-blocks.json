@@ -17,7 +17,7 @@
     {
       "id": "lessons-personalisation",
       "policy": "How a skill accumulates the user's corrections in corpus/LESSONS.md",
-      "why": "Three skills write to one file in the user's private repo. If they disagree about where lessons live, how a wrong one is retired, or whether a skill may edit itself, the kit starts rewriting its own prompts in someone's corpus. The retirement markup has to be one form: every session parses it, and a form only one skill knows is a live rule everywhere else.",
+      "why": "Four skills write to one file in the user's private repo. If they disagree about where lessons live, how a wrong one is retired, or whether a skill may edit itself, the kit starts rewriting its own prompts in someone's corpus. The retirement markup has to be one form: every session parses it, and a form only one skill knows is a live rule everywhere else.",
       "canonical": "render",
       "invariants": [
         "This skill ships generic. It gets sharper by accumulating the user's own corrections in `corpus/LESSONS.md` — in their **private** corpus repo, never in the kit.",
@@ -28,11 +28,10 @@
         "**When a lesson proves wrong, retire it rather than appending its opposite.** Two entries that contradict each other both arrive with equal footing in every later session. Retire in the session where the lesson misfired and only on the user's explicit say-so, by marking the entry in place: `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>`. A struck entry is history and is never applied again.",
         "**Never edit this SKILL.md to record a lesson,** and never write lessons into the kit repo."
       ],
-      "required_in": ["apply", "interview", "render"],
+      "required_in": ["apply", "interview", "prep", "render"],
       "exempt": {
         "bootstrap": "Creates LESSONS.md and explains it once, retirement included; runs before there is anything to correct.",
-        "compact": "Explicitly forbidden from touching LESSONS.md — pruning the scar tissue defeats it, and a wrong entry is retired where it misfired.",
-        "prep": "Sends the session to read render's SKILL.md for the rulebook and writes no lessons of its own; the four rules it restates are in prep-render-invariants."
+        "compact": "Explicitly forbidden from touching LESSONS.md — pruning the scar tissue defeats it, and a wrong entry is retired where it misfired."
       }
     },
 
@@ -91,14 +90,20 @@
 
     {
       "id": "prep-render-invariants",
-      "policy": "The four render rules prep restates rather than leaving to its read of render's SKILL.md",
-      "why": "render's whole rulebook governs a prep pack, and sibling skill loading is not guaranteed — a skill loads its own SKILL.md and nothing else — so prep carries that inheritance as an explicit step: read render's SKILL.md before writing any pack file. These four are copied on top of the step because they are the ones a prep pack fails on. A copy still binds if the read gets skipped, and it is what makes them checkable here.",
+      "policy": "The render rules prep carries as its own execution contract, instead of a mandatory read of render's SKILL.md",
+      "why": "Every pack file is a rendering, and sibling skill loading is not guaranteed — a skill loads its own SKILL.md and nothing else. prep used to inherit render's rulebook by mandating a full read of render's SKILL.md, which loaded baseline upkeep, résumé selection and PDF handling into every prep session to get a handful of rules. Now prep states the rules that govern a pack itself, in render's own words, and this block is what stops the copies drifting. render stays canonical; deleting or rewording either side fails here.",
       "canonical": "render",
       "invariants": [
         "Every claim about the candidate comes from the vetted corpus, and from nothing else.",
         "Numbers carry their source and their ceiling.",
+        "Date the vocabulary, not just the facts.",
+        "Attribute their role honestly.",
+        "And don't render hindsight as design intent.",
+        "Prefer the true version.",
         "No names of non-public people. No internal codenames.",
-        "Obey recorded rendering decisions."
+        "Obey recorded rendering decisions.",
+        "Surface diffs and decisions; never silently apply.",
+        "Make it sound like the user, not a model — always, as the last step."
       ],
       "required_in": ["render", "prep"],
       "exempt": {
@@ -111,6 +116,11 @@
   ],
 
   "superseded": [
+    {
+      "text": "A session gets that rulebook exactly one way",
+      "why": "The mandatory full read of render's SKILL.md loaded render's whole rulebook into every prep session to inherit a small contract. Replaced by prep's own drift-guarded copy of the rules that govern a pack.",
+      "replaced_by": "prep-render-invariants"
+    },
     {
       "text": "One line each. Append-only.",
       "why": "Read as a bar on ever marking an entry, which left a lesson that proved wrong with no exit but a contradicting entry beside it — two rules of equal footing in every later session. The file still only grows; a wrong entry is struck in place instead.",
