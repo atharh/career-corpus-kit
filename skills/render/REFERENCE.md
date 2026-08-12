@@ -63,13 +63,38 @@ bullets.
 **Form:** prose, one page. ~350–600 words; one page is a hard ceiling. If a build pipeline
 turns single newlines into breaks, keep signature lines on their own lines.
 
+**What the letter is for.** The résumé already carries the evidence; the letter answers three
+questions, in order: who the user is, why they are writing to *this* company, and why they
+would be good at *this* work. A hiring manager skims it asking one thing — did a person aim
+this at us, or does everyone get this letter?
+
 **Rules of the form:**
-- **One thesis, stated in the opening**, drawn from the JD — what this employer is buying and
-  why they're it. Not "I've done many things."
+- **One thesis, stated in the opening, taken from the part of the posting that describes the
+  work** — what this employer is buying and why they're it. Not "I've done many things." A
+  posting speaks in two registers: what the job is (what gets built, owned, fixed) and how the
+  company likes to work (values, culture, method statements). A thesis can come from the JD
+  and still come from the wrong part of it — tailor to the job, and let the second register
+  calibrate tone at most.
+- **Don't mirror the posting's structure.** If a reader with the posting open can reconstruct
+  which requirement each paragraph is discharging — its lines quoted back at it, paragraph
+  weight copied from the posting's emphasis, bridges like "you say X" — the letter reads as a
+  requirements response, which is the shape of template spam. The JD decides which stories
+  appear and which face they wear; the letter's structure is the user's own.
+- **The why-them paragraph must be true of the user and not of the next applicant.** That is
+  the test it has to pass. Admiration anyone could type — impressive product, resonant
+  mission — reads as sent-to-everyone. The corpus earns this paragraph with real contact
+  (the product used, the domain worked in, the problem hit first-hand) or it stays short.
 - **2–4 beats, each a concrete moment, not a claim.** A specific scene ("you can't
   un-summarise a monthly total back into rows") beats "I solve messy real-world problems."
   Show, don't assert — the corpus has the scenes; use them.
-- **Order by relevance, not time.** Lead with the beat that most directly answers the role.
+- **Lead with the beat that is the job, and weight the rest by honest relevance.** Not
+  chronology. The story matching what the role actually is opens the case; a marginal match
+  survives as a clause, not a paragraph — a beat inflated past its relevance is the
+  letter-level version of an unsourced number.
+- **Write beats as the calls the user made, not the scope they held.** "Chose X over Y,
+  cut Z" is evidence; "owned the platform" is a job description. A decision to kill or
+  discard something is often the strongest line in the letter. Attribution rules as
+  everywhere: `[HONEST-ATTRIBUTION]`, `[TRUE-VERSION]`.
 - **Honest framing device or none.** A neat opener that outruns the facts ("done it twice" when
   one instance only half-qualifies) will break under one interview question. Reframe to what's
   defensible word-for-word.
