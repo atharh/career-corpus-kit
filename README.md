@@ -228,6 +228,14 @@ The `.md` files are the repository copies, and raw Markdown is not a sending for
 out is a PDF, a DOCX, or the body pasted into a form — so the provenance frontmatter every
 rendered artifact opens with never reaches an employer.
 
+**The kit writes the Markdown and stops there.** Converting it is yours to choose, because a
+stylesheet is a design opinion and this kit doesn't hold one. `pandoc resume.md -o resume.docx`
+is the shortest path, needs nothing else installed, and drops the frontmatter on the way out —
+pandoc reads it as metadata rather than text, so the provenance block can't leak through any
+pandoc-based conversion. For a PDF without a heavier toolchain, `pandoc resume.md -o resume.pdf
+--pdf-engine=typst` needs one extra binary instead of a TeX install. And if your corpus repo
+already has a build pipeline, `render` uses it and re-checks the page count.
+
 ## See one before you build one
 
 **[`examples/`](examples/)** holds a complete fictional corpus — one invented engineer, two

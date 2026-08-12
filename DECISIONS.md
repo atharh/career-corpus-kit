@@ -113,4 +113,15 @@ body text pasted into a form; the artifact-frontmatter template and the README b
 and a paste hands over the body alone. No export pipeline gets built for this — stripping a
 frontmatter block is not a feature.
 
+**Conversion is the user's, and the reason is not portability.** A résumé stylesheet is a
+design opinion — fonts, margins, how a section rule looks — and the kit already refuses this
+class of call in `[LENGTH-IS-THEIRS]`: a preference invented here is imposed on every user.
+Shipping a converter means shipping a look. The README names `pandoc` as the shortest path
+without shipping one, and `render` uses a pipeline that already exists in the user's repo.
+
+**One mechanism worth not re-testing:** pandoc parses YAML frontmatter as a metadata block and,
+absent `--standalone`, drops it — verified against both HTML-fragment and DOCX output. Any
+pandoc-based conversion enforces the repository-only rule for free, so the instruction and the
+tooling agree rather than the rule resting on someone remembering it.
+
 **Reopens on:** a real sending path that consumes the Markdown file itself.
