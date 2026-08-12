@@ -57,7 +57,10 @@ doesn't have:
 - **The loop structure and the date.** How many rounds, with whom, over what period. The pack
   is a study plan as well as a document, and a plan needs a clock.
 
-**Read `applications/<company>-<role>/` before you ask for any of it.** The `apply` skill
+**Read `applications/<company>-<role>/` before you ask for any of it.** Use the application
+the user named or the session has already established; with more than one live application and
+neither, list them and ask — never guess, because a pack built against the wrong loop looks
+exactly like a correct one. The `apply` skill
 opened that folder and most of this is already sitting in it — `jd.md` is the posting
 verbatim, `_inbox/` holds the recruiter's mail and the scheduling note, `fit.md` already names
 what the corpus can't back for this role (which is a ready-made probe list, see `04` below),
