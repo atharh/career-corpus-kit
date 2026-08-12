@@ -1,6 +1,6 @@
 ---
 name: interview
-description: Interview the user to turn a career memory into a vetted story file in their career corpus. Use when they want to add to the corpus, decompress a résumé bullet, capture a story that just surfaced, prepare for an interview, or when a job description needs evidence the corpus doesn't have yet.
+description: Interview the user to turn a career memory into a vetted story file in their career corpus. Use when they want to add to the corpus, decompress a résumé bullet, capture a story that just surfaced, or when a job description or an upcoming interview needs evidence the corpus doesn't have yet. To build the prep pack for a booked interview, use the career-corpus prep skill.
 ---
 
 # Career corpus — interview
