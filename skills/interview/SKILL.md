@@ -90,15 +90,15 @@ limit the user volunteers unprompted is the strongest ceiling there is**, becaus
 against their own interest (*"two teams, not the org"*). Record it the moment it is said; the
 bigger version always reads better to a later session, which is how ceilings quietly re-inflate.
 
-**Scope a volunteered absolute in the session it's given — record the ceiling, then ask what it
-excludes.** `[SCOPE-THE-ABSOLUTE]` People state limits absolutely and mean them narrowly:
-*"I never touched the front end"* can mean only *"I didn't write the UI code"*, with the
-reviews, the design calls and the incidents handled sitting unrecorded behind it — the
-absolute closes the topic, so nothing ever asks. Record the limit unsoftened, per
-`[NUMBER-SOURCE]`; then one cheap question at the moment it lands: **what does that rule out,
-exactly?** Recovering the same material later costs a blocked story and a full round. The tell
-is a limit carrying *at all*, *never*, or *nothing*. Distinct from resisting inflation: that
-protects claims from growing; this stops a true ceiling from suppressing true material.
+**Record a volunteered limit unsoftened, then ask in the same session what it excludes.**
+`[SCOPE-THE-ABSOLUTE]` The tell is a limit carrying *at all*, *never*, or *nothing*. Record it
+per `[NUMBER-SOURCE]`; then one cheap question at the moment it lands: **what does that rule
+out, exactly?** People state limits absolutely and mean them narrowly: *"I never touched the
+front end"* can mean only *"I didn't write the UI code"*, with the reviews, the design calls
+and the incidents handled sitting unrecorded behind it — the absolute closes the topic, so
+nothing ever asks, and recovering the material later costs a blocked story and a full round.
+Distinct from resisting inflation: that protects claims from growing; this stops a true
+ceiling from suppressing true material.
 
 **No names of non-public people. Ever. Roles only.** `[ROLES-ONLY]` The corpus describes real
 people's worst professional moments, and the user would never say those names in an interview
@@ -258,13 +258,13 @@ is worse than nothing. Keep a noes section — what the user has *not* done with
 technology — the analogue of a through-line's "where it doesn't hold", and the thing that
 makes the rest credible in a room.
 
-**The self-named list is a queue of things to disprove, not the file's backbone.**
-`[LIST-IS-A-QUEUE]` A technology survives "have you used it" and survives "where", then dies
-at "what ran on it" — self-report reliably swaps in a neighbouring tool or moves a claim to
-the wrong employer, and the list looks strongest exactly while it is least tested. Build the
-file on what the user did; treat each listed technology as a candidate claim and ask what
-actually ran on it before writing it down. This is the ask-what-it-did move from
-`[WHO-OWNED-IT]`, pointed at tools.
+**Treat each self-named technology as a candidate claim: ask what actually ran on it before
+writing it down.** `[LIST-IS-A-QUEUE]` Build the file on what the user did — the list is a
+queue of things to disprove, not the file's backbone. A technology survives "have you used it"
+and survives "where", then dies at "what ran on it": self-report reliably swaps in a
+neighbouring tool or moves a claim to the wrong employer, and the list looks strongest exactly
+while it is least tested. This is the ask-what-it-did move from `[WHO-OWNED-IT]`, pointed at
+tools.
 
 **A cross-company file finds conflicts a story file can't — hold them, never launder them.**
 `[CROSS-FILE-CEILINGS]` "Where did you use X" has no respect for file boundaries, so a

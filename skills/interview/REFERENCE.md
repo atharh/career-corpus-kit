@@ -113,8 +113,8 @@ plainly: where does that number come from — a dashboard, a postmortem, someone
 *"do you remember roughly?"*, which invites a reconstruction on the spot and produces a figure
 with no source that now has to be disputed later.
 
-**The question is itself the filter, and withdrawal is a win.** `[ASK-IS-THE-FILTER]` It either
-produces a claim with a source or removes one that would not have survived being asked about in
-a room. Don't soften it to protect a good number — a number nobody can source is a liability
-wearing the costume of an asset. Pairs with *cross-check the arithmetic* `[CHECK-ARITHMETIC]`,
-which tests whether a number is consistent; this tests whether it exists.
+**Don't soften the ask to protect a good number — withdrawal is a win.** `[ASK-IS-THE-FILTER]`
+The question is itself the filter: it either produces a claim with a source or removes one
+that would not have survived being asked about in a room, and a number nobody can source is a
+liability wearing the costume of an asset. Pairs with *cross-check the arithmetic*
+`[CHECK-ARITHMETIC]`, which tests whether a number is consistent; this tests whether it exists.
