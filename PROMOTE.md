@@ -7,10 +7,16 @@ either — git keeps them.
 
 ## Cursor
 
-**Reviewed up to corpus commit `07e0d91` (2026-08-13), lesson log, repo instructions and work
-backlog read in full.** Start the next pass from `git log -p 07e0d91..HEAD -- <intake paths>`.
-Advance this sha when a pass finishes, and don't replace it with a date — a date can't be
-diffed, and it misses amendments to older entries.
+**Reviewed up to corpus commit `81490e1` (2026-08-14), lesson log, repo instructions and work
+backlog diffed from the prior cursor; the capability files' own design sections read as intake
+because they were addressed to this pass.** Start the next pass from
+`git log -p 81490e1..HEAD -- <intake paths>`. Advance this sha when a pass finishes, and don't
+replace it with a date — a date can't be diffed, and it misses amendments to older entries.
+
+One entry is pending, not declined: the corpus lesson log holds a 📌 entry on volunteered
+absolutes — record the ceiling, then ask what it excludes, in the same session; the tell is
+*at all / never / nothing*. Its own text says porting is the user's call, and the call hasn't
+been made. A pass seeing the kit without it is seeing an open offer, not a gap.
 
 ## Declined — do not re-propose
 
@@ -54,6 +60,19 @@ the corpus that suggested it.
   thesis, stories as one-clause flashes, flagged if about to be sent unedited. A future pass
   seeing the corpus clause unshipped is seeing a design superseded by a stronger one, not an
   omission.
+
+- **A PDF rebuilt in the same commit as its Markdown** (declined 2026-08-14). The corpus's repo
+  instructions require it, and the reasoning is sound *there* — a stale PDF beside updated
+  Markdown is a wrong artifact looking finished. But the rule presumes a build script and a
+  commit workflow, and the kit ships neither: render's workflow already says to rebuild when a
+  PDF pipeline is present, which is all the kit can honestly promise about tooling it doesn't
+  provide. Same family as the declined worktree discipline: the kit prescribes no git workflow.
+
+- **"Check the shipped artifact before believing a status line in `tasks/`"** (declined
+  2026-08-14). Real defect, wrong scope: it is hygiene for one repo's private work-tracking
+  files, which a stranger's corpus won't have. The kit-side mirror of the same failure is
+  already covered by its own `CLAUDE.md` — read the clone, not the cache, and pin a sha rather
+  than trusting a note.
 
 - **The recurrence-gated version of *absent* vs. *unwritten* is still sitting in the corpus.**
   The kit shipped the ungated version in release B — `fit.md` records `no-corpus-evidence`,
