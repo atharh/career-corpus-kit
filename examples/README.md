@@ -36,7 +36,10 @@ a story that's thinner than the others.
    second Postgres, and *data mesh* postdates the work by three years.
 6. **[`corpus/through-lines.md`](corpus/through-lines.md)** — a pattern with its
    counter-example attached, and a second pattern the user withdrew.
-7. **[`corpus/LESSONS.md`](corpus/LESSONS.md)** — how the skills personalise. Ships empty, fills
+7. **[`corpus/capabilities/postgresql.md`](corpus/capabilities/postgresql.md)** — one
+   technology across the whole career: an index that owns no facts, a depth ceiling per claim,
+   and the noes that make the yeses credible.
+8. **[`corpus/LESSONS.md`](corpus/LESSONS.md)** — how the skills personalise. Ships empty, fills
    with the things you had to say twice.
 
 ## What to notice
