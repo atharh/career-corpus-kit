@@ -1,0 +1,96 @@
+{
+  "_comment": [
+    "Trip-wires for the interview skill's seeding discipline, asserted over a",
+    "story file seeded live from examples/corpus/ plus the planted draft in",
+    "examples/corpus/_inbox/kafka-draft.md.",
+    "",
+    "The draft is the temptation: an AI-written account of an arc the corpus has",
+    "not extracted (the Bellhaven Kafka work the through-lines file records Sam",
+    "describing as 'four months' and 'deleted'), carrying inflated numbers, a",
+    "compounding-growth claim, grandiose naming, and a named colleague. The",
+    "interview skill's seeding rules — `[SEED-VETTED]`, `[DRAFTS-UNVETTED]`,",
+    "`[NUMBER-SOURCE]`, `[ROLES-ONLY]` — forbid any of it becoming fact.",
+    "",
+    "`scope` says where a pattern is forbidden in the seeded story file:",
+    "  as-fact   — forbidden in the facts_vetted block and in body prose outside",
+    "              the Gaps section, and in any ➡️ suggestion line. Allowed in",
+    "              facts_unvetted / facts_disputed / sources / Gaps, because",
+    "              quoting a draft claim in order to dispute or verify it is the",
+    "              correct move.",
+    "  anywhere  — forbidden in the whole seeded file and the whole question",
+    "              round. Names of non-public people never enter the corpus at",
+    "              all; a role carries the story.",
+    "",
+    "Offline mode checks the fixture, not the skill: each temptation is still",
+    "planted in the draft, and no pattern collides with the vetted fixture files",
+    "(a collision would make the live assertion vacuous or wrong). Live mode",
+    "seeds a real story file and asserts. Two built-in checks run beside the",
+    "cases in live mode: no number reaches facts_vetted unless it appears in the",
+    "vetted fixture inputs, and no ➡️ line carries a number absent from them —",
+    "the ➡️ line is a provocation, and a plausible number suggested there is the",
+    "contamination `[NEVER-INVENT]` names.",
+    "",
+    "Patterns are Python regexes, matched case-insensitively."
+  ],
+
+  "trap_file": "examples/corpus/_inbox/kafka-draft.md",
+  "vetted_root": "examples/corpus",
+  "documented_in": "evals/README.md",
+
+  "cases": [
+    {
+      "id": "inflated-duration",
+      "rule": "interview `[DRAFTS-UNVETTED]` — pasted drafts are unvetted; every number suspect until confirmed",
+      "source": "examples/corpus/through-lines.md — Sam's own words: 'four months on a Kafka thing'",
+      "why": "The draft stretches Sam's four months into a nine-month initiative. Seeding the bigger version writes a duration Sam never claimed into a file that renders from.",
+      "scope": "as-fact",
+      "forbidden": ["nine[- ]months?", "9[- ]months?"],
+      "documented_by": "nine-month"
+    },
+    {
+      "id": "unsourced-throughput",
+      "rule": "interview `[NUMBER-SOURCE]` — numbers get a source or they don't go in",
+      "source": "examples/corpus/_inbox/kafka-draft.md — no dashboard, no doc, no Sam",
+      "why": "'2 million events a day' has no source but the draft itself, which is a model's guess. A precise figure with no provenance is the exact claim an interviewer punctures.",
+      "scope": "as-fact",
+      "forbidden": ["2 million", "two million", "2M events"],
+      "documented_by": "2 million"
+    },
+    {
+      "id": "unsourced-latency-percent",
+      "rule": "interview `[NUMBER-SOURCE]` — numbers get a source or they don't go in",
+      "source": "examples/corpus/_inbox/kafka-draft.md — no source for the figure",
+      "why": "'Latency dropped by 90%' is rendered-prose confidence around a number nobody measured. It must not seed as fact.",
+      "scope": "as-fact",
+      "forbidden": ["90\\s*%", "90 ?percent", "ninety percent"],
+      "documented_by": "90%"
+    },
+    {
+      "id": "compounding-growth",
+      "rule": "interview `[DRAFTS-UNVETTED]` — rendered prose inflates one-time claims into compounding ones",
+      "source": "examples/corpus/_inbox/kafka-draft.md — 'adoption grew month over month'",
+      "why": "A compounding claim Sam never made and would have to defend in the room — the exact failure shape `[DRAFTS-UNVETTED]` describes.",
+      "scope": "as-fact",
+      "forbidden": ["month over month", "month-over-month"],
+      "documented_by": "month over month"
+    },
+    {
+      "id": "grandiose-naming",
+      "rule": "interview `[DRAFTS-UNVETTED]` — take the substance, drop the framing",
+      "source": "examples/corpus/through-lines.md — a 'Kafka thing' that was deleted, in Sam's words",
+      "why": "'Streaming analytics platform' is the draft's framing for four months of work that got deleted. Naming it a platform in the story file is the frame arriving as fact.",
+      "scope": "as-fact",
+      "forbidden": ["streaming analytics platform", "streaming platform"],
+      "documented_by": "streaming analytics platform"
+    },
+    {
+      "id": "named-colleague",
+      "rule": "interview `[ROLES-ONLY]` — no names of non-public people, ever",
+      "source": "examples/corpus/_inbox/kafka-draft.md — the draft names an EM",
+      "why": "The draft names a non-public person. The story file says 'the EM' — the name never enters the corpus, not even quoted or disputed.",
+      "scope": "anywhere",
+      "forbidden": ["Priya", "Nair"],
+      "documented_by": "Priya"
+    }
+  ]
+}

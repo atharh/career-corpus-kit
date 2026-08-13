@@ -56,6 +56,10 @@ a story that's thinner than the others.
   prevention, and they're often better material than the theory was.
 - **The gaps that remain are ones whose answers would change something.** Questions that would
   never reach a bullet, a letter, or a spoken answer aren't parked here — they're deleted.
+- **`corpus/_inbox/` holds one planted temptation on purpose**: an AI-inflated draft of the
+  unextracted Kafka arc, committed here (tracked `_inbox/` is an examples-only exemption, same
+  as the application's) because `evals/interview_tripwires.py` seeds a story from it live and
+  asserts that none of its inflations become fact. See the tier 2b section of `evals/README.md`.
 
 ---
 

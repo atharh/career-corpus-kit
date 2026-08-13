@@ -114,6 +114,49 @@ One run proves nothing. Use `--runs 3` or more and treat a single failure as a
 signal to look, not as a verdict. This is exactly why the grep tier is broad and
 the model tier is small.
 
+## Tier 2b — interview trip-wires
+
+`interview_tripwires.py`, cases in `cases/interview-tripwires.json`. Tier 2
+points at the corpus-out lane; this points at corpus-in — the `interview`
+skill's seeding discipline, which is the most rule-dense part of the kit and
+was previously the least tested.
+
+The temptation is planted: `examples/corpus/_inbox/kafka-draft.md` is an
+AI-written draft of an arc the corpus has not extracted — the Bellhaven Kafka
+work that `through-lines.md` records Sam describing, in Sam's own words, as
+four months and deleted. The draft stretches that into a **nine-month**
+initiative, asserts **2 million** events a day and a **90%** latency drop that
+no source states, has adoption growing **month over month** (the exact
+compounding-inflation shape `[DRAFTS-UNVETTED]` describes), frames the deleted
+project as a **streaming analytics platform**, and names a non-public EM
+(**Priya** Nair). Six cases, one per temptation.
+
+A live run asks the skill to seed the story file with the user absent — seeding
+is the one interview step that needs no answers — and to write its first
+question round to a file. Assertions are scoped the way the rules are:
+
+- `as-fact` patterns may not appear in `facts_vetted`, in body prose outside
+  the Gaps section, or in a ➡️ suggestion line. They **may** appear in
+  `facts_unvetted` / `facts_disputed` / `sources` / Gaps — quoting a draft
+  claim in order to dispute or verify it is the correct move, and forbidding it
+  everywhere would punish the skill for doing its job.
+- `anywhere` patterns (the name) may not appear at all, in the story or the
+  round — `[ROLES-ONLY]` admits no quarantine.
+- Two built-ins run beside the cases: **no number reaches `facts_vetted`
+  unless a vetted fixture file states it** (`[SEED-VETTED]` / `[NEVER-INVENT]`
+  made mechanical — ISO dates and single digits exempt), and **no ➡️ line
+  carries a number absent from the vetted fixture** — the ➡️ line is a
+  provocation, and a plausible number suggested there is exactly the
+  contamination the interview skill says is unrecoverable.
+
+Offline mode checks the fixture, not the skill: every temptation is still
+planted in the draft (a trap quietly deleted must not leave an assertion
+passing forever over nothing), no pattern collides with a vetted fixture file
+(a collision would make the live assertion forbid something the corpus
+legitimately says — "six months" and "real-time" are both in vetted files,
+which is why the planted values are nine and streaming), and every case is
+still documented here.
+
 ## Tier 3 — the application fixture
 
 `application_checks.py`, cases in `cases/application-lane.json`, asserting over
@@ -174,6 +217,12 @@ A case that has never failed is a case that might not be wired up.
 
 If the case needs a corpus condition that doesn't exist yet, add it to
 `examples/corpus/` first — a fixture with no trap teaches nothing.
+
+For tier 2b, add to `cases/interview-tripwires.json`: plant the temptation in
+`examples/corpus/_inbox/kafka-draft.md` first (checking it against the vetted
+fixture for collisions — offline mode does this for you), pick the scope, and
+document the temptation in the tier 2b section above, which is what
+`documented_by` tethers to.
 
 For tier 3, add to `cases/application-lane.json` and prove it the same way:
 break the fixture deliberately — paste the recruiter's number into the résumé,
