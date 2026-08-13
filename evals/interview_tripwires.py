@@ -101,6 +101,32 @@ def regions(text: str) -> dict[str, str] | None:
     return {"facts_vetted": facts_vetted, "body_outside_gaps": "".join(kept)}
 
 
+CHECKBOX_LINE = re.compile(r"(?m)^[ \t]*- \[[ xX]\][^\n]*$")
+DQUOTE_SPAN = re.compile(r'"[^"]{0,300}"|“[^”]{0,300}”', re.S)
+
+
+def own_voice(body: str) -> str:
+    """Strip the quarantine forms from body prose, leaving what the file asserts.
+
+    A seeded story legitimately *mentions* a draft's claims while refusing them —
+    that is the skill doing its job — and the kit gives it three forms for doing
+    so: a checkbox queue item awaiting confirm-or-kill, a ⚠️ ceiling paragraph
+    recording the value that never renders, and a quoted span attributed to its
+    source. What survives those strips is the file speaking in its own voice,
+    which is the only place an `as-fact` trap pattern is a violation. The strips
+    apply to body prose only: `facts_vetted` and ➡️ lines stay strict, because
+    those are supposed to be pristine and a hit there is worth a human look.
+    """
+    kept = []
+    for para in re.split(r"\n[ \t]*\n", body):
+        first = para.lstrip().splitlines()[0] if para.strip() else ""
+        if "⚠️" in first:
+            continue
+        kept.append(para)
+    text = CHECKBOX_LINE.sub(" ", "\n\n".join(kept))
+    return DQUOTE_SPAN.sub(" ", text)
+
+
 def novel_numbers(region: str, vetted: str) -> list[str]:
     """Digit tokens in `region` that the vetted fixture never states anywhere.
 
@@ -176,7 +202,7 @@ def live_checks(spec: dict, story: str, round_text: str, vetted: str) -> list[st
         else:
             spots = {
                 "facts_vetted": reg["facts_vetted"],
-                "body outside Gaps": reg["body_outside_gaps"],
+                "body prose, own voice": own_voice(reg["body_outside_gaps"]),
                 "➡️ lines": arrows,
             }
         for name, text in spots.items():

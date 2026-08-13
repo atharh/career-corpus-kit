@@ -135,11 +135,16 @@ A live run asks the skill to seed the story file with the user absent — seedin
 is the one interview step that needs no answers — and to write its first
 question round to a file. Assertions are scoped the way the rules are:
 
-- `as-fact` patterns may not appear in `facts_vetted`, in body prose outside
-  the Gaps section, or in a ➡️ suggestion line. They **may** appear in
-  `facts_unvetted` / `facts_disputed` / `sources` / Gaps — quoting a draft
-  claim in order to dispute or verify it is the correct move, and forbidding it
-  everywhere would punish the skill for doing its job.
+- `as-fact` patterns may not appear in `facts_vetted`, in a ➡️ suggestion
+  line, or in body prose speaking in its own voice. They **may** appear in
+  `facts_unvetted` / `facts_disputed` / `sources` / Gaps, and in the body's
+  three quarantine forms — a checkbox queue item, a ⚠️ ceiling paragraph, a
+  quoted span attributed to its source. Holding a draft claim in order to
+  dispute or verify it is the correct move, and forbidding it everywhere would
+  punish the skill for doing its job — the first live runs failed on exactly
+  that, flagging a seeded file that had refused every planted claim in
+  textbook form. `facts_vetted` and ➡️ stay strict: those are supposed to be
+  pristine, a hit there is rare, and the kept workdir makes it adjudicable.
 - `anywhere` patterns (the name) may not appear at all, in the story or the
   round — `[ROLES-ONLY]` admits no quarantine.
 - Two built-ins run beside the cases: **no number reaches `facts_vetted`
