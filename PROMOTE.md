@@ -13,11 +13,6 @@ because they were addressed to this pass.** Start the next pass from
 `git log -p 81490e1..HEAD -- <intake paths>`. Advance this sha when a pass finishes, and don't
 replace it with a date — a date can't be diffed, and it misses amendments to older entries.
 
-One entry is pending, not declined: the corpus lesson log holds a 📌 entry on volunteered
-absolutes — record the ceiling, then ask what it excludes, in the same session; the tell is
-*at all / never / nothing*. Its own text says porting is the user's call, and the call hasn't
-been made. A pass seeing the kit without it is seeing an open offer, not a gap.
-
 ## Declined — do not re-propose
 
 A rule rejected on purpose leaves no trace in the skills, so without this list every pass
