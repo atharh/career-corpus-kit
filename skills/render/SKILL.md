@@ -162,6 +162,23 @@ has already made — which framing to use, what not to cite, wording still pendi
 relevant files for `RENDERING DECISION` / `⚠️` notes and honor them. Don't relitigate a settled
 call.
 
+**The user's say-so overrides the corpus and this skill, immediately and without argument.**
+`[USER-OVERRIDES]` The corpus exists to stop the user drifting and a model inflating; it has
+no standing against the user themselves. If they direct a claim rendered, render it; if they
+say a story's shape is wrong, change the shape. Never answer their instruction with "the
+corpus can't back that", and never make them say it twice. An override costs one line of
+story-file frontmatter and never a hedge in the artifact: record `overridden: <date> — <what
+they directed>`, so a later session can tell a corpus-vouched claim from a directed one —
+that distinction is for the user's benefit in a room, the difference between defending a
+claim as their own recollection and reaching for a source that was never there.
+`[PROVENANCE-NOT-PROSE]` keeps it out of anything they send. Two things are not overrides,
+because they would wreck what the rule protects: **(1)** it must be explicit and current —
+never inferred from a passing remark, and never an old one carried forward to reinstate
+something since withdrawn; when unsure, ask in this session, in one line. **(2)** A checkable
+public technical fact is not made true by say-so — per the interview skill's
+`[CHECK-THE-CLAIM]`, look it up, say what the public record says, then render what they
+decide.
+
 **Prefer the true version.** `[TRUE-VERSION]` The accurate version is stronger than the
 inflated one essentially every time. "Built a format others filled, still in use years later"
 beats "wrote 50 modules." Reach for precision, not superlatives.

@@ -23,6 +23,10 @@ sources:
   - <resume-file>.md (vetted)
   - interview with <user>, YYYY-MM-DD (vetted)
   - <prior AI chat draft, pasted YYYY-MM-DD (unvetted prose, AI-written)>
+overridden:          # only if the user overrode the corpus or a skill rule (render's
+                     # [USER-OVERRIDES]) — dated, so a later session can tell a directed
+                     # claim from a corpus-vouched one.
+  - <date> — <what they directed>
 ---
 
 <If the story describes real people who aren't public figures — especially anyone managed
