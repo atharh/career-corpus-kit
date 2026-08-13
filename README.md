@@ -15,7 +15,7 @@ It's also how you stop forgetting your own career. Recall is triggered, not enum
 remember the thing you did five years ago only when something adjacent jogs it. The interview
 skill is built to do that jogging, and to write down what surfaces before it evaporates.
 
-## Four things you'll do with it
+## Five things you'll do with it
 
 Everything else in this README is detail under one of these.
 
@@ -47,10 +47,22 @@ the corpus will ever get.
 
 Opens a folder for the role, captures the posting before it 404s, and checks your corpus
 against it *before* anything gets written. From there it hands off on its own: the résumé and
-cover letter when you're ready to send, a study pack when an interview gets booked, and the
-outcome logged when it lands.
+cover letter when you're ready to send (that's `/career-corpus:render` — it also works
+standalone, for tailoring to a posting you're not tracking), the prep below when an interview
+gets booked, and the outcome logged when it lands.
 
-**4. Maintain my corpus** — supervised, and rarer than the rest.
+**4. Prep this interview** — booked, whether or not you applied through the kit.
+
+```
+/career-corpus:prep
+```
+
+A recruiter's call, a referral, an internal loop — there doesn't have to be an application
+folder. You get an opener, a story bank mapped to what this employer actually hires for, the
+probes they'll push on with defensible answers, and questions to ask them. Run it again the
+day the interview ends — that's where intention 2's highest-quality material comes from.
+
+**5. Maintain my corpus** — supervised, and rarer than the rest.
 
 ```
 /career-corpus:compact
@@ -127,7 +139,7 @@ covers what that means and what doesn't belong in a corpus.
 From that repo, run `/career-corpus:bootstrap` and follow its handoff. It writes a
 `.gitignore` before anything else — every `_inbox/` stays out of git, because raw recruiter
 mail and take-home briefs are the one thing you don't want in history forever. Everything
-after that is one of the four intentions above.
+after that is one of the five intentions above.
 
 ## Updating later
 
@@ -183,7 +195,7 @@ the most precisely targeted gap you'll ever be handed — a real interviewer fou
 
 ## Reference: the six skills, in two lanes
 
-Underneath the four intentions, the kit is two lanes. One builds the corpus. The other spends
+Underneath the five intentions, the kit is two lanes. One builds the corpus. The other spends
 it, one job application at a time.
 
 **Lane 1 — build the corpus**
