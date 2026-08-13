@@ -90,6 +90,16 @@ limit the user volunteers unprompted is the strongest ceiling there is**, becaus
 against their own interest (*"two teams, not the org"*). Record it the moment it is said; the
 bigger version always reads better to a later session, which is how ceilings quietly re-inflate.
 
+**Scope a volunteered absolute in the session it's given — record the ceiling, then ask what it
+excludes.** `[SCOPE-THE-ABSOLUTE]` People state limits absolutely and mean them narrowly:
+*"I never touched the front end"* can mean only *"I didn't write the UI code"*, with the
+reviews, the design calls and the incidents handled sitting unrecorded behind it — the
+absolute closes the topic, so nothing ever asks. Record the limit unsoftened, per
+`[NUMBER-SOURCE]`; then one cheap question at the moment it lands: **what does that rule out,
+exactly?** Recovering the same material later costs a blocked story and a full round. The tell
+is a limit carrying *at all*, *never*, or *nothing*. Distinct from resisting inflation: that
+protects claims from growing; this stops a true ceiling from suppressing true material.
+
 **No names of non-public people. Ever. Roles only.** `[ROLES-ONLY]` The corpus describes real
 people's worst professional moments, and the user would never say those names in an interview
 anyway — "a senior engineer on the platform team" carries the story fine. The repo stays private
