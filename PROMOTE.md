@@ -28,7 +28,7 @@ the corpus that suggested it.
   kit's own leave test — drift evidence is calibration about one person, the canonical shape
   `CLAUDE.md` names as the thing not to port — and it earns nothing at the point of use: a
   render needs the current value, and the superseded one reaches no artifact ever. **What was
-  real in it shipped instead:** the self-correction carve-out in `[MARK-DONT-FIX]` case a — a
+  real in it shipped instead:** the self-correction carve-out in `[MARK-DONT-FIX]` — a
   self-correction is not a conflict, and the tell is whether the user marks the change
   themselves. **Don't re-derive the trail** from `compact`'s keep-list: that rule preserves a
   supersession trail *if one exists*; it is not evidence that anything should write one.

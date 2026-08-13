@@ -155,40 +155,33 @@ about the user sitting there earns its way in here like everything else, by them
 a line in a story file, a claim in a rendered artifact, a reading nobody has confirmed yet —
 changes only by a decision the user makes and sees: **show what stands, show what would
 replace it, name what prompted the change, and let them choose.** Settling it yourself makes a
-factual call that was theirs, and a model settles on the vaguer version. Four cases.
+factual call that was theirs, and a model settles on the vaguer version. The move, by case:
 
-**a. Two of their own statements conflict.** Quote both lines back, name the conflict, let them
-reconcile it — the reconciliation is usually more interesting than either version, and resolving
-it yourself risks inventing or destroying fact. *But a self-correction is not a conflict, and
-this case must not fire on one.* When they revise an earlier answer *and say which one is
-right* — *"actually it was four months, not six"* — it is settled; take the new answer. Quoting
-it back reads as not listening, and routing it to `facts_disputed` parks a settled number where
-neither value renders. The tell is whether they mark the change themselves.
-
-**b. The reading is yours, not theirs.** Label it in the file as your inference, dated, to be
-confirmed or rejected before rendering. Record a rejection *and their reasoning*; the
-refutation is often better material than the theory was.
-
-**c. The change invalidates something already rendered** — what they just said against what a
-résumé or a live application **already claims**. Expensive, because a rendered claim is one a
-reader has already believed. Say it in the same breath — *"that contradicts your résumé, which
-says X"* — and let them decide; a correction to the corpus never authorises editing the
-artifact. One concern per change: a **submitted** artifact is frozen evidence of what a reader
-saw — supersede it, never rewrite it; an **in-flight** one is re-rendered on request, with the
-diff shown — a session doing corpus work has no business editing a live application; a
-**baseline** is refreshed as its own deliberate act, in its own commit. The session owes the
-**marker, not the fix**: an unchecked gap in the story file naming the artifact and the line,
-re-render offered separately. Never leave it as *the corpus now knows* — a corrected corpus
-beside an artifact still making the old claim looks healthy while the document people read is
-wrong, and nothing re-reads a rendered artifact. And **once per corpus — not once per session —
-diff the whole résumé against the corpus**, asking of each claim what vouches for it *now*.
-
-**d. The change rewrites a line already on disk.** New information usually *adds* rather than
-contradicts, and the tidy move — folding the detail into the sentence already written — is where
-substance goes quietly missing. **If the proposed line says less than the one it replaces, it
-is not a fix**, and **adding a sentence beside the original beats merging both into one**: the
-detail that looked like clutter answers the third follow-up and is not recoverable from the
-merged version.
+- **Two of their own statements conflict** → quote both lines, name the conflict, let them
+  reconcile it — the reconciliation is usually more interesting than either version. A
+  self-correction is not a conflict: when they revise an earlier answer *and say which one is
+  right* — *"actually it was four months, not six"* — they have marked the change themselves
+  and it is settled. Take the new answer; quoting it back reads as not listening, and routing
+  it to `facts_disputed` parks a settled number where neither value renders.
+- **The reading is yours, not theirs** → label it in the file as your inference, dated, to be
+  confirmed or rejected before rendering. Record a rejection *and their reasoning*; the
+  refutation is often better material than the theory was.
+- **The change invalidates something already rendered** → say it in the same breath — *"that
+  contradicts your résumé, which says X"* — and let them decide. The session owes the
+  **marker, not the fix**: an unchecked gap in the story file naming the artifact and the
+  line, re-render offered separately — never *the corpus now knows*, because nothing re-reads
+  a rendered artifact. The artifact's lifecycle bounds what may happen next: a **submitted**
+  artifact is frozen evidence of what a reader saw — supersede it, never rewrite it; an
+  **in-flight** one is re-rendered on request, with the diff shown; a **baseline** is
+  refreshed as its own deliberate act, in its own commit. And **once per corpus — not once per
+  session — diff the whole résumé against the corpus**, asking of each claim what vouches for
+  it *now*.
+- **The change rewrites a line already on disk** → new information usually *adds* rather than
+  contradicts, and folding the detail into the sentence already written is where substance
+  goes quietly missing. **If the proposed line says less than the one it replaces, it is not
+  a fix**; adding a sentence beside the original beats merging both into one — the detail
+  that looked like clutter answers the third follow-up and is not recoverable from the merged
+  version.
 
 **The trigger is meaning, not keystrokes.** `[MEANING-NOT-KEYSTROKES]` A decision round is owed
 when the edit could change fact, specificity, provenance, emphasis, or a recorded rendering
@@ -295,16 +288,14 @@ private and personal.
   apply next time. Route it first — a rule that would still hold if the corpus were about
   someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
   rule nobody can diff is a rule nobody can review, port, or undo.
-- **Retire a lesson that proves wrong rather than appending its opposite** — in the session
-  where it misfired, only on the user's explicit say-so, by striking it in place:
-  `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>`. A struck entry is history, never
-  applied again — the strike records wrongness, which lives nowhere else.
-- **Delete a lesson the method has since absorbed — the strike is only for rules that proved
-  wrong.** Once a shipped skill states the rule with its full force, the entry here is a
-  duplicate that can only drift. Delete it outright, no strike left behind, when nothing local
-  remains — no calibration about this user, no number they set, no recorded divergence; if any
-  does, trim the entry to that residue instead — and no session still loads a skill version
-  without the rule. Each deletion is the user's call, entry by entry, never a session's.
+- **A lesson leaves this file two ways, each on the user's explicit say-so, entry by entry.**
+  One that proves *wrong* is retired in the session where it misfired, struck in place —
+  `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>` — and never applied again; the
+  strike records wrongness, which lives nowhere else. One the method has since *absorbed* is
+  deleted outright, no strike left behind — a shipped rule's duplicate here can only drift —
+  once nothing local remains (no calibration about this user, no number they set, no recorded
+  divergence; trim the entry to that residue if any does) and no session still loads a skill
+  version without the rule.
 
 ## The file
 
