@@ -180,11 +180,11 @@ recomputed from what's already on disk. An open-application count, a "3 live, 1 
 line, a `status:` field beside a log that already ends in the current stage — all recomputable,
 so all of them rot silently and then lie. Read the folders and compute those each time.
 
-**The other half of the split is the part that gets skipped.** `[PIN-THE-INPUTS]` Some things
-cannot be reconstructed later, and those get written down at the moment they are true: the
-corpus commit a render drew on, the hash of what was actually sent, the URL a posting was
-captured from. Lose one and it is gone — the posting 404s, the corpus moves on, and nothing on
-disk remembers. A pin is not a rollup; it records an input.
+**Pin what cannot be reconstructed later, at the moment it is true.** `[PIN-THE-INPUTS]` The
+other half of `[NO-ROLLUP]`'s split, and the part that gets skipped: the corpus commit a
+render drew on, the hash of what was actually sent, the URL a posting was captured from. Lose
+one and it is gone — the posting 404s, the corpus moves on, and nothing on disk remembers. A
+pin is not a rollup; it records an input.
 
 **But a pin is a fingerprint, not a copy.** `[PIN-NOT-ARCHIVE]` The `sha256` in a submitted
 artifact's frontmatter settles one question and only one: whether a file the user still has is
@@ -201,10 +201,10 @@ in `application.md`'s frontmatter, artifact-level state in each artifact's own �
 manifest file**, because a file whose only job is to repeat another file's state goes stale
 without anything noticing.
 
-**This folder is the most sensitive thing in the repo.** `[FOLDER-IS-SENSITIVE]` It holds other
-people's real names, private correspondence, and sometimes an employer's confidential material.
-It belongs in the private corpus repo and nowhere else. Never paste its contents anywhere the
-user didn't ask for, and don't commit an employer's take-home brief to anything public.
+**Keep this folder in the private corpus repo and nowhere else.** `[FOLDER-IS-SENSITIVE]` It is
+the most sensitive thing in the repo — other people's real names, private correspondence, and
+sometimes an employer's confidential material. Never paste its contents anywhere the user
+didn't ask for, and don't commit an employer's take-home brief to anything public.
 
 `_inbox/` is git-ignored by default — `bootstrap` writes that rule, and it is the reason
 inbound can be filed here at all without thinking about it each time. **For an employer's
