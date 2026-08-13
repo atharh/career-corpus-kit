@@ -15,7 +15,7 @@ is more archive than queue. This skill removes the sediment and leaves the rock.
 
 Because the gap list is the interview's work queue, and a queue that is 40% struck-through
 is a queue nobody can read. The cost isn't tokens — a whole corpus is small. The cost is
-**attention**: an open 🔴 buried under six resolved items gets missed, by the model and by
+**attention**: an open question buried under six resolved items gets missed, by the model and by
 the user.
 
 ## Why not just delete the old stuff
@@ -50,7 +50,7 @@ Stop and leave the line alone if it carries any of:
 3. **A rejected reading** — a theory the model proposed and the user refuted, recorded as the
    model's error. Its whole function is recurrence prevention. Compress the prose if it's
    long; never remove the ruling.
-4. **⚠️ or 🔴 markers**, and anything they're attached to.
+4. **⚠️ markers**, and anything they're attached to.
 5. **Provenance and vetting status** — `facts_unvetted`, `facts_disputed`, source lines,
    "their account only", "not independently sourced". A fact that loses its provenance becomes
    a fact that looks vetted.
