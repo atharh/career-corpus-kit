@@ -119,6 +119,9 @@ Work **one file at a time**, and show the user what changed before moving on.
   conversation with the user, not a sweep.
 - **Never compact `through-lines.md`'s "where it doesn't hold" sections.** A through-line
   without its counter-examples is hagiography — the counter-example *is* the rule.
+- **Never compact a capability file's depth ceilings or its noes.** Same defect, same reason:
+  the noes are what make the yeses credible, and an entry swept of its ceiling reads as
+  uniform confidence — see the interview skill's `[DEPTH-CEILING]`.
 - **Never run unsupervised**, in a loop, or across the whole corpus in one pass. This is a
   reviewed operation.
 - **Never sweep a line you don't understand.** Ask.

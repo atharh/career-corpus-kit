@@ -136,6 +136,15 @@ that block exists to take away from you. And note what `facts_vetted` does and d
 it says the user is on record, not that anyone checked. See "What 'vetted' means" in
 `interview`.
 
+**A technology claim renders from its capability file, at its recorded depth.**
+`[CAPABILITY-CLAIMS]` When the artifact wants a skills line, a form's self-rating, or an
+answer to "what's your experience with X", source it from `corpus/capabilities/<technology>.md`
+where one exists — it already carries the depth ceilings and the noes, so render inside them,
+and never flatten different depths into one uniformly confident list: *administered it* and
+*my team ran on it* are different claims, and a list that reads them alike over-claims the
+weaker one. Where no capability file exists, the claim renders only what story files back —
+which for a bare skills-line entry may be nothing; say so rather than padding the list.
+
 **Date the vocabulary, not just the facts.** `[DATE-VOCABULARY]` No term that postdates the
 work. If the corpus says they were "doing data modelling in 2014," don't render it as a tool
 that shipped in 2016. Check `anachronisms_corrected` blocks before using any tool or role name.
@@ -252,7 +261,8 @@ private and personal.
    exists, read `jd.md` and `fit.md` from it; if it doesn't, offer `/career-corpus:apply`
    first. Then read the JD and name what the role actually rewards, in one or two lines —
    that's the thesis.
-3. **Read the corpus** — `through-lines.md`, the relevant `background.md` and story files, and
+3. **Read the corpus** — `through-lines.md`, the relevant `background.md` and story files,
+   any `capabilities/` files the role's stack touches, and
    any `RENDERING DECISION` notes. For a tailored render, also read the closest baseline as a
    voice reference (but source facts from the corpus, not from it).
 4. **Select** the 2–4 stories that are the strongest evidence — for the JD if tailored, in

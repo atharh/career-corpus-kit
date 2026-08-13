@@ -24,7 +24,9 @@ corpus/
 ```
 
 Nothing else yet. `applications/` appears alongside `corpus/` the first time the user opens an
-application with the `apply` skill — don't create it here.
+application with the `apply` skill — don't create it here. The same goes for
+`corpus/capabilities/` and `corpus/personal-projects/`: the `interview` skill opens those the
+first time a technology question or an employer-less arc needs one.
 
 ## Steps
 
@@ -70,7 +72,8 @@ application with the `apply` skill — don't create it here.
    the skills line, and a one-paragraph summary — taken from what they wrote, not invented.
    Mark anything uncertain as a gap.
 4. **Build the extraction queue.** Read the résumé and list the stories worth extracting — one
-   per real arc (a hard project, a conflict, a build, a turnaround). Rank by interview value:
+   per real arc (a hard project, a conflict, a build, a turnaround — side projects included;
+   their stories live under `corpus/personal-projects/`). Rank by interview value:
    prefer arcs with a decision, opposition, and a number over accomplishments with none. Flag
    the user's headline claims — the things a JD will most often ask for. Write them to
    `QUEUE.md` as a checklist.
