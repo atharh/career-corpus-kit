@@ -108,7 +108,9 @@ rather than edited when the corpus underneath it moves.
 ## `03` — map to their criteria, never to generic categories
 
 If the employer publishes focus areas, competencies, or a levelling rubric, **the story bank's
-sections are theirs, verbatim**, and each section names the corpus stories that serve it.
+sections are theirs, verbatim**, and each section names the corpus stories that serve it. A
+criterion that names a technology also pulls `corpus/capabilities/<technology>.md`, whose
+ceilings bound what the answer may claim.
 
 The value is in what this exposes. A criterion with three strong corpus stories behind it is
 fine and needs no work. **A criterion with nothing behind it is the actual finding**, and it
@@ -133,6 +135,8 @@ Source probes from, in order of yield:
 2. **Open gaps.** The interview skill logged them because an answer would change something —
    which is very close to why an interviewer would ask.
 3. **⚠️ ceilings.** Every ceiling exists because a claim could be over-read. Assume it will be.
+   A capability file's depth ceilings and noes are this list pre-built for technology probes —
+   *"how advanced is your X"* gets asked in exactly the form `corpus/capabilities/` answers.
 4. **Résumé claims with thin corpus backing.** Anything on the page that no story file
    decompresses is a bullet the candidate cannot currently defend for more than one follow-up.
 5. **The shape of the career itself** — employment gaps, level changes, an IC↔manager move, a
