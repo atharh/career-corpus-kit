@@ -211,7 +211,10 @@ than theirs.
 `corpus/LESSONS.md` — that file is where their preferences live, not this one. Afterwards hold
 to it without re-asking; reopen the question only when a refresh would exceed what they set. A
 number invented here would be a preference imposed on every user of the kit, which is exactly
-what that file exists to prevent.
+what that file exists to prevent. The cover-letter bounds in [REFERENCE.md](REFERENCE.md) are
+not the exception they look like: a page ceiling is a fact about the reader, not a preference
+about the user. A *tighter* target than the ceiling is a preference, and lives in
+`corpus/LESSONS.md` with the rest of them.
 
 **Make it sound like the user, not a model — always, as the last step.** `[THEIR-VOICE]`
 Rendered prose that reads as AI-written gets binned. Two moves, in order:
