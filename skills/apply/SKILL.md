@@ -231,16 +231,14 @@ private and personal.
   apply next time. Route it first — a rule that would still hold if the corpus were about
   someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
   rule nobody can diff is a rule nobody can review, port, or undo.
-- **Retire a lesson that proves wrong rather than appending its opposite** — in the session
-  where it misfired, only on the user's explicit say-so, by striking it in place:
-  `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>`. A struck entry is history, never
-  applied again — the strike records wrongness, which lives nowhere else.
-- **Delete a lesson the method has since absorbed — the strike is only for rules that proved
-  wrong.** Once a shipped skill states the rule with its full force, the entry here is a
-  duplicate that can only drift. Delete it outright, no strike left behind, when nothing local
-  remains — no calibration about this user, no number they set, no recorded divergence; if any
-  does, trim the entry to that residue instead — and no session still loads a skill version
-  without the rule. Each deletion is the user's call, entry by entry, never a session's.
+- **A lesson leaves this file two ways, each on the user's explicit say-so, entry by entry.**
+  One that proves *wrong* is retired in the session where it misfired, struck in place —
+  `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>` — and never applied again; the
+  strike records wrongness, which lives nowhere else. One the method has since *absorbed* is
+  deleted outright, no strike left behind — a shipped rule's duplicate here can only drift —
+  once nothing local remains (no calibration about this user, no number they set, no recorded
+  divergence; trim the entry to that residue if any does) and no session still loads a skill
+  version without the rule.
 
 ## What "good" looks like
 
