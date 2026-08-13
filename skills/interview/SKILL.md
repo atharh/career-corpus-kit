@@ -113,6 +113,15 @@ would later formalise" is true *and stronger*, because they had the idea before 
 existed to name it. Record the correction in an `anachronisms_corrected` block so the modern
 word can't creep back in.
 
+**Fact-check technical claims against the public record, and repair the wording rather than
+dropping the claim.** `[CHECK-THE-CLAIM]` When a story leans on how a tool or system worked,
+the user is recalling a years-old stack from memory: most of it will hold, and the part that
+doesn't is checkable in one question by anyone in the room. Look the mechanism up in public
+documentation, keep what holds, restate what doesn't, and record in the story file which is
+which. The true version is usually *more* specific and sounds more like someone who ran the
+thing. Sibling to `[DATE-THE-TERM]`: that rule dates the word; this one verifies the claim
+behind it.
+
 **Beware present-day artifacts.** `[LENS-NOT-SOURCE]` A current project offered as "context" for
 an old story is a **lens, not a source** — it tells you what to ask, never what happened. A
 vivid, well-structured artifact beside a thin ten-year-old memory will colonise it, in exactly
