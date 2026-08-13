@@ -74,14 +74,23 @@ something like this work before; and can they write clearly — the letter is it
 sample for that last one. Every rule below serves those three.
 
 **Rules of the form:**
-- **One thesis, stated in the opening: the specific work the user would own here**, taken
-  from the part of the posting that describes the work — what this employer is buying and
-  why they're it. Specificity is the proof the posting was read. Not "I've done many things." A
+- **The opening paragraph names the role, why this role, and the tie from the user's
+  background to it — in about three sentences.** The tie is the thesis: the specific work
+  the user would own here, taken from the part of the posting that describes the work —
+  what this employer is buying and why they're it. Specificity is the proof the posting
+  was read. Not "I've done many things." A
   posting speaks in two registers: what the job is (what gets built, owned, fixed) and how the
   company likes to work (values, culture, method statements). A thesis can come from the JD
   and still come from the wrong part of it. The test for which register is which: ask what
   this person will be doing on a Wednesday. Weight the letter there; the second register
   earns a clause, not a beat.
+- **Then a positioning summary — the written form of "tell us about yourself."** Two or
+  three sentences: years, domains, the kinds of systems and contexts worked in, and the
+  through-line that aims all of it at this role. This is the same object as `prep`'s
+  `01-about-me.md` opener, compressed to prose. A technology inventory is not a persona:
+  stacks earn a clause where the role demands one, never a list — the résumé carries the
+  inventory. The line between positioning and restating: a through-line aimed at the role
+  is positioning; a tour of achievements is the résumé again.
 - **Don't mirror the posting's structure.** If a reader with the posting open can reconstruct
   which requirement each paragraph is discharging — its lines quoted back at it, paragraph
   weight copied from the posting's emphasis, bridges like "you say X" — the letter reads as a
@@ -97,6 +106,10 @@ sample for that last one. Every rule below serves those three.
   stuffed with mini-anecdotes is a résumé with worse formatting. Tell it as a concrete
   moment, not a claim: a specific scene ("you can't un-summarise a monthly total back into
   rows") beats "I solve messy real-world problems." The corpus has the scenes; use them.
+- **A story enters through the claim it proves.** One sentence of argument before the
+  scene, tying it to the role's work; then the story as its evidence. A story the reader
+  wasn't set up for reads as a résumé bullet that escaped — a cold open is an essay move,
+  and a letter is an argument, not an essay.
 - **Pick the story by honest relevance, not chronology or pride.** The story matching what
   the role actually is carries the case; a marginal second match survives as a clause, not
   a paragraph — material inflated past its relevance is the letter-level version of an
@@ -109,16 +122,28 @@ sample for that last one. Every rule below serves those three.
   cut Z" is evidence; "owned the platform" is a job description. A decision to kill or
   discard something is often the strongest line in the letter. Attribution rules as
   everywhere: `[HONEST-ATTRIBUTION]`, `[TRUE-VERSION]`.
-- **Don't restate the résumé.** The reader has it. The letter carries what a bullet cannot:
+- **Don't restate the résumé.** The reader has it. Past the positioning summary, the letter
+  carries what a bullet cannot:
   why the user did it that way, and what they were thinking at the time. A sentence that
   would survive unchanged as a résumé bullet is in the wrong document.
 - **Honest framing device or none.** A neat opener that outruns the facts ("done it twice" when
   one instance only half-qualifies) will break under one interview question. Reframe to what's
   defensible word-for-word.
+- **The letter never narrates its own structure.** No "the shorter one," no "my second
+  example" — the connective tissue is the argument itself, not stage directions.
 - **Close with a plain ask, and put the practical facts there.** One unadorned line asking
   for the conversation; location, timezone, availability — the close and nowhere else. No
   throat-clearing, no "I would welcome the opportunity" boilerplate if a plainer line is
   truer to their voice.
+
+**Baseline (no JD) is a different shape, not a tailored letter with blanks.** Every
+structural rule above binds to a posting — the thesis, the lane, which story gets the slot,
+why-them. With no posting to bind to, what's left of those rules is "tell a scene vividly,"
+and a fully-told story nothing selected reads arbitrary. So a baseline is summary-led: the
+opening tie and the positioning summary for its role family carry it, stories appear as
+one-clause flashes at most, and a real JD later picks which flash expands. It is the
+scaffold a tailored render starts from, not a finished letter — flag it if the user is
+about to send one unedited.
 
 ---
 
