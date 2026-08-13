@@ -211,40 +211,45 @@ def live(spec: dict, run_index: int) -> tuple[str, str]:
     if not shutil.which("claude"):
         raise SystemExit("live mode needs the `claude` CLI on PATH")
 
-    with tempfile.TemporaryDirectory(prefix=f"cck-seed-{run_index}-") as tmp:
-        work = Path(tmp)
-        shutil.copytree(ROOT / "examples" / "corpus", work / "corpus")
-        before = {p.relative_to(work) for p in work.rglob("*.md")}
+    # mkdtemp, not TemporaryDirectory: the workdir outlives the run so a failure
+    # can be adjudicated by reading the seeded file. A trap pattern inside a
+    # ceiling entry — "four months, not the nine the draft claims" — is correct
+    # corpus practice that the regex cannot tell from a violation, so a live
+    # failure is a signal to look, and the workdir is where to look.
+    work = Path(tempfile.mkdtemp(prefix=f"cck-seed-{run_index}-"))
+    print(f"    workdir (kept): {work}")
+    shutil.copytree(ROOT / "examples" / "corpus", work / "corpus")
+    before = {p.relative_to(work) for p in work.rglob("*.md")}
 
-        proc = subprocess.run(
-            [
-                "claude", "-p", LIVE_PROMPT,
-                "--plugin-dir", str(ROOT),
-                "--permission-mode", "acceptEdits",
-                "--output-format", "json",
-            ],
-            cwd=work, capture_output=True, text=True, timeout=1800,
-        )
-        if proc.returncode != 0:
-            raise SystemExit(f"claude exited {proc.returncode}:\n{proc.stderr[-2000:]}")
+    proc = subprocess.run(
+        [
+            "claude", "-p", LIVE_PROMPT,
+            "--plugin-dir", str(ROOT),
+            "--permission-mode", "acceptEdits",
+            "--output-format", "json",
+        ],
+        cwd=work, capture_output=True, text=True, timeout=1800,
+    )
+    if proc.returncode != 0:
+        raise SystemExit(f"claude exited {proc.returncode}:\n{proc.stderr[-2000:]}")
 
-        new = [
-            p for p in (work / "corpus").rglob("*.md")
-            if p.relative_to(work) not in before
-            and "_inbox" not in p.parts and p.name != "ROUND.md"
-        ]
-        if not new:
-            raise SystemExit("live run seeded no new story file under corpus/")
-        story = "\n".join(p.read_text() for p in new)
+    new = [
+        p for p in (work / "corpus").rglob("*.md")
+        if p.relative_to(work) not in before
+        and "_inbox" not in p.parts and p.name != "ROUND.md"
+    ]
+    if not new:
+        raise SystemExit("live run seeded no new story file under corpus/")
+    story = "\n".join(p.read_text() for p in new)
 
-        round_path = work / "ROUND.md"
-        round_text = round_path.read_text() if round_path.exists() else ""
-        if not round_text:
-            try:  # fall back to the session's final message
-                round_text = json.loads(proc.stdout).get("result", "")
-            except (json.JSONDecodeError, AttributeError):
-                round_text = ""
-        return story, round_text
+    round_path = work / "ROUND.md"
+    round_text = round_path.read_text() if round_path.exists() else ""
+    if not round_text:
+        try:  # fall back to the session's final message
+            round_text = json.loads(proc.stdout).get("result", "")
+        except (json.JSONDecodeError, AttributeError):
+            round_text = ""
+    return story, round_text
 
 
 def main() -> int:
