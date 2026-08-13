@@ -1,7 +1,11 @@
 ---
 title: <the arc, not the project — "Breaking the docs-platform deadlock", not "DocsPlatform">
-company: <folder name>
+company: <folder name — or personal-projects, for an arc that belongs to no employer>
 role: <the role they held DURING this arc — not their title at the company>
+authorship:          # who produced the artifact itself — establish it before anything renders
+                     # (`[WHO-OWNED-IT]`'s provenance tell). Authorship is not proficiency in
+                     # the stack; record each claim separately. Required for personal projects.
+  - <artifact> — <by hand | directed an agent that wrote it | one of N authors> (source, date)
 period: <what's actually known. "?" is a legitimate value. Don't guess.>
 status: <seed | drafted, partially fact-checked | drafted>
 related:

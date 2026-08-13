@@ -76,7 +76,7 @@ is frequently better than the theory would have been.
 
 **Establish who owned it before you write it down.** `[WHO-OWNED-IT]` Work described in the
 first person is not always the speaker's, and the render skill can only attribute as honestly as
-this session recorded. Three tells, one family — each is a signal that ownership is still
+this session recorded. Four tells, one family — each is a signal that ownership is still
 unestablished, and each has its own move:
 
 - **Grammar — "we" is unattributed until it's split.** It covers *I did this*, *I was on the
@@ -93,8 +93,16 @@ unestablished, and each has its own move:
   Detail reads as ownership and it isn't. So the trigger is counter-intuitive: **when a
   mechanism is described well enough that you're ready to write it down, that is the moment to
   ask who designed it.**
+- **Provenance — "built" no longer says whose keystrokes.** A project the user built can have
+  been written by hand, produced by an agent they directed, or delivered by a team they ran,
+  and the verb is identical in all three mouths. The move is to ask what the build actually
+  consisted of, step by step, and record which it was in the story's `authorship:` block — the
+  claims render differently, and a guess in either direction is wrong often enough that only
+  asking settles it. Personal projects are where this tell fires hardest, because no employer
+  context bounds the claim. And authorship is not proficiency: writing it by hand says nothing
+  about depth in the stack, and lifting one claim never lifts the other.
 
-The general shape: articulacy sets off the other two, because the fluent account is the one you
+The general shape: articulacy sets off the others, because the fluent account is the one you
 stop questioning. Sibling to *chase the generic word* `[GENERIC-WORD]`, which catches the
 opposite failure — there, vagueness hides that nothing happened; here, precision hides who it
 happened to.
