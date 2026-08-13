@@ -7,10 +7,10 @@ either — git keeps them.
 
 ## Cursor
 
-**Reviewed up to corpus commit `e2e2c91` (2026-08-11), lesson log and repo instructions read
-in full.** Start the next pass from `git log -p e2e2c91..HEAD -- <intake paths>`. Advance this
-sha when a pass finishes, and don't replace it with a date — a date can't be diffed, and it
-misses amendments to older entries.
+**Reviewed up to corpus commit `07e0d91` (2026-08-13), lesson log, repo instructions and work
+backlog read in full.** Start the next pass from `git log -p 07e0d91..HEAD -- <intake paths>`.
+Advance this sha when a pass finishes, and don't replace it with a date — a date can't be
+diffed, and it misses amendments to older entries.
 
 ## Declined — do not re-propose
 
@@ -39,6 +39,21 @@ the corpus that suggested it.
   number where preferences live. The rest of that corpus section ported in the same pass —
   the Wednesday test, don't-restate-the-résumé, practical facts in the close — so a future
   pass seeing the kit diverge only on the number is seeing a decision, not an omission.
+
+- **Worktree-per-change git discipline** (declined 2026-08-13). The corpus's repo instructions
+  grew a full concurrency protocol — one worktree per change, `--ff-only` merges, explicit-path
+  staging — because several sessions commit to that repo at once. The kit's skills prescribe no
+  git workflow at all, and the case for adding one rests entirely on one repo's collision
+  pattern; a single-session corpus never hits it. Revisit only if concurrent-session collisions
+  prove to be a class, not an incident.
+
+- **The baseline-letter "general thesis" clause is resolved upstream, not open.** The corpus's
+  work backlog still carries as *open* a proposed clause giving a baseline letter "the
+  strongest general answer to why this role family" as its thesis. The kit answered the same
+  gap differently in 1.16.10: a baseline letter is a summary-led scaffold — no why-them, no JD
+  thesis, stories as one-clause flashes, flagged if about to be sent unedited. A future pass
+  seeing the corpus clause unshipped is seeing a design superseded by a stronger one, not an
+  omission.
 
 - **The recurrence-gated version of *absent* vs. *unwritten* is still sitting in the corpus.**
   The kit shipped the ungated version in release B — `fit.md` records `no-corpus-evidence`,
