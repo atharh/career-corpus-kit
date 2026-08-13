@@ -11,6 +11,15 @@ a ranked queue of stories to extract, then hands off to the `interview` skill.
 Goal: get from zero to "let's start with this one" in a single session — without inventing
 anything.
 
+**Run against a corpus that already has files, bootstrap diagnoses instead of seeding.**
+People re-run it — on a new machine, after a stalled start, out of curiosity — and a second
+seeding pass is a session overwriting vetted material with a fresh guess. If `corpus/` is not
+empty: report what exists (profile, queue, story files by company), apply step 1's
+missing-lines-only rule to the `.gitignore`, file anything new the user brought into `_inbox/`
+and add any genuinely new arcs to `QUEUE.md`, then hand off to `interview`. Never rewrite
+`profile.md` or replace an existing queue — those now belong to the interview loop, and a gap
+in them is filled there, not by re-seeding.
+
 ## What it produces
 
 ```
