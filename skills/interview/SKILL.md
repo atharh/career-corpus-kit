@@ -225,6 +225,53 @@ not discomfort — *demand the mistake* passes it easily, because "tell me about
 it wrong" is asked in nearly every interview loop, and so are the cost, the opposition, and the
 person who lost. A story with no mistake in it has a hole exactly where a question is coming.
 
+## Rules specific to capability files
+
+Some evidence has no arc. *"What's your experience with <technology>?"* — asked out loud in a
+loop, or as a self-rating box on an application form — spans companies and decades, and neither
+existing kind can hold the answer: a story file wants one arc with one central decision
+`[ONE-ARC]`, and a through-line holds patterns of behaviour, not tool claims. A bare inventory
+is worse than either: "used X at three companies" is a record of X existing near the user, not
+of anything they did.
+
+**When the question is "what's your experience with X", open a capability file.**
+`[CAPABILITY-FILE]` One file per technology, `corpus/capabilities/<technology>.md`, opening
+with the question it answers. One technology per file even when the career genuinely spans two
+rivals — a merged file flattens two different depths into one claim; write two files and
+cross-reference. The unit inside is what the user *did with* the technology, not where it was
+present. See `templates/capability.md` for the skeleton.
+
+**A capability file owns no facts.** `[OWNS-NO-FACTS]` It is a derived index: every fact in it
+cites the story file that owns it, never restated as this file's own. A fact that surfaces here
+with no home yet is held, marked homeless, and **pushed down into the owning company or project
+file as soon as placement settles** — a technology claim that never acquires a place it
+happened is a claim with no anchor, and an anchorless claim is what a follow-up question
+punctures first.
+
+**Every entry carries a depth ceiling, and the file carries the noes.** `[DEPTH-CEILING]`
+Record how far each claim can be pushed before it breaks — *administered it* and *my team ran
+on it* are different claims, and a file that flattens them reads as uniform confidence, which
+is worse than nothing. Keep a noes section — what the user has *not* done with the
+technology — the analogue of a through-line's "where it doesn't hold", and the thing that
+makes the rest credible in a room.
+
+**The self-named list is a queue of things to disprove, not the file's backbone.**
+`[LIST-IS-A-QUEUE]` A technology survives "have you used it" and survives "where", then dies
+at "what ran on it" — self-report reliably swaps in a neighbouring tool or moves a claim to
+the wrong employer, and the list looks strongest exactly while it is least tested. Build the
+file on what the user did; treat each listed technology as a candidate claim and ask what
+actually ran on it before writing it down. This is the ask-what-it-did move from
+`[WHO-OWNED-IT]`, pointed at tools.
+
+**A cross-company file finds conflicts a story file can't — hold them, never launder them.**
+`[CROSS-FILE-CEILINGS]` "Where did you use X" has no respect for file boundaries, so a
+capability file will surface contradictions between one company's recorded ceiling and an
+answer given about another — that is an argument for the shape, and also its hazard: a file
+assembling claims from five companies can quietly launder one company's ceiling away. When an
+answer collides with a recorded ceiling, **block the material and hold the push-down until the
+owner of that ceiling settles it**, per `[MARK-DONT-FIX]` — the reconciliation usually
+produces material nobody would have gone looking for.
+
 ## Lessons — how this skill personalises to you
 
 This skill ships generic and sharpens by accumulating the user's own corrections in
@@ -257,6 +304,10 @@ Context nests, and each layer is written exactly once:
 corpus/
   profile.md              ← career spine: years, education, contact, skills
   through-lines.md        ← cross-career findings. See `[THROUGH-LINES-FILE]`.
+  capabilities/
+    <technology>.md       ← one technology, whole career. See `[CAPABILITY-FILE]`.
+  personal-projects/
+    <project>.md          ← a story file whose arc belongs to no employer
   _inbox/                 ← raw, unextracted material. NEVER a source. See `[INBOX-QUEUE]`.
   <company>/
     background.md         ← company context every story here assumes
@@ -269,6 +320,13 @@ their voice, with beats as `##` subheads so they're addressable without being bo
 `templates/story.md` for the skeleton. **Never use a STAR template** — it produces dead
 checklist prose they'll resent filling in, and STAR can be rendered *from* good prose while
 life can't be put back into prose born as a form.
+
+**A personal project is a story file that belongs to no employer.** Same skeleton, same rules,
+filed under `corpus/personal-projects/` because there is no company folder to claim it. Its
+`authorship:` frontmatter matters doubly there, because no employer context bounds the claim:
+whether the user wrote the thing by hand, directed an agent that produced it, or was one
+author of several is exactly what `[WHO-OWNED-IT]`'s provenance tell establishes — and
+authorship is not proficiency in the stack; lifting one claim never lifts the other.
 
 ### What "vetted" means
 
