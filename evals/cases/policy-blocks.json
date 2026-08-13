@@ -28,13 +28,13 @@
       ],
       "required_in": [
         "apply",
+        "compact",
         "interview",
         "prep",
         "render"
       ],
       "exempt": {
-        "bootstrap": "Creates LESSONS.md and explains it once, retirement included; runs before there is anything to correct.",
-        "compact": "Explicitly forbidden from touching LESSONS.md — pruning the scar tissue defeats it, and a wrong entry is retired where it misfired."
+        "bootstrap": "Creates LESSONS.md and explains it once, retirement included; runs before there is anything to correct."
       }
     },
     {

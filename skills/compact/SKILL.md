@@ -126,6 +126,33 @@ Work **one file at a time**, and show the user what changed before moving on.
   reviewed operation.
 - **Never sweep a line you don't understand.** Ask.
 
+## Lessons — how this skill personalises to you
+
+This skill ships generic and sharpens by accumulating the user's own corrections in
+`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit. Never edit this
+SKILL.md to record a lesson: the method stays stable and shareable; the scar tissue stays
+private and personal.
+
+A compaction session is where sweep-or-keep calls get corrected — "that line was a ceiling",
+"never sweep X-shaped notes" — and those corrections are lessons like any other. Carrying this
+block does not loosen the Never list above: reading and appending to `LESSONS.md` is not
+compacting it.
+
+- **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
+  additional rule for this user, on equal footing with the hard rules above.
+- **After a correction that generalises, append one dated line**: the mistake, and the rule to
+  apply next time. Route it first — a rule that would still hold if the corpus were about
+  someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
+  rule nobody can diff is a rule nobody can review, port, or undo.
+- **A lesson leaves this file two ways, each on the user's explicit say-so, entry by entry.**
+  One that proves *wrong* is retired in the session where it misfired, struck in place —
+  `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>` — and never applied again; the
+  strike records wrongness, which lives nowhere else. One the method has since *absorbed* is
+  deleted outright, no strike left behind — a shipped rule's duplicate here can only drift —
+  once nothing local remains (no calibration about this user, no number they set, no recorded
+  divergence; trim the entry to that residue if any does) and no session still loads a skill
+  version without the rule.
+
 ## What good looks like
 
 A compacted story file reads as **the current truth about one arc**, with its rules visible
