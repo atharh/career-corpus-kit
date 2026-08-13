@@ -60,18 +60,23 @@ bullets.
 
 ## Cover letter
 
-**Form:** prose, one page. ~350–600 words; one page is a hard ceiling, and a ceiling is not a
-target — shorter reads stronger. If a build pipeline turns single newlines into breaks, keep
-signature lines on their own lines.
+**Form:** prose, ~300–450 words — a full page with greeting and sign-off, and never more.
+The ceiling is not a style preference: the reader is time-poor and skeptical, and a letter
+that can't prioritise is evidence about a candidate whose job is prioritising. Under ~200
+words reads as an afterthought. Structure carries more than raw length — three or four tight
+paragraphs, each doing one job, beat one dense block at the same word count. If a build
+pipeline turns single newlines into breaks, keep signature lines on their own lines.
 
-**What the letter is for.** The résumé already carries the evidence; the letter answers three
-questions, in order: who the user is, why they are writing to *this* company, and why they
-would be good at *this* work. A hiring manager skims it asking one thing — did a person aim
-this at us, or does everyone get this letter?
+**What the letter is for.** The résumé already carries the evidence; the letter's one job is
+to buy the conversation. A hiring manager gives it ten or twenty seconds and skims for three
+things: did a person aim this at us, or does everyone get this letter; have they done
+something like this work before; and can they write clearly — the letter is itself the
+sample for that last one. Every rule below serves those three.
 
 **Rules of the form:**
-- **One thesis, stated in the opening, taken from the part of the posting that describes the
-  work** — what this employer is buying and why they're it. Not "I've done many things." A
+- **One thesis, stated in the opening: the specific work the user would own here**, taken
+  from the part of the posting that describes the work — what this employer is buying and
+  why they're it. Specificity is the proof the posting was read. Not "I've done many things." A
   posting speaks in two registers: what the job is (what gets built, owned, fixed) and how the
   company likes to work (values, culture, method statements). A thesis can come from the JD
   and still come from the wrong part of it. The test for which register is which: ask what
@@ -86,14 +91,21 @@ this at us, or does everyone get this letter?
   the test it has to pass. Admiration anyone could type — impressive product, resonant
   mission — reads as sent-to-everyone. The corpus earns this paragraph with real contact
   (the product used, the domain worked in, the problem hit first-hand) or it stays short.
-- **2–4 beats, each a concrete moment, not a claim.** A specific scene ("you can't
-  un-summarise a monthly total back into rows") beats "I solve messy real-world problems."
-  Show, don't assert — the corpus has the scenes; use them.
-- **Lead with the beat that is the job, and weight the rest by honest relevance.** Not
-  chronology. The story matching what the role actually is opens the case; a marginal match
-  survives as a clause, not a paragraph — a beat inflated past its relevance is the
-  letter-level version of an unsourced number.
-- **Write beats as the calls the user made, not the scope they held.** "Chose X over Y,
+- **One story, told fully — a second only if both stay short.** Three or four sentences:
+  the situation, the calls made, the measurable outcome. The story's job is to make the
+  thesis vivid, not to survey the career — the résumé does the surveying, and a letter
+  stuffed with mini-anecdotes is a résumé with worse formatting. Tell it as a concrete
+  moment, not a claim: a specific scene ("you can't un-summarise a monthly total back into
+  rows") beats "I solve messy real-world problems." The corpus has the scenes; use them.
+- **Pick the story by honest relevance, not chronology or pride.** The story matching what
+  the role actually is carries the case; a marginal second match survives as a clause, not
+  a paragraph — material inflated past its relevance is the letter-level version of an
+  unsourced number.
+- **Position in the lane the posting is in.** A leadership role is answered with judgment
+  calls, org outcomes, and work done through others; a senior hands-on role with craft
+  depth and cross-team leverage. The corpus often backs both; the JD picks which face the
+  story wears. Strong evidence from the wrong lane reads as applying for a different job.
+- **Write the story as the calls the user made, not the scope they held.** "Chose X over Y,
   cut Z" is evidence; "owned the platform" is a job description. A decision to kill or
   discard something is often the strongest line in the letter. Attribution rules as
   everywhere: `[HONEST-ATTRIBUTION]`, `[TRUE-VERSION]`.
@@ -103,9 +115,10 @@ this at us, or does everyone get this letter?
 - **Honest framing device or none.** A neat opener that outruns the facts ("done it twice" when
   one instance only half-qualifies) will break under one interview question. Reframe to what's
   defensible word-for-word.
-- **Close briefly, and put the practical facts there.** Location, timezone, availability —
-  the close and nowhere else. No throat-clearing, no "I would welcome the opportunity"
-  boilerplate if a plainer line is truer to their voice.
+- **Close with a plain ask, and put the practical facts there.** One unadorned line asking
+  for the conversation; location, timezone, availability — the close and nowhere else. No
+  throat-clearing, no "I would welcome the opportunity" boilerplate if a plainer line is
+  truer to their voice.
 
 ---
 
