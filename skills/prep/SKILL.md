@@ -196,7 +196,13 @@ private and personal.
 - **Retire a lesson that proves wrong rather than appending its opposite** — in the session
   where it misfired, only on the user's explicit say-so, by striking it in place:
   `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>`. A struck entry is history, never
-  applied again; nothing already in the file is deleted.
+  applied again — the strike records wrongness, which lives nowhere else.
+- **Delete a lesson the method has since absorbed — the strike is only for rules that proved
+  wrong.** Once a shipped skill states the rule with its full force, the entry here is a
+  duplicate that can only drift. Delete it outright, no strike left behind, when nothing local
+  remains — no calibration about this user, no number they set, no recorded divergence; if any
+  does, trim the entry to that residue instead — and no session still loads a skill version
+  without the rule. Each deletion is the user's call, entry by entry, never a session's.
 
 ## After the interview — this is half the skill
 

@@ -82,7 +82,8 @@ application with the `apply` skill — don't create it here.
    that one belongs to the method, and stays out of this file. The header also states how a
    lesson leaves: one that proves wrong is retired on the user's say-so by marking it in place
    — `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>` — and a struck entry is no
-   longer applied. Nothing in the file is ever deleted.
+   longer applied; one the method has since fully absorbed is deleted outright, on the user's
+   say-so, entry by entry.
 7. **Hand off.** Point at the top of the queue: *"Your highest-value story looks like <X>. Run
    `/career-corpus:interview <X>` to start."*
 

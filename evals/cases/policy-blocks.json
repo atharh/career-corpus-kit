@@ -16,7 +16,7 @@
     {
       "id": "lessons-personalisation",
       "policy": "How a skill accumulates the user's corrections in corpus/LESSONS.md",
-      "why": "Four skills write to one file in the user's private repo. If they disagree about where lessons live, how a wrong one is retired, or whether a skill may edit itself, the kit starts rewriting its own prompts in someone's corpus. The retirement markup has to be one form: every session parses it, and a form only one skill knows is a live rule everywhere else.",
+      "why": "Four skills write to one file in the user's private repo. If they disagree about where lessons live, how an entry leaves — retired when it proved wrong, deleted when the method absorbed it — or whether a skill may edit itself, the kit starts rewriting its own prompts in someone's corpus. The retirement markup has to be one form: every session parses it, and a form only one skill knows is a live rule everywhere else.",
       "canonical": "render",
       "invariants": [
         "This skill ships generic and sharpens by accumulating the user's own corrections in `corpus/LESSONS.md` — in their **private** corpus repo, never in the kit.",
@@ -24,7 +24,8 @@
         "**At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an additional rule for this user, on equal footing with the hard rules above.",
         "**After a correction that generalises, append one dated line**: the mistake, and the rule to apply next time. Route it first — a rule that would still hold if the corpus were about someone else belongs to the method, not this file.",
         "a rule nobody can diff is a rule nobody can review, port, or undo",
-        "**Retire a lesson that proves wrong rather than appending its opposite** — in the session where it misfired, only on the user's explicit say-so, by striking it in place: `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>`. A struck entry is history, never applied again; nothing already in the file is deleted."
+        "**Retire a lesson that proves wrong rather than appending its opposite** — in the session where it misfired, only on the user's explicit say-so, by striking it in place: `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>`. A struck entry is history, never applied again — the strike records wrongness, which lives nowhere else.",
+        "**Delete a lesson the method has since absorbed — the strike is only for rules that proved wrong.** Once a shipped skill states the rule with its full force, the entry here is a duplicate that can only drift. Delete it outright, no strike left behind, when nothing local remains — no calibration about this user, no number they set, no recorded divergence; if any does, trim the entry to that residue instead — and no session still loads a skill version without the rule. Each deletion is the user's call, entry by entry, never a session's."
       ],
       "required_in": [
         "apply",
@@ -125,6 +126,16 @@
     }
   ],
   "superseded": [
+    {
+      "text": "nothing already in the file is deleted",
+      "why": "Read as a blanket bar on deletion, which left a lesson the method had since absorbed with no exit: striking it says 'never apply this again' while the shipped rule still applies, and keeping it duplicates a shipped rule into the private file, where it drifts. The strike is only for rules that proved wrong; a fully-absorbed entry is deleted outright, on the user's call.",
+      "replaced_by": "lessons-personalisation"
+    },
+    {
+      "text": "Nothing in the file is ever deleted",
+      "why": "Bootstrap's phrasing of the same blanket bar — see the entry above. The header it writes must state both exits, or the file's own text forbids one of them.",
+      "replaced_by": "lessons-personalisation"
+    },
     {
       "text": "A session gets that rulebook exactly one way",
       "why": "The mandatory full read of render's SKILL.md loaded render's whole rulebook into every prep session to inherit a small contract. Replaced by prep's own drift-guarded copy of the rules that govern a pack.",
