@@ -4,7 +4,8 @@
 
 The skills read this at session start and treat each entry as a rule for working with **this**
 corpus, on equal footing with their built-in rules. Appended when a correction generalises.
-Newest at the bottom. One lesson each, append-only.
+Newest at the bottom. One lesson each. A lesson that proves wrong is struck in place, never
+rewritten; one the kit's method has since fully absorbed is deleted outright.
 
 **This file is the whole personalisation mechanism.** It ships empty. It fills up with the
 things you had to tell Claude twice.
