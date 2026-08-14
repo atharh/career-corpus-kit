@@ -58,15 +58,3 @@ Two options, and they are different products:
 defensible on the material, so nothing in the repo decides it. Decide when audience expansion
 becomes real work.
 
----
-
-## Port the corpus's `verify` skill, once it proves out
-
-**Waiting on corpus-side evidence, noted 2026-08-13.** A live corpus built a repo-local
-skill that reads story files like a technical interviewer and checks publicly checkable
-technical claims against the public record, with citations — the batch counterpart of
-`interview`'s `[CHECK-THE-CLAIM]`, which ported in the same pass. The skill itself was parked
-by its author with explicit proof criteria (multiple company directories covered, each finding
-class through an accept/amend/reject loop, no accepted correction reverted). Propose the port
-when a later promote pass finds those criteria met; port the design, not the implementation's
-paths.

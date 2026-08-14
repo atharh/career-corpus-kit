@@ -7,6 +7,7 @@
 # The live trip-wires are opt-in and cost tokens:
 #   python3 evals/tripwires.py --mode live --runs 3
 #   python3 evals/interview_tripwires.py --mode live --runs 3
+#   python3 evals/verify_tripwires.py --mode live --runs 3
 set -uo pipefail
 cd "$(dirname "$0")/.."
 
@@ -16,6 +17,8 @@ echo
 python3 evals/tripwires.py || status=1
 echo
 python3 evals/interview_tripwires.py || status=1
+echo
+python3 evals/verify_tripwires.py || status=1
 echo
 python3 evals/application_checks.py || status=1
 

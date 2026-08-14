@@ -1,0 +1,40 @@
+{
+  "_comment": [
+    "The claims the verify skill must handle correctly, planted in the fixture.",
+    "",
+    "The corpus vouches for provenance, not truth — so a vetted story file carrying",
+    "a publicly wrong claim is a legal corpus state, and it is exactly the state",
+    "`verify` exists to catch. The trap: the Bellhaven reporting story (2016)",
+    "describes its transform as using PostgreSQL generated columns, a feature that",
+    "shipped in PostgreSQL 12, in 2019. The control: the same file's",
+    "anachronisms_corrected: block already settles 'data mesh', and settled entries",
+    "are not reopened.",
+    "",
+    "`planted` patterns must stay in the target file (offline mode asserts this —",
+    "a trap quietly deleted must not leave the live assertions passing over",
+    "nothing). `expect_in_report` patterns must appear in a live run's report.",
+    "`documented_in` tethers each case to the section that explains it."
+  ],
+
+  "target": "examples/corpus/bellhaven/reporting-migration.md",
+  "documented_in": "evals/README.md",
+
+  "cases": [
+    {
+      "id": "planted-anachronism",
+      "rule": "verify `[CITE-OR-ASK]` — the finding fires, and carries a citation; interview `[CHECK-THE-CLAIM]` is the rule it enforces",
+      "why": "Generated columns shipped in PostgreSQL 12 (2019); the story's work is 2016. One search by an interviewer kills the sentence.",
+      "planted": ["generated columns"],
+      "expect_in_report": ["generated column"],
+      "documented_by": "generated columns"
+    },
+    {
+      "id": "settled-ledger",
+      "rule": "verify — `anachronisms_corrected:` is the settled ledger; settled entries are not reopened",
+      "why": "'data mesh' is already corrected and logged in the fixture. The entry must stay planted so a live run has a settled correction to leave alone.",
+      "planted": ["data mesh", "anachronisms_corrected:"],
+      "expect_in_report": [],
+      "documented_by": "data mesh"
+    }
+  ]
+}
