@@ -71,6 +71,14 @@ day the interview ends — that's where intention 2's highest-quality material c
 Prune the sediment interviews leave behind, and re-render a stale baseline rather than editing
 it by hand. Both show you a diff with a reason per change before anything moves.
 
+```
+/career-corpus:verify
+```
+
+Fact-check the corpus's technical claims against the public record — release dates, feature
+sets, how the mechanism really worked — the way a technical interviewer would, with citations.
+You accept, amend, or reject each finding; nothing is patched silently.
+
 **You don't have to remember the commands.** Each skill advertises when it applies, so "help me
 capture what happened on the migration project" or "I have a loop next Tuesday" routes to the
 right one. The slash commands are the explicit form, for when you want to be sure.
@@ -95,9 +103,9 @@ claude plugin install career-corpus@career-corpus-kit
 ```
 
 The skills show up as `/career-corpus:bootstrap`, `/career-corpus:interview`,
-`/career-corpus:apply`, `/career-corpus:render`, `/career-corpus:prep`, and
-`/career-corpus:compact`. If the install summary says `Run /reload-plugins to activate.`,
-run that.
+`/career-corpus:apply`, `/career-corpus:render`, `/career-corpus:prep`,
+`/career-corpus:compact`, and `/career-corpus:verify`. If the install summary says
+`Run /reload-plugins to activate.`, run that.
 
 <details>
 <summary>Or: install from a clone, without the marketplace</summary>
@@ -193,7 +201,7 @@ most obvious thing to render from it. Each of these is just a prompt:
 The last one is worth doing even when you don't get the job. A question you couldn't answer is
 the most precisely targeted gap you'll ever be handed — a real interviewer found it for you.
 
-## Reference: the six skills, in two lanes
+## Reference: the seven skills, in two lanes
 
 Underneath the five intentions, the kit is two lanes. One builds the corpus. The other spends
 it, one job application at a time.
@@ -205,6 +213,7 @@ it, one job application at a time.
 | **`/career-corpus:bootstrap`** | once, at the start | Reads your existing résumé/LinkedIn, sets up the corpus, and generates a prioritized queue of stories worth extracting. Gets you from empty to "start with this one." |
 | **`/career-corpus:interview`** | whenever a memory surfaces | Interviews you about one memory and writes a vetted story file. Relentless, works in rounds of a few questions at a time, and it never lets a claim in that you can't defend. |
 | **`/career-corpus:compact`** | maintenance | Prunes the sediment interviews leave behind — resolved gaps, dated back-and-forth — while guarding the lines that keep renders honest: your ceilings, rendering decisions, and rejected readings. Run it when a gap list has become more archive than queue. |
+| **`/career-corpus:verify`** | maintenance | Reads story files the way a technical interviewer would and checks every publicly checkable technical claim against the public record, with citations. Findings arrive as a report — you accept, amend, or reject each one; nothing is patched silently, and nothing is corrected without a source. |
 
 **Lane 2 — run an application**
 

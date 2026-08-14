@@ -40,7 +40,9 @@ Sam was the person who didn't mind database work, so it landed on them.
 ## Beat: the boring correct answer
 
 A nightly export into a separate Postgres instance. Reports point at the replica-ish copy;
-production never sees a reporting query again.
+production never sees a reporting query again. Sam's account of the transform: it leaned on
+Postgres's generated columns to keep the derived report fields consistent, so the reporting
+tables never drifted from the export.
 
 There is no clever decision here and the corpus should not manufacture one. **The interesting
 part is what Sam argued *against*:** the VP Engineering wanted to buy a BI tool and point it at

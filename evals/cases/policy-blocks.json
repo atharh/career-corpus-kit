@@ -31,7 +31,8 @@
         "compact",
         "interview",
         "prep",
-        "render"
+        "render",
+        "verify"
       ],
       "exempt": {
         "bootstrap": "Creates LESSONS.md and explains it once, retirement included; runs before there is anything to correct."
@@ -54,7 +55,8 @@
         "bootstrap": "Points at the interview skill's rules rather than restating them.",
         "compact": "Never reads _inbox/; it prunes vetted story files.",
         "prep": "States the sharper application-specific version — a recruiter is selling a job.",
-        "render": "States it as the sourcing rule (see candidate-claim-sourcing), not the storage rule."
+        "render": "States it as the sourcing rule (see candidate-claim-sourcing), not the storage rule.",
+        "verify": "Never reads _inbox/ — unvetted material isn't worth verifying, and extraction may redo it."
       }
     },
     {
@@ -73,7 +75,8 @@
         "bootstrap": "Creates no file named after a person.",
         "compact": "Renames nothing.",
         "interview": "Carries the broader no-names-anywhere rule for story bodies.",
-        "render": "Carries the broader no-names-anywhere rule for artifact prose."
+        "render": "Carries the broader no-names-anywhere rule for artifact prose.",
+        "verify": "Names no files after a human interaction; corrections land in existing story files."
       }
     },
     {
@@ -92,7 +95,8 @@
         "compact": "Renders nothing.",
         "interview": "Writes to the corpus rather than reading from applications/.",
         "prep": "Carries the positive form of the rule under prep-render-invariants, not this folder-scoped bar.",
-        "render": "States the same rule as the three source domains — see the superseded list below for the wording it may not go back to."
+        "render": "States the same rule as the three source domains — see the superseded list below for the wording it may not go back to.",
+        "verify": "Renders nothing and never reads applications/; it audits the corpus the sourcing rule points at."
       }
     },
     {
@@ -120,7 +124,8 @@
         "apply": "Opens the folder and runs the fit check; the artifacts themselves are render's and prep's.",
         "bootstrap": "Renders nothing.",
         "compact": "Renders nothing — it prunes the corpus these rules read from.",
-        "interview": "Writes the vetted claims these rules spend, and states its own capture-side versions."
+        "interview": "Writes the vetted claims these rules spend, and states its own capture-side versions.",
+        "verify": "Renders nothing — it audits the corpus the render rules read from."
       }
     }
   ],
