@@ -226,6 +226,19 @@ def live_checks(spec: dict, story: str, round_text: str, vetted: str) -> list[st
             "states — the ➡️ line is a provocation, never a number for the user to "
             "nod along to (`[NEVER-INVENT]`)"
         )
+
+    # Third built-in: the fixture corpus has no capability file for Kafka, so a seed
+    # that lands vetted Kafka material owes the would-be file a forward pointer in the
+    # story's gaps queue (`[CAPABILITY-HARVEST]`). Vetted technology experience with no
+    # capability file reads as absent to a fit check; the pointer marks the file worth
+    # opening.
+    if not re.search(r"capabilities/[a-z0-9-]*kafka[a-z0-9-]*\.md", story, re.I):
+        failures.append(
+            "capability-harvest: the seeded story never cites a would-be "
+            "`../capabilities/<kafka…>.md` forward pointer — `[CAPABILITY-HARVEST]` "
+            "says a story session landing vetted material about a technology with no "
+            "capability file cites the file anyway, marking it worth opening"
+        )
     return failures
 
 

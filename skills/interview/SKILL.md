@@ -248,6 +248,28 @@ in one — `[OWNS-NO-FACTS]`, `[DEPTH-CEILING]`, `[LIST-IS-A-QUEUE]`, `[CROSS-FI
 live in CAPABILITIES.md, beside the material they bind, and the template embeds them at the
 matching sections.
 
+**Feed capability files from story sessions — by noting what surfaced, never by asking.**
+`[CAPABILITY-HARVEST]` The symmetric twin of `[THROUGH-LINES-FILE]`, for technologies: a fit
+check reads only what is written, so vetted technology experience that lives in story arcs
+with no capability file reads as *absent*, and an application gets scored against a gap the
+user does not have. When a story session lands vetted material about a technology that
+already has a capability file, add the instance there **in the same session** — in the
+capability file, citing the story file that owns the fact, `[OWNS-NO-FACTS]` unchanged. When
+no capability file exists, cite the would-be file anyway — `../capabilities/<technology>.md`
+in the story's gaps queue, marked as a forward pointer — because a pointer that resolves to
+nothing marks a file worth opening, not an error. Candidates for new capability files are
+**derived, never curated**: computed from those forward pointers and from what recurs across
+story files, because a hand-maintained candidates list rots. The derived list is a queue the
+user prunes and generalises, per `[LIST-IS-A-QUEUE]`: a candidate they dismiss as not a
+capability they would claim stays dismissed — record the dismissal where the derivation can
+see it, since a dismissal is the user's decision, not a session's — and a family-level
+candidate, one file for a category of tools, surfaces only when stories evidence more than
+one distinct member. The guard: **never ask capability-inventory questions inline in a story
+interview.** Recall is triggered, and a tool question mid-arc makes people summarise instead
+of remember; "what's your experience with X" passes neither branch of the say-it-out-loud
+test `[SAY-ALOUD]` until a JD or a form makes it render or defend. Harvest what surfaces on
+its own; inventory questions belong to the dedicated round `[CAPABILITY-FILE]` opens.
+
 ## Lessons — how this skill personalises to you
 
 This skill ships generic and sharpens by accumulating the user's own corrections in

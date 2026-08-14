@@ -109,3 +109,7 @@ follows up on "halved a batch job", and "80%" invites "80% of what, measured how
 - [ ] **What did the two watermark bugs actually do?** A concrete near-miss caught by the
       parallel run is the best possible answer to "how do you de-risk a migration", and right
       now it's one clause.
+- [ ] **`../capabilities/airflow.md` — forward pointer, no file yet** (`[CAPABILITY-HARVEST]`).
+      This arc is the corpus's strongest scheduler material — watermark tracking, the
+      parallel-run cutover — and profile.md lists Airflow with no capability file to point an
+      application form at.

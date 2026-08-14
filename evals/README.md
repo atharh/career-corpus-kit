@@ -42,6 +42,12 @@ It also checks that every `/career-corpus:<skill>` mentioned exists, that
 relative links resolve, and that the example corpus keeps its `FICTIONAL`
 banners, its `sources:` blocks, and its `related:` targets.
 
+**Capability-pointer check.** `[CAPABILITY-HARVEST]` makes a dangling
+`capabilities/<x>.md` reference legal on purpose — a story session citing the
+would-be file marks a file worth opening. What keeps that from swallowing typos
+is the marking: every capability reference in `examples/corpus/` either resolves
+or sits in a paragraph that says "forward pointer", and anything else fails.
+
 **Policy drift check.** Table in `cases/policy-blocks.json`. Four policies are
 stated in more than one skill — the Lessons block, `_inbox/`-is-not-evidence,
 no-names-in-filenames, and candidate-claim sourcing — and each entry pins the
@@ -147,12 +153,16 @@ question round to a file. Assertions are scoped the way the rules are:
   pristine, a hit there is rare, and the kept workdir makes it adjudicable.
 - `anywhere` patterns (the name) may not appear at all, in the story or the
   round — `[ROLES-ONLY]` admits no quarantine.
-- Two built-ins run beside the cases: **no number reaches `facts_vetted`
+- Three built-ins run beside the cases: **no number reaches `facts_vetted`
   unless a vetted fixture file states it** (`[SEED-VETTED]` / `[NEVER-INVENT]`
-  made mechanical — ISO dates and single digits exempt), and **no ➡️ line
+  made mechanical — ISO dates and single digits exempt), **no ➡️ line
   carries a number absent from the vetted fixture** — the ➡️ line is a
   provocation, and a plausible number suggested there is exactly the
-  contamination the interview skill says is unrecoverable.
+  contamination the interview skill says is unrecoverable — and **the seeded
+  story cites a would-be `../capabilities/<kafka…>.md` forward pointer**: the
+  fixture corpus has no capability file for Kafka, so the seed landing vetted
+  Kafka material is exactly the case `[CAPABILITY-HARVEST]` exists for, and a
+  seed that leaves no pointer has dropped the harvest.
 
 Offline mode checks the fixture, not the skill: every temptation is still
 planted in the draft (a trap quietly deleted must not leave an assertion

@@ -1,7 +1,8 @@
 # Capability files — the rules
 
 The trigger and the shape live elsewhere: `[CAPABILITY-FILE]` in SKILL.md says when to open
-one, and [templates/capability.md](templates/capability.md) is the skeleton. This file is the
+one, `[CAPABILITY-HARVEST]` says how story sessions feed one, and
+[templates/capability.md](templates/capability.md) is the skeleton. This file is the
 rules that govern the material once a capability file is open. **Read it whenever you open or
 update anything under `corpus/capabilities/`** — updates as much as first openings, because
 every rule here is about how claims accrete.
