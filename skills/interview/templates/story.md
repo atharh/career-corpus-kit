@@ -84,3 +84,6 @@ don't write it here; delete it. Lookups you can do yourself are never gaps.>
 - [ ] **<the sharpest unanswered question, in bold>**
 - [ ] <question>
 - [ ] Verify: <every fact in facts_unvetted>
+- [ ] <only if this arc landed vetted material about a technology with no capability file
+      yet: `../capabilities/<technology>.md` — forward pointer, no file yet
+      (`[CAPABILITY-HARVEST]`)>

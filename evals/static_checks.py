@@ -418,6 +418,31 @@ def check_example_corpus(r: Report) -> None:
                 )
 
 
+def check_capability_pointers(r: Report) -> None:
+    """Every `capabilities/<x>.md` reference in the example corpus resolves or is a
+    marked forward pointer.
+
+    `[CAPABILITY-HARVEST]` makes a dangling capability reference legal on purpose: a
+    story session citing the would-be file marks a file worth opening. What keeps that
+    from swallowing typos is the marking — an unresolved reference whose paragraph never
+    says "forward pointer" is indistinguishable from a broken link, and fails here.
+    """
+    corpus = ROOT / "examples" / "corpus"
+    ref = re.compile(r"[\w./-]*\bcapabilities/[a-z0-9-]+\.md")
+    for path in sorted(corpus.rglob("*.md")):
+        rel = path.relative_to(ROOT)
+        for para in re.split(r"\n[ \t]*\n", path.read_text()):
+            for m in ref.finditer(para):
+                if (path.parent / m.group(0)).exists():
+                    r.check(f"{rel} — capability reference {m.group(0)} resolves", True)
+                    continue
+                r.check(
+                    f"{rel} — capability reference {m.group(0)} is a marked forward pointer",
+                    "forward pointer" in para.lower(),
+                    "unresolved and unmarked — a typo, or a forward pointer missing its marking",
+                )
+
+
 def squash(text: str) -> str:
     """Collapse whitespace so a hard-wrapped sentence matches its one-line form.
 
@@ -548,6 +573,7 @@ def main() -> int:
     check_readme_lists_every_skill(r, names)
     check_policy_blocks(r, names)
     check_example_corpus(r)
+    check_capability_pointers(r)
 
     base = args.base_ref or os.environ.get("EVAL_BASE_REF")
     if base and plugin:
