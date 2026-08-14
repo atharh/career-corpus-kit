@@ -31,30 +31,3 @@ optional until it shows a stable signal distinct from the fixture.
 **Why deferred:** the fixture had to exist first, and the offline half is what stops the
 example itself rotting, which is the failure that has actually happened in this repo.
 
----
-
-## The examples are all engineering
-
-**A positioning call, not a task — still undecided 2026-08-12**, and nothing downstream should
-be planned until it is made. The metadata promises a general career tool — keywords name no
-discipline, the description says "your work history" — and `examples/` delivers a backend
-engineering one: one invented engineer, two invented backend companies, an application fixture
-for a staff engineering role. The skills themselves are nearly clean (re-counted 2026-08-12:
-about a dozen lines of engineering vocabulary, mostly illustrative — an afternoon to
-neutralise, not a rewrite). The concentration is in `examples/`, which is also the first thing
-a reader opens.
-
-Two options, and they are different products:
-
-- **Narrow the positioning.** Say in the README and the plugin description that this is built
-  for technical careers. An afternoon of wording. Honest, and it stops disappointing people
-  who don't fit; the cost is choosing a smaller audience deliberately.
-- **Build one credible second-domain corpus.** One discipline, fabricated to the standard of
-  the existing fixture, plus the vocabulary sweep above. **It has to be convincing or it is
-  worse than the current state** — a thin example in a second discipline reads as a claim the
-  kit can't back. Explicitly *not* a gallery of shallow examples across four fields.
-
-**Why it can't be delegated:** it is a question about who this is for. Both answers are
-defensible on the material, so nothing in the repo decides it. Decide when audience expansion
-becomes real work.
-

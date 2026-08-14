@@ -50,6 +50,28 @@ of the fixture will notice the smell too.
 
 ---
 
+## The examples stay engineering — the kit reads as engineering-focused, and that is fine
+
+**Settled 2026-08-15, by the maintainer.** The backlog carried this as an open positioning
+call: the metadata promises a general career tool while `examples/` delivers a backend
+engineering one, with a choice between narrowing the positioning and building a credible
+second-domain corpus. The call: neither gets built. The kit itself has grown steadily more
+technical — capability files are per-*technology*, `verify` checks claims against release
+histories and changelogs, the harvest rule derives candidates from technology mentions — so
+the examples being engineering is the product matching itself, not a gap. No second-domain
+corpus, and no vocabulary-neutralising sweep of the skills.
+
+What this entry does *not* settle: the README and plugin description still use general
+wording ("your work history"). That stays as-is until it demonstrably disappoints someone —
+tightening it is an afternoon of wording whenever wanted, and doing it preemptively chooses a
+smaller audience for no observed cost.
+
+**Reopens on:** audience expansion becoming real work someone intends to do — at which point
+the old bar still applies: a second-domain example has to be convincing or it is worse than
+none.
+
+---
+
 ## Judge layer for the evals — not until a failure demands it
 
 **Deferred 2026-08-11; boundary reaffirmed 2026-08-12 by an external review.** Every assertion
