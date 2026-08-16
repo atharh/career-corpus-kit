@@ -677,6 +677,16 @@ def check_doctor(r: Report, spec: dict) -> None:
         )
         (root / "corpus" / "_inbox").mkdir()
         (root / "corpus" / "_inbox" / "raw.md").write_text("unvetted\n")
+        # Inbound material in the corpus inbox, twice over: a pasted note that
+        # echoes a thread constraint word for word, and a stray copy sharing a
+        # basename with a real corpus file. Neither may surface — `_inbox/` is
+        # never a constraint's home (`[INBOX-NOT-EVIDENCE]`), and a basename
+        # collision there must not hide the one real match.
+        (root / "corpus" / "_inbox" / "pasted.md").write_text(
+            "RENDERING DECISION 2026-01-07: the demo cluster stays described as shared "
+            "hardware borrowed between teams.\n"
+        )
+        (root / "corpus" / "_inbox" / "handle.md").write_text("unvetted copy\n")
         apps = root / "applications"
         (apps / "unmigrated").mkdir(parents=True)
         # An unmigrated thread with silt in it. Both are true of the same thread
@@ -735,6 +745,17 @@ def check_doctor(r: Report, spec: dict) -> None:
             # Names its own home, which is stronger evidence than any overlap.
             "- RENDERING DECISION 2026-01-04: identity handling is settled in "
             "`corpus/projects/handle.md` and is not repeated here.\n"
+            # Echoed only by corpus/_inbox/pasted.md, which is not an echo.
+            "- RENDERING DECISION 2026-01-07: the demo cluster stays described as shared "
+            "hardware borrowed between teams.\n"
+            # Cites a bare basename that corpus/_inbox/handle.md also carries.
+            "- RENDERING DECISION 2026-01-05: the account biography follows handle.md "
+            "and stays unlinked.\n"
+        )
+        # A recruiter's inbound file quoting a decision back at the candidate.
+        (bad / "_inbox").mkdir()
+        (bad / "_inbox" / "recruiter.md").write_text(
+            "RENDERING DECISION 2026-01-01: the team size stays out of the résumé.\n"
         )
         # A pack that grew a subfolder — the caution count must see into it.
         (bad / "rounds").mkdir()
@@ -824,6 +845,32 @@ def check_doctor(r: Report, spec: dict) -> None:
             "it names corpus/projects/handle.md" in got.stdout,
             "a constraint that cites a path is naming its home, which is not a heuristic at all "
             f"and beats any word overlap\n{got.stdout}",
+        )
+        r.check(
+            "a constraint in an application _inbox/ is not reported",
+            "_inbox/recruiter.md — constraint-marked" not in got.stdout,
+            "inbound material is somebody else's words (`[INBOX-NOT-EVIDENCE]`), so a "
+            "recruiter quoting a decision back is not the user duplicating one — the same "
+            f"exclusion the caution count already makes\n{got.stdout}",
+        )
+        demo_line = next(
+            (ln for ln in got.stdout.split("\n") if "demo cluster" in ln), ""
+        )
+        r.check(
+            "corpus/_inbox/ is never named as a constraint's home",
+            "no echo found" in demo_line and "_inbox" not in demo_line,
+            "an echo living only in corpus/_inbox/ is not an echo — reporting it asserts a "
+            f"home that is never a valid home\n{demo_line!r}\n{got.stdout}",
+        )
+        biography_line = next(
+            (ln for ln in got.stdout.split("\n") if "account biography" in ln), ""
+        )
+        r.check(
+            "an _inbox/ basename collision does not hide the one real match",
+            "it names corpus/projects/handle.md" in biography_line,
+            "a stray copy in corpus/_inbox/ made the basename ambiguous, so the exactly-one "
+            f"rule dropped the real match — the filter has to run before the count\n"
+            f"{biography_line!r}\n{got.stdout}",
         )
         r.check(
             "the caution count sees into a subfolder",
