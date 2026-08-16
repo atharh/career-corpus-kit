@@ -27,6 +27,7 @@ ROOT = Path(__file__).resolve().parent.parent
 # see CLAUDE.md. Everything else (CI, .gitignore, this directory) is exempt.
 USER_VISIBLE = (
     "skills/",
+    "tools/",
     "README.md",
     "PRIVACY.md",
     "examples/",

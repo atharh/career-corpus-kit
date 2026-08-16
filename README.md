@@ -242,6 +242,19 @@ applications/acme-staff-engineer/
 nothing in your corpus backs the main thing they're asking for" is a valid answer. That's a
 cheaper thing to find out now than in the room.
 
+Ask *"what's live?"* and `apply` runs the one script the kit ships, from your repo root:
+
+```
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/application_status.py"
+```
+
+Every thread, its stage, how long it has been quiet — all computed from the files, never stored,
+so it cannot go stale. Its `NEEDS ATTENTION` block is a conformance check rather than a summary:
+each line is one of this kit's stated rules being broken — something sent that was never frozen,
+something frozen that nobody sent, a thread whose events can't be read. What it will not tell
+you is what to do next. Stage and age are derivations; whether a quiet thread is dead is a
+judgement about your career, and the kit doesn't take those.
+
 `render` also works outside a lane — baselines, self-reviews, promo packets, bios. Those belong
 to no application, so no folder gets opened for them.
 

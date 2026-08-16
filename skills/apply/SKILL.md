@@ -75,10 +75,19 @@ reason in it is corpus material.** So is anything the loop exposed. Route it to
 `/career-corpus:interview` and say so explicitly — this is the highest-signal queue the corpus
 ever gets, and it evaporates within a week.
 
-**Asked "what's live?"** — read the `events:` block of each `applications/*/application.md`,
-report stage, age and next action per thread, and name the ones that have gone quiet. Compute
-it; never store it. A thread with a log and no `events:` is unmigrated, and says so — it is
-never reported as a thread with no events.
+**Asked "what's live?"** — run the kit's checker from the corpus repo root rather than
+hand-rolling the computation:
+
+```
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/application_status.py"
+```
+
+It reads the `events:` block of each `applications/*/application.md` and reports stage, age and
+what has gone quiet — computed, never stored. Its `NEEDS ATTENTION` block is conformance rather
+than reporting: every line in it is a stated rule being broken. A thread with a log and no
+`events:` is reported as unmigrated, never as a thread with no events. Read its output back to
+the user in their terms and add the next action per thread, which the tool deliberately refuses
+to compute — that one is a judgement, and `[SURFACE-DONT-DECIDE]` says whose.
 
 ## The fit check — `fit.md`
 

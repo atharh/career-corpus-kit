@@ -97,7 +97,12 @@ first time a technology question or an employer-less arc needs one.
    longer applied; one the method has since fully absorbed is deleted outright, on the user's
    say-so, entry by entry.
 7. **Hand off.** Point at the top of the queue: *"Your highest-value story looks like <X>. Run
-   `/career-corpus:interview <X>` to start."*
+   `/career-corpus:interview <X>` to start."* Mention, without making them run it now, that
+   the kit ships one checker they can run themselves from the repo root once applications
+   exist — `python3 "${CLAUDE_PLUGIN_ROOT}/tools/application_status.py"` — and that it computes
+   what is live rather than storing it. It lives in the kit rather than being copied into the
+   corpus so that a fix reaches them on the next version; a checker that cannot be fixed
+   centrally is the same trap as a manifest.
 
 ## The one rule that matters here
 

@@ -29,7 +29,9 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -195,8 +197,10 @@ def check_event_vocabulary(r: Report, spec: dict, fixture: Path) -> None:
     r.check(
         "the application.md heading does not restate the stage",
         not strays,
-        f"{head[:56]!r} carries {strays} — recomputable from events:, so it drifts silently the "
-        "next time the thread moves. apply `[STATE-FIRST]`",
+        f"{head[:72]!r} contains {strays} — a stage there is recomputable from events:, so it "
+        "drifts silently the next time the thread moves. apply `[STATE-FIRST]`. Name the term "
+        "and let the reader judge: a role genuinely called Inbound Marketing Lead trips this "
+        "and is fine, and 'may restate the stage' would send them hunting for nothing",
     )
 
     entries = list_block(fm, "events")
@@ -493,6 +497,93 @@ def check_gap_not_covered(r: Report, spec: dict, fixture: Path) -> None:
             )
 
 
+STATUS_TOOL = ROOT / "tools" / "application_status.py"
+
+# One synthetic thread per row of the tool's conformance table, and the needle
+# that row must produce. Written to a temp dir rather than into examples/: these
+# are broken on purpose, and a fixture that ships broken threads teaches the
+# broken shape to every reader of the example corpus.
+FM = "---\ncompany: C\nrole: R\n{}---\n\n# C — R\n\n## Log\n\n- 2026-01-01 — **opened** — x\n"
+SENT_OK = "events:\n  - 2026-01-01 opened\n  - 2026-01-02 sent\nsent:\n  date: 2026-01-02\n  artifacts:\n    - resume.md\n"
+ART = "---\nartifact: resume\nlifecycle: {}\ngenerated: 2026-01-02\n---\n\nbody\n"
+
+BROKEN_THREADS = {
+    "no-application-md": (None, "no application.md"),
+    "unmigrated": (FM.format(""), "unmigrated: no events: block"),
+    "unreadable": (FM.format("events:\n  - the sixth of January, opened\n"), "unreadable"),
+    "sent-no-block": (
+        FM.format("events:\n  - 2026-01-01 opened\n  - 2026-01-02 sent\n"),
+        "a sent event but no sent: block",
+    ),
+    "went-out-unfrozen": (FM.format(SENT_OK), "went out but is not lifecycle: submitted"),
+    "frozen-unsent": (FM.format(SENT_OK), "is frozen but nobody sent it"),
+    "bad-lifecycle": (FM.format(SENT_OK), "unknown lifecycle"),
+}
+
+
+def check_status_tool(r: Report, spec: dict) -> None:
+    """The shipped checker agrees with the fixture, and each rule it states bites.
+
+    `apply` specifies "asked what's live, compute it" and shipped no way to do
+    it, so every session hand-rolled the computation and no two had a reason to
+    agree. The tool closes that; these assertions are what stop it from
+    reporting a clean corpus because it silently stopped checking.
+    """
+    if not r.check("the status tool ships", STATUS_TOOL.is_file(), f"no {STATUS_TOOL}"):
+        return
+
+    def run(root: Path) -> subprocess.CompletedProcess:
+        return subprocess.run(
+            [sys.executable, str(STATUS_TOOL), str(root)],
+            capture_output=True, text=True, timeout=60,
+        )
+
+    clean = run(ROOT / spec["source_root"])
+    r.check(
+        "the tool reports the example corpus as conformant",
+        clean.returncode == 0 and "NEEDS ATTENTION" not in clean.stdout,
+        f"exit {clean.returncode}\n{clean.stdout}{clean.stderr}",
+    )
+    r.check(
+        "the tool reads the fixture's stage as the furthest event reached",
+        re.search(r"kestrel\S*\s+outcome\b", clean.stdout) is not None,
+        "`outcome` is the furthest point in the pipeline this thread reached; the last event "
+        f"written is a `routed`, and reading that instead pulls the thread backwards\n{clean.stdout}",
+    )
+
+    with tempfile.TemporaryDirectory() as tmp:
+        apps = Path(tmp) / "applications"
+        for name, (text, _) in BROKEN_THREADS.items():
+            (apps / name).mkdir(parents=True)
+            if text is None:
+                continue
+            (apps / name / "application.md").write_text(text)
+            life = "in-flight" if name == "went-out-unfrozen" else "submitted"
+            (apps / name / "resume.md").write_text(ART.format(life))
+        (apps / "frozen-unsent" / "cover-letter.md").write_text(ART.format("submitted"))
+        (apps / "bad-lifecycle" / "cover-letter.md").write_text(ART.format("archived"))
+
+        got = run(Path(tmp))
+        r.check(
+            "the tool exits non-zero when it has findings",
+            got.returncode == 1,
+            f"exit {got.returncode} — a checker whose exit status ignores its own findings "
+            "cannot gate anything",
+        )
+        for name, (_, needle) in BROKEN_THREADS.items():
+            r.check(
+                f"the tool reports {name}",
+                needle in got.stdout,
+                f"expected {needle!r} in the output\n{got.stdout}{got.stderr}",
+            )
+        r.check(
+            "an unmigrated thread is not reported as having no events",
+            "unmigrated" in got.stdout and re.search(r"unmigrated\s+\(undated\)", got.stdout),
+            "the whole reason the format changed: `no events` and `events I could not read` "
+            f"must never be the same observation\n{got.stdout}",
+        )
+
+
 def check_documented(r: Report, spec: dict) -> None:
     """Each group is explained by a sentence in the example README.
 
@@ -525,6 +616,7 @@ def main() -> int:
         return r.summary()
 
     check_documented(r, spec)
+    check_status_tool(r, spec)
     check_templates_conform(r, spec, fixture)
     check_event_vocabulary(r, spec, fixture)
     check_sent_block(r, spec, fixture)
