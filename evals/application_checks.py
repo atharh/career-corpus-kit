@@ -687,15 +687,36 @@ def check_doctor(r: Report, spec: dict) -> None:
             FM.format("") + "- 2026-01-02 — **sent** — narration\n" + "  and more\n" * 8
         )
 
+        # A second corpus constraint, so the echo test has to pick between two.
+        (root / "corpus" / "craft.md").write_text(
+            "# Craft\n\nRENDERING DECISION 2026-01-02: the support work is described as craft "
+            "and never as a support role.\n"
+        )
+
         bad = apps / "silted"
         bad.mkdir()
         (bad / "application.md").write_text(
             "---\ncompany: C\nrole: R\nevents:\n  - 2026-01-01 opened\n"
-            "  - 2026-01-02 interviewed\n---\n\n"
+            "  - 2026-01-02 interviewed\n"
+            # A marker inside dense frontmatter: no blank line anywhere in the
+            # block, so treating the block as one paragraph quotes the whole
+            # header and buries the marker.
+            "note: RENDERING DECISION 2026-01-03: the salary box takes a range.\n---\n\n"
             "# C — R — INTERVIEWING\n\n## Log\n\n"
             "- 2026-01-01 — **opened** — a line\n"
             + "  more narration\n" * 8
-            + "\nRENDERING DECISION 2026-01-01: the team size stays out of the résumé.\n"
+            # A long log outgrows one heading. Matching `## Log` exactly hides
+            # everything after the continuation, and the threads that need a
+            # second heading are the ones with the most silt under it.
+            + "\n## Log (continued)\n\n- 2026-01-03 — **inbound** — the long one\n"
+            + "  and more\n" * 9
+            # Two bullets, no blank line between them: two constraints echoing
+            # two different corpus files. One unit would attribute the first
+            # bullet's echo to both.
+            + "\n## Constraints\n\n"
+            "- RENDERING DECISION 2026-01-01: the team size stays out of the résumé.\n"
+            "- RENDERING DECISION 2026-01-02: the support work is described as craft "
+            "and never as a support role.\n"
         )
         for name in ("fit.md", "resume.md", "cover-letter.md"):
             (bad / name).write_text(f"# {name}\n\n⚠️ something unresolved here.\n")
@@ -716,6 +737,25 @@ def check_doctor(r: Report, spec: dict) -> None:
             "the heading and log checks read the body, so blocking them behind the format "
             "reports least silt on the corpus that has the most of it, and the count rises as "
             f"the corpus gets cleaner\n{got.stdout}",
+        )
+        r.check(
+            "the log check survives a continuation heading",
+            "the long one" in got.stdout,
+            "matching `## Log` exactly hides everything after `## Log (continued)`, and a log "
+            "that outgrew one heading is the one with the most silt under it — the same "
+            f"least-where-there-is-most failure one level down\n{got.stdout}",
+        )
+        r.check(
+            "a marker in dense frontmatter is quoted as its own line",
+            "'note: RENDERING DECISION" in got.stdout,
+            "YAML has no blank line in it, so treating the block as one paragraph quotes the "
+            f"whole header and buries the marker forty lines down\n{got.stdout}",
+        )
+        r.check(
+            "each item in a list gets its own echo",
+            "corpus/story.md" in got.stdout and "corpus/craft.md" in got.stdout,
+            "a bullet list has no blank lines between items, so several constraints read as one "
+            f"and an echo found for the first is reported for all of them\n{got.stdout}",
         )
         r.check(
             "the constraint echo test survives a hard-wrapped marker",
