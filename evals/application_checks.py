@@ -739,8 +739,15 @@ def check_doctor(r: Report, spec: dict) -> None:
         # A pack that grew a subfolder — the caution count must see into it.
         (bad / "rounds").mkdir()
         (bad / "rounds" / "02-probes.md").write_text("# Probes\n\n🔴 unresolved.\n")
-        for name in ("fit.md", "resume.md", "cover-letter.md"):
+        for name in ("resume.md", "cover-letter.md"):
             (bad / name).write_text(f"# {name}\n\n⚠️ something unresolved here.\n")
+        # A conscientious fit check: it cites a ceiling and names where it came
+        # from, which is the exception `[CONSTRAINT-HAS-ONE-HOME]` states rather
+        # than a violation of it. Reporting this trains the reader to skim.
+        (bad / "fit.md").write_text(
+            "# fit\n\n⚠️ something unresolved here.\n\n"
+            "- RENDERING DECISION 2026-01-04: ceiling per `corpus/projects/handle.md`.\n"
+        )
 
         subprocess.run(["git", "init", "-q", tmp], check=True, capture_output=True)
         subprocess.run(["git", "-C", tmp, "add", "-A"], check=True, capture_output=True)
@@ -784,6 +791,13 @@ def check_doctor(r: Report, spec: dict) -> None:
             "every candidate carries the marker on both sides by construction, so `rendering` "
             "and `decision` were half the required four for free — which matched a generic "
             f"sentence about recorded rendering decisions to a specific one\n{got.stdout}",
+        )
+        r.check(
+            "a fit check citing a ceiling with its source is not reported",
+            "fit.md — constraint-marked" not in got.stdout,
+            "`[CONSTRAINT-HAS-ONE-HOME]` states fit.md as the exception, and the rule's own test "
+            "for it is whether the citation names its source. Reporting the convention working "
+            f"teaches the reader to skim the class\n{got.stdout}",
         )
         r.check(
             "a constraint naming its own corpus file is reported as naming it",

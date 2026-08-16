@@ -288,9 +288,12 @@ def named_corpus_file(unit: str, root: Path) -> Path | None:
         if direct.is_file() and "corpus" in direct.parts:
             return direct.relative_to(root)
         if corpus.is_dir():
-            hit = next(iter(sorted(corpus.rglob(Path(ref).name))), None)
-            if hit is not None:
-                return hit.relative_to(root)
+            # Exactly one, or none. Taking the first of several basename matches
+            # names a file confidently and possibly wrongly, which is the worst
+            # output this tool can produce — the reader trusts a path.
+            hits = sorted(corpus.rglob(Path(ref).name))
+            if len(hits) == 1:
+                return hits[0].relative_to(root)
     return None
 
 
@@ -315,11 +318,27 @@ def check_constraints(f: Findings, root: Path) -> None:
     for p in sorted((root / "applications").rglob("*.md")):
         for quote, words in marked_paragraphs(p.read_text()):
             named = named_corpus_file(quote, root)
-            echo = next((src for src, other in corpus_paras if overlaps(words, other)), None)
+            # All of them, not the first: several echoes means the constraint is
+            # already in more than one corpus file, which is a different problem
+            # from this one and worth seeing rather than hiding behind a match.
+            echoes = sorted({src for src, other in corpus_paras if overlaps(words, other)})
+            # `fit.md` is the exception `[CONSTRAINT-HAS-ONE-HOME]` states, and
+            # the rule's own test for it is whether the citation names its
+            # source: a fit check assesses and cites, and is regenerated, so a
+            # stale citation gets rewritten rather than rotting. A fit check
+            # citing with a path is the convention working, and reporting it
+            # teaches the reader to skim the class. One that restates a ceiling
+            # without naming where it came from is not covered by the exception.
+            if p.name == "fit.md" and named is not None:
+                continue
             if named is not None:
                 where = f"it names {named}, which is where it belongs"
-            elif echo is not None:
-                where = f"the same decision looks to be in {echo}"
+            elif len(echoes) == 1:
+                where = f"the same decision looks to be in {echoes[0]}"
+            elif echoes:
+                where = (f"{len(echoes)} corpus files look like they carry it — "
+                         f"{', '.join(str(e) for e in echoes[:3])}"
+                         f"{'…' if len(echoes) > 3 else ''}")
             else:
                 where = "no echo found in corpus/ — worth checking by hand before deleting"
             f.editorial.append(
