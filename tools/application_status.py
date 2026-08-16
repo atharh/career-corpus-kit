@@ -36,6 +36,21 @@ import appthread as at  # noqa: E402
 QUIET_DAYS = 14
 
 
+def artifact_files(folder: Path, patterns: tuple[str, ...] = ("*.md",)):
+    """Every artifact in a thread folder, at any depth.
+
+    Flat globbing is a scoping failure this codebase has made three times now,
+    and it fails the same way every time: a folder that grew a subfolder is a
+    folder with *more* in it, so the check reports least where there is most.
+    `_inbox/` is excluded because inbound material is not a rendered artifact and
+    carries no lifecycle of the user's.
+    """
+    for pattern in patterns:
+        for path in sorted(folder.rglob(pattern)):
+            if "_inbox" not in path.relative_to(folder).parts:
+                yield path
+
+
 def read_thread(folder: Path) -> dict:
     """Everything derivable about one thread, and an honest failure if not.
 
@@ -105,7 +120,7 @@ def binary_findings(t: dict, folder: Path, tracked: set[Path] | None) -> list[st
         return []
     out = []
     listed = set(t["sent"]["artifacts"])
-    for binary in sorted(p for e in ("*.pdf", "*.docx") for p in folder.glob(e)):
+    for binary in artifact_files(folder, ("*.pdf", "*.docx")):
         if binary.resolve() in tracked:
             continue
         sibling = binary.with_suffix(".md")
@@ -140,8 +155,8 @@ def findings(t: dict, folder: Path) -> list[str]:
         )
 
     listed = set(t["sent"]["artifacts"]) if t["sent"] else set()
-    for f in sorted(folder.glob("*.md")):
-        if f.name == "application.md":
+    for f in artifact_files(folder):
+        if f == folder / "application.md":
             continue
         life = at.lifecycle_of(f.read_text())
         if life is None:
