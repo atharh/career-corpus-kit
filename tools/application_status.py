@@ -169,9 +169,15 @@ def findings(t: dict, folder: Path) -> list[str]:
         elif f.name in listed and life != "submitted":
             out.append(f"{t['name']} — {f.name} went out but is not lifecycle: submitted.")
         elif f.name not in listed and life == "submitted" and t["sent"]:
+            # Deliberately does not say which way to resolve it. The file is
+            # frozen, so "unfreeze it" is not a tidy-up a checker may propose;
+            # and if it did go out, the missing record is in application.md,
+            # which is not frozen at all.
             out.append(
                 f"{t['name']} — {f.name} is frozen but nobody sent it: it is not in "
-                f"sent.artifacts."
+                f"sent.artifacts. If it went out, the gap is in application.md's sent: block. "
+                f"If it did not, the freeze was applied by mistake, and lifting one is a "
+                f"deliberate act rather than a correction."
             )
     return out
 
