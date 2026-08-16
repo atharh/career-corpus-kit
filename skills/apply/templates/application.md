@@ -23,9 +23,9 @@ contacts:            # optional — roles, not names, unless the user wants them
 # <Company> — <Role>
 
 <One or two lines: what this thread is waiting on and whose move it is next. Not the stage —
-`events:` above already ends in that. This paragraph is the only part of the file that gets
-rewritten rather than appended to, and it is what a reader sees first — see the state-first
-rule `[STATE-FIRST]`.>
+`events:` above already ends in that, and neither this paragraph nor the heading above it
+restates it. This paragraph is the only part of the file that gets rewritten rather than
+appended to, and it is what a reader sees first — see the state-first rule `[STATE-FIRST]`.>
 
 ## Log
 

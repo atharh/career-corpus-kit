@@ -227,9 +227,13 @@ folds, and it does not delete.
 
 **The state is at the top; the chronology is below it.** `[STATE-FIRST]` A reader must never
 have to reconstruct *where does this stand* by working forward through a log. `events:` is at
-the top of the file and ends in the current stage, and the paragraph under the heading says
-what the thread is waiting on and whose move it is next — the part that is genuinely not
-derivable. Don't restate the stage there; that would be the rollup `[NO-ROLLUP]` forbids.
+the top of the file and ends in the current stage, so the state is already first — and **no
+other surface restates it**: not the heading, not the paragraph beneath it, not a badge or a
+date beside either. The heading is the one that will tempt you, because it is the most visible
+line in the file and a stage in it reads as a courtesy rather than as the rollup `[NO-ROLLUP]`
+forbids. It is one all the same, and a conspicuous one goes stale in front of everybody the
+next time the thread moves. What the paragraph beneath the heading carries instead is the part
+that is genuinely not derivable: what the thread is waiting on, and whose move it is next.
 Entries that no longer bear on the next decision move into a collapsed `<details>` block, which
 folds on GitHub and stops dead material from reading as live.
 

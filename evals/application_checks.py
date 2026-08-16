@@ -177,6 +177,28 @@ def check_event_vocabulary(r: Report, spec: dict, fixture: Path) -> None:
 
     text = (fixture / "application.md").read_text()
     fm = frontmatter(text) or ""
+
+    # `[STATE-FIRST]`: the state is at the top because `events:` is at the top,
+    # and no other surface restates it. The heading is the one that tempts — the
+    # most visible line in the file, where a stage reads as a courtesy rather
+    # than as a rollup. It is one, and a conspicuous one goes stale in public.
+    # Each event plus its participle, because a heading says INTERVIEWING where
+    # the vocabulary says `interviewed`. Deliberately not a prefix match: `open`
+    # and `sent` are ordinary words, and a company or role name is the one thing
+    # guaranteed to be in this heading.
+    stages = {w for w in vocab} | {re.sub(r"(?:ed|d)$", "", w) + "ing" for w in vocab}
+    body_text = re.sub(r"\A---\n.*?\n---\n", "", text, count=1, flags=re.S)
+    head = next((ln for ln in body_text.splitlines() if ln.startswith("# ")), "")
+    strays = sorted({w for w in stages if re.search(rf"\b{re.escape(w)}\b", head, re.I)})
+    if re.search(r"\d{4}-\d{2}-\d{2}", head):
+        strays.append("a date")
+    r.check(
+        "the application.md heading does not restate the stage",
+        not strays,
+        f"{head[:56]!r} carries {strays} — recomputable from events:, so it drifts silently the "
+        "next time the thread moves. apply `[STATE-FIRST]`",
+    )
+
     entries = list_block(fm, "events")
 
     # An unmigrated thread must report as unmigrated. Reporting it as a thread
