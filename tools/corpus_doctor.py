@@ -80,7 +80,19 @@ CAUTION_FILES = 3
 # a corpus is full of accented words — "résumé" is the obvious one — and an
 # ASCII-only class silently drops them, which made two identical constraints
 # share too few words to be recognised as the same constraint.
-WORD = re.compile(r"[^\W\d_]{5,}")
+#
+# Four letters, not five. Discounting the marker's own words raised the real bar
+# for a *short* constraint, where two or three words carry the whole meaning —
+# "the team size stays out of the résumé" keeps only two at five letters, and
+# `team` and `size` are exactly the words that distinguish it. The proportional
+# half-the-smaller test below is what holds the common four-letter words in
+# check, so the length filter does not have to.
+WORD = re.compile(r"[^\W\d_]{4,}")
+
+# The marker's own vocabulary, derived from the marker so it cannot drift out of
+# step with it. Discounted from the duplicate test below: words guaranteed to be
+# on both sides carry no evidence about whether two constraints are the same one.
+MARKER_WORDS = frozenset(re.findall(WORD, CONSTRAINT.pattern.lower()))
 
 HEADING = re.compile(r"^#{1,6}\s")
 LOG_HEADING = re.compile(r"^#{1,6}\s+Log\b", re.I)
@@ -249,9 +261,37 @@ def overlaps(a: set[str], b: set[str]) -> bool:
     for four content words *and* half of the smaller paragraph's, and it still
     only proposes a candidate — the finding says where to look, never that the
     two are the same.
+
+    The marker's own words are discounted, and that is the difference between the
+    number meaning something and not. Every candidate on both sides contains the
+    marker by construction, so `rendering` and `decision` were contributing half
+    the required four for free — which made the effective bar one or two genuinely
+    distinguishing words, and matched a generic sentence *about* recorded
+    rendering decisions to a specific one.
     """
+    a, b = a - MARKER_WORDS, b - MARKER_WORDS
     shared = a & b
     return bool(a and b) and len(shared) >= 4 and len(shared) >= 0.5 * min(len(a), len(b))
+
+
+def named_corpus_file(unit: str, root: Path) -> Path | None:
+    """A corpus file the constraint names in its own text.
+
+    Not a heuristic at all, and stronger than any word overlap: a constraint that
+    cites a path is naming its own home. Checked first for that reason — the
+    fuzzy test is the fallback rather than the primary, and where this fires the
+    finding can say which file without hedging.
+    """
+    corpus = root / "corpus"
+    for ref in re.findall(r"[\w./-]*\.md", unit):
+        direct = root / ref
+        if direct.is_file() and "corpus" in direct.parts:
+            return direct.relative_to(root)
+        if corpus.is_dir():
+            hit = next(iter(sorted(corpus.rglob(Path(ref).name))), None)
+            if hit is not None:
+                return hit.relative_to(root)
+    return None
 
 
 def check_constraints(f: Findings, root: Path) -> None:
@@ -274,9 +314,14 @@ def check_constraints(f: Findings, root: Path) -> None:
 
     for p in sorted((root / "applications").rglob("*.md")):
         for quote, words in marked_paragraphs(p.read_text()):
+            named = named_corpus_file(quote, root)
             echo = next((src for src, other in corpus_paras if overlaps(words, other)), None)
-            where = f"the same decision looks to be in {echo}" if echo else \
-                "no echo found in corpus/ — worth checking by hand before deleting"
+            if named is not None:
+                where = f"it names {named}, which is where it belongs"
+            elif echo is not None:
+                where = f"the same decision looks to be in {echo}"
+            else:
+                where = "no echo found in corpus/ — worth checking by hand before deleting"
             f.editorial.append(
                 f"{p.relative_to(root)} — constraint-marked, and {where} "
                 f"(`[CONSTRAINT-HAS-ONE-HOME]`): {quote[:90]!r}"
@@ -295,10 +340,16 @@ def check_caution(f: Findings, root: Path) -> None:
         # Blockquoted lines are quoted material or a file header, not the file's
         # own caution about the candidate. Counting them makes every folder look
         # anxious and the check useless — measured, not assumed.
+        # rglob, not glob: a flat scan is the third instance of the scoping
+        # failure this tool keeps making, and it fails the same way as the other
+        # two — a pack that grew a subfolder is a pack with more in it, so the
+        # count would be a floor for a second, invisible reason. `_inbox/` stays
+        # out: inbound material is somebody else's caution, not the user's.
         marked = sorted(
-            p.name for p in folder.glob("*.md")
-            if any(CAUTION.search(ln) for ln in p.read_text().split("\n")
-                   if not ln.lstrip().startswith(">"))
+            str(p.relative_to(folder)) for p in folder.rglob("*.md")
+            if "_inbox" not in p.parts
+            and any(CAUTION.search(ln) for ln in p.read_text().split("\n")
+                    if not ln.lstrip().startswith(">"))
         )
         if len(marked) >= CAUTION_FILES:
             f.editorial.append(
