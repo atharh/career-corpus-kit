@@ -3,7 +3,8 @@ company: <Company, as the posting names it>
 role: <Role, as the posting titles it>
 opened: <YYYY-MM-DD>
 found_via: <job board | referral | inbound | the company's own careers page>
-# No status: field. The last event below is the status — see apply's no-rollup rule `[NO-ROLLUP]`.
+# No status: field. Status is derived from the events below — the furthest pipeline event
+# reached; `inbound` and `routed` never advance it. See apply's no-rollup rule `[NO-ROLLUP]`.
 events:              # the machine-readable thread. One line per event, oldest first, and the
   - <YYYY-MM-DD> opened          # only place anything reads state from — `[STATE-IS-DATA]`.
   - <YYYY-MM-DD> fit-checked     # `<YYYY-MM-DD> <event>`, one space, nothing else on the line.
@@ -23,7 +24,7 @@ contacts:            # optional — roles, not names, unless the user wants them
 # <Company> — <Role>
 
 <One or two lines: what this thread is waiting on and whose move it is next. Not the stage —
-`events:` above already ends in that, and neither this paragraph nor the heading above it
+that is derived from `events:` above, and neither this paragraph nor the heading above it
 restates it. This paragraph is the only part of the file that gets rewritten rather than
 appended to, and it is what a reader sees first — see the state-first rule `[STATE-FIRST]`.>
 

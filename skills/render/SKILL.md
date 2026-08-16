@@ -48,7 +48,7 @@ actually targeted in `applications/`, which is the only evidence of intent a cor
 what the corpus can evidence, because a family nothing can back is not a candidate however
 often it has been targeted. The output is a report: here are the families, here is which
 baseline artifacts each one has, here is the gap. A family with a letter and no résumé is the
-common shape and nothing surfaces it today. Derive it on the spot and never store it — a stored
+common shape, and this derivation is what surfaces it. Derive it on the spot and never store it — a stored
 family list is a rollup that goes stale exactly like the `status:` field `apply`'s `[NO-ROLLUP]`
 bans. This one is not in the status checker deliberately: which family an application belonged
 to is a judgement about a role rather than a field on disk, and a tool that guessed it would be

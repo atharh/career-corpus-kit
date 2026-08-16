@@ -26,6 +26,7 @@ otherwise, so it can gate a commit if the user wants it to.
 from __future__ import annotations
 
 import datetime as dt
+import re
 import subprocess
 import sys
 from pathlib import Path
@@ -34,6 +35,35 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import appthread as at  # noqa: E402
 
 QUIET_DAYS = 14
+
+SHA256_LINE = re.compile(r"^\s+sha256:\s*\S")
+
+
+def listed_markdown(listed: set[str]) -> set[str]:
+    """The Markdown artifacts `sent.artifacts` designates, as folder-relative paths.
+
+    The template says the list names *files the employer received*, and for a PDF
+    submission that is honestly the binary — so a listed `resume.pdf` designates
+    `resume.md`, the frozen source it was built from. Both spellings are the same
+    claim, and treating one as unaccounted-for punishes reading the template
+    plainly.
+    """
+    return {n for n in listed if n.endswith(".md")} | {
+        str(Path(n).with_suffix(".md")) for n in listed if n.endswith((".pdf", ".docx"))
+    }
+
+
+def hash_pinned(md: Path) -> bool:
+    """Whether the artifact records a `submitted.sha256` for its sent bytes.
+
+    `[PIN-NOT-ARCHIVE]` sanctions declining to track a sent binary, with the
+    hash as the documented fallback; a corpus using that opt-out is following a
+    stated rule, not breaking one.
+    """
+    if not md.is_file():
+        return False
+    parts = at.split_frontmatter(md.read_text())
+    return parts is not None and any(SHA256_LINE.match(ln) for ln in parts[0])
 
 
 def artifact_files(folder: Path, patterns: tuple[str, ...] = ("*.md",)):
@@ -124,10 +154,15 @@ def binary_findings(t: dict, folder: Path, tracked: set[Path] | None) -> list[st
         if binary.resolve() in tracked:
             continue
         sibling = binary.with_suffix(".md")
-        if sibling.name in listed:
+        rel_bin = str(binary.relative_to(folder))
+        rel_sib = str(sibling.relative_to(folder))
+        if rel_bin in listed or rel_sib in listed:
+            if hash_pinned(sibling):
+                continue
             out.append(
                 f"{t['name']} — {binary.name} went out but is not in git. It cannot be "
-                f"rebuilt byte-for-byte, so those bytes are unrecoverable: `git add -f` it."
+                f"rebuilt byte-for-byte, so those bytes are unrecoverable: `git add -f` it, "
+                f"or record `submitted.sha256` if the bytes genuinely cannot be tracked."
             )
         elif not sibling.exists():
             out.append(
@@ -148,33 +183,43 @@ def findings(t: dict, folder: Path) -> list[str]:
         ]
 
     out = []
-    if any(e == "sent" for _, e in t["events"]) and t["sent"] is None:
+    reached_sent = any(e == "sent" for _, e in t["events"])
+    if reached_sent and t["sent"] is None:
         out.append(
             f"{t['name']} — a sent event but no sent: block. Which files the employer "
             f"received is recorded nowhere, and nothing else on disk knows it."
         )
+    # The same invariant, other direction: the pair only works as a pair.
+    if t["sent"] is not None and not reached_sent:
+        out.append(
+            f"{t['name']} — a sent: block but no sent event. The frontmatter claims files "
+            f"went out and the thread's events never say so."
+        )
 
-    listed = set(t["sent"]["artifacts"]) if t["sent"] else set()
+    listed = listed_markdown(set(t["sent"]["artifacts"])) if t["sent"] else set()
     for f in artifact_files(folder):
         if f == folder / "application.md":
             continue
+        # The relative path, not the basename: `sent.artifacts` names files in
+        # this folder, and a same-named draft in a subfolder is a different file.
+        rel = str(f.relative_to(folder))
         life = at.lifecycle_of(f.read_text())
         if life is None:
             continue
         if life not in at.LIFECYCLES:
             out.append(
-                f"{t['name']} — {f.name} has unknown lifecycle {life!r}; expected one of "
+                f"{t['name']} — {rel} has unknown lifecycle {life!r}; expected one of "
                 f"{', '.join(at.LIFECYCLES)}."
             )
-        elif f.name in listed and life != "submitted":
-            out.append(f"{t['name']} — {f.name} went out but is not lifecycle: submitted.")
-        elif f.name not in listed and life == "submitted" and t["sent"]:
+        elif rel in listed and life != "submitted":
+            out.append(f"{t['name']} — {rel} went out but is not lifecycle: submitted.")
+        elif rel not in listed and life == "submitted" and t["sent"]:
             # Deliberately does not say which way to resolve it. The file is
             # frozen, so "unfreeze it" is not a tidy-up a checker may propose;
             # and if it did go out, the missing record is in application.md,
             # which is not frozen at all.
             out.append(
-                f"{t['name']} — {f.name} is frozen but nobody sent it: it is not in "
+                f"{t['name']} — {rel} is frozen but nobody sent it: it is not in "
                 f"sent.artifacts. If it went out, the gap is in application.md's sent: block. "
                 f"If it did not, the freeze was applied by mistake, and lifting one is a "
                 f"deliberate act rather than a correction."
@@ -216,7 +261,17 @@ def main(argv: list[str]) -> int:
         dates = [d for d, _ in t["events"]]
         age = days_since(max(dates), today) if dates else None
         when = f"{max(dates)}  {age}d" if dates else "(undated)"
-        shown = t["stage"] or ("unmigrated" if t["unmigrated"] else "unreadable")
+        # Four states, not three: a readable thread whose events are all
+        # non-pipeline (an inbound with no move yet) has no stage, and calling
+        # it unreadable conflates the two states read_thread keeps apart.
+        if t["stage"]:
+            shown = t["stage"]
+        elif t["error"]:
+            shown = "unreadable"
+        elif t["unmigrated"]:
+            shown = "unmigrated"
+        else:
+            shown = "no stage yet"
         row = f"  {t['name']:<46} {shown:<14} {when}"
         reached_sent = (
             t["stage"] is not None

@@ -1,11 +1,12 @@
 > ⚠️ **FICTIONAL EXAMPLE.** Invented person, invented project, invented numbers. Never a
 > source.
 >
-> ⚠️ **TRACKED ON PURPOSE.** `_inbox/` is git-ignored in a real corpus repo, and a doctor check
-> should flag any tracked `_inbox/` file it finds there. This one is committed because
-> `examples/` is not a corpus — the skills never read it, and a fixture with no unvetted
-> material in it cannot demonstrate the rule that unvetted material is never a source. The
-> exemption is the path: `examples/**/_inbox/`. See `examples/README.md`.
+> ⚠️ **TRACKED ON PURPOSE.** `_inbox/` is git-ignored in a real corpus repo, and the corpus
+> doctor flags any tracked `_inbox/` file it finds — this one included, which is expected and
+> not a defect: the check carries no path exemptions, so a report here proves it still bites.
+> This one is committed because `examples/` is not a corpus — the skills never read it, and a
+> fixture with no unvetted material in it cannot demonstrate the rule that unvetted material
+> is never a source. See `examples/README.md`.
 
 # Pasted 2026-03-09 — draft from a previous AI chat, about the Bellhaven Kafka work
 
