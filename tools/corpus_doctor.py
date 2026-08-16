@@ -104,14 +104,6 @@ LOG_HEADING = re.compile(r"^#{1,6}\s+Log\b", re.I)
 # Three bullets in one block are three constraints, not one.
 LIST_ITEM = re.compile(r"^[ \t]*(?:[-*+]|\d+[.)])\s")
 
-# `examples/**/_inbox/` is committed on purpose and the exemption is written
-# into the check rather than discovered by it: `examples/` is not a corpus, the
-# skills never read it, and a fixture with no unvetted material in it cannot
-# demonstrate the rule that unvetted material is never evidence. A doctor that
-# "fixes" it deletes the only trap the trip-wires have.
-INBOX_EXEMPT = re.compile(r"(^|/)examples/.*(^|/)_inbox/")
-
-
 class Findings:
     def __init__(self) -> None:
         self.blocking: list[str] = []
@@ -124,8 +116,12 @@ def stage_terms(vocab) -> set[str]:
     """Each event plus its participle — a heading says INTERVIEWING where the
     vocabulary says `interviewed`. Not a prefix match: `open` and `sent` are
     ordinary words, and a company or role name is the one thing guaranteed to be
-    in that heading."""
-    return set(vocab) | {re.sub(r"(?:ed|d)$", "", w) + "ing" for w in vocab}
+    in that heading. `sent` is irregular — strip-and-append makes "senting", and
+    a SENDING heading walks past a check built for exactly it."""
+    irregular = {"sent": "sending"}
+    return set(vocab) | {
+        irregular.get(w, re.sub(r"(?:ed|d)$", "", w) + "ing") for w in vocab
+    }
 
 
 def body_of(text: str) -> str:
@@ -422,9 +418,9 @@ def check_tracked_inbox(f: Findings, root: Path) -> None:
     the definition of the editorial class.
     """
     try:
-        # --full-name so paths are relative to the repository root: the exemption
-        # below is about where a file sits in the repo, and paths relative to
-        # whatever directory this was pointed at would miss it.
+        # --full-name so paths are relative to the repository root, which is the
+        # only stable way to name a file in a finding regardless of which
+        # directory this was pointed at.
         r = subprocess.run(
             ["git", "-C", str(root), "ls-files", "-z", "--full-name", "*_inbox/*"],
             capture_output=True, text=True, timeout=30,
@@ -433,7 +429,13 @@ def check_tracked_inbox(f: Findings, root: Path) -> None:
         return
     if r.returncode != 0:
         return
-    tracked = [p for p in r.stdout.split("\0") if p and not INBOX_EXEMPT.search("/" + p)]
+    # No path carve-outs. The kit's own examples/ fixture tracks its inbox on
+    # purpose and gets reported like anyone else — an exemption pattern here is
+    # a false negative in any user repo whose paths happen to match it, in the
+    # one check about irreversible exposure. The finding's text carries the
+    # judgement: some repos track it deliberately, and the fixture's banner
+    # says this one does.
+    tracked = [p for p in r.stdout.split("\0") if p]
     for p in sorted(tracked):
         f.editorial.append(
             f"{p} — tracked, but `_inbox/` is unvetted material and is ignored by default. "

@@ -254,9 +254,11 @@ applied, and an additive finding means nothing is wrong — so an assertion that
 merely found the string would miss the failure that matters. Its exit status is
 asserted to be 0 even with findings: it is a report, and *this corpus predates
 the guidance* is not the claim *this corpus violates it*. The
-`examples/**/_inbox/` exemption is asserted as well, because a doctor that
-reports the fixture inbox teaches the next reader to delete the only trap the
-trip-wires have.
+absence of path carve-outs is asserted as well: the tracked-inbox check must
+report the kit's own fixture inbox, because an exemption pattern in the tool
+would be a false negative in any user repo whose paths happened to match it —
+and the fixture files carry banners so the finding reads as expected rather
+than as a chore.
 
 ## Adding a case
 

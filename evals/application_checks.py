@@ -528,6 +528,17 @@ BROKEN_THREADS = {
         FM.format("events:\n  - 2026-01-01 opened\n  - 2026-01-02 sent\n"),
         "a sent event but no sent: block",
     ),
+    "sent-block-no-event": (
+        FM.format(
+            "events:\n  - 2026-01-01 opened\n"
+            "sent:\n  date: 2026-01-02\n  artifacts:\n    - resume.md\n"
+        ),
+        "a sent: block but no sent event",
+    ),
+    "bad-date": (
+        FM.format("events:\n  - 2026-06-31 opened\n"),
+        "not a real calendar date",
+    ),
     "went-out-unfrozen": (FM.format(SENT_OK), "went out but is not lifecycle: submitted"),
     "frozen-unsent": (FM.format(SENT_OK), "is frozen but nobody sent it"),
     "bad-lifecycle": (FM.format(SENT_OK), "unknown lifecycle"),
@@ -592,6 +603,50 @@ def check_status_tool(r: Report, spec: dict) -> None:
         (clean_thread / "resume.md").write_text(ART.format("submitted"))
         (clean_thread / "cover-letter.md").write_text(ART.format("in-flight"))
         (clean_thread / "cover-letter.pdf").write_bytes(b"%PDF-1.4 fake\n")
+        # The template promises a trailing `# …` is stripped; one space is enough.
+        noted = apps / "commented"
+        noted.mkdir()
+        (noted / "application.md").write_text(FM.format(
+            "events: # the thread\n"
+            "  - 2026-01-01 opened # via referral\n"
+            "  - 2026-01-02 sent  # portal\n"
+            "sent:\n  date: 2026-01-02\n  artifacts:\n    - resume.md\n"
+        ))
+        (noted / "resume.md").write_text(ART.format("submitted"))
+        # The employer received the binary; listing it designates the Markdown source.
+        as_pdf = apps / "sent-as-pdf"
+        as_pdf.mkdir()
+        (as_pdf / "application.md").write_text(FM.format(
+            "events:\n  - 2026-01-02 sent\n"
+            "sent:\n  date: 2026-01-02\n  artifacts:\n    - resume.pdf\n"
+        ))
+        (as_pdf / "resume.md").write_text(ART.format("submitted"))
+        (as_pdf / "resume.pdf").write_bytes(b"%PDF-1.4 fake\n")
+        # The sanctioned opt-out: sent bytes not in git, submitted.sha256 recorded.
+        opted = apps / "hash-opt-out"
+        opted.mkdir()
+        (opted / "application.md").write_text(FM.format(SENT_OK))
+        (opted / "resume.md").write_text(
+            "---\nartifact: resume\nlifecycle: submitted\ngenerated: 2026-01-02\n"
+            "submitted:\n  date: 2026-01-02\n  as: resume.pdf\n  sha256: 0f0f0f0f\n"
+            "---\n\nbody\n"
+        )
+        (opted / "resume.pdf").write_bytes(b"%PDF-1.4 fake\n")
+        # A same-named draft in a subfolder is a different file from the listed one.
+        shadow = apps / "draft-shadow"
+        shadow.mkdir()
+        (shadow / "application.md").write_text(FM.format(SENT_OK))
+        (shadow / "resume.md").write_text(ART.format("submitted"))
+        (shadow / "drafts").mkdir()
+        (shadow / "drafts" / "resume.md").write_text(ART.format("in-flight"))
+        # Readable, but every event is non-pipeline: no stage is not unreadable.
+        inbound = apps / "inbound-only"
+        inbound.mkdir()
+        (inbound / "application.md").write_text(
+            FM.format("events:\n  - 2026-01-01 inbound\n")
+        )
+        # A value the lifecycle regex must return as *unknown*, not skip.
+        (apps / "bad-lifecycle" / "extra.md").write_text(ART.format("Submitted"))
         subprocess.run(["git", "init", "-q", tmp], check=True, capture_output=True)
 
         got = run(Path(tmp))
@@ -618,6 +673,47 @@ def check_status_tool(r: Report, spec: dict) -> None:
             "unmigrated" in got.stdout and re.search(r"unmigrated\s+\(undated\)", got.stdout),
             "the whole reason the format changed: `no events` and `events I could not read` "
             f"must never be the same observation\n{got.stdout}",
+        )
+        r.check(
+            "a single-space trailing comment parses",
+            re.search(r"commented\s+sent\b", got.stdout) is not None
+            and "commented — unreadable" not in got.stdout,
+            "the template promises 'a trailing `# …` note is fine and is stripped before "
+            f"parsing'; requiring two spaces turns the promise into an unreadable thread\n"
+            f"{got.stdout}",
+        )
+        r.check(
+            "a capitalized lifecycle is unknown, not invisible",
+            "unknown lifecycle 'Submitted'" in got.stdout,
+            "a value the regex cannot capture must fail as *unknown*, not read as a file "
+            f"with no lifecycle and no checks applying\n{got.stdout}",
+        )
+        r.check(
+            "listing the sent binary designates its Markdown source",
+            "sent-as-pdf — resume.pdf went out but is not in git" in got.stdout
+            and "sent-as-pdf — resume.md is frozen" not in got.stdout,
+            "sent.artifacts says 'files the employer received'; for a PDF submission that "
+            f"is the binary, and reading the template plainly must not produce findings\n"
+            f"{got.stdout}",
+        )
+        r.check(
+            "the sha256 opt-out is a stated rule, not a finding",
+            "hash-opt-out — resume.pdf" not in got.stdout,
+            "[PIN-NOT-ARCHIVE] sanctions declining to track sent bytes, with "
+            "submitted.sha256 as the documented fallback; flagging the sanctioned shape "
+            f"fails every run forever\n{got.stdout}",
+        )
+        r.check(
+            "a same-named draft in a subfolder is not the listed artifact",
+            "draft-shadow — drafts/resume.md" not in got.stdout,
+            "comparing basenames makes drafts/resume.md collide with the top-level "
+            f"resume.md that actually went out\n{got.stdout}",
+        )
+        r.check(
+            "no pipeline events is a state, not unreadable",
+            re.search(r"inbound-only\s+no stage yet", got.stdout) is not None,
+            "a recruiter-outreach thread holding only an inbound event is readable; "
+            f"'unreadable' is reserved for grammar failures\n{got.stdout}",
         )
 
 
@@ -663,10 +759,12 @@ def check_doctor(r: Report, spec: dict) -> None:
         f"{clean.stdout}{clean.stderr}",
     )
     r.check(
-        "the doctor exempts examples/**/_inbox/ by path",
-        "kafka-draft.md" not in clean.stdout,
-        "the fixture inbox is committed on purpose — a doctor that reports it teaches the next "
-        f"reader to delete the only trap the trip-wires have\n{clean.stdout}",
+        "the tracked-inbox check has no path carve-outs",
+        "kafka-draft.md" in clean.stdout,
+        "an exemption pattern in the tool is a false negative in any user repo whose paths "
+        "happen to match it, in the one check about irreversible exposure; the fixture inbox "
+        "is reported like anyone else's, and its banner plus the finding's own text carry "
+        f"the deliberate-tracking case\n{clean.stdout}",
     )
 
     with tempfile.TemporaryDirectory() as tmp:
@@ -757,6 +855,13 @@ def check_doctor(r: Report, spec: dict) -> None:
         (bad / "_inbox" / "recruiter.md").write_text(
             "RENDERING DECISION 2026-01-01: the team size stays out of the résumé.\n"
         )
+        # A heading carrying the one irregular participle in the vocabulary.
+        (apps / "sending").mkdir()
+        (apps / "sending" / "application.md").write_text(
+            "---\ncompany: C\nrole: R\nevents:\n  - 2026-01-01 sent\n---\n\n"
+            "# C — R — SENDING\n\nWaiting on the form.\n\n## Log\n\n"
+            "- 2026-01-01 — **sent** — x\n"
+        )
         # A pack that grew a subfolder — the caution count must see into it.
         (bad / "rounds").mkdir()
         (bad / "rounds" / "02-probes.md").write_text("# Probes\n\n🔴 unresolved.\n")
@@ -832,6 +937,12 @@ def check_doctor(r: Report, spec: dict) -> None:
             "a `submitted` artifact is frozen evidence and deletion is the one thing nobody may "
             "do to it, so advice to delete reads as a chore that cannot be done — and the freeze "
             f"is in the frontmatter of the file being checked, not in the check\n{frozen_line!r}",
+        )
+        r.check(
+            "the participle of sent is sending, not senting",
+            re.search(r"sending — the heading contains.*SENDING", got.stdout) is not None,
+            "strip-and-append derives 'senting', so a SENDING heading walks straight past "
+            f"the check built for exactly it\n{got.stdout}",
         )
         r.check(
             "a fit check citing a ceiling with its source is not reported",

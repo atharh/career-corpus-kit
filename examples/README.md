@@ -57,8 +57,8 @@ a story that's thinner than the others.
 - **The gaps that remain are ones whose answers would change something.** Questions that would
   never reach a bullet, a letter, or a spoken answer aren't parked here — they're deleted.
 - **`corpus/_inbox/` holds one planted temptation on purpose**: an AI-inflated draft of the
-  unextracted Kafka arc, committed here (tracked `_inbox/` is an examples-only exemption, same
-  as the application's) because `evals/interview_tripwires.py` seeds a story from it live and
+  unextracted Kafka arc, committed here (deliberately tracked, and the corpus doctor reports
+  it — expected, same as the application's) because `evals/interview_tripwires.py` seeds a story from it live and
   asserts that none of its inflations become fact. See the tier 2b section of `evals/README.md`.
 
 ---
@@ -109,8 +109,10 @@ check named on day two.
   headcount, how far along the build already is — none of it appears in the letter, the résumé
   or the pack. The dates and the panel shape from the same email are used freely, because those
   are scheduling, not claims. The split is written down in the note itself.
-- **The log has no `status:` field.** The last line is the status. Anything else is a second
-  copy going stale on its own schedule — `apply`'s no-rollup rule `[NO-ROLLUP]`.
+- **The log has no `status:` field.** The status is derived from `events:` — the furthest
+  pipeline event reached, with `inbound` and `routed` never advancing it. Anything stored
+  beside it is a second copy going stale on its own schedule — `apply`'s no-rollup rule
+  `[NO-ROLLUP]`.
 - **The events are in the frontmatter, and only there.** `events:` is what anything reading the
   thread's state reads; the log beneath it carries *why*, and nothing parses it — `apply`'s
   `[STATE-IS-DATA]`. It is not a second copy, it is the only machine-readable one, and the
@@ -135,11 +137,13 @@ check named on day two.
   gives different bytes every run, and `git show <commit>:<path>` answers what a hash never
   could. This repo is documentation and ships no PDFs, so the bytes are untracked here and a
   fingerprint is all there is. Both files say so in a frontmatter comment.
-- **`_inbox/` is committed here on purpose.** It is git-ignored in a real corpus repo, and a
-  future doctor check should flag any tracked `_inbox/` file it finds in one. `examples/` is not
-  a corpus — the skills never read it — so the exemption is the path, `examples/**/_inbox/`, and
-  the file carries a banner saying so. A fixture with no unvetted material in it cannot
-  demonstrate the rule that unvetted material is never evidence.
+- **`_inbox/` is committed here on purpose.** It is git-ignored in a real corpus repo, and the
+  corpus doctor flags any tracked `_inbox/` file it finds — including this one, deliberately:
+  a path exemption in the tool would be a false negative in any repo whose paths happened to
+  match it, in the one check about irreversible exposure. The finding is a judgement rather
+  than a fix, each file's banner records that `examples/` is not a corpus and tracks it
+  knowingly, and a fixture with no unvetted material in it cannot demonstrate the rule that
+  unvetted material is never evidence.
 
 ## What this example is not
 

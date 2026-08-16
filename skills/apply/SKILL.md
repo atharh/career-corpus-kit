@@ -298,8 +298,10 @@ text** rather than an upload — there is no uploaded artifact to point at, so t
 to hash the answer's own Markdown, which the hash then invalidates. Hash a delimited block and
 say where it begins and ends, or record the commit instead and skip the hash.
 
-So `application.md` carries no `status:` field: the last line of its `events:` **is** the
-status, and a field beside it is a second copy on its own schedule. And application-level state
+So `application.md` carries no `status:` field: its `events:` list **is** the status — the
+stage being the furthest pipeline event reached, since `inbound` and `routed` land after
+`interviewed` all the time and reading the last line written would pull a thread backwards —
+and a field beside it is a second copy on its own schedule. And application-level state
 lives in `application.md`'s frontmatter, artifact-level state in each artifact's own — **no
 separate manifest file**, because a file whose only job is to repeat another file's state goes
 stale without anything noticing.

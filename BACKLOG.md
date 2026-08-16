@@ -57,3 +57,24 @@ version of this needs an answer to that, not just an extra row in the table.
 
 **Reopens on:** a second piece of corpus tooling that a pass should have seen and didn't.
 
+
+## The eval suite's private parsers, and the vocabulary's four copies
+
+**Deferred 2026-08-17**, out of the review pass over 1.24.0–1.30.5. Two findings from that
+pass were confirmed and deliberately not fixed inline, because both are consolidation work
+rather than a patch:
+
+- `evals/application_checks.py` carries its own frontmatter/event parsers, and they already
+  disagree with `tools/appthread.py` at the edges (comment stripping, lifecycle capture —
+  both of which just produced real defects in the tools). Green evals therefore do not attest
+  that the fixture is *tool*-parseable, only that it satisfies the evals' private grammar.
+  The fix is the evals importing `appthread`, or an assertion that the two parsers agree on
+  the fixture; either way one grammar, stated once.
+- The nine-event vocabulary exists in four unsynced copies (appthread, the application
+  template, apply's SKILL.md, the examples README) and nothing pins them to
+  `appthread.EVENTS`. A tenth event added to one copy drifts silently.
+
+Same family: `[NOT-EVERY-DOUBT-IS-A-BLOCKER]` and `[CONSTRAINT-HAS-ONE-HOME]` are each stated
+near-verbatim in three SKILL.md files — a CLAUDE.md-consolidate-pass candidate, not a defect.
+
+**Reopens on:** the next change to the event vocabulary or to either parser.

@@ -15,6 +15,7 @@ anchored expression per line is a complete and safe reader.
 
 from __future__ import annotations
 
+import datetime as dt
 import re
 
 # The nine events `apply` defines. A file naming anything else is a file whose
@@ -40,7 +41,10 @@ ITEM_LINE = re.compile(r"^    - (\S.*)$")
 SENT_DATE = re.compile(r"^  date: (\d{4}-\d{2}-\d{2})$")
 BASELINE_PIN = re.compile(r"^  baseline_pin: (\S+)$")
 TOP_KEY = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*:")
-LIFECYCLE = re.compile(r"^lifecycle:\s*[\"']?([a-z-]+)")
+# Any non-space token, not `[a-z-]+`: a value like `Submitted` must come back
+# and fail the LIFECYCLES comparison as *unknown*, not vanish into "this file
+# has no lifecycle" — which reads as "no checks apply".
+LIFECYCLE = re.compile(r"^lifecycle:\s*[\"']?([^\"'#\s]+)")
 
 
 class ThreadFormatError(Exception):
@@ -68,8 +72,25 @@ def strip_comment(line: str) -> str:
     """
     if line.lstrip().startswith("#"):
         return ""
-    cut = line.find("  #")
-    return line[:cut].rstrip() if cut != -1 else line.rstrip()
+    # One space is enough, as in YAML itself — the template promises a trailing
+    # `# …` is stripped, and a stricter rule here turns that promise into a
+    # ThreadFormatError.
+    m = re.search(r"[ \t]#", line)
+    return line[:m.start()].rstrip() if m else line.rstrip()
+
+
+def real_date(iso: str) -> str:
+    """The date, or a raised ThreadFormatError when the calendar disagrees.
+
+    The digit-shape regexes accept `2026-06-31`; letting it through means the
+    first consumer to do date arithmetic dies mid-report instead of this one
+    thread reading as unreadable.
+    """
+    try:
+        dt.date.fromisoformat(iso)
+    except ValueError:
+        raise ThreadFormatError(f"not a real calendar date: {iso!r}")
+    return iso
 
 
 def block(fm_lines: list[str], key: str) -> list[str] | None:
@@ -105,7 +126,7 @@ def parse_events(fm_lines: list[str]) -> list[tuple[str, str]]:
             raise ThreadFormatError(f"not an event line: {line!r}")
         if m.group(2) not in EVENTS:
             raise ThreadFormatError(f"not one of the nine events: {m.group(2)!r}")
-        events.append((m.group(1), m.group(2)))
+        events.append((real_date(m.group(1)), m.group(2)))
     return events
 
 
@@ -131,7 +152,7 @@ def parse_sent(fm_lines: list[str]) -> dict | None:
             SENT_DATE.match(line), BASELINE_PIN.match(line), ITEM_LINE.match(line)
         )
         if m_date:
-            out["date"], listing = m_date.group(1), None
+            out["date"], listing = real_date(m_date.group(1)), None
         elif m_pin:
             out["baseline_pin"], listing = m_pin.group(1), None
         elif stripped in ("  artifacts: []", "  baselines: []"):
