@@ -82,6 +82,12 @@ CAUTION_FILES = 3
 # share too few words to be recognised as the same constraint.
 WORD = re.compile(r"[^\W\d_]{5,}")
 
+HEADING = re.compile(r"^#{1,6}\s")
+LOG_HEADING = re.compile(r"^#{1,6}\s+Log\b", re.I)
+# A list item starts a new unit of meaning even with no blank line before it.
+# Three bullets in one block are three constraints, not one.
+LIST_ITEM = re.compile(r"^[ \t]*(?:[-*+]|\d+[.)])\s")
+
 # `examples/**/_inbox/` is committed on purpose and the exemption is written
 # into the check rather than discovered by it: `examples/` is not a corpus, the
 # skills never read it, and a fixture with no unvetted material in it cannot
@@ -109,6 +115,29 @@ def stage_terms(vocab) -> set[str]:
 def body_of(text: str) -> str:
     parts = at.split_frontmatter(text)
     return parts[1] if parts else text
+
+
+def log_lines(body: str) -> list[str]:
+    """Every line under a Log heading, across however many headings that takes.
+
+    Only bullets in the log are log entries — a resolved gap item under Open
+    questions is `compact`'s territory, not `[LOG-APPEND-ONLY]`'s. But matching
+    `## Log` exactly is how that scoping goes wrong: a long log outgrows one
+    heading and picks up `## Log (continued)`, and everything after the first
+    continuation goes invisible. That reproduces the same failure the blocking
+    class had one level down — least reported where there is most, because the
+    threads with the longest logs are exactly the ones that needed a second
+    heading. So any heading whose text starts `Log` opens a log section, and any
+    other heading closes it.
+    """
+    out: list[str] = []
+    inside = False
+    for ln in body.split("\n"):
+        if HEADING.match(ln):
+            inside = bool(LOG_HEADING.match(ln))
+        elif inside:
+            out.append(ln)
+    return out
 
 
 def check_thread_shape(f: Findings, name: str, text: str) -> None:
@@ -145,11 +174,6 @@ def check_thread_shape(f: Findings, name: str, text: str) -> None:
                 f"nothing here can write it."
             )
 
-    # Only bullets under `## Log` are log entries. Every other `- ` in the file
-    # belongs to something else — a resolved gap item under Open questions is
-    # `compact`'s territory, not `[LOG-APPEND-ONLY]`'s, and telling someone to
-    # compress a checkbox is noise that teaches them to skim the class.
-    log = re.search(r"^## Log[ \t]*$\n(.*?)(?=^## |\Z)", body, re.M | re.S)
     entry, count = None, 0
 
     def flush() -> None:
@@ -164,7 +188,7 @@ def check_thread_shape(f: Findings, name: str, text: str) -> None:
                 f"length; whether this entry still earns its space is a judgement."
             )
 
-    for ln in (log.group(1) if log else "").split("\n"):
+    for ln in log_lines(body):
         if ln.startswith("- "):
             flush()
             entry, count = ln[2:], 1
@@ -176,19 +200,43 @@ def check_thread_shape(f: Findings, name: str, text: str) -> None:
     flush()
 
 
-def marked_paragraphs(text: str) -> list[tuple[str, set[str]]]:
-    """(quoted paragraph, its content words) for each paragraph carrying a marker.
+def constraint_units(text: str) -> list[str]:
+    """The blocks a constraint can occupy, one per unit of meaning.
 
-    Paragraph rather than line, because Markdown here is hard-wrapped: a marker
-    routinely lands on a continuation line, so quoting the line hands the reader
-    a fragment starting mid-sentence, and the echo test below inherits the same
-    damage — four shared words out of a 70-character fragment finds nothing, and
-    then confidently reports no echo for a constraint that has one.
+    Not lines: this Markdown is hard-wrapped, so a marker lands on a continuation
+    line and quoting that line hands back a fragment starting mid-sentence, which
+    also starves the echo test below.
+
+    Not whole paragraphs either, for two reasons found by running it. YAML
+    frontmatter has no blank line in it, so a dense header is a single paragraph
+    and the quote becomes the entire block with the real marker forty lines down
+    — worse than the fragment it replaced. And a bullet list has no blank lines
+    between items, so three bullets naming three different corpus files read as
+    one constraint, and an echo found for the first is reported for all three.
+
+    So: frontmatter splits per line, which is what a YAML line is, and prose
+    splits on blank lines and again at every list item.
     """
+    parts = at.split_frontmatter(text)
+    units = list(parts[0]) if parts else []
+    for block in re.split(r"\n[ \t]*\n", parts[1] if parts else text):
+        current: list[str] = []
+        for ln in block.split("\n"):
+            if LIST_ITEM.match(ln) and current:
+                units.append("\n".join(current))
+                current = []
+            current.append(ln)
+        if current:
+            units.append("\n".join(current))
+    return units
+
+
+def marked_paragraphs(text: str) -> list[tuple[str, set[str]]]:
+    """(quoted unit, its content words) for each unit carrying a marker."""
     out = []
-    for para in re.split(r"\n[ \t]*\n", text):
-        if CONSTRAINT.search(para):
-            flat = re.sub(r"\s+", " ", para).strip()
+    for unit in constraint_units(text):
+        if CONSTRAINT.search(unit):
+            flat = re.sub(r"\s+", " ", unit).strip()
             out.append((flat, set(re.findall(WORD, flat.lower()))))
     return out
 
