@@ -238,14 +238,25 @@ failing to back a requirement may mean the user never did it or did it and never
 wrote it down; those need opposite responses, and picking between them is not the
 kit's call.
 
-**This tier also tests the one thing the kit ships that users run**,
-`tools/application_status.py`. It gets both halves: the example corpus must come
-back conformant, and a temp corpus built one-broken-thread-per-rule must produce
-every finding the tool claims to make. The broken threads live in a temp
-directory rather than in `examples/`, because a fixture that ships broken threads
-teaches the broken shape to everyone reading it. The tool's exit status is
-asserted too — a checker whose exit code ignores its own findings can't gate
-anything.
+**This tier also tests the two things the kit ships that users run.**
+`tools/application_status.py` gets both halves: the example corpus must come back
+conformant, and a temp corpus built one-broken-thread-per-rule must produce every
+finding the tool claims to make. The broken threads live in a temp directory
+rather than in `examples/`, because a fixture that ships broken threads teaches
+the broken shape to everyone reading it. The tool's exit status is asserted too —
+a checker whose exit code ignores its own findings can't gate anything.
+
+`tools/corpus_doctor.py` is asserted the same way, with one difference that is
+the point of the tool: a finding must land in the *right class*. Blocking,
+mechanical, editorial and additive exist because the four need different
+handling — a mechanical fix may be proposed, an editorial one must never be
+applied, and an additive finding means nothing is wrong — so an assertion that
+merely found the string would miss the failure that matters. Its exit status is
+asserted to be 0 even with findings: it is a report, and *this corpus predates
+the guidance* is not the claim *this corpus violates it*. The
+`examples/**/_inbox/` exemption is asserted as well, because a doctor that
+reports the fixture inbox teaches the next reader to delete the only trap the
+trip-wires have.
 
 ## Adding a case
 

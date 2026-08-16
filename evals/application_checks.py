@@ -621,6 +621,98 @@ def check_status_tool(r: Report, spec: dict) -> None:
         )
 
 
+DOCTOR = ROOT / "tools" / "corpus_doctor.py"
+
+# One deliberately broken corpus, one expectation per class. The doctor's four
+# classes are its whole design — they exist because the four need genuinely
+# different treatment — so the assertion is that a finding lands in the right
+# class, not merely that it is found.
+DOCTOR_CASES = [
+    ("BLOCKING", "unmigrated: no events: block"),
+    ("MECHANICAL", "the heading contains"),
+    ("MECHANICAL", "tracked, but `_inbox/` is unvetted"),
+    ("EDITORIAL", "no paragraph under the heading"),
+    ("EDITORIAL", "a log entry runs"),
+    ("EDITORIAL", "constraint-marked line"),
+    ("EDITORIAL", "caution markers in"),
+    ("ADDITIVE", "corpus/directions.md — absent"),
+]
+
+
+def check_doctor(r: Report, spec: dict) -> None:
+    """The conformance checker sorts findings into the class that fits them.
+
+    A corpus several versions behind otherwise gets a wall it cannot act on, so
+    ordering by what blocks what is the feature rather than the formatting. And
+    the classes are not interchangeable: a mechanical fix may be proposed, an
+    editorial one must never be applied, and an additive finding means nothing is
+    wrong at all.
+    """
+    if not r.check("the corpus doctor ships", DOCTOR.is_file(), f"no {DOCTOR}"):
+        return
+
+    def run(root: Path) -> subprocess.CompletedProcess:
+        return subprocess.run(
+            [sys.executable, str(DOCTOR), str(root)], capture_output=True, text=True, timeout=60
+        )
+
+    clean = run(ROOT / spec["source_root"])
+    r.check(
+        "the doctor finds nothing blocking or mechanical in the example corpus",
+        "BLOCKING" not in clean.stdout and "MECHANICAL" not in clean.stdout,
+        f"{clean.stdout}{clean.stderr}",
+    )
+    r.check(
+        "the doctor exempts examples/**/_inbox/ by path",
+        "kafka-draft.md" not in clean.stdout,
+        "the fixture inbox is committed on purpose — a doctor that reports it teaches the next "
+        f"reader to delete the only trap the trip-wires have\n{clean.stdout}",
+    )
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = Path(tmp)
+        (root / "corpus").mkdir()
+        (root / "corpus" / "story.md").write_text(
+            "# Story\n\nRENDERING DECISION 2026-01-01: the team size stays out of the résumé.\n"
+        )
+        (root / "corpus" / "_inbox").mkdir()
+        (root / "corpus" / "_inbox" / "raw.md").write_text("unvetted\n")
+        apps = root / "applications"
+        (apps / "unmigrated").mkdir(parents=True)
+        (apps / "unmigrated" / "application.md").write_text(FM.format(""))
+
+        bad = apps / "silted"
+        bad.mkdir()
+        (bad / "application.md").write_text(
+            "---\ncompany: C\nrole: R\nevents:\n  - 2026-01-01 opened\n"
+            "  - 2026-01-02 interviewed\n---\n\n"
+            "# C — R — INTERVIEWING\n\n## Log\n\n"
+            "- 2026-01-01 — **opened** — a line\n"
+            + "  more narration\n" * 8
+            + "\nRENDERING DECISION 2026-01-01: the team size stays out of the résumé.\n"
+        )
+        for name in ("fit.md", "resume.md", "cover-letter.md"):
+            (bad / name).write_text(f"# {name}\n\n⚠️ something unresolved here.\n")
+
+        subprocess.run(["git", "init", "-q", tmp], check=True, capture_output=True)
+        subprocess.run(["git", "-C", tmp, "add", "-A"], check=True, capture_output=True)
+
+        got = run(root)
+        r.check(
+            "the doctor is a report and does not fail",
+            got.returncode == 0,
+            f"exit {got.returncode} — 'your corpus predates this guidance' is not the same claim "
+            "as 'your corpus violates it', and an exit code cannot say both",
+        )
+        for cls, needle in DOCTOR_CASES:
+            block = re.search(rf"^{cls}[^\n]*\n(.*?)(?=^[A-Z]{{4,}} —|\Z)", got.stdout, re.M | re.S)
+            r.check(
+                f"the doctor reports {needle!r} under {cls}",
+                block is not None and needle in block.group(1),
+                f"absent, or sorted into another class\n{got.stdout}{got.stderr}",
+            )
+
+
 def check_documented(r: Report, spec: dict) -> None:
     """Each group is explained by a sentence in the example README.
 
@@ -654,6 +746,7 @@ def main() -> int:
 
     check_documented(r, spec)
     check_status_tool(r, spec)
+    check_doctor(r, spec)
     check_templates_conform(r, spec, fixture)
     check_event_vocabulary(r, spec, fixture)
     check_sent_block(r, spec, fixture)
