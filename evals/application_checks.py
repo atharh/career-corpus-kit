@@ -37,6 +37,9 @@ CASES = ROOT / "evals" / "cases" / "application-lane.json"
 
 DATE = re.compile(r"^\d{4}-\d{2}-\d{2}$")
 LOG_LINE = re.compile(r"^- (\d{4}-\d{2}-\d{2}) — \*\*([a-z-]+)\*\* — \S")
+# One `events:` entry. Anchored and closed on purpose: the whole point of the
+# format is that a reader without a YAML library is still correct about it.
+EVENT = re.compile(r"(\d{4}-\d{2}-\d{2}) ([a-z-]+)")
 PLACEHOLDER = re.compile(r"^<.*>$")
 
 BEGIN = "<!-- BEGIN VERBATIM POSTING -->"
@@ -95,7 +98,10 @@ def scalar(fm: str, key: str) -> str | None:
 
 
 def list_block(fm: str, key: str) -> list[str]:
-    m = re.search(rf"^{key}:[^\n]*\n((?:[ \t]+-[^\n]*\n?)+)", fm, re.M)
+    # `[ \t]*` so a nested key (`sent.artifacts`) is readable too. Trailing `# …`
+    # is stripped below, because a corpus annotates its frontmatter and a grammar
+    # that calls that a syntax error pushes the annotation out of the file.
+    m = re.search(rf"^[ \t]*{key}:[^\n]*\n((?:[ \t]+-[^\n]*\n?)+)", fm, re.M)
     if not m:
         return []
     return [ln.strip().lstrip("- ").split("#")[0].strip() for ln in m.group(1).splitlines() if ln.strip()]
@@ -147,7 +153,14 @@ def check_templates_conform(r: Report, spec: dict, fixture: Path) -> None:
 
 
 def check_event_vocabulary(r: Report, spec: dict, fixture: Path) -> None:
-    """The log is dated, append-only, and uses the named events and nothing else."""
+    """Events are read as data, from `events:`, and never out of the log prose.
+
+    `apply`'s `[STATE-IS-DATA]`. Parsing the body fails in the unsafe direction:
+    nothing distinguishes a thread with no events from a thread whose events did
+    not parse, so a malformed `sent` line silently disarms every check gated on
+    having reached `sent`. The body stays — it carries *why* — but nothing here
+    derives state from it.
+    """
     tmpl = (ROOT / spec["templates"]["application.md"]).read_text()
     vocab: set[str] = set()
     for line in tmpl.splitlines():
@@ -162,38 +175,131 @@ def check_event_vocabulary(r: Report, spec: dict, fixture: Path) -> None:
         return
     r.check("the event vocabulary is small", len(vocab) <= 12, f"{len(vocab)} events")
 
-    body = section((fixture / "application.md").read_text(), "## Log")
-    lines = [ln for ln in body.splitlines() if ln.startswith("- ")]
-    r.check("the fixture log has entries", bool(lines), "no `- ` lines under ## Log")
+    text = (fixture / "application.md").read_text()
+    fm = frontmatter(text) or ""
+    entries = list_block(fm, "events")
+
+    # An unmigrated thread must report as unmigrated. Reporting it as a thread
+    # with no events is the failure this whole format exists to remove.
+    if not r.check(
+        "the fixture's application.md carries an events: block",
+        bool(entries),
+        "a thread with a log and no events: is UNMIGRATED, not eventless — apply `[STATE-IS-DATA]`",
+    ):
+        return
 
     seen_dates: list[str] = []
     used: set[str] = set()
-    for ln in lines:
-        m = LOG_LINE.match(ln)
+    for entry in entries:
+        m = EVENT.fullmatch(entry)
         if not r.check(
-            f"log line parses: {ln[:56]!r}…",
+            f"events entry parses: {entry[:56]!r}",
             m is not None,
-            "want `- YYYY-MM-DD — **event** — text`",
+            "want `<YYYY-MM-DD> <event>` — one plain string, never a mapping",
         ):
             continue
         assert m is not None
-        date, event = m.group(1), m.group(2)
-        seen_dates.append(date)
-        used.add(event)
+        seen_dates.append(m.group(1))
+        used.add(m.group(2))
         r.check(
-            f"log event {event!r} is in the vocabulary",
-            event in vocab,
+            f"event {m.group(2)!r} is in the vocabulary",
+            m.group(2) in vocab,
             f"vocabulary is {sorted(vocab)}",
         )
     r.check(
-        "the log is in date order",
+        "events are in date order",
         seen_dates == sorted(seen_dates),
-        "an append-only log that jumps backwards has been rewritten, not appended to",
+        "an append-only thread that jumps backwards has been rewritten, not appended to",
     )
     r.check(
         "the fixture exercises most of the vocabulary",
         len(used) >= 5,
         f"only {sorted(used)} used — a fixture that never reaches an outcome teaches half the lane",
+    )
+
+    # The reader's surface still has to exist, and its lines still have to be
+    # dated one-per-event. That is conformance to the template, not state: no
+    # assertion above reads a single character of it.
+    body = section(text, "## Log")
+    lines = [ln for ln in body.splitlines() if ln.startswith("- ")]
+    r.check("the fixture log has entries", bool(lines), "no `- ` lines under ## Log")
+    for ln in lines:
+        r.check(
+            f"log line is a dated entry: {ln[:56]!r}…",
+            LOG_LINE.match(ln) is not None,
+            "want `- YYYY-MM-DD — **event** — text`; the body is the reader's, and stays legible",
+        )
+
+
+def lifecycle_of(path: Path) -> str | None:
+    if not path.is_file():
+        return None
+    return scalar(frontmatter(path.read_text()) or "", "lifecycle")
+
+
+def sent_violations(fm: str, lifecycles: dict[str, str | None]) -> list[str]:
+    """What is wrong with a `sent:` block, given each candidate file's lifecycle.
+
+    `apply`'s `[SENT-NAMES-WHAT-WENT]`, and the two invariants only work as a
+    pair: everything named went out frozen, and nothing else is frozen. Taking
+    `lifecycles` as an argument rather than a folder is what lets the exemption
+    below be asserted rather than merely omitted.
+    """
+    out: list[str] = []
+    if "sent:" not in fm:
+        return out
+    date = re.search(r"^sent:[^\n]*\n(?:[ \t]+[^\n]*\n)*?[ \t]+date:[ \t]*(\S+)", fm, re.M)
+    if not date or not DATE.match(date.group(1)):
+        out.append("sent: has no `date:` in YYYY-MM-DD form")
+    artifacts = list_block(fm, "artifacts")
+    if not artifacts and "baselines:" not in fm:
+        out.append("sent: names nothing — an empty list reads as `nothing was sent`, which is a claim")
+    for name in artifacts:
+        life = lifecycles.get(name)
+        if life is None:
+            out.append(f"sent.artifacts names {name}, which is not in the folder")
+        elif life != "submitted":
+            out.append(f"sent.artifacts names {name}, which is `lifecycle: {life}` — it went out unfrozen")
+    # Baselines are deliberately absent from that loop; see check_sent_block.
+    for name, life in sorted(lifecycles.items()):
+        if life == "submitted" and name not in artifacts:
+            out.append(f"{name} is `lifecycle: submitted` but nobody sent it")
+    return out
+
+
+def check_sent_block(r: Report, spec: dict, fixture: Path) -> None:
+    """`sent:` names what the employer received, and the pair of checks it enables."""
+    fm = frontmatter((fixture / "application.md").read_text()) or ""
+    events = [e.split()[-1] for e in list_block(fm, "events") if EVENT.fullmatch(e)]
+
+    r.check(
+        "a thread that reached `sent` carries a sent: block",
+        ("sent" in events) == ("sent:" in fm),
+        "one without the other — apply `[SENT-NAMES-WHAT-WENT]`",
+    )
+
+    lifecycles = {n: lifecycle_of(fixture / n) for n in spec["artifacts"]}
+    problems = sent_violations(fm, lifecycles)
+    r.check("the fixture's sent: block is consistent", not problems, "; ".join(problems))
+
+    # The exemption, pinned. `sent.baselines` entries are NOT held to
+    # `lifecycle: submitted`, because a baseline goes on being edited and
+    # freezing one would be wrong rather than noisy. A later reader will see the
+    # asymmetry with `artifacts:` and be tempted to "fix" it; these two
+    # assertions are what makes that a failing change rather than a tidy-up.
+    unfrozen = {"resume.md": "baseline"}
+    as_baseline = "sent:\n  date: 2026-04-09\n  artifacts: []\n  baselines:\n    - resume.md\n"
+    as_artifact = "sent:\n  date: 2026-04-09\n  artifacts:\n    - resume.md\n"
+    r.check(
+        "sent.baselines does not require `lifecycle: submitted`",
+        not sent_violations(as_baseline, unfrozen),
+        f"got {sent_violations(as_baseline, unfrozen)} — a baseline is edited on, and freezing "
+        "one is wrong rather than merely noisy",
+    )
+    r.check(
+        "sent.artifacts does require it",
+        bool(sent_violations(as_artifact, unfrozen)),
+        "the exemption above only means something while the rule it exempts from still bites",
     )
 
 
@@ -399,6 +505,7 @@ def main() -> int:
     check_documented(r, spec)
     check_templates_conform(r, spec, fixture)
     check_event_vocabulary(r, spec, fixture)
+    check_sent_block(r, spec, fixture)
     check_jd_boundary(r, fixture)
     check_fit_states(r, spec, fixture)
     check_artifact_frontmatter(r, spec, fixture)

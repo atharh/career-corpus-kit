@@ -111,6 +111,19 @@ check named on day two.
   are scheduling, not claims. The split is written down in the note itself.
 - **The log has no `status:` field.** The last line is the status. Anything else is a second
   copy going stale on its own schedule — `apply`'s no-rollup rule `[NO-ROLLUP]`.
+- **The events are in the frontmatter, and only there.** `events:` is what anything reading the
+  thread's state reads; the log beneath it carries *why*, and nothing parses it — `apply`'s
+  `[STATE-IS-DATA]`. It is not a second copy, it is the only machine-readable one, and the
+  reason it exists is that prose fails in the unsafe direction: a thread whose `sent` line
+  cannot be read looks identical to a thread that was never sent, and every check that waits
+  for `sent` goes quiet at once. April's entries are folded into a `<details>` block for the
+  same reason the state sits at the top — `[STATE-FIRST]`.
+- **The `sent:` block names which files the employer actually received.** Nothing else on disk
+  knows: an artifact prepared and deliberately not sent looks exactly like an artifact that went
+  out unfrozen. With the list, the two invariants are checkable — everything named is
+  `lifecycle: submitted`, and nothing outside it is. Baselines, when a thread sends one, are
+  listed and deliberately exempt: a maintained résumé keeps being edited, so freezing it would
+  be wrong rather than merely noisy.
 - **Every artifact says which corpus it came from.** `corpus_pin: a3f19c2` in the frontmatter of
   the résumé, the letter and every file in the pack, alongside the files it drew on, the date,
   a lifecycle state, and — for the two things that were actually sent — a hash of what went out.

@@ -3,6 +3,27 @@ company: Kestrel Freight Network
 role: Engineering Lead, Dispatch Data
 opened: 2026-04-06
 found_via: the company's own careers page
+events:
+  - 2026-04-06 opened
+  - 2026-04-07 fit-checked
+  - 2026-04-08 fit-checked
+  - 2026-04-08 routed
+  - 2026-04-09 rendered
+  - 2026-04-09 sent
+  - 2026-04-21 inbound
+  - 2026-04-21 scheduled
+  - 2026-04-24 rendered
+  - 2026-04-28 interviewed
+  - 2026-05-06 interviewed
+  - 2026-05-06 rendered
+  - 2026-05-06 routed
+  - 2026-05-12 outcome
+  - 2026-05-12 routed
+sent:
+  date: 2026-04-09
+  artifacts:
+    - resume.md
+    - cover-letter.md   # the four form-only answers are in the log; they are not files
 contacts:
   - recruiter: email
   - engineering manager, Dispatch: video, screen only so far
@@ -12,7 +33,13 @@ contacts:
 
 # Kestrel Freight Network — Engineering Lead, Dispatch Data
 
+Closed. Nothing is outstanding with Kestrel; what is outstanding is in the corpus queue, where
+three routed items are waiting on an `/career-corpus:interview` session.
+
 ## Log
+
+<details>
+<summary>April — opened, sent, first round</summary>
 
 - 2026-04-06 — **opened** — posting on the company careers page, captured to `jd.md` before it
   moves. Nine real requirements, four of them boilerplate on first read.
@@ -41,6 +68,9 @@ contacts:
   verbatim.
 - 2026-04-28 — **interviewed** — screen. Went fine. The batch-window story did the work.
   Line-management question did not come up. Loop confirmed for week commencing 4 May.
+
+</details>
+
 - 2026-05-06 — **interviewed** — direction-without-ownership round, 45 minutes, with a
   director. The parallel-run story landed. The follow-up did not: *"tell me about a performance
   conversation that went badly."* Sam had nothing and said so.
