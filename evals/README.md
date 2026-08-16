@@ -234,6 +234,15 @@ failing to back a requirement may mean the user never did it or did it and never
 wrote it down; those need opposite responses, and picking between them is not the
 kit's call.
 
+**This tier also tests the one thing the kit ships that users run**,
+`tools/application_status.py`. It gets both halves: the example corpus must come
+back conformant, and a temp corpus built one-broken-thread-per-rule must produce
+every finding the tool claims to make. The broken threads live in a temp
+directory rather than in `examples/`, because a fixture that ships broken threads
+teaches the broken shape to everyone reading it. The tool's exit status is
+asserted too — a checker whose exit code ignores its own findings can't gate
+anything.
+
 ## Adding a case
 
 Add to `cases/render-tripwires.json`:
