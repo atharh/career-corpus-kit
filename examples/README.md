@@ -129,6 +129,12 @@ check named on day two.
   a lifecycle state, and — for the two things that were actually sent — a hash of what went out.
   Same rule as the absent `status:` field, pointing the other way: none of that is recomputable from
   what is on disk, and a corpus that has moved on cannot be asked what it used to say.
+- **The two hashes are the fallback, and this example is the case that needs one.** A real
+  corpus force-adds the sent PDF at the freeze and writes no `sha256`, because a generated
+  artifact cannot be rebuilt — PDF and DOCX writers stamp a creation time, so the same Markdown
+  gives different bytes every run, and `git show <commit>:<path>` answers what a hash never
+  could. This repo is documentation and ships no PDFs, so the bytes are untracked here and a
+  fingerprint is all there is. Both files say so in a frontmatter comment.
 - **`_inbox/` is committed here on purpose.** It is git-ignored in a real corpus repo, and a
   future doctor check should flag any tracked `_inbox/` file it finds in one. `examples/` is not
   a corpus — the skills never read it — so the exemption is the path, `examples/**/_inbox/`, and

@@ -53,11 +53,13 @@ first time a technology question or an employer-less arc needs one.
    # To keep one file deliberately:  git add -f <path>
    _inbox/
 
-   # Rendered output. Rebuildable from the markdown, and carries contact details
-   # in a form that's easy to mis-attach. Re-rendering gives you the document
-   # again, not the bytes you sent.
+   # Rendered output. Working state while a draft is still moving, and it carries
+   # contact details in a form that's easy to mis-attach. Re-rendering gives you
+   # the document again, never the bytes you sent — PDF and DOCX writers stamp a
+   # creation time, so the same markdown builds differently every run.
    #
-   # To keep one file deliberately:  git add -f <path>
+   # So force-add the one that went out, at the moment it freezes:
+   #   git add -f <what went out>
    *.pdf
    *.docx
 

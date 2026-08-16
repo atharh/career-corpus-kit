@@ -155,3 +155,32 @@ pandoc-based conversion enforces the repository-only rule for free, so the instr
 tooling agree rather than the rule resting on someone remembering it.
 
 **Reopens on:** a real sending path that consumes the Markdown file itself.
+
+---
+
+## A generated artifact is tracked at freeze, not fingerprinted
+
+**Settled 2026-08-17.** `[PIN-NOT-ARCHIVE]` used to end at *offer `git add -f` as the user's
+call, never as a default*, resting on the premise that a rendered file is rebuildable from
+committed Markdown. That premise is false, and it was measured on the kit's own recommended
+path rather than assumed: two `pandoc` DOCX builds of one unchanged file differ, and differ
+only in a `dcterms:created` timestamp inside `docProps/core.xml`. Headless-Chrome PDF output
+behaves the same way for the same reason. So the old default guaranteed eventual permanent loss
+of the one artifact an application folder exists to preserve, while spending a frontmatter
+field on a fingerprint of the thing being lost.
+
+The rule now force-adds the sent bytes at the freeze and drops `sha256` where they are tracked;
+the hash stays for bytes that genuinely cannot be — another machine, a portal that kept no
+copy, a user who declines. The `.gitignore` is unchanged, deliberately: a path pattern cannot
+tell a frozen artifact from a working one, and one that tried would commit every in-flight
+re-render.
+
+**Two things a revival must not re-derive.** `SOURCE_DATE_EPOCH=<n> pandoc …` *does* make the
+DOCX byte-identical, verified — so a determinism escape hatch exists for that path and does not
+change the conclusion, because reproducibility also requires the toolchain version to hold
+still for as long as the application folder is worth keeping, and it will not. And the privacy
+argument covers **inbound** binaries only: an employer's brief, a recruiter attachment, a scan.
+An outbound PDF built from committed Markdown carries no privacy delta over the Markdown.
+
+**Reopens on:** a sending format the kit generates deterministically end to end, toolchain
+version included.

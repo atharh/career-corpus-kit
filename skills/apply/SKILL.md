@@ -61,7 +61,9 @@ doesn't repeat them.
 that the folder doesn't hold (a portfolio link, a salary expectation, a "why us" box typed
 into a text field). Applications get answered weeks later and nobody remembers what they
 claimed in the box. Record the files themselves in `application.md`'s `sent:` block, which is
-a separate question from the prose and is asked, never guessed — `[SENT-NAMES-WHAT-WENT]`.
+a separate question from the prose and is asked, never guessed — `[SENT-NAMES-WHAT-WENT]`. This
+is also where a generated artifact enters git: `git add -f` what actually went out, because the
+freeze is the moment it stops being rebuildable — `[PIN-NOT-ARCHIVE]`.
 
 **5. Inbound.** Everything that arrives goes in `_inbox/` with a date, and the log gets a line.
 Recruiter mail, rejections, scheduling, the take-home brief, the "we've moved you to the next
@@ -257,14 +259,38 @@ render drew on, the hash of what was actually sent, the URL a posting was captur
 one and it is gone — the posting 404s, the corpus moves on, and nothing on disk remembers. A
 pin is not a rollup; it records an input.
 
-**But a pin is a fingerprint, not a copy.** `[PIN-NOT-ARCHIVE]` The `sha256` in a submitted
-artifact's frontmatter settles one question and only one: whether a file the user still has is
-the file that went out. It recovers nothing. `bootstrap`'s `.gitignore` keeps `*.pdf` and
-`*.docx` out of git, so by default the sent bytes survive only as the working copy and the pin
-outlives them — never describe the frontmatter as an archive of what a reader saw. A user who
-wants those bytes in history can `git add -f <the file that went out>` at the `sent` event.
-Offer it as their call at the moment it's live, never as a default: it trades away a privacy
-default `PRIVACY.md` sets out.
+**A pin is a fingerprint, not a copy — so keep the copy.** `[PIN-NOT-ARCHIVE]` A `sha256`
+settles one question and only one: whether a file the user still has is the file that went out.
+It recovers nothing, and frontmatter is never an archive of what a reader saw. That matters
+more than it reads, because **a generated artifact usually cannot be rebuilt**: PDF and DOCX
+writers stamp a creation time into the output, so the same Markdown through the same tool gives
+different bytes every run, and once the working copy is gone the sent file is gone with it. So
+`git add -f <what went out>` at the moment the artifact freezes — the `sent` event, when its
+`lifecycle:` becomes `submitted`. Before the freeze it is regenerable working state and belongs
+nowhere near git; after it, it is the only evidence of what a reader saw.
+
+This covers what the kit generated from committed source and nothing else. A PDF built from the
+folder's own Markdown carries nothing the Markdown does not, so tracking it spends no privacy
+the repo has not already spent. **Inbound binaries never qualify** — an employer's brief, a
+recruiter's attachment, a scan — and that half of `bootstrap`'s `.gitignore` is what
+`[FOLDER-IS-SENSITIVE]` is really for. Leave the ignore rules alone either way: a path pattern
+cannot tell a frozen artifact from a working one, and one that tried would commit every
+in-flight re-render.
+
+Keep the hash for the case it was built for — bytes that genuinely cannot be tracked: sent from
+another machine, uploaded to a portal that kept no copy, or a file the user declines to commit.
+Opting out is theirs to choose and it is a real trade, so say what it costs rather than just
+recording their answer: the sent bytes stop being recoverable. Growth from doing this is
+bounded but monotonic — two or three files per application, once each, never rewritten.
+
+**Never pin a hash inside the file it hashes.** `[PIN-NOT-SELF]` Writing the pin changes the
+file, so the recorded value is wrong the instant it is saved and every later check reports
+tampering that never happened. That is worse than having no pin: it manufactures alarms at
+exactly the moment someone is trying to trust the folder. A pin references a different file, or
+a delimited region of its own. The case that catches people is a form field taking **pasted
+text** rather than an upload — there is no uploaded artifact to point at, so the obvious move is
+to hash the answer's own Markdown, which the hash then invalidates. Hash a delimited block and
+say where it begins and ends, or record the commit instead and skip the hash.
 
 So `application.md` carries no `status:` field: the last line of its `events:` **is** the
 status, and a field beside it is a second copy on its own schedule. And application-level state
