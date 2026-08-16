@@ -48,7 +48,8 @@
 
   "documented_by": {
     "template-conformance": "The log has no `status:` field.",
-    "event-vocabulary": "the whole thread as a dated event log",
+    "event-vocabulary": "The events are in the frontmatter, and only there.",
+    "sent-block": "names which files the employer actually received",
     "jd-verbatim-boundary": "captured verbatim between two markers",
     "fit-evidence-states": "never `missing`",
     "artifact-frontmatter": "Every artifact says which corpus it came from."

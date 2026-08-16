@@ -15,7 +15,7 @@ It owns the folder. `render` and `prep` write *into* it.
 ```
 applications/<company>-<role>/
   jd.md            ← the posting, verbatim, with its URL and the date you captured it
-  application.md   ← the dated event log, and contacts by role. The last line is the stage
+  application.md   ← events as frontmatter, the dated log beneath it, contacts by role
   fit.md           ← what this role wants, and what the corpus can and can't back
   _inbox/          ← raw inbound — recruiter mail, take-home brief, notes. UNVETTED.
   resume.md        ┐
@@ -60,7 +60,8 @@ doesn't repeat them.
 **4. Sent.** Log the date and what actually went out, including anything the form asked for
 that the folder doesn't hold (a portfolio link, a salary expectation, a "why us" box typed
 into a text field). Applications get answered weeks later and nobody remembers what they
-claimed in the box.
+claimed in the box. Record the files themselves in `application.md`'s `sent:` block, which is
+a separate question from the prose and is asked, never guessed — `[SENT-NAMES-WHAT-WENT]`.
 
 **5. Inbound.** Everything that arrives goes in `_inbox/` with a date, and the log gets a line.
 Recruiter mail, rejections, scheduling, the take-home brief, the "we've moved you to the next
@@ -74,8 +75,10 @@ reason in it is corpus material.** So is anything the loop exposed. Route it to
 `/career-corpus:interview` and say so explicitly — this is the highest-signal queue the corpus
 ever gets, and it evaporates within a week.
 
-**Asked "what's live?"** — read `applications/*/application.md`, report stage, age and next
-action per thread, and name the ones that have gone quiet. Compute it; never store it.
+**Asked "what's live?"** — read the `events:` block of each `applications/*/application.md`,
+report stage, age and next action per thread, and name the ones that have gone quiet. Compute
+it; never store it. A thread with a log and no `events:` is unmigrated, and says so — it is
+never reported as a thread with no events.
 
 ## The fit check — `fit.md`
 
@@ -116,10 +119,12 @@ Where the corpus is thin, the useful output is a **pointer, not a verdict**: *"n
 'led a platform migration' — the closest is `corpus/<company>/<story>.md`, and an interview
 session on <arc> would probably produce it."*
 
-## The log's event vocabulary
+## The event vocabulary
 
-`application.md` is a dated, append-only list of events, and the events are named from a fixed
-set so a thread can be read at a glance six weeks later. Nine of them:
+A thread is a dated list of events, named from a fixed set so it can be read at a glance six
+weeks later. Every event is written in two places at once: a line in `events:` for anything
+that reads state, and a line in the log for the reader who wants to know why — `[STATE-IS-DATA]`.
+Nine events:
 
 | Event | What it marks |
 |---|---|
@@ -136,6 +141,25 @@ set so a thread can be read at a glance six weeks later. Nine of them:
 Something that fits none of them is usually two events. A fixed vocabulary is also what lets a
 reader — or a check — see at a glance that a thread was never `sent`, or was `interviewed`
 without ever being `routed`.
+
+## Migrating a thread that has no `events:` block
+
+A thread opened before the frontmatter existed still has all its events, in prose. Offer to
+migrate it when you next touch the folder, and run the migration like this:
+
+- **Assisted, never automatic.** Propose the block, report what you could not resolve, and let
+  the user confirm before writing — report-then-patch, the shape `verify` already uses.
+- **The mechanical half only.** Lift the events into `events:` and fold the existing body into
+  the collapsed block **verbatim**. Don't rewrite paragraphs into one-liners and don't decide
+  what still binds: auto-summarising provenance is a silent lossy edit, and compression is a
+  judgement the user makes thread by thread, possibly never for a closed one.
+- **Ask for `sent.artifacts`.** Which files an employer received is not on disk anywhere, which
+  is the whole reason the block exists. A plausible guess here is indistinguishable from a fact.
+- **A log older than the vocabulary is expected to defeat you.** Say which lines you could not
+  parse and leave them alone. A confident wrong answer here is worse than an unmigrated thread,
+  because the unmigrated one reports itself as unmigrated and this one reports itself as done.
+- **Touch `application.md` and nothing else**, so a migration can never collide with a frozen
+  artifact, and run it twice safely.
 
 ## Hard rules
 
@@ -171,9 +195,43 @@ filenames, names in the body if the user wants them. Filenames get screenshotted
 and tab-completed in front of other people — including, eventually, in front of someone from
 that company.
 
+**State is data; prose is for the reader.** `[STATE-IS-DATA]` Anything deriving a thread's
+state — a status check, this skill on re-entry — reads `events:` in `application.md`'s
+frontmatter and never the log body. Parsing prose fails in the unsafe direction: nothing can
+tell *this thread has no events* from *this thread has events I couldn't read*, so one
+malformed line makes a sent application look like it is still being written, and every check
+gated on having reached `sent` goes quiet at the same moment. No regex fixes that, because with
+prose as the surface the ambiguity is real. So: the frontmatter is authoritative for tooling,
+the body for *why*. This is not the second copy `[NO-ROLLUP]` forbids — it is the only
+machine-readable copy, and nothing parses the body.
+
+The grammar is closed on purpose: `<YYYY-MM-DD> <event>`, one plain string per line,
+never a mapping. Mappings need a real YAML parser and a kit cannot assume the user has one, and
+a grammar narrow enough to read with one anchored expression is a grammar nobody has to guess
+at. Strip comments before parsing, whole-line and trailing — a user annotating why a date is an
+estimate or what a pin covers must not be committing a syntax error, or the annotation moves to
+some other file, away from the value it explains.
+
 **The folder is the memory; the log is dated and append-only.** `[LOG-APPEND-ONLY]` Don't
 rewrite history in `application.md` when a stage changes — add a line. What you believed on the
-12th matters when you're working out on the 30th why nobody replied.
+12th matters when you're working out on the 30th why nobody replied. Append-only forbids
+editing what is already there; it does not license paragraphs. One dated line per event, and
+don't log history to prevent an error the current state already prevents: a corrected fact
+needs no note of what it used to be, because the corrected file is the enforcement, and a
+recurrence shows up as a visible contradiction that costs one question to settle. A claim
+deliberately left *out* is the exception that isn't one — that is a live constraint rather than
+history, and it belongs beside the fact it constrains under `render`'s `[OBEY-DECISIONS]`.
+Sibling conventions in this kit prune dead material on every revision; this one never does.
+An application log is potentially evidence of what a user decided and why, so it compresses and
+folds, and it does not delete.
+
+**The state is at the top; the chronology is below it.** `[STATE-FIRST]` A reader must never
+have to reconstruct *where does this stand* by working forward through a log. `events:` is at
+the top of the file and ends in the current stage, and the paragraph under the heading says
+what the thread is waiting on and whose move it is next — the part that is genuinely not
+derivable. Don't restate the stage there; that would be the rollup `[NO-ROLLUP]` forbids.
+Entries that no longer bear on the next decision move into a collapsed `<details>` block, which
+folds on GitHub and stops dead material from reading as live.
 
 **Store inputs and events; never store a rollup.** `[NO-ROLLUP]` The test is whether it can be
 recomputed from what's already on disk. An open-application count, a "3 live, 1 stalled" summary
@@ -195,11 +253,32 @@ wants those bytes in history can `git add -f <the file that went out>` at the `s
 Offer it as their call at the moment it's live, never as a default: it trades away a privacy
 default `PRIVACY.md` sets out.
 
-So `application.md` carries no `status:` field: the last line of its log **is** the status, and
-a field beside the log is a second copy on its own schedule. And application-level state lives
-in `application.md`'s frontmatter, artifact-level state in each artifact's own — **no separate
-manifest file**, because a file whose only job is to repeat another file's state goes stale
-without anything noticing.
+So `application.md` carries no `status:` field: the last line of its `events:` **is** the
+status, and a field beside it is a second copy on its own schedule. And application-level state
+lives in `application.md`'s frontmatter, artifact-level state in each artifact's own — **no
+separate manifest file**, because a file whose only job is to repeat another file's state goes
+stale without anything noticing.
+
+**Record which files the employer actually received.** `[SENT-NAMES-WHAT-WENT]` The `sent:`
+block names them, and it is new information rather than a rollup: nothing else on disk knows
+which of the things the user prepared went out. Without it, an artifact prepared and
+deliberately not sent looks exactly like a defect — the thread reached `sent`, the file still
+reads `lifecycle: in-flight`, and a check reports a problem that isn't one. Recording the fact
+beats naming the condition, so this is also why there is no fourth `lifecycle:` value for
+*prepared and not sent*: it is already expressible as absence from the list. Two invariants
+follow, and they only work as a pair: everything in `artifacts:` carries `lifecycle: submitted`
+— or something went out unfrozen — and nothing outside it does, or something is frozen that
+nobody sent. Ask for the list; never infer it from what happens to be in the folder.
+
+`baselines:` is for a thread that sent something living outside its folder — the maintained
+résumé, a letter kept per role family — which is the normal shape of an application older than
+the user's folder convention. Without it such a thread can say neither what went out nor that
+nothing local did, because an empty `artifacts:` list reads as *nothing was sent*. **Baselines
+are deliberately never held to `lifecycle: submitted`**: a baseline goes on being edited, and
+freezing one would be wrong rather than merely noisy. One `baseline_pin` covers every file in
+the list, because it pins a repo commit and not a file version — `git show <pin>:<path>`
+recovers each of them as it stood. A per-file pin invites recording the commit that last
+*touched* that file, which quietly asserts nothing else in the send had moved.
 
 **Keep this folder in the private corpus repo and nowhere else.** `[FOLDER-IS-SENSITIVE]` It is
 the most sensitive thing in the repo — other people's real names, private correspondence, and

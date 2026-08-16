@@ -231,7 +231,7 @@ An application is a months-long thread, not a document, so `apply` gives each on
 ```
 applications/acme-staff-engineer/
   jd.md            ← the posting, verbatim, with its URL and the date you captured it
-  application.md   ← the dated event log, and contacts by role. Its last line is the stage
+  application.md   ← events as frontmatter, the dated log beneath it, contacts by role
   fit.md           ← what this role wants, and what your corpus can and can't back
   _inbox/          ← raw inbound — recruiter mail, take-home brief. Unvetted, never rendered from
   resume.md, cover-letter.md         ← written by render

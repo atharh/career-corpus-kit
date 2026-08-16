@@ -44,9 +44,17 @@ long-lived artifacts that the grep-based reverse lookup stops being enough.
 **Settled 2026-08-12.** `baseline` / `in-flight` / `submitted` is a statement about what may
 be *done to the file*, and on that reading a prep pack for a rejected application is correctly
 `in-flight` forever: not frozen, not a baseline. "The thread is closed" is a property of
-`application.md`'s log, which already ends in an `outcome` event — duplicating it into every
+`application.md`'s events, which already end in an `outcome` — duplicating it into every
 artifact's frontmatter is the rollup `[NO-ROLLUP]` forbids. Recorded because the next reader
 of the fixture will notice the smell too.
+
+**And none for *prepared and deliberately not sent*, settled the same way 2026-08-17.** That
+one has a real failure behind it — an artifact left at `lifecycle: in-flight` in a thread that
+reached `sent` reads as a defect to any check, and answering it in the log does nothing to stop
+it recurring. It is still not a lifecycle value, because the state is a fact about the *send*
+rather than about what may be done to the file, and it is expressible without a new word:
+absence from `sent.artifacts` in a thread with a `sent` event — `[SENT-NAMES-WHAT-WENT]`.
+Recording the fact beats naming the condition.
 
 ---
 
