@@ -34,8 +34,10 @@ corpus/
 
 Nothing else yet. `applications/` appears alongside `corpus/` the first time the user opens an
 application with the `apply` skill — don't create it here. The same goes for
-`corpus/capabilities/` and `corpus/personal-projects/`: the `interview` skill opens those the
-first time a technology question or an employer-less arc needs one.
+`corpus/capabilities/`, `corpus/personal-projects/` and `corpus/directions.md`: the `interview`
+skill opens those the first time a technology question, an employer-less arc, or a role family
+that clears `[DIRECTIONS-FILE]`'s three-part test needs one. A directions file especially — an
+empty one is an invitation to fill it, and filling it is how it becomes a horoscope.
 
 ## Steps
 
