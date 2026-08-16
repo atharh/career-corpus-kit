@@ -118,7 +118,9 @@ the first is evidence about the user:
 - **Employer context** — what the role wants, what the company does, what the team is for.
   `jd.md`, the employer's own public material, clearly attributed inbound. This is what you
   tailor *to*. It is never a fact about the user.
-- **Derived analysis** — `fit.md`, an earlier draft, another application's résumé. Read it to
+- **Derived analysis** — `fit.md`, an earlier draft, another application's résumé, and
+  `corpus/directions.md`, which is a hypothesis about where the evidence *could* point and
+  never evidence itself (`[DIRECTIONS-FILE]`). Read it to
   use the work already done. Never cite it as evidence, and treat its conclusions as carrying
   the error bars of whatever they were computed from: analysis calculated off a résumé inherits
   that résumé's mistakes, so a confident-sounding gap or strength can be an artefact of a wrong
