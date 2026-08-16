@@ -214,7 +214,11 @@ Two kinds of assertion:
   `skills/apply/templates/` and `skills/render/templates/` rather than restated
   here**, so a template that gains a slot fails the fixture until the fixture
   gains one too. That is what keeps the templates load-bearing instead of
-  decorative.
+  decorative. It runs the other way as well for one field: a file whose template
+  declares no `lifecycle:` must not have one. The freeze guards only ever test
+  for `submitted`, so an invented value there is invisible to them and legible to
+  every human who opens the file — `fit.md` is the one that attracts it, being
+  derived, never sent and never frozen.
 - **Trip-wires**, in the tier 2 sense. The recruiter's note in `_inbox/` carries
   three confident, unverified claims about the employer; none may appear in the
   résumé, the letter or the pack, while the dates and panel shape from the same

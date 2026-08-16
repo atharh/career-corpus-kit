@@ -127,6 +127,48 @@
         "interview": "Writes the vetted claims these rules spend, and states its own capture-side versions.",
         "verify": "Renders nothing — it audits the corpus the render rules read from."
       }
+    },
+    {
+      "id": "not-every-doubt-is-a-blocker",
+      "policy": "Uncertainty is reported once, in a clause, unless being wrong would be expensive or hard to undo",
+      "why": "The three skills that write into an application folder are the three that can accumulate caution in it. The failure is invisible in any single session — nothing goes wrong the day a flag is added — so no session has the vantage point to notice, which is what makes it a kit rule rather than a judgement call.",
+      "canonical": "apply",
+      "invariants": [
+        "Most uncertainty is not a blocker. The test is whether being wrong would be expensive or hard to undo — if it would not, say it once, in a clause, and carry on.",
+        "Three things still earn a gate: editing a frozen artifact, putting an unsourced claim in front of an employer, and anything the user has said is theirs to decide."
+      ],
+      "required_in": [
+        "apply",
+        "prep",
+        "render"
+      ],
+      "exempt": {
+        "bootstrap": "Seeds a corpus and hands off; it gates nothing and writes no application folder.",
+        "compact": "Pruning accumulated caution is what this skill is for — the rule is its premise, not a constraint on it.",
+        "interview": "Recording an unresolved question is its job; compact is the counterweight to that, not this rule.",
+        "verify": "Its findings are factual errors against the public record, which is the expensive-to-be-wrong case this rule already exempts."
+      }
+    },
+    {
+      "id": "constraint-has-one-home",
+      "policy": "A limit on a claim lives in the corpus file that owns the claim; applications/ never repeats it",
+      "why": "Copying a ceiling into an application thread is always justified as insurance against a render that skips the corpus file — but that render was already broken, so the copy guards a failure that would have gone wrong anyway and adds a second thing to keep true. The operational half matters more than the rule: 'this exists nowhere else' is what people write when they have not looked.",
+      "canonical": "render",
+      "invariants": [
+        "A limit on a claim lives in the corpus file that owns the claim, and an application thread never repeats it.",
+        "Grep the corpus before writing a constraint into an application thread"
+      ],
+      "required_in": [
+        "apply",
+        "prep",
+        "render"
+      ],
+      "exempt": {
+        "bootstrap": "Opens no application thread; there is nowhere for it to copy a constraint to.",
+        "compact": "Prunes within a story file and never copies out of one; its keep-list is what protects a constraint from being pruned.",
+        "interview": "Writes the corpus file that owns the constraint, which is the one home this rule points at.",
+        "verify": "Proposes restatements inside the file that owns the claim, and never reads applications/ at all."
+      }
     }
   ],
   "superseded": [
