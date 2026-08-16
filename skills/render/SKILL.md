@@ -40,6 +40,20 @@ union of everything ever vetted — at which point the strongest evidence is bur
 merely true, and a reader who stops early never reaches it. **A refresh that only ever adds is
 not a refresh.** Every baseline refresh reconsiders what is already there, not just what is new.
 
+**Where the family list comes from.** The convention is in the filename and nothing says where
+the families themselves come from, so a corpus invents the set implicitly: a letter gets
+rendered for a role, gets kept, and a family exists. Nothing afterwards asks whether the set is
+complete. Derive it instead, from two things already on disk — the role families the user has
+actually targeted in `applications/`, which is the only evidence of intent a corpus holds, and
+what the corpus can evidence, because a family nothing can back is not a candidate however
+often it has been targeted. The output is a report: here are the families, here is which
+baseline artifacts each one has, here is the gap. A family with a letter and no résumé is the
+common shape and nothing surfaces it today. Derive it on the spot and never store it — a stored
+family list is a rollup that goes stale exactly like the `status:` field `apply`'s `[NO-ROLLUP]`
+bans. This one is not in the status checker deliberately: which family an application belonged
+to is a judgement about a role rather than a field on disk, and a tool that guessed it would be
+confidently wrong on the interesting cases.
+
 **A bullet earns its slot on all three** — the hard rules below, applied at *selection* time
 rather than at writing time:
 
@@ -228,6 +242,15 @@ call, not yours. Reconciling their own material is their decision, not yours.
 just what changed — what is in, what is out, and one line of why for each. Otherwise a cut looks
 like a loss instead of a choice, and "what to cut for length" quietly becomes your call rather
 than theirs.
+
+**Suggest a missing baseline; never create one.** `[SUGGEST-DONT-SPAWN]` Name the missing
+member, say what it would be for, and stop. A baseline is a maintained checkpoint with real
+upkeep behind it: every corpus change is potential staleness across every baseline, and every
+refresh is a selection the user has to sit and review. Creating one per family multiplies the
+staleness this skill's whole lifecycle contract exists to prevent, and manufactures review work
+nobody asked for. Retiring a family is the same call seen from the other side and is equally
+not yours — someone who has stopped targeting a lane may still want the checkpoint, which is
+`apply`'s `[SURFACE-DONT-DECIDE]`.
 
 **How long an entry should run is theirs to set, and this skill states no number.**
 `[LENGTH-IS-THEIRS]` The first time it comes up, ask, and write the shape they accept into
