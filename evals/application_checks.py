@@ -692,6 +692,18 @@ def check_doctor(r: Report, spec: dict) -> None:
             "# Craft\n\nRENDERING DECISION 2026-01-02: the support work is described as craft "
             "and never as a support role.\n"
         )
+        # A decoy: a generic sentence *about* recorded rendering decisions rather
+        # than any particular one. It shares exactly `rendering`, `decision`,
+        # `recorded` and `without` with the constraint below — four words, of
+        # which the marker guarantees two and collocation supplies a third.
+        (root / "corpus" / "LESSONS.md").write_text(
+            "# Lessons\n\n- 2026-01-05: a recorded RENDERING DECISION must be obeyed without "
+            "relitigating.\n"
+        )
+        (root / "corpus" / "projects").mkdir()
+        (root / "corpus" / "projects" / "handle.md").write_text(
+            "# Handle\n\nRENDERING DECISION 2026-01-04: the account handle stays unlinked.\n"
+        )
 
         bad = apps / "silted"
         bad.mkdir()
@@ -717,7 +729,16 @@ def check_doctor(r: Report, spec: dict) -> None:
             "- RENDERING DECISION 2026-01-01: the team size stays out of the résumé.\n"
             "- RENDERING DECISION 2026-01-02: the support work is described as craft "
             "and never as a support role.\n"
+            # Shares four words with the decoy, three of them free.
+            "- RENDERING DECISION 2026-01-06: the box answer is recorded here and reused "
+            "without change.\n"
+            # Names its own home, which is stronger evidence than any overlap.
+            "- RENDERING DECISION 2026-01-04: identity handling is settled in "
+            "`corpus/projects/handle.md` and is not repeated here.\n"
         )
+        # A pack that grew a subfolder — the caution count must see into it.
+        (bad / "rounds").mkdir()
+        (bad / "rounds" / "02-probes.md").write_text("# Probes\n\n🔴 unresolved.\n")
         for name in ("fit.md", "resume.md", "cover-letter.md"):
             (bad / name).write_text(f"# {name}\n\n⚠️ something unresolved here.\n")
 
@@ -756,6 +777,25 @@ def check_doctor(r: Report, spec: dict) -> None:
             "corpus/story.md" in got.stdout and "corpus/craft.md" in got.stdout,
             "a bullet list has no blank lines between items, so several constraints read as one "
             f"and an echo found for the first is reported for all of them\n{got.stdout}",
+        )
+        r.check(
+            "the marker's own words do not count toward an echo",
+            "LESSONS.md" not in got.stdout,
+            "every candidate carries the marker on both sides by construction, so `rendering` "
+            "and `decision` were half the required four for free — which matched a generic "
+            f"sentence about recorded rendering decisions to a specific one\n{got.stdout}",
+        )
+        r.check(
+            "a constraint naming its own corpus file is reported as naming it",
+            "it names corpus/projects/handle.md" in got.stdout,
+            "a constraint that cites a path is naming its home, which is not a heuristic at all "
+            f"and beats any word overlap\n{got.stdout}",
+        )
+        r.check(
+            "the caution count sees into a subfolder",
+            "rounds/02-probes.md" in got.stdout,
+            "a flat glob is the same scoping failure a third time: a pack that grew a subfolder "
+            f"is a pack with more in it\n{got.stdout}",
         )
         r.check(
             "the constraint echo test survives a hard-wrapped marker",
