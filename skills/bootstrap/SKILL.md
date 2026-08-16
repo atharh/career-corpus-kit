@@ -106,7 +106,11 @@ empty one is an invitation to fill it, and filling it is how it becomes a horosc
    exist — `python3 "${CLAUDE_PLUGIN_ROOT}/tools/application_status.py"` — and that it computes
    what is live rather than storing it. It lives in the kit rather than being copied into the
    corpus so that a fix reaches them on the next version; a checker that cannot be fixed
-   centrally is the same trap as a manifest.
+   centrally is the same trap as a manifest. **Running against a corpus that already has files,
+   say this at the end of the diagnosis instead**: `python3
+   "${CLAUDE_PLUGIN_ROOT}/tools/corpus_doctor.py"` reports where an existing corpus is behind
+   the current guidance and writes nothing. That is the case where it earns its keep — a corpus
+   built against an older version has no other way to find out what changed.
 
 ## The one rule that matters here
 

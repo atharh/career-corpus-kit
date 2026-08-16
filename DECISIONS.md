@@ -116,6 +116,21 @@ itself a judge, so this reopens only after the judge layer does.
 
 ## Coverage report and a corpus doctor
 
+**The doctor half shipped 2026-08-17 as `tools/corpus_doctor.py`; the coverage half is still
+deferred.** It arrived for a different reason than it was deferred against: the kit can never
+see a private corpus, so a run of format and rule changes needs some way for an existing corpus
+to find out where it is behind, and that can only be a checker the user runs. Its findings sort
+into four classes because the four need different handling — blocking, mechanical, editorial,
+additive — and it is a report rather than a gate, exiting 0 whenever it ran. *This corpus
+predates the guidance* is not the claim *this corpus violates it*, and one exit code cannot say
+both; `tools/application_status.py` keeps exit 1 for the second. Nothing records which version
+a corpus has reached: a marker like that is a stored copy of derivable state and goes stale on
+the first hand-edit, so every rule is checked every run. The `examples/**/_inbox/` exemption
+below is written into the check, as this entry demanded.
+
+The coverage half — what the corpus does *not* yet cover — stays deferred on its original
+grounds, which the doctor does not touch.
+
 **Deferred 2026-08-11.** A computed report — never a stored file, `[NO-ROLLUP]` — showing what
 the corpus already covers: roles and years with no stories, résumé claims nothing decompresses,
 interview dimensions with zero or one story, stories being spent across several live

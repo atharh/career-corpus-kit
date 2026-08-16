@@ -255,6 +255,20 @@ something frozen that nobody sent, a thread whose events can't be read. What it 
 you is what to do next. Stage and age are derivations; whether a quiet thread is dead is a
 judgement about your career, and the kit doesn't take those.
 
+The kit ships one other script, for when your corpus is older than the guidance:
+
+```
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/corpus_doctor.py"
+```
+
+The kit can never see your corpus, so it cannot migrate one — this reports where you're behind
+and writes nothing. Findings come sorted by what to do with them: **blocking** (nothing else
+about that thread is knowable yet), **mechanical** (the fix is unambiguous, and a session can
+propose it), **editorial** (detectable, but the fix is a judgement, so no tool should make it),
+and **additive**, where nothing is wrong and the list is the whole migration. It never fails —
+a corpus that predates a rule isn't a corpus breaking one, and nothing records which version
+you've reached, because that marker would be the first thing to go stale.
+
 `render` also works outside a lane — baselines, self-reviews, promo packets, bios. Those belong
 to no application, so no folder gets opened for them.
 

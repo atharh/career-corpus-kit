@@ -158,6 +158,9 @@ without ever being `routed`.
 A thread opened before the frontmatter existed still has all its events, in prose. Offer to
 migrate it when you next touch the folder, and run the migration like this:
 
+- **Find them with the checker first**, rather than one at a time as you happen to open a
+  folder: `python3 "${CLAUDE_PLUGIN_ROOT}/tools/corpus_doctor.py"` reports every thread that is
+  behind the current guidance, sorted by what blocks what, and writes nothing.
 - **Assisted, never automatic.** Propose the block, report what you could not resolve, and let
   the user confirm before writing — report-then-patch, the shape `verify` already uses.
 - **The mechanical half only.** Lift the events into `events:` and fold the existing body into
