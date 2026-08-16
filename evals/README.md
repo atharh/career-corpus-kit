@@ -305,3 +305,17 @@ confirm it fires, and revert.
 - **Nothing runs against a real corpus.** Deliberate: a live corpus moves while
   the skills that write to it are under test, so a failure can't be attributed.
   For that, diff *claim sets* between two kit versions rather than diffing text.
+
+**A fixture cannot be in the state the tools most need to handle**, and this is
+worth knowing before trusting a green suite on anything that reads a corpus. A
+fixture is built to demonstrate a rule, so it is either correct or broken in the
+way its author had in mind. What it can never be is *lived in* — slightly wrong
+somewhere and still working, which is the state every real corpus is in
+permanently. The shapes that come out of that are the ones nobody would think to
+plant: a log that outgrew its heading and picked up a second one, a coincidental
+word match outranking a genuine one, a field invented once and copied twice.
+Every checker in `tools/` has had defects of that kind, and none of them were
+found here. So when one of those tools is changed, a run against a real corpus —
+the user's own, by the user, since the kit can never see one — is worth more than
+another fixture case, and the fixture's job afterwards is to hold the fix rather
+than to have found it.
