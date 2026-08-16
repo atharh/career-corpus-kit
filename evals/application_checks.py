@@ -630,10 +630,10 @@ DOCTOR = ROOT / "tools" / "corpus_doctor.py"
 DOCTOR_CASES = [
     ("BLOCKING", "unmigrated: no events: block"),
     ("MECHANICAL", "the heading contains"),
-    ("MECHANICAL", "tracked, but `_inbox/` is unvetted"),
+    ("EDITORIAL", "tracked, but `_inbox/` is unvetted"),
     ("EDITORIAL", "no paragraph under the heading"),
     ("EDITORIAL", "a log entry runs"),
-    ("EDITORIAL", "constraint-marked line"),
+    ("EDITORIAL", "constraint-marked, and"),
     ("EDITORIAL", "caution markers in"),
     ("ADDITIVE", "corpus/directions.md — absent"),
 ]
@@ -679,7 +679,13 @@ def check_doctor(r: Report, spec: dict) -> None:
         (root / "corpus" / "_inbox" / "raw.md").write_text("unvetted\n")
         apps = root / "applications"
         (apps / "unmigrated").mkdir(parents=True)
-        (apps / "unmigrated" / "application.md").write_text(FM.format(""))
+        # An unmigrated thread with silt in it. Both are true of the same thread
+        # in real life — a log predating the format is the one that has been
+        # growing unchecked longest — and blocking the body checks behind the
+        # stage reported least silt exactly where there was most.
+        (apps / "unmigrated" / "application.md").write_text(
+            FM.format("") + "- 2026-01-02 — **sent** — narration\n" + "  and more\n" * 8
+        )
 
         bad = apps / "silted"
         bad.mkdir()
@@ -703,6 +709,20 @@ def check_doctor(r: Report, spec: dict) -> None:
             got.returncode == 0,
             f"exit {got.returncode} — 'your corpus predates this guidance' is not the same claim "
             "as 'your corpus violates it', and an exit code cannot say both",
+        )
+        r.check(
+            "a blocking thread still gets the checks that do not need a stage",
+            "unmigrated — a log entry runs" in got.stdout,
+            "the heading and log checks read the body, so blocking them behind the format "
+            "reports least silt on the corpus that has the most of it, and the count rises as "
+            f"the corpus gets cleaner\n{got.stdout}",
+        )
+        r.check(
+            "the constraint echo test survives a hard-wrapped marker",
+            "the same decision looks to be in" in got.stdout,
+            "matching the line rather than the paragraph quotes a fragment starting mid-sentence "
+            "and then reports no echo for a constraint that has one — the annotation sends a "
+            f"reader to hand-check what the tool could have named\n{got.stdout}",
         )
         for cls, needle in DOCTOR_CASES:
             block = re.search(rf"^{cls}[^\n]*\n(.*?)(?=^[A-Z]{{4,}} —|\Z)", got.stdout, re.M | re.S)

@@ -66,9 +66,21 @@ LOG_ENTRY_LINES = 6
 # check greps for. A bare ⚠️ is used all over the kit for cautions and banners
 # alike, and matching it as a constraint reports every file that carries a
 # header — measured against the example corpus, which is why the split exists.
+#
+# 🔴 is in the caution set because the kit itself taught it: `compact` carried it
+# through 1.20.0 and dropped it afterwards, so a corpus built against an older
+# version is full of a blocker glyph that a check written against the current kit
+# would not match. Guidance a kit has retired is still on disk in every corpus
+# that followed it.
 CONSTRAINT = re.compile(r"RENDERING DECISION")
-CAUTION = re.compile(r"RENDERING DECISION|⚠️")
+CAUTION = re.compile(r"RENDERING DECISION|⚠️|🔴")
 CAUTION_FILES = 3
+
+# Content words, for the duplicate test below. Unicode-aware rather than [a-z]:
+# a corpus is full of accented words — "résumé" is the obvious one — and an
+# ASCII-only class silently drops them, which made two identical constraints
+# share too few words to be recognised as the same constraint.
+WORD = re.compile(r"[^\W\d_]{5,}")
 
 # `examples/**/_inbox/` is committed on purpose and the exemption is written
 # into the check rather than discovered by it: `examples/` is not a corpus, the
@@ -100,7 +112,14 @@ def body_of(text: str) -> str:
 
 
 def check_thread_shape(f: Findings, name: str, text: str) -> None:
-    """`[STATE-FIRST]` and `[LOG-APPEND-ONLY]`, on one application.md."""
+    """`[STATE-FIRST]` and `[LOG-APPEND-ONLY]`, on one application.md.
+
+    Both checks read the *body* and neither needs a stage, so this runs on
+    unmigrated and unparseable threads too. Suppressing it with the rest of a
+    blocking thread's checks inverted the silt report: the corpus with the most
+    silt in it — the one that predates the format entirely — reported none, and
+    the count went up as the corpus got cleaner.
+    """
     body = body_of(text)
     lines = body.split("\n")
 
@@ -126,6 +145,11 @@ def check_thread_shape(f: Findings, name: str, text: str) -> None:
                 f"nothing here can write it."
             )
 
+    # Only bullets under `## Log` are log entries. Every other `- ` in the file
+    # belongs to something else — a resolved gap item under Open questions is
+    # `compact`'s territory, not `[LOG-APPEND-ONLY]`'s, and telling someone to
+    # compress a checkbox is noise that teaches them to skim the class.
+    log = re.search(r"^## Log[ \t]*$\n(.*?)(?=^## |\Z)", body, re.M | re.S)
     entry, count = None, 0
 
     def flush() -> None:
@@ -140,7 +164,7 @@ def check_thread_shape(f: Findings, name: str, text: str) -> None:
                 f"length; whether this entry still earns its space is a judgement."
             )
 
-    for ln in body.split("\n"):
+    for ln in (log.group(1) if log else "").split("\n"):
         if ln.startswith("- "):
             flush()
             entry, count = ln[2:], 1
@@ -150,6 +174,36 @@ def check_thread_shape(f: Findings, name: str, text: str) -> None:
             flush()
             entry, count = None, 0
     flush()
+
+
+def marked_paragraphs(text: str) -> list[tuple[str, set[str]]]:
+    """(quoted paragraph, its content words) for each paragraph carrying a marker.
+
+    Paragraph rather than line, because Markdown here is hard-wrapped: a marker
+    routinely lands on a continuation line, so quoting the line hands the reader
+    a fragment starting mid-sentence, and the echo test below inherits the same
+    damage — four shared words out of a 70-character fragment finds nothing, and
+    then confidently reports no echo for a constraint that has one.
+    """
+    out = []
+    for para in re.split(r"\n[ \t]*\n", text):
+        if CONSTRAINT.search(para):
+            flat = re.sub(r"\s+", " ", para).strip()
+            out.append((flat, set(re.findall(WORD, flat.lower()))))
+    return out
+
+
+def overlaps(a: set[str], b: set[str]) -> bool:
+    """Whether two constraint paragraphs look like the same constraint.
+
+    Scale-aware on purpose: a fixed threshold either misses a short constraint or
+    matches any two long paragraphs that happen to share vocabulary. This asks
+    for four content words *and* half of the smaller paragraph's, and it still
+    only proposes a candidate — the finding says where to look, never that the
+    two are the same.
+    """
+    shared = a & b
+    return bool(a and b) and len(shared) >= 4 and len(shared) >= 0.5 * min(len(a), len(b))
 
 
 def check_constraints(f: Findings, root: Path) -> None:
@@ -163,28 +217,21 @@ def check_constraints(f: Findings, root: Path) -> None:
     itself.
     """
     corpus = root / "corpus"
-    corpus_lines = []
+    corpus_paras = []
     if corpus.is_dir():
         for p in sorted(corpus.rglob("*.md")):
-            corpus_lines.extend(
-                (p.relative_to(root), ln.strip()) for ln in p.read_text().split("\n")
-                if CONSTRAINT.search(ln)
+            corpus_paras.extend(
+                (p.relative_to(root), words) for _, words in marked_paragraphs(p.read_text())
             )
 
     for p in sorted((root / "applications").rglob("*.md")):
-        for ln in p.read_text().split("\n"):
-            if not CONSTRAINT.search(ln):
-                continue
-            words = {w for w in re.findall(r"[a-z]{5,}", ln.lower())}
-            echo = next(
-                (src for src, other in corpus_lines
-                 if words and len(words & set(re.findall(r"[a-z]{5,}", other.lower()))) >= 4),
-                None,
-            )
-            where = f"also in {echo}" if echo else "no obvious echo in corpus/ — check by hand"
+        for quote, words in marked_paragraphs(p.read_text()):
+            echo = next((src for src, other in corpus_paras if overlaps(words, other)), None)
+            where = f"the same decision looks to be in {echo}" if echo else \
+                "no echo found in corpus/ — worth checking by hand before deleting"
             f.editorial.append(
-                f"{p.relative_to(root)} — constraint-marked line, {where} "
-                f"(`[CONSTRAINT-HAS-ONE-HOME]`): {ln.strip()[:70]!r}"
+                f"{p.relative_to(root)} — constraint-marked, and {where} "
+                f"(`[CONSTRAINT-HAS-ONE-HOME]`): {quote[:90]!r}"
             )
 
 
@@ -208,14 +255,23 @@ def check_caution(f: Findings, root: Path) -> None:
         if len(marked) >= CAUTION_FILES:
             f.editorial.append(
                 f"{folder.name} — caution markers in {len(marked)} files: {', '.join(marked)} "
-                f"(`[NOT-EVERY-DOUBT-IS-A-BLOCKER]`). Nothing here can tell a justified gate "
-                f"from an accumulated one; that read is the user's."
+                f"(`[NOT-EVERY-DOUBT-IS-A-BLOCKER]`). Two things this cannot see, so read the "
+                f"number as a floor and not a total: it cannot tell a justified gate from an "
+                f"accumulated one, and it only counts doubt somebody marked. The largest "
+                f"accumulations are usually unmarked prose, and no marker search finds those."
             )
 
 
 def check_tracked_inbox(f: Findings, root: Path) -> None:
     """`_inbox/` is git-ignored by default; a tracked one is unvetted material in
-    history in every clone, and deleting the file later does not take it back."""
+    history in every clone, and deleting the file later does not take it back.
+
+    Editorial, not mechanical, and the finding's own text is what settles it: if
+    removing the file does not undo the exposure, there is no unambiguous fix to
+    propose. A repo may also be tracking `_inbox/` deliberately — the example
+    corpus in this kit does. That makes it a judgement about one repo, which is
+    the definition of the editorial class.
+    """
     try:
         # --full-name so paths are relative to the repository root: the exemption
         # below is about where a file sits in the repo, and paths relative to
@@ -230,9 +286,11 @@ def check_tracked_inbox(f: Findings, root: Path) -> None:
         return
     tracked = [p for p in r.stdout.split("\0") if p and not INBOX_EXEMPT.search("/" + p)]
     for p in sorted(tracked):
-        f.mechanical.append(
+        f.editorial.append(
             f"{p} — tracked, but `_inbox/` is unvetted material and is ignored by default. "
-            f"It is in history in every clone; removing the file now does not take it back."
+            f"It is in history in every clone; removing the file now does not take it back, "
+            f"which is why this is a judgement rather than a fix. Some repos track it on "
+            f"purpose."
         )
 
 
@@ -279,13 +337,17 @@ def main(argv: list[str]) -> int:
             if not thread.is_file():
                 f.blocking.append(f"{folder.name} — no application.md. There is no thread to read.")
                 continue
+            # Body-only checks run first and unconditionally. They do not need a
+            # stage, so blocking on one would report least silt where there is
+            # most — a thread predating the format is exactly the one whose log
+            # has been growing unchecked the longest.
+            check_thread_shape(f, folder.name, thread.read_text())
             t = read_thread(folder)
             if t["error"] or t["unmigrated"]:
                 f.blocking.extend(findings(t, folder))
                 continue
             f.mechanical.extend(findings(t, folder))
             f.mechanical.extend(binary_findings(t, folder, tracked))
-            check_thread_shape(f, folder.name, thread.read_text())
         check_constraints(f, root)
         check_caution(f, root)
     check_tracked_inbox(f, root)
