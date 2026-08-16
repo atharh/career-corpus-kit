@@ -33,8 +33,8 @@ contacts:
 
 # Kestrel Freight Network — Engineering Lead, Dispatch Data
 
-Closed. Nothing is outstanding with Kestrel; what is outstanding is in the corpus queue, where
-three routed items are waiting on an `/career-corpus:interview` session.
+Nothing is outstanding with Kestrel. What is outstanding is in the corpus queue: three routed
+items waiting on a `/career-corpus:interview` session, the oldest of them from 8 April.
 
 ## Log
 
