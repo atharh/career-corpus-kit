@@ -14,6 +14,7 @@ sources:
 submitted:
   date: 2026-04-09
   as: PDF uploaded to the Kestrel careers form
+  # Untracked bytes, so a hash — the fallback. See resume.md's note and `[PIN-NOT-ARCHIVE]`.
   sha256: 1c07a5e93b6f4d28ae5710b2cf8934d6e0a17f45b93c28de6014ab7f3c2905ee
 ---
 

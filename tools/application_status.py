@@ -11,8 +11,9 @@ before the eval suite existed.
 So this is a conformance checker for the application lane, and its findings are
 violations of stated rules rather than opinions: an artifact that went out but
 was never frozen, one frozen that nobody sent, a `lifecycle:` outside the three
-`interview`'s `[MARK-DONT-FIX]` defines, a thread whose events cannot be read.
-It is portable because it parses nothing the kit did not define.
+`interview`'s `[MARK-DONT-FIX]` defines, a thread whose events cannot be read, a
+sent PDF that never entered git and so cannot be recovered. It is portable
+because it parses nothing the kit did not define.
 
 Nothing it prints is stored anywhere — `[NO-ROLLUP]`.
 
@@ -25,6 +26,7 @@ otherwise, so it can gate a commit if the user wants it to.
 from __future__ import annotations
 
 import datetime as dt
+import subprocess
 import sys
 from pathlib import Path
 
@@ -60,6 +62,64 @@ def read_thread(folder: Path) -> dict:
         return t
     t["stage"] = at.stage(t["events"])
     return t
+
+
+def tracked_binaries(root: Path) -> set[Path] | None:
+    """Every *.pdf and *.docx git knows about, or None when this isn't a repo.
+
+    None rather than an empty set, because the two mean opposite things: outside
+    a repo nothing is tracked and nothing can be, so the checks below have no
+    opinion rather than a bad one. Read once per run — `git ls-files` is one
+    process where one call per artifact would be dozens.
+    """
+    def git(*args: str) -> subprocess.CompletedProcess:
+        return subprocess.run(
+            ["git", "-C", str(root), *args], capture_output=True, text=True, timeout=30
+        )
+
+    try:
+        if git("rev-parse", "--git-dir").returncode != 0:
+            return None
+        r = git("ls-files", "-z", "*.pdf", "*.docx")
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if r.returncode != 0:
+        return None
+    return {(root / p).resolve() for p in r.stdout.split("\0") if p}
+
+
+def binary_findings(t: dict, folder: Path, tracked: set[Path] | None) -> list[str]:
+    """The sent bytes have to survive, and a generated artifact cannot be rebuilt.
+
+    `apply`'s `[PIN-NOT-ARCHIVE]`: PDF and DOCX writers stamp a creation time
+    into the output, so a rebuild produces a different file rather than the same
+    one. Once the untracked working copy is gone, what a reader saw is gone.
+
+    Two cases, and the second is the one a list of filenames cannot see: a sent
+    artifact's binary that never got `git add -f`, and a binary nothing accounts
+    for at all. A binary whose Markdown sibling exists but is absent from
+    `sent.artifacts` is a working copy of something deliberately not sent, and is
+    left alone.
+    """
+    if tracked is None or t["sent"] is None:
+        return []
+    out = []
+    listed = set(t["sent"]["artifacts"])
+    for binary in sorted(p for e in ("*.pdf", "*.docx") for p in folder.glob(e)):
+        if binary.resolve() in tracked:
+            continue
+        sibling = binary.with_suffix(".md")
+        if sibling.name in listed:
+            out.append(
+                f"{t['name']} — {binary.name} went out but is not in git. It cannot be "
+                f"rebuilt byte-for-byte, so those bytes are unrecoverable: `git add -f` it."
+            )
+        elif not sibling.exists():
+            out.append(
+                f"{t['name']} — {binary.name} is untracked and nothing accounts for it: no "
+                f"Markdown sibling, and not in sent.artifacts. Either it went out, or it is cruft."
+            )
+    return out
 
 
 def findings(t: dict, folder: Path) -> list[str]:
@@ -118,6 +178,7 @@ def main(argv: list[str]) -> int:
         return 2
 
     today = dt.date.today()
+    tracked = tracked_binaries(root)
     sent_rows: list[str] = []
     prep_rows: list[str] = []
     problems: list[str] = []
@@ -129,6 +190,7 @@ def main(argv: list[str]) -> int:
             continue
         t = read_thread(folder)
         problems.extend(findings(t, folder))
+        problems.extend(binary_findings(t, folder, tracked))
 
         dates = [d for d, _ in t["events"]]
         age = days_since(max(dates), today) if dates else None

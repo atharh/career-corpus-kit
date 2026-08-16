@@ -10,7 +10,7 @@ sources:                        # the files this drew on, repo-root-relative
 submitted:                      # optional — present only once lifecycle is `submitted`
   date: <YYYY-MM-DD>
   as: <what actually went out — filename, format, or "pasted into the form">
-  sha256: <hash of the bytes that went out>
+  sha256: <only when the sent bytes are NOT in git — see apply's `[PIN-NOT-ARCHIVE]`>
 ---
 
 <The frontmatter block above is the whole template. Every rendered artifact carries it —
@@ -29,7 +29,12 @@ its own deliberate act.>
 a PDF, a DOCX, or body text pasted into a form — never this file itself. When handing over
 paste-ready text, hand over the body alone; the block above never reaches a reader.>
 
-<`sha256` identifies the sent bytes; it does not keep them. It settles whether a file still on
-disk is the one that went out, and says nothing at all once that file is gone: rendered `*.pdf`
-and `*.docx` are git-ignored by default, so keeping the bytes themselves is a separate,
-deliberate `git add -f` — the user's privacy call, not this template's.>
+<`sha256` identifies the sent bytes; it does not keep them, and it is the fallback rather than
+the default. Keeping them is `git add -f <what went out>` at the freeze, because a generated
+artifact cannot be rebuilt — PDF and DOCX writers stamp a creation time, so the same Markdown
+gives different bytes every run. Where the bytes are in git, `git show <commit>:<path>` answers
+what the hash answered and answers what it never could, so the hash is left out rather than
+duplicated. Write it only when the bytes genuinely cannot be tracked — sent from another
+machine, a portal that kept no copy, a file the user declines to commit. See apply's
+`[PIN-NOT-ARCHIVE]`, and `[PIN-NOT-SELF]` for the pasted-text case, where the hash must never
+be taken over the file that holds it.>

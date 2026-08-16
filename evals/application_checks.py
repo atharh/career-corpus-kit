@@ -518,6 +518,8 @@ BROKEN_THREADS = {
     "went-out-unfrozen": (FM.format(SENT_OK), "went out but is not lifecycle: submitted"),
     "frozen-unsent": (FM.format(SENT_OK), "is frozen but nobody sent it"),
     "bad-lifecycle": (FM.format(SENT_OK), "unknown lifecycle"),
+    "sent-pdf-untracked": (FM.format(SENT_OK), "went out but is not in git"),
+    "orphan-binary": (FM.format(SENT_OK), "nothing accounts for it"),
 }
 
 
@@ -562,8 +564,30 @@ def check_status_tool(r: Report, spec: dict) -> None:
             (apps / name / "resume.md").write_text(ART.format(life))
         (apps / "frozen-unsent" / "cover-letter.md").write_text(ART.format("submitted"))
         (apps / "bad-lifecycle" / "cover-letter.md").write_text(ART.format("archived"))
+        # `[PIN-NOT-ARCHIVE]`: one sent PDF nobody force-added, and one binary with
+        # no Markdown sibling at all. A real repo, because outside one the tool has
+        # no opinion about what is tracked rather than a wrong one.
+        (apps / "sent-pdf-untracked" / "resume.pdf").write_bytes(b"%PDF-1.4 fake\n")
+        (apps / "orphan-binary" / "mystery.pdf").write_bytes(b"%PDF-1.4 fake\n")
+        # The exemption, pinned the same way the baselines one is: a binary whose
+        # Markdown sibling exists but is absent from sent.artifacts is a working
+        # copy of something deliberately not sent, and reporting it would fire on
+        # every folder holding a draft.
+        clean_thread = apps / "prepared-not-sent"
+        clean_thread.mkdir()
+        (clean_thread / "application.md").write_text(FM.format(SENT_OK))
+        (clean_thread / "resume.md").write_text(ART.format("submitted"))
+        (clean_thread / "cover-letter.md").write_text(ART.format("in-flight"))
+        (clean_thread / "cover-letter.pdf").write_bytes(b"%PDF-1.4 fake\n")
+        subprocess.run(["git", "init", "-q", tmp], check=True, capture_output=True)
 
         got = run(Path(tmp))
+        r.check(
+            "an unsent artifact's binary is left alone",
+            "cover-letter.pdf" not in got.stdout,
+            "a working copy of something deliberately not sent is not a finding, or the check "
+            f"fires on every folder holding a draft\n{got.stdout}",
+        )
         r.check(
             "the tool exits non-zero when it has findings",
             got.returncode == 1,

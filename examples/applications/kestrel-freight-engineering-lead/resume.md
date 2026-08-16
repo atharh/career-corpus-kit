@@ -15,6 +15,9 @@ sources:
 submitted:
   date: 2026-04-09
   as: PDF uploaded to the Kestrel careers form
+  # The fallback, not the default: this repo is documentation and holds no PDFs, so the
+  # bytes are untracked and a hash is all there is. A real corpus force-adds the sent
+  # file at the freeze and writes no sha256 at all — apply's `[PIN-NOT-ARCHIVE]`.
   sha256: 9f2b7c41d0a8e6535ab1c9f0742de83b6c1a5f92e4d70b83cc61a2f4d9e70b15
 ---
 

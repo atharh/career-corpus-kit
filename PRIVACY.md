@@ -34,22 +34,36 @@ delete the raw file. The story file is what you keep.
 ## What staying out of history costs
 
 The `.gitignore` keeps two things out of git: every `_inbox/`, and rendered `*.pdf` and
-`*.docx`. Both are deliberate: raw inbound is other people's material, and a rendered file
-carries your contact details in a form that's easy to mis-attach. The cost is worth stating
-once, because nothing else in the kit makes up for it: an untracked file has no history. No
-earlier version to diff, nothing to restore, no copy anywhere but your working tree. Delete
-it, or lose the disk, and it is gone.
+`*.docx`. **Those are two populations with two different reasons, and only one of the reasons
+is about privacy.** The cost they share is worth stating once, because nothing else in the kit
+makes up for it: an untracked file has no history. No earlier version to diff, nothing to
+restore, no copy anywhere but your working tree. Delete it, or lose the disk, and it is gone.
 
-So the durability of raw inbound is whatever your own backups give it, and "extraction may need
-redoing" assumes a file that nothing here guarantees will still be there. Extract early. The
-`sha256` a submitted artifact records is a fingerprint, not a backup — it tells you whether a
-file you still have is the one that went out, and says nothing at all once that file is gone.
+**Raw inbound stays out because it is not yours to store.** That is the privacy rule, it is the
+important one, and it does not soften. The durability of raw inbound is whatever your own
+backups give it, and "extraction may need redoing" assumes a file that nothing here guarantees
+will still be there. Extract early.
 
-Decide per file rather than per rule. To keep one deliberately, `git add -f <path>` — and then
-it is in history for good, which is the section above. Most raw inbound should not be kept, and
-a rendered document can be re-rendered from the markdown, which *is* tracked. The one worth
-thinking about is the file you actually sent: if you want the exact bytes a reader saw,
-force-add that one and accept that it stays.
+**Rendered output starts out ignored because it is regenerable working state — and it stops
+being that the moment you send it.** A PDF your own pipeline builds from committed Markdown
+contains nothing the Markdown does not already contain, so keeping it out buys no privacy the
+repo has not already spent. And *re-render it from the Markdown* is not the safety net it
+sounds like: PDF and DOCX writers stamp a creation time into the output, so the same source
+through the same tool gives different bytes on every run. That is measured on this kit's own
+recommended path, not assumed — two `pandoc` DOCX builds of one unchanged file differ, and
+differ only in a timestamp buried inside the archive. Setting `SOURCE_DATE_EPOCH` makes them
+identical if your pipeline can, and even then a tool upgrade moves the output again.
+
+So once the working copy is gone, the file a reader actually saw is gone permanently, and no
+hash brings it back — a `sha256` is a fingerprint, not a backup. It tells you whether a file
+you still have is the one that went out, and says nothing at all once that file is gone.
+
+The kit's answer is to keep that one file: `git add -f <what went out>` at the `sent` event,
+when the artifact freezes. It is in history for good after that, which is the section above —
+and being deliberate about *which* file that happens to is the whole point. Before the freeze
+a rendered file is working state and belongs nowhere near git; after it, it is the only
+evidence of what a reader saw. Opting out is fine and it is a real trade: you keep the hash,
+and you accept that the sent bytes stop being recoverable.
 
 ## An employer's confidential material
 
