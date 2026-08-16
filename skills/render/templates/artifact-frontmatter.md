@@ -31,8 +31,9 @@ paste-ready text, hand over the body alone; the block above never reaches a read
 
 <`sha256` identifies the sent bytes; it does not keep them, and it is the fallback rather than
 the default. Keeping them is `git add -f <what went out>` at the freeze, because a generated
-artifact cannot be rebuilt — PDF and DOCX writers stamp a creation time, so the same Markdown
-gives different bytes every run. Where the bytes are in git, `git show <commit>:<path>` answers
+artifact usually cannot be rebuilt — PDF and DOCX writers stamp a creation time, so the same
+Markdown gives different bytes on every run unless the tool can be pinned, and a tool that can
+be today stops being at its next upgrade. Where the bytes are in git, `git show <commit>:<path>` answers
 what the hash answered and answers what it never could, so the hash is left out rather than
 duplicated. Write it only when the bytes genuinely cannot be tracked — sent from another
 machine, a portal that kept no copy, a file the user declines to commit. See apply's

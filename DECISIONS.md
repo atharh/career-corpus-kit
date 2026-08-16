@@ -175,12 +175,18 @@ copy, a user who declines. The `.gitignore` is unchanged, deliberately: a path p
 tell a frozen artifact from a working one, and one that tried would commit every in-flight
 re-render.
 
-**Two things a revival must not re-derive.** `SOURCE_DATE_EPOCH=<n> pandoc …` *does* make the
-DOCX byte-identical, verified — so a determinism escape hatch exists for that path and does not
-change the conclusion, because reproducibility also requires the toolchain version to hold
-still for as long as the application folder is worth keeping, and it will not. And the privacy
-argument covers **inbound** binaries only: an employer's brief, a recruiter attachment, a scan.
-An outbound PDF built from committed Markdown carries no privacy delta over the Markdown.
+**Two things a revival must not re-derive.** First, the two paths fail differently and saying
+only *"the output is not reproducible"* is true of one and overstated for the other.
+`SOURCE_DATE_EPOCH=<n> pandoc …` *does* make the DOCX byte-identical, verified; headless Chrome
+ignores the variable entirely and its `/CreationDate` moves anyway, also verified. So a pandoc
+user is reproducible today and a Chrome user never is. The conclusion survives both, on a
+reason that is not about today: reproducibility also requires the toolchain version to hold
+still for as long as the application folder is worth keeping, and it will not. State the
+asymmetry rather than flattening it — a reader who tries the variable, finds it works, and
+concludes the rule was never checked has learned the wrong thing about every other rule here.
+Second, the privacy argument covers **inbound** binaries only: an employer's brief, a recruiter
+attachment, a scan. An outbound PDF built from committed Markdown carries no privacy delta over
+the Markdown.
 
 **Reopens on:** a sending format the kit generates deterministically end to end, toolchain
 version included.

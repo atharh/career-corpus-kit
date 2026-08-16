@@ -263,8 +263,11 @@ pin is not a rollup; it records an input.
 settles one question and only one: whether a file the user still has is the file that went out.
 It recovers nothing, and frontmatter is never an archive of what a reader saw. That matters
 more than it reads, because **a generated artifact usually cannot be rebuilt**: PDF and DOCX
-writers stamp a creation time into the output, so the same Markdown through the same tool gives
-different bytes every run, and once the working copy is gone the sent file is gone with it. So
+writers stamp a creation time into the output, so the same Markdown through the same tool
+usually gives different bytes every run, and once the working copy is gone the sent file is
+gone with it. Some tools can be pinned to a fixed timestamp and some ignore the attempt — but a
+tool that is reproducible today still stops being so at its next upgrade, and the folder
+outlives the toolchain. So
 `git add -f <what went out>` at the moment the artifact freezes — the `sent` event, when its
 `lifecycle:` becomes `submitted`. Before the freeze it is regenerable working state and belongs
 nowhere near git; after it, it is the only evidence of what a reader saw.
@@ -335,6 +338,28 @@ every clone, and deleting the file later doesn't take it back — see `PRIVACY.m
 **Surface, don't decide.** `[SURFACE-DONT-DECIDE]` Whether to apply with a named gap, whether a
 requirement is boilerplate, whether a stalled thread is dead — all the user's call. Give them
 the read and the reason, not the verdict.
+
+**Not every doubt is a blocker.** `[NOT-EVERY-DOUBT-IS-A-BLOCKER]` Most uncertainty is not a
+blocker. The test is whether being wrong would be expensive or hard to undo — if it would not,
+say it once, in a clause, and carry on. A one-line heads-up is the whole deliverable, not a
+decision record, not a reconciliation of two forms that disagree, not a checkbox that outlives
+the question it was asking. Each escalation reads as diligence on the day it is written, and
+the cost lands on every later reader: a folder that argues with itself, and a house style the
+next session copies. Three things still earn a gate: editing a frozen artifact, putting an
+unsourced claim in front of an employer, and anything the user has said is theirs to decide.
+This is the narrower rule underneath `[SURFACE-DONT-DECIDE]` — that one stops a session taking
+the user's decision, this one stops it reporting the same doubt in four places.
+
+**A constraint has one home.** `[CONSTRAINT-HAS-ONE-HOME]` A limit on a claim lives in the
+corpus file that owns the claim, and an application thread never repeats it. Nothing keeps a
+copy true: correct the corpus later and the copy goes on stating the old position with full
+confidence. **Grep the corpus before writing a constraint into an application thread** — a rule
+saying *don't duplicate* loses to a session that sincerely believes it is not duplicating, and
+"this exists nowhere else" is the sentence people write when they have not looked. The
+exception is `fit.md`, and it is not a violation: weighing corpus evidence against a posting is
+that file's whole job, it names the file each ceiling came from, and it is regenerated rather
+than maintained, so a stale citation gets rewritten instead of rotting. Assessment may cite a
+constraint; a log of what happened may not.
 
 ## Lessons — how this skill personalises to you
 
