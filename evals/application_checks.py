@@ -741,6 +741,15 @@ def check_doctor(r: Report, spec: dict) -> None:
         (bad / "rounds" / "02-probes.md").write_text("# Probes\n\n🔴 unresolved.\n")
         for name in ("resume.md", "cover-letter.md"):
             (bad / name).write_text(f"# {name}\n\n⚠️ something unresolved here.\n")
+        # A frozen artifact carrying a duplicated constraint. Reporting it is
+        # right; advising deletion is not, because the freeze forbids exactly
+        # that. The freeze is easy to overlook — it is in the frontmatter of the
+        # file being checked rather than anywhere in the check.
+        (bad / "form-answers.md").write_text(
+            "---\nartifact: form-answers\nlifecycle: submitted\n---\n\n# Answers\n\n"
+            "RENDERING DECISION 2026-01-02: the support work is described as craft and never "
+            "as a support role.\n"
+        )
         # A conscientious fit check: it cites a ceiling and names where it came
         # from, which is the exception `[CONSTRAINT-HAS-ONE-HOME]` states rather
         # than a violation of it. Reporting this trains the reader to skim.
@@ -791,6 +800,17 @@ def check_doctor(r: Report, spec: dict) -> None:
             "every candidate carries the marker on both sides by construction, so `rendering` "
             "and `decision` were half the required four for free — which matched a generic "
             f"sentence about recorded rendering decisions to a specific one\n{got.stdout}",
+        )
+        frozen_line = next(
+            (ln for ln in got.stdout.split("\n") if "form-answers.md — constraint-marked" in ln),
+            "",
+        )
+        r.check(
+            "a finding on a frozen artifact does not advise editing it",
+            "lifecycle: submitted` and frozen" in frozen_line and "before deleting" not in frozen_line,
+            "a `submitted` artifact is frozen evidence and deletion is the one thing nobody may "
+            "do to it, so advice to delete reads as a chore that cannot be done — and the freeze "
+            f"is in the frontmatter of the file being checked, not in the check\n{frozen_line!r}",
         )
         r.check(
             "a fit check citing a ceiling with its source is not reported",

@@ -18,7 +18,11 @@ genuinely different treatment:
 
   BLOCKING    Nothing else about this thread is knowable until it is fixed.
   MECHANICAL  The fix exists and is unambiguous. Propose it; write nothing
-              without confirmation.
+              without confirmation — and nothing at all where the file is
+              `lifecycle: submitted`, which is frozen evidence of what a reader
+              saw. A freeze bounds what may be proposed rather than how it is
+              applied, and it is easy for a checker to overlook because it lives
+              in the frontmatter of the file being checked, not in the check.
   EDITORIAL   Detectable, but the fix is a judgement. Never auto-applied.
               Summarising provenance is a silent lossy edit, and what still
               binds is the user's call.
@@ -316,7 +320,13 @@ def check_constraints(f: Findings, root: Path) -> None:
             )
 
     for p in sorted((root / "applications").rglob("*.md")):
-        for quote, words in marked_paragraphs(p.read_text()):
+        text = p.read_text()
+        # A `submitted` artifact is frozen evidence of what a reader saw, so no
+        # advice may propose editing it. The freeze is easy for a checker to
+        # forget precisely because it lives in the frontmatter of the file being
+        # checked rather than anywhere in the check.
+        frozen = at.lifecycle_of(text) == "submitted"
+        for quote, words in marked_paragraphs(text):
             named = named_corpus_file(quote, root)
             # All of them, not the first: several echoes means the constraint is
             # already in more than one corpus file, which is a different problem
@@ -339,11 +349,19 @@ def check_constraints(f: Findings, root: Path) -> None:
                 where = (f"{len(echoes)} corpus files look like they carry it — "
                          f"{', '.join(str(e) for e in echoes[:3])}"
                          f"{'…' if len(echoes) > 3 else ''}")
+            elif frozen:
+                where = "no echo found in corpus/ — worth checking by hand"
             else:
                 where = "no echo found in corpus/ — worth checking by hand before deleting"
+            note = (
+                " This file is `lifecycle: submitted` and frozen, so nothing here is to be "
+                "edited or deleted: the finding is that the duplicate exists, and the action is "
+                "keeping it out of the next render."
+                if frozen else ""
+            )
             f.editorial.append(
                 f"{p.relative_to(root)} — constraint-marked, and {where} "
-                f"(`[CONSTRAINT-HAS-ONE-HOME]`): {quote[:90]!r}"
+                f"(`[CONSTRAINT-HAS-ONE-HOME]`): {quote[:90]!r}.{note}"
             )
 
 
