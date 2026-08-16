@@ -289,13 +289,17 @@ def named_corpus_file(unit: str, root: Path) -> Path | None:
     corpus = root / "corpus"
     for ref in re.findall(r"[\w./-]*\.md", unit):
         direct = root / ref
-        if direct.is_file() and "corpus" in direct.parts:
+        if direct.is_file() and "corpus" in direct.parts and "_inbox" not in direct.parts:
             return direct.relative_to(root)
         if corpus.is_dir():
             # Exactly one, or none. Taking the first of several basename matches
             # names a file confidently and possibly wrongly, which is the worst
-            # output this tool can produce — the reader trusts a path.
-            hits = sorted(corpus.rglob(Path(ref).name))
+            # output this tool can produce — the reader trusts a path. `_inbox/`
+            # is excluded before counting: it is never a valid home
+            # (`[INBOX-NOT-EVIDENCE]`), and a basename collision there would
+            # otherwise either name it confidently or hide the one real match.
+            hits = sorted(h for h in corpus.rglob(Path(ref).name)
+                          if "_inbox" not in h.parts)
             if len(hits) == 1:
                 return hits[0].relative_to(root)
     return None
@@ -310,16 +314,25 @@ def check_constraints(f: Findings, root: Path) -> None:
     constraint lives; whether a given line is really a constraint is left to the
     reader, and the corpus is searched for an echo so the common case answers
     itself.
+
+    `_inbox/` stays out on both sides, same as the caution count: inbound
+    material is somebody else's words (`[INBOX-NOT-EVIDENCE]`), so a recruiter
+    quoting a decision is not the user duplicating one, and an echo living in
+    `corpus/_inbox/` must never be reported as where a constraint belongs.
     """
     corpus = root / "corpus"
     corpus_paras = []
     if corpus.is_dir():
         for p in sorted(corpus.rglob("*.md")):
+            if "_inbox" in p.parts:
+                continue
             corpus_paras.extend(
                 (p.relative_to(root), words) for _, words in marked_paragraphs(p.read_text())
             )
 
     for p in sorted((root / "applications").rglob("*.md")):
+        if "_inbox" in p.parts:
+            continue
         text = p.read_text()
         # A `submitted` artifact is frozen evidence of what a reader saw, so no
         # advice may propose editing it. The freeze is easy for a checker to
