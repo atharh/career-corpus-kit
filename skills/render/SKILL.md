@@ -171,6 +171,29 @@ has already made — which framing to use, what not to cite, wording still pendi
 relevant files for `RENDERING DECISION` / `⚠️` notes and honor them. Don't relitigate a settled
 call.
 
+**A constraint has one home.** `[CONSTRAINT-HAS-ONE-HOME]` A limit on a claim lives in the
+corpus file that owns the claim, and an application thread never repeats it. Surfacing a
+ceiling while rendering is right; copying it into `applications/` so the next reader sees it is
+not, because nothing keeps the copy true — correct the corpus later and the copy goes on
+stating the old position with full confidence. The justification is always *a future render
+might miss it*, and that render was already broken: `[OBEY-DECISIONS]` requires reading the
+file, and everything else the render needs is in it. So the copy guards a failure that would
+have gone wrong anyway, and adds a second thing to keep true. **Grep the corpus before writing
+a constraint into an application thread** — a rule saying *don't duplicate* loses to a session
+that sincerely believes it is not duplicating, and *this exists nowhere else* is the sentence
+people write when they have not looked. `fit.md` is the exception and not a violation: it
+assesses rather than records, names the file each ceiling came from, and is regenerated rather
+than maintained, so a stale citation gets rewritten instead of rotting.
+
+Held alongside it: not every doubt is a blocker — `apply`'s `[NOT-EVERY-DOUBT-IS-A-BLOCKER]`.
+Most uncertainty is not a
+blocker. The test is whether being wrong would be expensive or hard to undo — if it would not,
+say it once, in a clause, and carry on. A render that will not go out until some unresolved
+question is settled has usually escalated a question that no answer would have changed. Three
+things still earn a gate: editing a frozen artifact, putting an unsourced claim in front of an
+employer, and anything the user has said is theirs to decide. Note what the first two are —
+this rule loosens nothing that `[CLAIM-SOURCE]` or the freeze holds.
+
 **The user's say-so overrides the corpus and this skill, immediately and without argument.**
 `[USER-OVERRIDES]` The corpus exists to stop the user drifting and a model inflating; it has
 no standing against the user themselves. If they direct a claim rendered, render it; if they

@@ -152,6 +152,19 @@ def check_templates_conform(r: Report, spec: dict, fixture: Path) -> None:
                 key not in keys,
                 f"apply `[NO-ROLLUP]` — {key} is recomputable from the log; a second copy drifts",
             )
+        # A `lifecycle:` on a file whose template declares none is invisible
+        # rather than wrong: the freeze guards only ever test for `submitted`, so
+        # an invented value sits there indefinitely doing nothing and reads as
+        # meaningful to every human who opens the file. `fit.md` is the one that
+        # attracts it — it is derived, never sent, and never frozen.
+        declared = top_level_keys(frontmatter((ROOT / tmpl_rel).read_text()) or "")
+        if "lifecycle" not in declared:
+            r.check(
+                f"{name} has no lifecycle: field",
+                "lifecycle" not in keys,
+                f"{tmpl_rel} declares none, and nothing reads one here — an invented value is "
+                "invisible to the freeze guards and legible to everyone else",
+            )
 
 
 def check_event_vocabulary(r: Report, spec: dict, fixture: Path) -> None:

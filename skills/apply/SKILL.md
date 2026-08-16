@@ -350,8 +350,9 @@ unsourced claim in front of an employer, and anything the user has said is their
 This is the narrower rule underneath `[SURFACE-DONT-DECIDE]` — that one stops a session taking
 the user's decision, this one stops it reporting the same doubt in four places.
 
-**A constraint has one home.** `[CONSTRAINT-HAS-ONE-HOME]` A limit on a claim lives in the
-corpus file that owns the claim, and an application thread never repeats it. Nothing keeps a
+And a constraint has one home, which is `render`'s `[CONSTRAINT-HAS-ONE-HOME]` and binds this
+skill hardest, because this skill owns the folder the copies land in. A limit on a claim lives
+in the corpus file that owns the claim, and an application thread never repeats it. Nothing keeps a
 copy true: correct the corpus later and the copy goes on stating the old position with full
 confidence. **Grep the corpus before writing a constraint into an application thread** — a rule
 saying *don't duplicate* loses to a session that sincerely believes it is not duplicating, and

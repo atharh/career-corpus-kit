@@ -45,6 +45,22 @@ One render rule is left out on purpose: `[PROVENANCE-NOT-PROSE]` keeps hedges ou
 you send, but a pack is study material and *should* show its seams — `[NAME-THE-WEAK]` below
 depends on it.
 
+Two more hold across the whole kit, and both are about what *not* to write down:
+
+- **Not every doubt is a blocker.** (`[NOT-EVERY-DOUBT-IS-A-BLOCKER]`) Most uncertainty is not
+  a blocker. The test is whether being wrong would be expensive or hard to undo — if it would
+  not, say it once, in a clause, and carry on. A pack is the easiest place in the kit to
+  accumulate caution, because every unresolved thing looks like something to prepare for.
+  Three things still earn a gate: editing a frozen artifact, putting an unsourced claim in
+  front of an employer, and anything the user has said is theirs to decide. `[NAME-THE-WEAK]`
+  is not in tension with this: naming a weakness once is the clause, and a pack that returns
+  to it in four files has stopped preparing the user and started worrying at them.
+- **A constraint has one home.** (`[CONSTRAINT-HAS-ONE-HOME]`) A limit on a claim lives in the
+  corpus file that owns the claim, and an application thread never repeats it. A pack cites a
+  ceiling to prepare an answer, which is fine; what it must not do is restate it as a standing
+  rule the folder now owns. **Grep the corpus before writing a constraint into an application
+  thread.**
+
 ## When this fires, and what it needs
 
 The trigger is *"I have an interview"*, not *"I'm applying"*. That means inputs `render`
