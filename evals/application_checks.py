@@ -639,6 +639,15 @@ def check_status_tool(r: Report, spec: dict) -> None:
         (shadow / "resume.md").write_text(ART.format("submitted"))
         (shadow / "drafts").mkdir()
         (shadow / "drafts" / "resume.md").write_text(ART.format("in-flight"))
+        # A nested artifact listed by its folder-relative path: the grammar must
+        # accept the `/`, or path-relative comparison has nothing to compare.
+        nested = apps / "nested-listing"
+        (nested / "rounds").mkdir(parents=True)
+        (nested / "application.md").write_text(FM.format(
+            "events:\n  - 2026-01-02 sent\n"
+            "sent:\n  date: 2026-01-02\n  artifacts:\n    - rounds/answers.md\n"
+        ))
+        (nested / "rounds" / "answers.md").write_text(ART.format("in-flight"))
         # Readable, but every event is non-pipeline: no stage is not unreadable.
         inbound = apps / "inbound-only"
         inbound.mkdir()
@@ -708,6 +717,13 @@ def check_status_tool(r: Report, spec: dict) -> None:
             "draft-shadow — drafts/resume.md" not in got.stdout,
             "comparing basenames makes drafts/resume.md collide with the top-level "
             f"resume.md that actually went out\n{got.stdout}",
+        )
+        r.check(
+            "a nested artifact can be listed by its relative path",
+            "nested-listing — rounds/answers.md went out but is not lifecycle: submitted"
+            in got.stdout,
+            "sent.artifacts must accept a path separator, or the folder-relative comparison "
+            f"is unreachable for anything below the top level\n{got.stdout}",
         )
         r.check(
             "no pipeline events is a state, not unreadable",
