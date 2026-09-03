@@ -286,17 +286,27 @@ capability file, citing the story file that owns the fact, `[OWNS-NO-FACTS]` unc
 no capability file exists, cite the would-be file anyway — `../capabilities/<technology>.md`
 in the story's gaps queue, marked as a forward pointer — because a pointer that resolves to
 nothing marks a file worth opening, not an error. Candidates for new capability files are
-**derived, never curated**: computed from those forward pointers and from what recurs across
-story files, because a hand-maintained candidates list rots. The derived list is a queue the
-user prunes and generalises, per `[LIST-IS-A-QUEUE]`: a candidate they dismiss as not a
-capability they would claim stays dismissed — record the dismissal where the derivation can
-see it, since a dismissal is the user's decision, not a session's — and a family-level
-candidate, one file for a category of tools, surfaces only when stories evidence more than
-one distinct member. The guard: **never ask capability-inventory questions inline in a story
-interview.** Recall is triggered, and a tool question mid-arc makes people summarise instead
-of remember; "what's your experience with X" passes neither branch of the say-it-out-loud
-test `[SAY-ALOUD]` until a JD or a form makes it render or defend. Harvest what surfaces on
-its own; inventory questions belong to the dedicated round `[CAPABILITY-FILE]` opens.
+**derived, never curated**: every term a story declares in `technologies:` that no capability
+file's `covers:` accounts for, computed by `tools/corpus_status.py` and stored nowhere. There
+is no lexicon and no dismissal list, because both would be a session's decisions dressed as
+the user's: a term the user would not claim standalone is covered by the family file whose
+ceiling says so, and a recorded clean no is coverage too — the file rules on the term
+(`[COVERS]`). The derived list is a queue the user prunes, per `[LIST-IS-A-QUEUE]`. The
+guard: **never ask capability-inventory questions inline in a story interview.** Recall is
+triggered, and a tool question mid-arc makes people summarise instead of remember; "what's
+your experience with X" passes neither branch of the say-it-out-loud test `[SAY-ALOUD]`
+until a JD or a form makes it render or defend. Harvest what surfaces on its own; inventory
+questions belong to the dedicated round `[CAPABILITY-FILE]` opens.
+
+**Declare what an arc evidences in `technologies:`, at capture — never leave it to a grep.**
+`[TECHNOLOGIES-DECLARED]` Write the field when the story is captured, by scanning the raw
+material and the user's answers for every technology named, and add to it whenever a later
+round surfaces one; a withdrawn technology comes off, because the field asserts the arc
+evidences the thing. A term on the line is a claim about the file; a word in the body is
+not — so a technology mentioned in passing and never added is invisible to the status tool by
+design, and the tool's list of story files with no `technologies:` key is how this rule gets
+checked. Canonical lowercase slugs, hyphenated when multi-word (`kubernetes`, not `k8s`);
+aliases live in a capability file's `covers:` and nowhere else, so matching stays exact.
 
 ## Lessons — how this skill personalises to you
 

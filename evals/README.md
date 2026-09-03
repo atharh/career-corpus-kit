@@ -48,6 +48,14 @@ would-be file marks a file worth opening. What keeps that from swallowing typos
 is the marking: every capability reference in `examples/corpus/` either resolves
 or sits in a paragraph that says "forward pointer", and anything else fails.
 
+**Strict-YAML frontmatter check.** Every frontmatter block under `examples/` and
+`skills/*/templates/` must parse as a YAML mapping. The templates invite prose
+into frontmatter, and `- foo: bar` parses as a one-key mapping rather than
+failing, so a sentence with a colon in it silently stops being a value. This is
+the one check that wants a library: it runs when PyYAML is importable (CI
+installs it) and prints a skipped line otherwise, so `./evals/run.sh` still
+needs nothing but `python3`.
+
 **Policy drift check.** Table in `cases/policy-blocks.json`. Four policies are
 stated in more than one skill — the Lessons block, `_inbox/`-is-not-evidence,
 no-names-in-filenames, and candidate-claim sourcing — and each entry pins the
@@ -259,6 +267,19 @@ report the kit's own fixture inbox, because an exemption pattern in the tool
 would be a false negative in any user repo whose paths happened to match it —
 and the fixture files carry banners so the finding reads as expected rather
 than as a chore.
+
+## Tier 3b — the corpus status tool
+
+`corpus_status_checks.py`, asserting over `tools/corpus_status.py`. The tool is
+the derivation behind `[CAPABILITY-HARVEST]`: the capability queue is the set of
+`technologies:` terms no `covers:` line accounts for, with no lexicon, family
+list or dismissal list anywhere. Each rule it states is checked to bite on a
+temp corpus built to break it — an alias in `covers:` covers, an empty
+`technologies:` is a declaration while an absent key is not, `background.md`
+and the spine files are never story files, and a block the tool cannot read
+raises with the path rather than reading as empty. The example corpus is pinned
+to what it demonstrates: one uncovered term sitting beside its forward pointer,
+and nothing untagged.
 
 ## Adding a case
 

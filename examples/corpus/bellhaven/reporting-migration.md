@@ -4,6 +4,7 @@ company: Bellhaven Health
 role: Software Engineer
 period: 2016-05 – 2016-12
 status: drafted — thin on outcome, strong on the anachronism lesson
+technologies: [postgresql, cron]
 facts_vetted:
   - clinic-facing reports ran directly against the production Postgres primary
   - a large customer's month-end report could lock tables for minutes during clinic hours

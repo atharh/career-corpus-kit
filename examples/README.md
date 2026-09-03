@@ -38,7 +38,8 @@ a story that's thinner than the others.
    counter-example attached, and a second pattern the user withdrew.
 7. **[`corpus/capabilities/postgresql.md`](corpus/capabilities/postgresql.md)** — one
    technology across the whole career: an index that owns no facts, a depth ceiling per claim,
-   and the noes that make the yeses credible.
+   and the noes that make the yeses credible. Its `covers:` line is what makes the story files'
+   `technologies:` terms count as covered — `tools/corpus_status.py` lists the rest.
 8. **[`corpus/LESSONS.md`](corpus/LESSONS.md)** — how the skills personalise. Ships empty, fills
    with the things you had to say twice.
 

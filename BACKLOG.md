@@ -57,6 +57,15 @@ version of this needs an answer to that, not just an extra row in the table.
 
 **Reopens on:** a second piece of corpus tooling that a pass should have seen and didn't.
 
+**Reopened 2026-09-03, still no call.** The second piece arrived: the corpus's status tool,
+ported as `tools/corpus_status.py`, reached the kit the same way — raised by hand, as a brief
+from a corpus session, not found by a pass. Two for two on reading 1 working; also two for two
+on reading 2's mechanism, since both tools carried a design the rules alone did not state (a
+closed grammar, a set difference). What made this one safe to read was that it was a *tool*,
+not a corpus file: no personal material in it, and the brief said which commits to look at.
+That may be the answer — tooling at the repo root is intake, `corpus/` never is — but one more
+instance before writing it into `CLAUDE.md`.
+
 
 ## The eval suite's private parsers, and the vocabulary's four copies
 

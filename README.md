@@ -255,6 +255,19 @@ something frozen that nobody sent, a thread whose events can't be read. What it 
 you is what to do next. Stage and age are derivations; whether a quiet thread is dead is a
 judgement about your career, and the kit doesn't take those.
 
+The corpus side has its own, for what's outstanding there:
+
+```
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/corpus_status.py"
+```
+
+Seeds still in `_inbox/`, open gaps per story, capability files a story cites before anyone
+wrote them — and the capability queue: every technology a story declares in `technologies:`
+that no capability file's `covers:` answers for. That last list is derived from two frontmatter
+fields and nothing else. There is no lexicon in the tool to fall behind and no dismissal list to
+maintain; a family file covers the terms you wouldn't claim standalone, and a recorded clean no
+is coverage too.
+
 The kit ships one other script, for when your corpus is older than the guidance:
 
 ```

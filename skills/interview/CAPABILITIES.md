@@ -16,6 +16,15 @@ file as soon as placement settles** — a technology claim that never acquires a
 happened is a claim with no anchor, and an anchorless claim is what a follow-up question
 punctures first.
 
+**A capability file declares every term it answers for in `covers:`, aliases included.**
+`[COVERS]` That line is the file's coverage, and nothing else is: the filename is a label, and
+matching against a story's `technologies:` is exact, so `kubernetes` and `k8s` both go on the
+line if either could be declared. A family file — one for a category of tools — is a
+capability file whose `covers:` has several entries, and nothing else defines one; open one
+when a term the user would not claim standalone still needs a ceiling, and let the ceiling say
+so. A recorded clean no counts as covered, because the file rules on the term either way —
+which is why there is no dismissal list anywhere.
+
 **Every entry carries a depth ceiling, and the file carries the noes.** `[DEPTH-CEILING]`
 Record how far each claim can be pushed before it breaks — *administered it* and *my team ran
 on it* are different claims, and a file that flattens them reads as uniform confidence, which

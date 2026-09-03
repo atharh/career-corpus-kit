@@ -6,6 +6,7 @@ period: 2023-04 – 2023-11
 status: drafted — this is the story with the mistake in it, and it's the strongest one
 related:
   - batch-window.md (the pager pain that started this)
+technologies: []   # the arc evidences a process change, not a tool — declared, not omitted
 facts_vetted:
   - the rotation covered 6 services with 8 engineers on it, one week in eight
   - Q1 2023 had 31 out-of-hours pages across the rotation

@@ -69,6 +69,25 @@ the corpus that suggested it.
   already covered by its own `CLAUDE.md` — read the clone, not the cache, and pin a sha rather
   than trusting a note.
 
+- **PyYAML as a dependency of a kit tool** (declined 2026-09-03, in the pass that ported
+  `technologies:` / `covers:` and `tools/corpus_status.py`). The corpus's version of the tool
+  imports it; the kit's reads the two list fields with the same one-token-per-item grammar
+  `appthread.py` uses, because that file already states the decision — a kit cannot assume a
+  library on a stranger's machine — and `./evals/run.sh` promises nothing but `python3`. The
+  strict-YAML rule ported as template guidance plus a static check that runs when PyYAML is
+  present and skips itself otherwise. A future pass seeing the corpus tool import `yaml` is
+  seeing a decision, not an omission.
+
+- **`background.md` as a story file for the status tool** (declined 2026-09-03). The corpus's
+  tool counts every non-spine file; the kit's excludes background files. A background file holds
+  a company's context, not an arc, and a stack listed there is a technology existing near the
+  user — the exact thing `[CAPABILITY-FILE]` says is not evidence — so asking it for
+  `technologies:` would invite the inventory the field exists to refuse.
+
+- **The cursor was not advanced by the 2026-09-03 pass.** That pass was a brief-driven port of
+  one design, not a diff of the three intake paths from `81490e1`; the next full pass still
+  starts there.
+
 - **The recurrence-gated version of *absent* vs. *unwritten* is still sitting in the corpus.**
   The kit shipped the ungated version in release B — `fit.md` records `no-corpus-evidence`,
   never `missing`, and asks — because the kit-internal argument stands on its own: the kit

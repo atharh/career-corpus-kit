@@ -444,6 +444,41 @@ def check_capability_pointers(r: Report) -> None:
                 )
 
 
+def check_frontmatter_is_yaml(r: Report) -> None:
+    """Every frontmatter block the kit ships parses as a strict YAML mapping.
+
+    The templates invite prose into frontmatter — a disputed claim is a sentence
+    — and a sentence with a colon in it silently stops being a value: `- foo: bar`
+    parses as a one-key mapping, not as an error. The kit's own tools read a
+    narrower grammar and need no YAML library (`tools/appthread.py`), so this
+    check is the only place the wider promise gets tested, and it runs only when
+    PyYAML happens to be importable. CI installs it; `run.sh` stays stdlib-only,
+    and a machine without it sees one skipped line rather than a failure.
+    """
+    try:
+        import yaml
+    except ImportError:
+        print("  (frontmatter YAML check skipped — PyYAML not installed)")
+        return
+    files = sorted((ROOT / "examples").rglob("*.md")) + sorted(
+        (ROOT / "skills").glob("*/templates/*.md"))
+    for path in files:
+        fm = frontmatter(path.read_text())
+        if fm is None:
+            continue
+        rel = path.relative_to(ROOT)
+        try:
+            data = yaml.safe_load(fm)
+        except yaml.YAMLError as e:
+            r.check(f"{rel} frontmatter is strict YAML", False, str(e).splitlines()[0])
+            continue
+        r.check(
+            f"{rel} frontmatter is a mapping",
+            data is None or isinstance(data, dict),
+            f"parsed as {type(data).__name__}",
+        )
+
+
 def squash(text: str) -> str:
     """Collapse whitespace so a hard-wrapped sentence matches its one-line form.
 
@@ -575,6 +610,7 @@ def main() -> int:
     check_policy_blocks(r, names)
     check_example_corpus(r)
     check_capability_pointers(r)
+    check_frontmatter_is_yaml(r)
 
     base = args.base_ref or os.environ.get("EVAL_BASE_REF")
     if base and plugin:

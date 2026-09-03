@@ -21,6 +21,8 @@ echo
 python3 evals/verify_tripwires.py || status=1
 echo
 python3 evals/application_checks.py || status=1
+echo
+python3 evals/corpus_status_checks.py || status=1
 
 echo
 if [ $status -eq 0 ]; then

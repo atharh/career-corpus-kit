@@ -22,6 +22,11 @@ jobs:
         with:
           python-version: "3.12"
 
+      # Only the strict-YAML frontmatter check needs it; it skips itself when
+      # absent, so ./evals/run.sh stays stdlib-only on a user's machine.
+      - name: Install PyYAML
+        run: pip install pyyaml
+
       - name: Resolve base ref
         id: base
         run: |
@@ -49,6 +54,9 @@ jobs:
 
       - name: Trip-wires (offline)
         run: python3 evals/tripwires.py
+
+      - name: Corpus status tool
+        run: python3 evals/corpus_status_checks.py
 
 # Live trip-wires are not run here. They need an API key and a full Claude Code
 # session per case, and renders are stochastic enough that a single run is noise.

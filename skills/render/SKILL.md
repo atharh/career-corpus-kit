@@ -154,9 +154,10 @@ it says the user is on record, not that anyone checked. See "What 'vetted' means
 
 **A technology claim renders from its capability file, at its recorded depth.**
 `[CAPABILITY-CLAIMS]` When the artifact wants a skills line, a form's self-rating, or an
-answer to "what's your experience with X", source it from `corpus/capabilities/<technology>.md`
-where one exists — it already carries the depth ceilings and the noes, so render inside them,
-and never flatten different depths into one uniformly confident list: *administered it* and
+answer to "what's your experience with X", source it from the `corpus/capabilities/` file whose
+`covers:` names X — by that line, not by filename, since a family file answers for terms it
+isn't named after — where one exists: it already carries the depth ceilings and the noes, so
+render inside them, and never flatten different depths into one uniformly confident list: *administered it* and
 *my team ran on it* are different claims, and a list that reads them alike over-claims the
 weaker one. Where no capability file exists, the claim renders only what story files back —
 which for a bare skills-line entry may be nothing; say so rather than padding the list.

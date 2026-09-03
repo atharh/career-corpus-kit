@@ -6,6 +6,7 @@ period: 2021-09 – 2022-03 (~6 months, part-time alongside normal work)
 status: drafted — good depth; one number still disputed
 related:
   - oncall-rebuild.md (same team, a year later; the on-call pain here is what led to that)
+technologies: [airflow]   # no capability file yet — see the forward pointer in the gaps
 facts_vetted:
   - the nightly dispatch job ran ~40 min in 2019 and ~3h10 by mid-2021
   - the 06:00 delivery deadline is contractual, not internal

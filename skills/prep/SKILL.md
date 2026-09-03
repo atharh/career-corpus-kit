@@ -125,8 +125,9 @@ rather than edited when the corpus underneath it moves.
 
 If the employer publishes focus areas, competencies, or a levelling rubric, **the story bank's
 sections are theirs, verbatim**, and each section names the corpus stories that serve it. A
-criterion that names a technology also pulls `corpus/capabilities/<technology>.md`, whose
-ceilings bound what the answer may claim.
+criterion that names a technology also pulls the `corpus/capabilities/` file whose `covers:`
+names it — a family file answers for terms it isn't named after — and its ceilings bound what
+the answer may claim.
 
 The value is in what this exposes. A criterion with three strong corpus stories behind it is
 fine and needs no work. **A criterion with nothing behind it is the actual finding**, and it

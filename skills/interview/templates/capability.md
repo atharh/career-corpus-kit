@@ -1,6 +1,10 @@
 ---
 title: <technology> — what they can actually be asked about
 kind: capability file — one technology, whole career. See `[CAPABILITY-FILE]`.
+covers:              # every term this file answers for, aliases included — `[COVERS]`.
+                     # A file with several is a family file; nothing else defines one.
+  - <technology>
+  - <alias>
 status: <opened YYYY-MM-DD | interviewed, rounds so far | renderable within its ceilings>
 answers_the_question: |
   <The question this file exists to answer, as it would actually be asked — out loud in a

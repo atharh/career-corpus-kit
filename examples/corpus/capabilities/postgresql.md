@@ -1,6 +1,7 @@
 ---
 title: PostgreSQL — what Sam can actually be asked about
 kind: capability file — one technology, whole career
+covers: [postgresql, postgres, pg_dump]
 status: opened 2026-03-02; renderable within its ceilings
 answers_the_question: |
   "How deep is your Postgres?" — asked as a self-rating box on an application form, which is
