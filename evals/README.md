@@ -275,9 +275,12 @@ the derivation behind `[CAPABILITY-HARVEST]`: the capability queue is the set of
 `technologies:` terms no `covers:` line accounts for, with no lexicon, family
 list or dismissal list anywhere. Each rule it states is checked to bite on a
 temp corpus built to break it — an alias in `covers:` covers, an empty
-`technologies:` is a declaration while an absent key is not, `background.md`
-and the spine files are never story files, and a block the tool cannot read
-raises with the path rather than reading as empty. The example corpus is pinned
+`technologies:` is a declaration while an absent key is not, a capability
+file with no `covers:` is listed rather than silently covering nothing,
+`background.md` and the spine files are never story files, `_inbox/` is out
+of the gap and flag counts, and a block the tool cannot read — or opens and
+never closes — raises with the path rather than reading as empty. The example
+corpus is pinned
 to what it demonstrates: one uncovered term sitting beside its forward pointer,
 and nothing untagged.
 

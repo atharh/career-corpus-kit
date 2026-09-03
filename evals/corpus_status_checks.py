@@ -160,11 +160,28 @@ def check_untagged(r: Report) -> None:
             "a/no-frontmatter.md": "# a heading\n\nno block at all\n",
         })
         names = [p.name for p in cs.untagged(corpus)]
-        r.check("a story file with no technologies: key is listed", names == ["absent.md"], repr(names))
-        r.check(
-            "a story with no frontmatter block is not this list's business",
-            "no-frontmatter.md" not in names,
-        )
+        r.check("a story file with no technologies: key is listed",
+                names == ["absent.md", "no-frontmatter.md"], repr(names))
+
+
+def check_uncovering(r: Report) -> None:
+    """A capability file with no `covers:` covers nothing, and says so."""
+    with tempfile.TemporaryDirectory() as tmp:
+        corpus = build(Path(tmp), {
+            "a/one.md": story("title: one\ntechnologies: [postgresql, airflow]"),
+            "capabilities/postgresql.md": story("title: pg\nstatus: opened"),
+            "capabilities/legacy.md": "# no frontmatter at all\n",
+            "capabilities/README.md": "# index, not a capability file\n",
+        })
+        names = [p.name for p in cs.uncovering(corpus)]
+        r.check("a capability file with no covers: is listed",
+                names == ["legacy.md", "postgresql.md"], repr(names))
+        r.check("its terms stay uncovered — nothing is inferred from the filename",
+                [t for _, t, _ in cs.uncovered(corpus)] == ["airflow", "postgresql"],
+                repr(cs.uncovered(corpus)))
+        out = run(Path(tmp)).stdout
+        r.check("the report has a section for it", "CAPABILITY FILES WITHOUT covers:" in out
+                and "capabilities/postgresql.md" in out, out)
 
 
 def check_story_file_set(r: Report) -> None:
@@ -175,11 +192,15 @@ def check_story_file_set(r: Report) -> None:
             "a/background.md": story("title: bg\nscale:\n  engineers: 3"),
             "a/arc.md": story("title: arc"),
             "_inbox/seed.md": story("title: seed"),
+            "a/_inbox/nested.md": story("title: nested"),
+            "README.md": story("title: readme"),
+            "a/README.md": story("title: readme"),
             "capabilities/x.md": story("title: x\ncovers: [x]"),
         })
         names = [str(p.relative_to(corpus)) for p in cs.story_files(corpus)]
         r.check(
-            "story files exclude _inbox/, capabilities/, the spine files and background.md",
+            "story files exclude _inbox/ at any depth, capabilities/, README.md, the spine "
+            "files and background.md",
             names == ["a/arc.md"],
             repr(names),
         )
@@ -206,6 +227,18 @@ def check_unparsable(r: Report) -> None:
         "an absent key is None, not an error",
         cs.term_list(["title: x"], "technologies", p) is None,
     )
+    r.check(
+        "a # inside a token is part of the term, not a comment",
+        cs.term_list(["technologies: [c#, .net]"], "technologies", p) == ["c#", ".net"],
+        repr(cs.term_list(["technologies: [c#, .net]"], "technologies", p)),
+    )
+    with tempfile.TemporaryDirectory() as tmp:
+        corpus = build(Path(tmp), {
+            "a/open.md": "---\ntitle: open\ntechnologies: [kafka]\n\n## never closed\n",
+        })
+        msg = raises(cs.universe, corpus)
+        r.check("a block that opens and never closes raises with the path — it is not "
+                "\"no block\"", msg is not None and "open.md" in msg, repr(msg))
     with tempfile.TemporaryDirectory() as tmp:
         corpus = build(Path(tmp), {
             "a/bad.md": story("title: bad\ntechnologies:\n  - kafka: streaming"),
@@ -227,12 +260,14 @@ def check_forward_pointers(r: Report) -> None:
         corpus = build(Path(tmp), {
             "a/one.md": story("title: one\ntechnologies: []",
                               "\n- [ ] `../capabilities/airflow.md` — forward pointer\n"
+                              "- [ ] `../capabilities/pg_dump.md` — forward pointer\n"
                               "- [ ] `../capabilities/kafka.md` — forward pointer\n"),
             "capabilities/kafka.md": story("title: k\ncovers: [kafka]"),
         })
         r.check(
-            "a cited capability file that does not exist is a forward pointer",
-            cs.forward_pointers(corpus) == ["capabilities/airflow.md"],
+            "a cited capability file that does not exist is a forward pointer, "
+            "underscores included",
+            cs.forward_pointers(corpus) == ["capabilities/airflow.md", "capabilities/pg_dump.md"],
             repr(cs.forward_pointers(corpus)),
         )
 
@@ -243,13 +278,20 @@ def check_gaps_and_flags(r: Report) -> None:
             "a/one.md": story("title: one\ntechnologies: []",
                               "\n- [ ] open\n- [x] closed\n- [ ] 🔴 flagged\n"),
             "profile.md": story("title: p", "\n- [ ] one here too\n"),
+            "_inbox/draft.md": "# pasted\n\n- [ ] their todo\n- [ ] 🔴 their flag\n",
         })
         rows = cs.gaps(corpus)
-        r.check("open gaps are counted per file, most first",
+        r.check("open gaps are counted per vetted file, most first — _inbox/ stays out",
                 [(n, p.name) for n, p in rows] == [(2, "one.md"), (1, "profile.md")], repr(rows))
         flags = cs.flagged(corpus)
-        r.check("a flagged open gap is listed with its line number",
+        r.check("a flagged open gap is listed with its line number — _inbox/ stays out",
                 [(p.name, i) for p, i, _ in flags] == [("one.md", 8)], repr(flags))
+        out = run(Path(tmp)).stdout
+        r.check("FLAGGED sits between the gap count and the forward pointers",
+                0 < out.find("OPEN GAPS") < out.find("FLAGGED 🔴") < out.find("FORWARD CAPABILITY"),
+                out)
+        r.check("the flagged line is printed with its path and line number",
+                "a/one.md:8:- [ ] 🔴 flagged" in out, out)
 
 
 def check_example_corpus(r: Report) -> None:
@@ -261,6 +303,7 @@ def check_example_corpus(r: Report) -> None:
     order = [
         "UNEXTRACTED SEEDS", "OPEN GAPS PER STORY", "FORWARD CAPABILITY POINTERS",
         "UNCOVERED TECHNOLOGIES", "STORY FILES WITHOUT technologies:",
+        "CAPABILITY FILES WITHOUT covers:",
     ]
     positions = [out.find(h) for h in order]
     r.check("sections appear in the documented order", all(p >= 0 for p in positions)
@@ -284,6 +327,7 @@ def main() -> int:
     check_covers(r)
     check_normalisation(r)
     check_untagged(r)
+    check_uncovering(r)
     check_story_file_set(r)
     check_unparsable(r)
     check_forward_pointers(r)

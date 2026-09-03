@@ -86,4 +86,10 @@ rather than a patch:
 Same family: `[NOT-EVERY-DOUBT-IS-A-BLOCKER]` and `[CONSTRAINT-HAS-ONE-HOME]` are each stated
 near-verbatim in three SKILL.md files — a CLAUDE.md-consolidate-pass candidate, not a defect.
 
+**Added 2026-09-03.** A third copy of a different predicate: what counts as a corpus file and
+where `_inbox/` stops is now defined in `tools/corpus_status.py` and, four times over, in
+`tools/corpus_doctor.py`. They agree today only because 1.31.1 aligned them by hand after the
+status tool shipped counting `_inbox/` checkboxes as corpus gaps. One `corpus_files` helper
+both import is the fix; same shape as the `appthread` item above.
+
 **Reopens on:** the next change to the event vocabulary or to either parser.

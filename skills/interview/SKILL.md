@@ -291,7 +291,8 @@ file's `covers:` accounts for, computed by `tools/corpus_status.py` and stored n
 is no lexicon and no dismissal list, because both would be a session's decisions dressed as
 the user's: a term the user would not claim standalone is covered by the family file whose
 ceiling says so, and a recorded clean no is coverage too — the file rules on the term
-(`[COVERS]`). The derived list is a queue the user prunes, per `[LIST-IS-A-QUEUE]`. The
+(`[COVERS]`), and the tool's list of capability files with no `covers:` key is how that rule
+gets checked. The derived list is a queue the user prunes, per `[LIST-IS-A-QUEUE]`. The
 guard: **never ask capability-inventory questions inline in a story interview.** Recall is
 triggered, and a tool question mid-arc makes people summarise instead of remember; "what's
 your experience with X" passes neither branch of the say-it-out-loud test `[SAY-ALOUD]`

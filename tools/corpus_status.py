@@ -15,13 +15,17 @@ difference — with no lexicon in this file to fall behind, no family list to
 curate, and no dismissal list to keep in step: a term the user would not claim
 standalone is covered by the family file whose ceiling says so, and a recorded
 clean no is coverage too. `[TECHNOLOGIES-DECLARED]` and `[COVERS]` in the
-interview skill are the rules this reads; the second-to-last section — story
-files with no `technologies:` key — is how the first of them gets checked.
+interview skill are the rules this reads; the last two sections — story files
+with no `technologies:` key, capability files with no `covers:` — are how they
+get checked.
 
 Nothing here infers, for the reason `appthread.py` gives: a frontmatter block
 that could not be read must never present as a block that declared nothing,
 because the second silently empties every set below. A malformed list raises
-with the path.
+with the path, and so does a block that opens and never closes. A capability
+file with no `covers:` is the same hole from the other side — it covers
+nothing and looks like coverage — so it gets a section of its own, the twin of
+the one for story files with no `technologies:`.
 
     python3 "${CLAUDE_PLUGIN_ROOT}/tools/corpus_status.py" [corpus-repo-root]
 
@@ -48,21 +52,26 @@ import appthread as at  # noqa: E402
 # files are ledgers and profile, not arcs; and `background.md` holds a
 # company's context rather than an arc — a stack listed there is a technology
 # existing near the user, which `[CAPABILITY-FILE]` says is not evidence of
-# anything they did.
+# anything they did. `_inbox` is tested at any depth, as `corpus_doctor.py`
+# tests it.
 EXCLUDED_DIRS = ("_inbox", "capabilities")
 EXCLUDED_NAMES = (
-    "LESSONS.md", "BACKLOG.md", "QUEUE.md", "profile.md", "through-lines.md",
-    "directions.md", "background.md",
+    "README.md", "LESSONS.md", "BACKLOG.md", "QUEUE.md", "profile.md",
+    "through-lines.md", "directions.md", "background.md",
 )
 
 GAP = "- [ ]"
 FLAG = "🔴"
 FLAG_WIDTH = 96
-CAPABILITY_REF = re.compile(r"capabilities/[a-z0-9-]+\.md")
+# As wide as a filename `[COVERS]` could give: the example ships `pg_dump` as
+# an alias, so an underscore is a slug shape a reader will copy.
+CAPABILITY_REF = re.compile(r"capabilities/[A-Za-z0-9_.-]+\.md")
 
 # One token, no YAML structure inside it. `- foo: bar` is a mapping and not a
-# term; a quoted or multi-word item is a shape this grammar does not read.
-TERM = re.compile(r"^[^\s:#\[\]{},\"']+$")
+# term; a quoted or multi-word item is a shape this grammar does not read. `#`
+# is allowed mid-token (`c#`): a comment only starts after whitespace, which
+# the token already excludes.
+TERM = re.compile(r"^[^\s:\[\]{},\"']+$")
 KEY_LINE = re.compile(r"^([A-Za-z_][A-Za-z0-9_]*):(.*)$")
 INLINE_LIST = re.compile(r"^\[(.*)\]$")
 BLOCK_ITEM = re.compile(r"^(\s*)-\s*(\S.*)$")
@@ -77,9 +86,20 @@ def corpus_files(corpus: Path) -> list[Path]:
     return sorted(p for p in corpus.rglob("*.md") if p.is_file())
 
 
+def vetted_files(corpus: Path) -> list[Path]:
+    """Every corpus file outside `_inbox/` — the gap and flag universe.
+
+    Wider than `story_files`: the spine files carry gaps too. Narrower than
+    `corpus_files`: a pasted draft's checkboxes are somebody else's to-do
+    list, and a flag in unvetted material is not a corpus flag.
+    """
+    return [p for p in corpus_files(corpus)
+            if "_inbox" not in p.relative_to(corpus).parts]
+
+
 def is_story_file(path: Path, corpus: Path) -> bool:
     rel = path.relative_to(corpus)
-    if rel.parts[0] in EXCLUDED_DIRS:
+    if any(part in EXCLUDED_DIRS for part in rel.parts[:-1]):
         return False
     return path.name not in EXCLUDED_NAMES
 
@@ -89,8 +109,15 @@ def story_files(corpus: Path) -> list[Path]:
 
 
 def frontmatter_lines(path: Path) -> list[str] | None:
-    """The file's frontmatter lines, or None when it has no block."""
-    parts = at.split_frontmatter(path.read_text())
+    """The file's frontmatter lines, or None when it has no block.
+
+    A block that opens and never closes is not "no block": it is one that
+    could not be read, and it raises rather than reading as empty.
+    """
+    text = path.read_text()
+    parts = at.split_frontmatter(text)
+    if parts is None and text.replace("\r", "").split("\n")[0].rstrip() == "---":
+        raise CorpusFormatError(f"{path}: frontmatter opens with --- and never closes")
     return None if parts is None else parts[0]
 
 
@@ -164,10 +191,15 @@ def universe(corpus: Path) -> dict[str, list[Path]]:
     return out
 
 
+def capability_files(corpus: Path) -> list[Path]:
+    return sorted(p for p in (corpus / "capabilities").glob("*.md")
+                  if p.name not in EXCLUDED_NAMES)
+
+
 def coverage(corpus: Path) -> set[str]:
     """-> {term} answered for by some capability file, aliases included."""
     out: set[str] = set()
-    for path in sorted((corpus / "capabilities").glob("*.md")):
+    for path in capability_files(corpus):
         fm = frontmatter_lines(path)
         if fm is None:
             continue
@@ -189,16 +221,28 @@ def uncovered(corpus: Path) -> list[tuple[int, str, list[Path]]]:
 
 
 def untagged(corpus: Path) -> list[Path]:
-    """-> [story files with a frontmatter block but no `technologies:` key].
+    """-> [story files with no `technologies:` key].
 
     `technologies: []` is a declaration — this arc evidences none — and is not
-    listed. A file with no frontmatter at all is a different defect and not
-    this list's business.
+    listed. A file with no frontmatter block has no key either, and is.
     """
+    return _without_key(story_files(corpus), "technologies")
+
+
+def uncovering(corpus: Path) -> list[Path]:
+    """-> [capability files with no `covers:` key].
+
+    Such a file answers for nothing, so every term it was written for lands
+    in the queue as uncovered — the twin of `untagged`, checking `[COVERS]`.
+    """
+    return _without_key(capability_files(corpus), "covers")
+
+
+def _without_key(paths: list[Path], key: str) -> list[Path]:
     out = []
-    for path in story_files(corpus):
+    for path in paths:
         fm = frontmatter_lines(path)
-        if fm is not None and term_list(fm, "technologies", path) is None:
+        if fm is None or term_list(fm, key, path) is None:
             out.append(path)
     return out
 
@@ -211,9 +255,9 @@ def seeds(corpus: Path) -> list[Path]:
 
 
 def gaps(corpus: Path) -> list[tuple[int, Path]]:
-    """-> [(open gap count, path)] over every corpus file, most first."""
+    """-> [(open gap count, path)] over every vetted file, most first."""
     rows = []
-    for path in corpus_files(corpus):
+    for path in vetted_files(corpus):
         n = sum(1 for line in path.read_text().split("\n") if line.startswith(GAP))
         if n:
             rows.append((n, path))
@@ -223,7 +267,7 @@ def gaps(corpus: Path) -> list[tuple[int, Path]]:
 def flagged(corpus: Path) -> list[tuple[Path, int, str]]:
     """-> [(path, line number, text)] for every flagged open gap."""
     out = []
-    for path in corpus_files(corpus):
+    for path in vetted_files(corpus):
         for i, line in enumerate(path.read_text().split("\n"), 1):
             if line.startswith(GAP) and FLAG in line:
                 out.append((path, i, line))
@@ -292,7 +336,14 @@ def report(corpus: Path) -> str:
     for path in bare:
         say(f"    {_rel(path, corpus)}")
     if not bare:
-        say("    (none — every story file with frontmatter names its technologies)")
+        say("    (none — every story file names its technologies)")
+
+    say("\nCAPABILITY FILES WITHOUT covers: — answering for nothing, so their terms sit above")
+    blank = uncovering(corpus)
+    for path in blank:
+        say(f"    {_rel(path, corpus)}")
+    if not blank:
+        say("    (none — every capability file says what it covers)")
 
     say("\nCoverage is read from frontmatter: a story's technologies:, a "
         "capability file's covers:.")

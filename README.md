@@ -262,7 +262,7 @@ python3 "${CLAUDE_PLUGIN_ROOT}/tools/corpus_status.py"
 ```
 
 Seeds still in `_inbox/`, open gaps per story, capability files a story cites before anyone
-wrote them — and the capability queue: every technology a story declares in `technologies:`
+wrote them, story and capability files whose frontmatter declares nothing — and the capability queue: every technology a story declares in `technologies:`
 that no capability file's `covers:` answers for. That last list is derived from two frontmatter
 fields and nothing else. There is no lexicon in the tool to fall behind and no dismissal list to
 maintain; a family file covers the terms you wouldn't claim standalone, and a recorded clean no
