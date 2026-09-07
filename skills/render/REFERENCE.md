@@ -218,3 +218,8 @@ being text, and text is the point.
 that looks correct on the page is not evidence. Extract the text and search it for the words
 you expect, or check whether any font's `ToUnicode` table maps U+2022 and U+FB00–FB04.
 Confirm the page count has not moved while you are there.
+
+**A check that reports the same numbers before and after is reporting that it did not run.**
+Rebuilds are the usual cause — a stale file on disk, or a build that failed and left the last
+good output in place. Compare a hash of the two files before you believe two readings that
+agree, and keep one deliberately broken case around to confirm the check can still fail.

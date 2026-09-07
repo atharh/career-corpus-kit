@@ -35,6 +35,18 @@ the corpus that suggested it.
   eye," which is the durable half and covers this case and every sibling of it. Don't re-add the
   specific claim without a reproduction.
 
+  **Re-proposed the same day as a *pair* — inline-block only in combination with a negative
+  `text-indent` — and declined again on a second reproduction.** Six variants crossing
+  inline-block against padding and hanging indent against none, each with a differing file hash
+  so each is known to have rebuilt, all mapped and drew the bullet on Chrome 152. The reporting
+  build sees something real; the stated mechanism is not it, and is not sufficient anywhere the
+  kit can test. It costs nothing to leave out, because **the CSS the kit already ships uses the
+  safe construction** — an inline `::before` with `padding-right` — so a reader following
+  REFERENCE.md never reaches the case. **What was real in it shipped instead:** the reporter's
+  process tell, generalised — a check returning identical numbers for inputs that should differ
+  has not run — which is now a guard on the text-layer check itself, where the kit can justify
+  it. Re-open only with a reproduction naming the version it holds for.
+
 - **"One structural slot per company for the role itself."** The kit deliberately allows more
   than one: role and scope bullets are structural, don't compete for outcome slots, and a
   promotion or role change inside one company needs a second. The divergence is intentional.
