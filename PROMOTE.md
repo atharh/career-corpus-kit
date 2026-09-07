@@ -13,11 +13,27 @@ because they were addressed to this pass.** Start the next pass from
 `git log -p 81490e1..HEAD -- <intake paths>`. Advance this sha when a pass finishes, and don't
 replace it with a date — a date can't be diffed, and it misses amendments to older entries.
 
+**The cursor did not move on 2026-09-07.** That pass ported `[TEXT-LAYER]` from a brief a
+corpus session sent directly; it read no intake file, so it attests to nothing about the lesson
+log between `81490e1` and now. A pass that lands a rule without reading the intake must leave
+this sha alone — advancing it would mark a range reviewed that no one has read, which is the
+one failure this cursor exists to prevent.
+
 ## Declined — do not re-propose
 
 A rule rejected on purpose leaves no trace in the skills, so without this list every pass
 re-argues it — and the dangerous case is a deliberate divergence quietly reverted to match
 the corpus that suggested it.
+
+- **`display: inline-block` on a bullet's `::before` silently reverts the glyph to vector
+  paths** (declined 2026-09-07). Offered as a warning to carry alongside `[TEXT-LAYER]`, and it
+  did cost the reporting session real time. It **did not reproduce here**: a probe using
+  `display: inline-block` with an explicit width still mapped U+2022 in its `ToUnicode` table.
+  So the cause is something else in that build — a font, a version, another declaration — and a
+  mechanism the kit cannot reproduce is not justifiable by reading the kit alone. **What was
+  real in it shipped instead:** `[TEXT-LAYER]`'s "verify by reading the extracted text, never by
+  eye," which is the durable half and covers this case and every sibling of it. Don't re-add the
+  specific claim without a reproduction.
 
 - **"One structural slot per company for the role itself."** The kit deliberately allows more
   than one: role and scope bullets are structural, don't compete for outcome slots, and a

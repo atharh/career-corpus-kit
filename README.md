@@ -295,7 +295,10 @@ is the shortest path, needs nothing else installed, and drops the frontmatter on
 pandoc reads it as metadata rather than text, so the provenance block can't leak through any
 pandoc-based conversion. For a PDF without a heavier toolchain, `pandoc resume.md -o resume.pdf
 --pdf-engine=typst` needs one extra binary instead of a TeX install. And if your corpus repo
-already has a build pipeline, `render` uses it and re-checks the page count.
+already has a build pipeline, `render` uses it and re-checks the page count. Whatever you
+pick, extract the text back out of the result once and read it: a converter can produce a
+perfect-looking page whose text layer no parser can match, and `render`'s `[TEXT-LAYER]` rule
+says what to look for.
 
 ## See one before you build one
 

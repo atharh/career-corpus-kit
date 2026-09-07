@@ -173,3 +173,48 @@ follow the flow an interview actually takes.
 - **Through-lines are talking points, not scripts.** Offer them as ways to connect stories,
   never as claims to recite. Let the interviewer's question pick the lens, same as the JD does
   for a letter.
+
+---
+
+## The outbound file
+
+Applies to every artifact above, and only at the point one becomes a PDF or a DOCX. The kit
+holds no stylesheet and has no opinion on how a page looks. It has one on what the file says.
+
+A PDF carries two things: the picture a person sees and the characters a machine extracts.
+They can disagree, and when they do **nothing looks wrong** — the page is right, the extraction
+is not, and the first reader of an application is usually the extraction. This is the same
+distinction `[LENGTH-IS-THEIRS]` draws for the page ceiling: a design opinion is the user's,
+but whether a reader can read it is a fact about the reader.
+
+Two ways a browser-based build breaks it, both invisible on screen:
+
+- **Ligatures.** Some renderers map the fi/ff/ffi glyph to its Unicode presentation form
+  (U+FB00–FB04) rather than to the letters it stands for. Every extractor then reads `staﬀ`,
+  `ﬁrst`, `certiﬁed`, `workﬂows` — and a parser matching the posting's own "Staff" or
+  "workflows" finds nothing. The affected words are ordinary and keyword-bearing, which is what
+  makes this the half that matters. One declaration ends it:
+  `font-variant-ligatures: none` on the body.
+- **List markers drawn as art.** A default bullet is often a vector path with no character
+  behind it, so each bullet reaches a parser as an unmarked paragraph. Line structure survives
+  and most parsers segment on that, so this is the smaller half. The fix emits a real character
+  instead:
+
+  ```css
+  ul { list-style: none; }
+  li { text-indent: -13.7px; }
+  li::before { content: "\2022"; padding-right: 10px; }
+  ```
+
+  **Those two numbers are calibration, not constants.** They reproduce the default marker's
+  geometry for one particular `ul` padding and body font size. Change the font and the bullets
+  move; re-measure rather than carrying the numbers across.
+
+The trade is honest and worth stating to the user: the bullet becomes a real `•` in the page's
+font rather than the browser's drawn disc, so it sits slightly smaller. That is the cost of it
+being text, and text is the point.
+
+**Verify by reading the text layer, never by eye.** Both defects render perfectly, so a fix
+that looks correct on the page is not evidence. Extract the text and search it for the words
+you expect, or check whether any font's `ToUnicode` table maps U+2022 and U+FB00–FB04.
+Confirm the page count has not moved while you are there.

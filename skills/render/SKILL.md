@@ -279,6 +279,17 @@ Rendered prose that reads as AI-written gets binned. Two moves, in order:
 This applies to human-facing prose only (cover letters, interview answers) — corpus story
 files are internal scaffolding and stay as they are.
 
+**The text layer has to say what the page says.** `[TEXT-LAYER]` Last of all, and only when the
+Markdown becomes a PDF or a DOCX. A generated file carries a picture for a person and characters
+for a machine; they can disagree, and when they do nothing looks wrong. The page is right, the
+extraction is wrong, and the extraction is usually what reads an application first. Two silent
+breakages — ligatures written as U+FB00–FB04 so `staff` and `workflows` stop matching the
+posting's own words, and list markers drawn as vector art so every bullet arrives unmarked — plus
+the check and the fix for each, are in [REFERENCE.md](REFERENCE.md). **Verify by reading the
+extracted text, never by eye**: both defects render perfectly, so the page is no evidence. This
+is not a stylesheet opinion, which the kit does not hold — it is `[LENGTH-IS-THEIRS]`'s
+distinction again, that whether a reader can read the artifact is a fact about the reader.
+
 ## Lessons — how this skill personalises to you
 
 This skill ships generic and sharpens by accumulating the user's own corrections in
@@ -322,7 +333,8 @@ private and personal.
    [templates/artifact-frontmatter.md](templates/artifact-frontmatter.md) for the block every
    artifact opens with.
 6. **Present as a reviewable diff**, decisions flagged, before applying anything.
-7. **On approval**, apply. If a PDF pipeline is present, rebuild and confirm the page count.
+7. **On approval**, apply. If a PDF pipeline is present, rebuild, confirm the page count,
+   and check the text layer against the page — `[TEXT-LAYER]`.
 
 ## What "good" looks like
 

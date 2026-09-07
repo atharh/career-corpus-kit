@@ -66,6 +66,17 @@ not a corpus file: no personal material in it, and the brief said which commits 
 That may be the answer — tooling at the repo root is intake, `corpus/` never is — but one more
 instance before writing it into `CLAUDE.md`.
 
+**Third instance, 2026-09-07, and it cuts the other way.** A corpus session raised two PDF
+text-layer defects and named the build script and commits to read. This pass **declined the
+read** and ported from the brief alone, because the brief already carried the tell, the move
+and the traps in generic form — and the fixes were then reproduced from scratch here, on a
+throwaway page, which is what actually justified the rule. So the score is three for three on
+reading 1, but the mechanism argument for reading 2 weakened: what the pass needed was not the
+corpus's implementation but a *reproduction*, and a reproduction can be built in the kit. That
+suggests a narrower answer than "root tooling is intake" — **a brief that states the mechanism
+is enough when the kit can rebuild the defect**, and the read is the fallback for when it
+cannot. Still no call; this is the first instance where declining the read cost nothing.
+
 
 ## The eval suite's private parsers, and the vocabulary's four copies
 
