@@ -1,7 +1,7 @@
 ---
 role: Product Manager
 track: ic
-aliases: [PM, product manager, associate product manager, APM, senior product manager, principal product manager, group product manager, product lead, product owner]
+aliases: [PM, product manager, associate product manager, APM, senior product manager, principal product manager, product owner]
 ---
 
 ## Scope by level
@@ -31,9 +31,12 @@ much as on scope — that axis carries more weight here than in most crafts, so 
 - **The outcome, measured, with a counterfactual.** What moved, over what baseline, and what
   else was happening at the same time. A launch that did not move the number, honestly
   reported, is worth more here than three that supposedly did.
-- **Competitive or market insight that changed a decision** — not a landscape summary. Which
-  competitor behaviour or industry shift altered what got built, and what would have been built
-  otherwise.
+- **Market insight that changed a decision** — not a landscape summary. Which competitor
+  behaviour or industry shift altered what got built, and what would have been built otherwise.
+  The senior form of this changes a decision the author did not own: another team's roadmap, a
+  pricing call, a go/no-go outside their authority. Product ladders grade contribution to
+  *company* strategy apart from contribution to the product, and the second is the one
+  self-told stories almost never carry.
 - **The prioritisation argument, with the rejected alternatives named.** Why these and not
   those, in a form a reader outside the team can follow. A roadmap without its discarded
   options is a list, not a strategy.
@@ -42,17 +45,25 @@ much as on scope — that axis carries more weight here than in most crafts, so 
 - **The riskiest assumption, exposed before the build.** Named up front, with the cheapest test
   that could have falsified it, and what the test returned.
 - **Shipped to learn.** The beta or experiment, the close-out written down, and the decision
-  that changed because of it — including a time the result killed the author's own idea.
+  that changed because of it — including a time the result killed the author's own idea, said
+  publicly and early enough to matter.
 - **The whole customer experience, not just the feature.** Pricing and packaging, launch
   narrative, sales and support enablement, onboarding for new and existing customers, docs.
   This is the most reliable separator between a PM who ships features and one who ships
   products.
+- **The product bet argued in money.** Revenue, margin, cost or market share, in front of the
+  people who allocate, and whether it got funded. Product stories carry engagement numbers
+  fluently and business numbers almost never, and the ladder starts asking for the second from
+  the middle of the track upwards.
 - **A decision made fast on incomplete information**, with what was unknown at the time and how
   it turned out. Product ladders grade decisiveness explicitly; hindsight-free telling is the
   whole test.
 - **Alignment won from someone who disagreed.** Which stakeholder, what they wanted, and what
   actually changed on each side. Alignment nobody resisted is not alignment.
-- **A strong opinion dropped on evidence**, publicly, early enough to matter.
+- **Requests from other teams, and what happened to them.** Which team asked, what they wanted
+  on the roadmap, what was taken in, what was refused and how the refusal was delivered. The
+  bullet above is the outbound direction — an argument the author started. This is the inbound
+  one, graded separately, and a PM who absorbs every request is running a queue.
 - **Shipping cadence as a measured thing** — what the team's rhythm was before and after, and
   what the author did to it, as distinct from what got shipped.
 - **Somebody who got better.** PMs have no reports, so mentorship goes unrecorded almost by
@@ -64,8 +75,8 @@ much as on scope — that axis carries more weight here than in most crafts, so 
 
 Problem statement or brief, product requirements doc, roadmap with its written rationale,
 strategy doc, research plan and its findings, experiment or beta plan, close-out report,
-success-metric definition agreed before launch, dashboard, pricing and packaging proposal,
-launch and GTM plan, sales and support enablement material, onboarding flow, decision log,
+success-metric definition agreed before launch, dashboard, pricing and packaging proposal, the
+business case that asked for the funding or the headcount, launch and GTM plan, sales and support enablement material, onboarding flow, decision log,
 post-launch review.
 
 ## How stories in this craft overclaim
