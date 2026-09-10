@@ -35,6 +35,7 @@ falling-out.** Say it plainly; a vague answer here invents a problem that didn't
 
 ## Gaps
 
-- [ ] **Nothing from 2017–2018 is extracted at all** — that's two of the four years, and it's
-      the period Sam was most senior at Bellhaven. Worth one session; likely holds the strongest
-      material from this company.
+- [x] ~~**Nothing from 2017–2018 is extracted at all** — that's two of the four years, and
+      it's the period Sam was most senior at Bellhaven.~~ Resolved 2026-04-20: `clinic-search.md`
+      seeded, thin — one session, mostly unvetted, and a charter title the evidence doesn't
+      match. The strongest material from this period is still in Sam's head, not in the file.

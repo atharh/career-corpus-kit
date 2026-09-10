@@ -34,13 +34,17 @@ a story that's thinner than the others.
 5. **[`corpus/bellhaven/reporting-migration.md`](corpus/bellhaven/reporting-migration.md)** — an
    `anachronisms_corrected` block. "Basically a data mesh" turned out to be a cron job and a
    second Postgres, and *data mesh* postdates the work by three years.
-6. **[`corpus/through-lines.md`](corpus/through-lines.md)** — a pattern with its
+6. **[`corpus/bellhaven/clinic-search.md`](corpus/bellhaven/clinic-search.md)** — a seed whose
+   title outranks its evidence: a squad-charter *tech lead* on work the vetted lines put at
+   senior scope, with most of the file still unvetted. It is what `ladder`'s assessment has to
+   grade honestly, and the fixture `evals/ladder_tripwires.py` reads.
+7. **[`corpus/through-lines.md`](corpus/through-lines.md)** — a pattern with its
    counter-example attached, and a second pattern the user withdrew.
-7. **[`corpus/capabilities/postgresql.md`](corpus/capabilities/postgresql.md)** — one
+8. **[`corpus/capabilities/postgresql.md`](corpus/capabilities/postgresql.md)** — one
    technology across the whole career: an index that owns no facts, a depth ceiling per claim,
    and the noes that make the yeses credible. Its `covers:` line is what makes the story files'
    `technologies:` terms count as covered — `tools/corpus_status.py` lists the rest.
-8. **[`corpus/LESSONS.md`](corpus/LESSONS.md)** — how the skills personalise. Ships empty, fills
+9. **[`corpus/LESSONS.md`](corpus/LESSONS.md)** — how the skills personalise. Ships empty, fills
    with the things you had to say twice.
 
 ## What to notice

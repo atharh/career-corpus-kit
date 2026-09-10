@@ -79,6 +79,17 @@ Fact-check the corpus's technical claims against the public record — release d
 sets, how the mechanism really worked — the way a technical interviewer would, with citations.
 You accept, amend, or reject each finding; nothing is patched silently.
 
+```
+/career-corpus:ladder what level does my work at <company> read as?
+```
+
+Grade the vetted evidence against a career ladder — a range with a citation per pillar, the
+floor that gates the next level, and every shortfall sorted into missing-from-the-file versus
+missing-from-the-work. Ask it to *benchmark* a story instead and it writes the other direction:
+how an invented stranger at the level you name would tell the same situation, as an instrument
+to diff your own file against. That output is fiction, quarantined in `benchmarks/`, and never
+reaches a résumé.
+
 **You don't have to remember the commands.** Each skill advertises when it applies, so "help me
 capture what happened on the migration project" or "I have a loop next Tuesday" routes to the
 right one. The slash commands are the explicit form, for when you want to be sure.
@@ -104,7 +115,8 @@ claude plugin install career-corpus@career-corpus-kit
 
 The skills show up as `/career-corpus:bootstrap`, `/career-corpus:interview`,
 `/career-corpus:apply`, `/career-corpus:render`, `/career-corpus:prep`,
-`/career-corpus:compact`, and `/career-corpus:verify`. If the install summary says
+`/career-corpus:compact`, `/career-corpus:verify`, and `/career-corpus:ladder`. If the install
+summary says
 `Run /reload-plugins to activate.`, run that.
 
 <details>
@@ -188,6 +200,8 @@ most obvious thing to render from it. Each of these is just a prompt:
 - **Promotion packets** — a promo doc is a rubric plus evidence, and the corpus is the evidence.
   The second half of this prompt is the valuable half.
   `/career-corpus:render a promotion packet for <level> against this rubric: <paste> — and list every line I have no evidence for`
+  Run `/career-corpus:ladder` first when you don't yet know which level the evidence supports:
+  it grades the corpus rather than packaging it.
 - **Gap analysis before you apply** — find out what your corpus *can't* support yet, while
   there's still time to do something about it. This is step 2 of `apply`, so you get it for
   free; ask for it on its own when you're deciding whether a role is worth the evening.
@@ -201,7 +215,7 @@ most obvious thing to render from it. Each of these is just a prompt:
 The last one is worth doing even when you don't get the job. A question you couldn't answer is
 the most precisely targeted gap you'll ever be handed — a real interviewer found it for you.
 
-## Reference: the seven skills, in two lanes
+## Reference: the eight skills, in two lanes
 
 Underneath the five intentions, the kit is two lanes. One builds the corpus. The other spends
 it, one job application at a time.
@@ -214,6 +228,7 @@ it, one job application at a time.
 | **`/career-corpus:interview`** | whenever a memory surfaces | Interviews you about one memory and writes a vetted story file. Relentless, works in rounds of a few questions at a time, and it never lets a claim in that you can't defend. |
 | **`/career-corpus:compact`** | maintenance | Prunes the sediment interviews leave behind — resolved gaps, dated back-and-forth — while guarding the lines that keep renders honest: your ceilings, rendering decisions, and rejected readings. Run it when a gap list has become more archive than queue. |
 | **`/career-corpus:verify`** | maintenance | Reads story files the way a technical interviewer would and checks every publicly checkable technical claim against the public record, with citations. Findings arrive as a report — you accept, amend, or reject each one; nothing is patched silently, and nothing is corrected without a source. |
+| **`/career-corpus:ladder`** | a promotion case, or a level check | Grades the vetted corpus against a career ladder: a level range with a `file:line` citation per pillar, the floor, and the delta to the next rung, with every gap sorted into capture versus work. Its other mode writes a synthetic telling of one story at a named level — fiction, quarantined in `benchmarks/`, never rendered — so you can diff your own file against it and find what you never did, measured, or recorded. |
 
 **Lane 2 — run an application**
 

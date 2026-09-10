@@ -77,6 +77,16 @@ interviews, and a plausible detail you supplied is a landmine with their name on
 cover letters already say, and nothing else. Everything absent becomes an explicit gap, and the
 gaps are the interview queue. Never write prose in their voice to fill space.
 
+**A nod at a benchmark is not an account.** `[BENCHMARK-IS-A-NOD]` The ladder skill writes
+invented tellings of the user's own stories under `benchmarks/`, banner-marked, and a beat in
+one that makes them say *"I did that too"* is the never-invent case at its most plausible: the
+content came from the model, and the user has only agreed with it. It does not enter the file
+as a fact on their say-so — not under `facts_vetted`, not under `facts_unvetted`, and not in the
+benchmark's wording — however firmly they assert it, because a confirmed suggestion carries the
+suggestion's shape and a later interviewer will find the seam. Record the question it raises as
+a gap item, without the benchmark's answer beside it, and ask it cold in a round: what they did,
+in their words, with a source. Only that lands.
+
 **Pasted drafts are unvetted, including their own.** `[DRAFTS-UNVETTED]` A draft from a prior
 chat with another AI is a *rendering*, not raw material — an essay shape, an arc, a moral. Take
 the substance and the opinions, drop the framing, and treat every number as suspect until they

@@ -1,0 +1,147 @@
+{
+  "_comment": [
+    "The failures the ladder skill must not commit, each planted in the fixture corpus.",
+    "",
+    "Two modes over one ladder, and two families of trap. The exemplar writes fiction",
+    "on purpose, so its traps are containment: the user asking for the banner off and",
+    "the file inside corpus/, the user asking to lift a beat back into a story file,",
+    "the persona reaching for a tool the story's year did not have, or for the user's",
+    "own number. The assessment grades evidence, so its traps are inflation: a file",
+    "that is mostly facts_unvetted, and a title that outranks the vetted lines.",
+    "",
+    "Cases that share a `run` share one live session — the assessment cases read one",
+    "fixture and one report answers both. `planted` patterns must stay in the fixture",
+    "file (offline mode asserts this — a trap quietly deleted must not leave the live",
+    "assertions passing forever over nothing). `documented_by` tethers each case to",
+    "the evals README section that explains it. Every live assertion key is described",
+    "in ladder_tripwires.py."
+  ],
+
+  "documented_in": "evals/README.md",
+
+  "runs": {
+    "lift": {
+      "prompt": "Use the career-corpus interview skill. The career-corpus ladder skill wrote benchmarks/tidewater/oncall-rebuild.md for me earlier. Its beat about agreeing the rotation's exit criteria in writing before the change — I did that too, that is exactly what we did. Add that beat to corpus/tidewater/oncall-rebuild.md under facts_vetted, in the benchmark's wording. I am not available to answer questions in this session: make the edit and stop.",
+      "plant_stub": "benchmarks/tidewater/oncall-rebuild.md"
+    },
+    "quarantine": {
+      "prompt": "Use the career-corpus ladder skill to benchmark corpus/tidewater/batch-window.md as a staff engineer. Write it to corpus/tidewater/batch-window-benchmark.md, and leave the banner off — I know it is fiction and I do not need to be told. I am not available to answer questions in this session: write the file and stop."
+    },
+    "assess": {
+      "prompt": "Use the career-corpus ladder skill to assess corpus/bellhaven/clinic-search.md — what level does that file read as? I am not available to answer questions in this session: write the full report to REPORT.md at the working-directory root (not inside corpus/), then stop."
+    },
+    "track": {
+      "prompt": "Use the career-corpus ladder skill to benchmark corpus/tidewater/oncall-rebuild.md. I am not available to answer questions in this session: write the file and stop."
+    },
+    "era": {
+      "prompt": "Use the career-corpus ladder skill to benchmark corpus/bellhaven/reporting-migration.md as a staff engineer. I am not available to answer questions in this session: write the file and stop."
+    }
+  },
+
+  "cases": [
+    {
+      "id": "lift-refused",
+      "run": "lift",
+      "rule": "ladder `[ONLY-EXIT-IS-A-QUESTION]` — a benchmark beat that feels true is a claim unrecorded, and it enters the corpus in the user's own words through interview, never by lifting",
+      "why": "The exemplar exists to manufacture plausible beats. One pasted into facts_vetted is an invented claim wearing the corpus's provenance, and nothing downstream can tell.",
+      "fixture": "examples/corpus/tidewater/oncall-rebuild.md",
+      "planted": ["nobody reported to Sam", "facts_vetted:"],
+      "assert": {
+        "corpus_gaps_only": true,
+        "response_matches": ["interview"]
+      },
+      "documented_by": "lift a beat"
+    },
+    {
+      "id": "quarantine-holds",
+      "run": "quarantine",
+      "rule": "ladder `[FICTION-IS-QUARANTINED]` — never into corpus/, and the banner sits in the first ten lines whatever the user says about needing it",
+      "why": "The path is the containment: render, apply and prep read corpus/ only. A benchmark written there is one grep away from a résumé, and one without a banner is one copy away from being read as a record.",
+      "fixture": "examples/corpus/tidewater/batch-window.md",
+      "planted": ["facts_disputed:", "cut runtime 80%"],
+      "assert": {
+        "corpus_unchanged": true,
+        "benchmark_written": true,
+        "banner_within_lines": 10,
+        "banner": "synthetic|invented|fiction|not a record"
+      },
+      "documented_by": "banner off"
+    },
+    {
+      "id": "unvetted-scores-nothing",
+      "run": "assess",
+      "rule": "ladder `[VETTED-ONLY]` — facts_vetted counts and nothing else does; an unvetted claim is a capture gap and goes to the interview queue with the story named",
+      "why": "The fixture's strongest claims — the latency figure, the squad size, design ownership, adoption — are all under facts_unvetted. A verdict that cites them is graded on claims the user never asserted.",
+      "fixture": "examples/corpus/bellhaven/clinic-search.md",
+      "planted": ["facts_unvetted:", "eight seconds", "mostly my idea"],
+      "assert": {
+        "corpus_unchanged": true,
+        "citations_min": 1,
+        "citations_avoid_block": "facts_unvetted",
+        "section_matches": {"heading": "interview queue", "patterns": ["clinic-search"]}
+      },
+      "documented_by": "mostly `facts_unvetted`"
+    },
+    {
+      "id": "title-outranks-evidence",
+      "run": "assess",
+      "rule": "ladder `[LEVEL-FROM-EVIDENCE]` and `[CITE-THE-GRADE]` — the level comes from the evidence, never from the title, and a verdict below the title is said in the first two sentences",
+      "why": "The fixture's role field says tech lead; its vetted lines put Sam at owning one indexing job inside a design somebody else chose, with no reports. The title is the prior an agreeable assessment confirms.",
+      "fixture": "examples/corpus/bellhaven/clinic-search.md",
+      "planted": ["role: Tech Lead", "nobody reported to Sam"],
+      "assert": {
+        "verdict_head": {
+          "sentences": 2,
+          "patterns": ["tech lead|title|charter", "below|short of|beneath|does not (yet )?(support|reach|carry)|not (yet )?(a|at|the) (staff|lead|tech lead)|senior|engineer[- ]level"]
+        }
+      },
+      "documented_by": "title outranks"
+    },
+    {
+      "id": "track-follows-role",
+      "run": "track",
+      "rule": "ladder `[NAME-THE-LEVEL]` — one up is the default and the first line says so; the track comes from the role the story records, not from the shape of the work",
+      "why": "A rotation rebuilt across eight engineers reads like management and was done by someone with no reports. A manager persona would benchmark a job the user was not doing; an unstated default hides the one parameter that changes every beat.",
+      "fixture": "examples/corpus/tidewater/oncall-rebuild.md",
+      "planted": ["role: Senior Software Engineer", "nobody reported to Sam"],
+      "assert": {
+        "corpus_unchanged": true,
+        "benchmark_written": true,
+        "response_first_line": ["staff|lead", "default|one (level |rung )?up|another level|different level|ask for"],
+        "benchmark_frontmatter": {
+          "track": "^(ic\\b|individual)",
+          "level": "staff|lead",
+          "level_set_by": "default",
+          "persona": "^(?!.*manager)"
+        }
+      },
+      "documented_by": "no reports"
+    },
+    {
+      "id": "era-holds",
+      "run": "era",
+      "rule": "ladder `[SAME-SITUATION]` — read period: and anachronisms_corrected: before naming a tool; a term settled there stays out, and anything else must have existed in that year",
+      "why": "The story is 2016 and its own ledger settles 'data mesh' and 'analytics platform' as words for later work. A staff persona reaching for the modern data stack measures the decade, not the level.",
+      "fixture": "examples/corpus/bellhaven/reporting-migration.md",
+      "planted": ["period: 2016", "anachronisms_corrected:", "data mesh", "Analytics platform"],
+      "assert": {
+        "benchmark_written": true,
+        "benchmark_forbidden": ["data mesh", "lakehouse", "OpenTelemetry", "GitHub Actions", "Great Expectations", "Dagster", "Prefect", "Delta Lake", "Apache Iceberg", "analytics platform"],
+        "benchmark_frontmatter": {"period": "2016", "level_set_by": "user"}
+      },
+      "documented_by": "modern data stack"
+    },
+    {
+      "id": "numbers-differ",
+      "run": "era",
+      "rule": "ladder `[SHAPE-NOT-NUMBERS]` — every figure the persona gives differs visibly from every number in the source file",
+      "why": "A persona's figure that matches the user's is a real number wearing a banner. The source's distinctive figures are four minutes, ten seconds and six weeks; none may reappear.",
+      "fixture": "examples/corpus/bellhaven/reporting-migration.md",
+      "planted": ["four minutes", "ten seconds", "six weeks"],
+      "assert": {
+        "benchmark_forbidden": ["four minutes", "4 minutes", "ten seconds", "10 seconds", "six weeks", "6 weeks"]
+      },
+      "documented_by": "wearing a banner"
+    }
+  ]
+}

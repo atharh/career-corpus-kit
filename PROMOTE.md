@@ -19,6 +19,11 @@ log between `81490e1` and now. A pass that lands a rule without reading the inta
 this sha alone — advancing it would mark a range reviewed that no one has read, which is the
 one failure this cursor exists to prevent.
 
+**The cursor did not move on 2026-09-10 either.** That pass ported the corpus's local
+benchmark skill as `ladder` (1.33.0) from a brief and the skill's own files — its intake was
+the backlog entry naming it and `.claude/skills/benchmark/`, not the lesson log — so the range
+after `81490e1` is still unread.
+
 ## Declined — do not re-propose
 
 A rule rejected on purpose leaves no trace in the skills, so without this list every pass
@@ -123,3 +128,25 @@ the corpus that suggested it.
   never takes a call that is the user's, and which of *absent* and *unwritten* applies is
   exactly such a call. A pass reading the corpus entry will see the kit apparently
   disagreeing; it is resolved, not divergent.
+
+- **A role file for principal engineer or architect** (declined 2026-09-10, upstream and here).
+  Both resolve to `software-engineer.md` through its aliases, and a title with no file falls to
+  the provisional-role path, which says so and offers to save one. A file per title is how the
+  role set grows into a taxonomy nobody maintains; a file earns its place when a craft, not a
+  rung, has no home.
+
+- **The corpus's tripwire for "manager-track fixture, no level named"** (reshaped 2026-09-10,
+  not dropped). The kit's fixture corpus is one IC with no reports, and its own `LESSONS.md`
+  pins that as a ceiling, so a manager-track story cannot be planted without breaking the
+  fixture's spine. The case ships inverted — a people-and-process story by someone with no
+  reports must yield an IC persona — which tests the same clause of `[NAME-THE-LEVEL]` from the
+  side the fixture can reach. A future pass seeing the corpus case unshipped is seeing a fixture
+  constraint, not an omission.
+
+- **The benchmark skill's own Lessons routing** (replaced 2026-09-10 by the kit's canonical
+  block). The local skill told a session to edit its calibration table or a role file in place
+  when a ladder correction was agreed. In the kit that is the promote path, not a session's
+  edit: the canonical block already says a rule that holds for anyone belongs to the method,
+  and `ladder` adds one sentence naming what that means for a ladder. A pass seeing the corpus
+  skill still self-editing is seeing the kit's `CLAUDE.md` applied, not a gap.
+

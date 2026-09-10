@@ -445,6 +445,81 @@ def check_tracked_inbox(f: Findings, root: Path) -> None:
         )
 
 
+# A sentence long enough that sharing it is copying, not coincidence. Eight
+# words is past every stock phrase a story and a benchmark could both use
+# innocently ("the team shipped it on time" is six) and short of the point
+# where a lifted beat would have to be re-wrapped to slip under it.
+LEAK_MIN_WORDS = 8
+
+
+# A line that starts a new unit of text whatever precedes it: a list item (with
+# or without a checkbox), a frontmatter key, a heading, a frontmatter fence.
+UNIT_START = re.compile(
+    r"^[ \t]*(?:(?:[-*+]|\d+[.)])[ \t]+(?:\[[ x]\][ \t]*)?|[A-Za-z_][\w-]*:[ \t]*$|#{1,6}[ \t]|---[ \t]*$)"
+)
+
+
+def sentences(text: str) -> set[str]:
+    """Every sentence of `text` at LEAK_MIN_WORDS words or more, normalised.
+
+    A unit is a paragraph, a list item, or a frontmatter value; units are
+    joined across hard wraps and then split into sentences. Whitespace is
+    collapsed, case folded, emphasis and quote marks dropped, list markers
+    stripped — so a beat that was pasted under facts_vetted and re-wrapped
+    still matches the prose it came from. Frontmatter is included on purpose:
+    a lifted beat that landed as a vetted fact is the worst case, not an exempt
+    one.
+    """
+    units: list[list[str]] = [[]]
+    for line in text.splitlines():
+        if not line.strip() or UNIT_START.match(line):
+            units.append([])
+        units[-1].append(UNIT_START.sub("", line, count=1))
+    out = set()
+    for unit in units:
+        plain = re.sub(r"[*_`>\"'“”‘’]", "", " ".join(unit))
+        for s in re.split(r"(?<=[.!?])\s+", plain):
+            s = re.sub(r"\s+", " ", s).strip().lower()
+            if len(s.split()) >= LEAK_MIN_WORDS:
+                out.add(s)
+    return out
+
+
+def check_benchmark_leak(f: Findings, root: Path) -> None:
+    """A sentence a story file shares with a benchmark file.
+
+    `benchmarks/` holds the ladder skill's exemplars: invented tellings of a
+    story at a target level, quarantined outside `corpus/` so no render can
+    reach them. The one leak that quarantine cannot see is the user pasting a
+    beat back — the ladder skill's `[ONLY-EXIT-IS-A-QUESTION]` says a benchmark
+    line that feels true is a claim unrecorded, to be said in the user's own
+    words through the interview skill, never lifted. A shared sentence is the
+    tell that it was lifted anyway, in either direction.
+
+    Editorial, not mechanical: the tool cannot say which way the sentence
+    travelled or whether the user actually did the thing, and the fix is the
+    user re-saying it in their own words or striking it — both judgements.
+    """
+    bench = root / "benchmarks"
+    if not bench.is_dir():
+        return
+    corpus_files = sorted(p for p in (root / "corpus").rglob("*.md") if "_inbox" not in p.parts)
+    corpus = {p: sentences(p.read_text(errors="replace")) for p in corpus_files}
+    for b in sorted(bench.rglob("*.md")):
+        shared_by_file = sentences(b.read_text(errors="replace"))
+        for p, sents in corpus.items():
+            for s in sorted(shared_by_file & sents):
+                f.editorial.append(
+                    f"{p.relative_to(root)} — carries a sentence that also appears in "
+                    f"{b.relative_to(root)}: \"{s[:90]}{'…' if len(s) > 90 else ''}\". A "
+                    f"benchmark is invented, and a beat in it that feels true is a claim "
+                    f"unrecorded, not one recovered (`[ONLY-EXIT-IS-A-QUESTION]`): it enters "
+                    f"the corpus in the user's own words through the interview skill, or not "
+                    f"at all. Which way this sentence travelled, and whether it is true, is "
+                    f"the user's call."
+                )
+
+
 def check_additive(f: Findings, root: Path) -> None:
     """Nothing is wrong here. The report is the migration."""
     if not (root / "corpus" / "directions.md").is_file():
@@ -502,6 +577,7 @@ def main(argv: list[str]) -> int:
         check_constraints(f, root)
         check_caution(f, root)
     check_tracked_inbox(f, root)
+    check_benchmark_leak(f, root)
     check_additive(f, root)
 
     blocks = [

@@ -30,6 +30,7 @@
         "apply",
         "compact",
         "interview",
+        "ladder",
         "prep",
         "render",
         "verify"
@@ -54,6 +55,7 @@
       "exempt": {
         "bootstrap": "Points at the interview skill's rules rather than restating them.",
         "compact": "Never reads _inbox/; it prunes vetted story files.",
+        "ladder": "Never reads _inbox/; the exemplar takes a story's shape from its file and the assessment scores facts_vetted only.",
         "prep": "States the sharper application-specific version — a recruiter is selling a job.",
         "render": "States it as the sourcing rule (see candidate-claim-sourcing), not the storage rule.",
         "verify": "Never reads _inbox/ — unvetted material isn't worth verifying, and extraction may redo it."
@@ -75,6 +77,7 @@
         "bootstrap": "Creates no file named after a person.",
         "compact": "Renames nothing.",
         "interview": "Carries the broader no-names-anywhere rule for story bodies.",
+        "ladder": "Names a benchmark after the story it shadows and never after a person; the persona's invented name stays in the frontmatter.",
         "render": "Carries the broader no-names-anywhere rule for artifact prose.",
         "verify": "Names no files after a human interaction; corrections land in existing story files."
       }
@@ -94,6 +97,7 @@
         "bootstrap": "Renders nothing.",
         "compact": "Renders nothing.",
         "interview": "Writes to the corpus rather than reading from applications/.",
+        "ladder": "Renders nothing, and its exemplar is fiction no artifact may source; the assessment reads corpus/ only.",
         "prep": "Carries the positive form of the rule under prep-render-invariants, not this folder-scoped bar.",
         "render": "States the same rule as the three source domains — see the superseded list below for the wording it may not go back to.",
         "verify": "Renders nothing and never reads applications/; it audits the corpus the sourcing rule points at."
@@ -125,6 +129,7 @@
         "bootstrap": "Renders nothing.",
         "compact": "Renders nothing — it prunes the corpus these rules read from.",
         "interview": "Writes the vetted claims these rules spend, and states its own capture-side versions.",
+        "ladder": "Renders nothing — a benchmark is quarantined fiction and an assessment is a report to the user, so neither is an artifact a reader receives.",
         "verify": "Renders nothing — it audits the corpus the render rules read from."
       }
     },
@@ -146,6 +151,7 @@
         "bootstrap": "Seeds a corpus and hands off; it gates nothing and writes no application folder.",
         "compact": "Pruning accumulated caution is what this skill is for — the rule is its premise, not a constraint on it.",
         "interview": "Recording an unresolved question is its job; compact is the counterweight to that, not this rule.",
+        "ladder": "Writes no application folder; its one gate is the target level, asked only when a story spans both tracks.",
         "verify": "Its findings are factual errors against the public record, which is the expensive-to-be-wrong case this rule already exempts."
       }
     },
@@ -167,6 +173,7 @@
         "bootstrap": "Opens no application thread; there is nowhere for it to copy a constraint to.",
         "compact": "Prunes within a story file and never copies out of one; its keep-list is what protects a constraint from being pruned.",
         "interview": "Writes the corpus file that owns the constraint, which is the one home this rule points at.",
+        "ladder": "Never writes into applications/ or corpus/; a ceiling it reads binds the verdict where it lives (`[CEILINGS-BIND-THE-VERDICT]`).",
         "verify": "Proposes restatements inside the file that owns the claim, and never reads applications/ at all."
       }
     }

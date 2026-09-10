@@ -77,6 +77,14 @@ suggests a narrower answer than "root tooling is intake" — **a brief that stat
 is enough when the kit can rebuild the defect**, and the read is the fallback for when it
 cannot. Still no call; this is the first instance where declining the read cost nothing.
 
+**Fourth instance, 2026-09-10, a skill rather than a tool.** The corpus grew a local skill
+(`.claude/skills/benchmark/`) and raised it by hand with a brief naming the commits and the
+gaps. Same position as the tools — in none of the three intake paths, reached the kit only
+because someone pointed — and the read was safe for the same reason: no corpus material in it.
+Four for four on reading 1. The brief again carried enough that the read served as source,
+not as diagnosis. If a fifth arrives, write the narrow answer into `CLAUDE.md`: anything under
+the corpus repo's `.claude/` or `tools/` is intake when a brief names it; `corpus/` never is.
+
 
 ## The eval suite's private parsers, and the vocabulary's four copies
 

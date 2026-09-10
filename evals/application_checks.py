@@ -747,6 +747,7 @@ DOCTOR_CASES = [
     ("EDITORIAL", "a log entry runs"),
     ("EDITORIAL", "constraint-marked, and"),
     ("EDITORIAL", "caution markers in"),
+    ("EDITORIAL", "also appears in benchmarks/"),
     ("ADDITIVE", "corpus/directions.md — absent"),
 ]
 
@@ -827,6 +828,19 @@ def check_doctor(r: Report, spec: dict) -> None:
         (root / "corpus" / "projects").mkdir()
         (root / "corpus" / "projects" / "handle.md").write_text(
             "# Handle\n\nRENDERING DECISION 2026-01-04: the account handle stays unlinked.\n"
+        )
+        # A benchmark beat pasted back into a story file, under facts_vetted, and
+        # hard-wrapped on the way — the leak the ladder skill's quarantine cannot
+        # see (`[ONLY-EXIT-IS-A-QUESTION]`). Editorial: which way the sentence
+        # travelled, and whether it is true, is the user's call.
+        (root / "benchmarks" / "projects").mkdir(parents=True)
+        (root / "benchmarks" / "projects" / "handle.md").write_text(
+            "---\nstatus: SYNTHETIC BENCHMARK\n---\n\n**I agreed the exit criteria in writing** "
+            "before the change started,\nwith the on-call lead, and published them.\n"
+        )
+        (root / "corpus" / "projects" / "lifted.md").write_text(
+            "---\nfacts_vetted:\n  - I agreed the exit criteria in writing before the change\n"
+            "    started, with the on-call lead, and published them.\n---\n"
         )
 
         bad = apps / "silted"

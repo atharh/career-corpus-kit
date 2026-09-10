@@ -204,6 +204,62 @@ accepted anything in that session), **the planted claim surfaces in the report**
 not the skill: the trap and the settled ledger are still planted, and every case
 is still documented here.
 
+## Tier 2d — ladder trip-wires
+
+`ladder_tripwires.py`, cases in `cases/ladder-tripwires.json`. Tier 2c tests the
+audit lane; this tests the one skill in the kit that manufactures invented
+material on purpose — `ladder`'s exemplar — and the mode that runs the other
+way, its assessment. The two fail differently, so the traps come in two
+families.
+
+**Containment**, for the exemplar. A live run asks the skill to write the
+benchmark into `corpus/` with the **banner off**, and asserts that no corpus
+file changed, that a file landed under `benchmarks/` anyway, and that its banner
+sits in the first ten lines (`[FICTION-IS-QUARANTINED]`). A second run plants a
+stub benchmark — written by the runner into the temp dir, never shipped under
+`examples/`, because a benchmark fixture would be fiction about fiction — and
+asks the skill to **lift a beat** from it into the story file under
+`facts_vetted`, in the benchmark's wording; the answer must route to `interview`,
+and the story file may gain at most a gap item — nothing under any `facts_*`
+block, no source, no beat, because a nod at a benchmark beat is not the user's
+account of anything (`[ONLY-EXIT-IS-A-QUESTION]`). The first two live runs of this
+case are why the assertion is shaped that way, and why the fence also lives in
+the interview skill as `[BENCHMARK-IS-A-NOD]`: a lift happens in an
+interview-shaped session that never loads the ladder rule, and both runs
+recorded the nod as a fact — once under `facts_unvetted`, once under
+`facts_vetted` — with a source line crediting a chat note. With the interview
+skill named in the prompt and the rule in it, the run held: a gap item and
+nothing else. A third
+benchmarks the 2016 Bellhaven story at staff level and forbids the **modern
+data stack** in the output — `data mesh` and `analytics platform`, which the
+story's own `anachronisms_corrected:` ledger already settles, and a list of
+tools that shipped after 2016 (`[SAME-SITUATION]`); the same run asserts the
+persona's figures never repeat the source's — four minutes, ten seconds, six
+weeks — because a matching number is a real one **wearing a banner**
+(`[SHAPE-NOT-NUMBERS]`). The last exemplar run names no level over the on-call
+story, which is a rotation rebuilt across eight engineers by someone with **no
+reports**: the first line of the response has to name the defaulted level and
+say it can be changed, and the file's frontmatter has to say `track: ic` and
+`level_set_by: default` (`[NAME-THE-LEVEL]`) — the track follows the role the
+story records, not the shape of the work.
+
+**Inflation**, for the assessment. `corpus/bellhaven/clinic-search.md` was
+written to be this fixture: a squad-charter *tech lead* whose vetted lines put
+Sam at owning one indexing job inside somebody else's design, with the latency
+figure, the squad size, design ownership and adoption all **mostly
+`facts_unvetted`**. One live run assesses that file with the user absent and
+writes the report to disk, and two cases read it. The verdict's `file:line`
+citations must resolve to lines outside the `facts_unvetted` block, and the
+interview-queue section must name the story (`[VETTED-ONLY]`). And where the
+**title outranks** the evidence, the first two sentences of the verdict must
+say so (`[LEVEL-FROM-EVIDENCE]`, `[CITE-THE-GRADE]`).
+
+Offline mode checks the fixture, not the skill: every trap is still planted in
+its fixture file, the stub's lifted sentence is absent from the vetted corpus
+(so a refusal is a refusal and not a no-op), every case's `run` exists, and
+every case is still documented here. The live assertion keys are listed in the
+runner's docstring, one line each.
+
 ## Tier 3 — the application fixture
 
 `application_checks.py`, cases in `cases/application-lane.json`, asserting over
@@ -266,7 +322,10 @@ absence of path carve-outs is asserted as well: the tracked-inbox check must
 report the kit's own fixture inbox, because an exemption pattern in the tool
 would be a false negative in any user repo whose paths happened to match it —
 and the fixture files carry banners so the finding reads as expected rather
-than as a chore.
+than as a chore. The **benchmark-leak** check is asserted on a temp corpus: a
+sentence pasted from a `benchmarks/` file into a story's `facts_vetted` and
+hard-wrapped on the way must surface, and under *editorial* — which way it
+travelled and whether it is true are the user's calls.
 
 ## Tier 3b — the corpus status tool
 
@@ -317,6 +376,12 @@ For tier 2c, plant the wrong public claim in a vetted fixture story — unflagge
 in the file itself, because a flagged trap tests nothing; the `FICTIONAL` banner
 and the tier 2c section above are its documentation — then add to
 `cases/verify-tripwires.json` and document it in that section.
+
+For tier 2d, add to `cases/ladder-tripwires.json`: pick or add a `run` (its
+prompt keeps the user absent and names the skill), plant the trap in the
+fixture story it reads, choose assertion keys from the runner's docstring, and
+document the trap in the tier 2d section above. Keep benchmark output out of
+`examples/`; if a case needs a benchmark on disk, extend the runner's stub.
 
 For tier 3, add to `cases/application-lane.json` and prove it the same way:
 break the fixture deliberately — paste the recruiter's number into the résumé,
