@@ -112,3 +112,91 @@ status tool shipped counting `_inbox/` checkboxes as corpus gaps. One `corpus_fi
 both import is the fix; same shape as the `appthread` item above.
 
 **Reopens on:** the next change to the event vocabulary or to either parser.
+
+---
+
+## A user-owned career framework that shadows the shipped ladder
+
+**Designed 2026-09-11, not built.** `ladder`'s calibration is baked into the kit: the level
+table in its `SKILL.md` and three role files. That costs twice. It may not be the bar the user
+is actually graded against, and it covers three roles. The provisional-role path only half
+covers the second, because it offers to "save a new role file" and names no place to save it.
+The only place it could mean is the plugin cache, which the next update overwrites. The payoff
+is a kit that grades against the framework the user's own promotion committee and review
+cycle use.
+
+**Split method from calibration.** The method stays in the kit and cannot be overridden. That
+means both modes' hard rules, the five tells used as probes, `[VETTED-ONLY]`, capture versus
+work, range and floor, and citations. Calibration becomes the user's: the ordered levels and
+what each one owns (scope, reach, horizon, success), the competencies being graded, and each
+role's craft (dimensions, artifacts, overclaim, blind spots). A framework can replace
+calibration. Nothing in it can switch off a rule. A framework that says "grade on title" still
+loses to `[LEVEL-FROM-EVIDENCE]`.
+
+**It lives at `ladder/` in the corpus repo root**, beside `corpus/`, `benchmarks/` and
+`applications/`. It does not go under `corpus/`, because `tools/corpus_status.py:57` counts
+every file there as a story unless an allowlist excludes it. Verify would also try to
+fact-check it. And it is not evidence about the user: it is an employer's bar, the same kind
+of thing as a JD.
+
+**Resolution checks the corpus first and falls back to the kit.** Role matching works as it
+does today (aliases, parenthesised spans stripped, longest match wins). It searches
+`ladder/roles/` before the kit's `roles/`, and a corpus file with a matching alias shadows the
+kit's file completely, with no merge. If `ladder/levels.md` exists, it replaces the
+calibration table. Every output records which source resolved. `role_file:` in both templates
+becomes either `ladder/roles/<file>.md` or `kit:roles/<file>.md@<version>`.
+
+**Seed by fork, not by copying everything.** Bootstrap should not copy the whole set into
+every corpus. An unedited copy is a snapshot that stops receiving kit fixes: 86048fd's product
+dimensions would never reach a corpus seeded the day before. Bootstrap's own rule also says an
+empty file is an invitation to fill it. There are three paths instead:
+
+1. **Default.** Nothing is copied and the kit fallback just works.
+2. **Fork.** Copy one kit file into `ladder/` with `forked_from: <file>@<kit version>`. A later
+   session can then diff the kit's newer copy against the fork and offer the changes. Deleting
+   the fork puts the user back on the kit's version.
+3. **Import.** Distil a company framework the user drops into `_inbox/` into the schema, with
+   the user confirming each level. The source stays in `_inbox/`, which is gitignored. Company
+   ladders are often confidential, and they carry the same exposure as the rest of the corpus.
+
+**The schema** extends `roles/README.md` with a levels file. It lists the levels in order,
+each with scope, reach, horizon, success and an optional `industry_equivalent:`, plus a
+competency list when the framework's pillars differ from the kit's five. The
+`industry_equivalent:` field is what keeps the exemplar's "one up" and outbound rendering
+working when a framework uses opaque level names.
+
+**Conflicts to settle when building it:**
+
+- **Level names.** `ladder` says to name levels in industry terms, never in an employer's grade
+  codes, and `roles/README.md` bans employer-specific vocabulary. A company framework is
+  employer vocabulary by definition. Proposed restatement: internal outputs (an assessment, a
+  self-review) may use the framework's level names. Outbound outputs (render, apply, an
+  exemplar) use the industry equivalent. The README ban then applies only to files the kit
+  ships.
+- **Stories from an earlier employer.** Which ladder grades them? Proposed: one active
+  framework carries the verdict. Stories from earlier employers are graded on its
+  scope/reach/horizon axes and never on its employer-specific competencies. That is the same
+  move as `[RECENT-ROLE-CARRIES]` grading an old story in its own year.
+- **One framework per company.** Start with a single framework. `ladder/<company>/` is the
+  extension if keeping an old employer's ladder turns out to matter.
+
+**Touches:** `ladder`'s SKILL.md (resolution, the split, the naming rule, the provisional save
+target), `roles/README.md`, both templates, and bootstrap, which gets one offer (default,
+fork or import) and still does not create `ladder/` unless one is chosen. Render and prep read
+the framework for a promotion packet or an internal interview and apply the outbound naming
+rule. Verify and compact already read only `corpus/`, so they need a confirmation, not a
+change. `corpus_doctor` gets a schema check and fork-drift reporting. The evals get a
+fictional framework in `examples/` with cases for shadowing, fork drift, and a framework that
+tries to disable a hard rule. The README needs updating too. This is a minor version bump.
+
+---
+
+## Self-review for a review cycle
+
+**Depends on the framework item above.** It is the payoff the framework exists for. It is
+shaped like render: a document other people read, built from vetted claims only. It is scoped
+to a date window, organised by the framework's competencies, and carries the assessment's floor
+and delta. Peer feedback in a 360 is third-party raw inbound. It goes in `_inbox/`, and none
+of it becomes a claim until the user states it. That is the same fence as
+`[BENCHMARK-IS-A-NOD]`. Keep it out of the framework change: it is a new output with its own
+rules, not a resolution change.
