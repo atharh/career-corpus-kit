@@ -1,98 +1,103 @@
 # Career Corpus Kit
 
 A [Claude Code](https://claude.com/claude-code) plugin for building a **career corpus** — a
-private, high-depth record of your work history — and rendering résumés, cover letters, and
-interview prep from it.
+private, high-depth record of your work history — and producing everything else from it:
+résumés, cover letters, interview prep, level assessments, promotion packets.
 
-The premise: **your résumé is an output, not the source of truth.** A résumé bullet, a cover-
-letter paragraph, and a spoken interview answer are the same fact compressed to three
-different lengths. Most people author the compressed bullet and throw away the source — so
-when an interviewer pushes, there's nothing underneath. This kit inverts that. You author your
-career once, at full depth, in Markdown story files. Everything you send is *rendered* from
-that corpus, tailored to the specific role.
+**Your résumé is an output, not the source of truth.** You write your career down once, at
+full depth. Everything you send is rendered from that record and tailored to the role.
 
-It's also how you stop forgetting your own career. Recall is triggered, not enumerated — you
-remember the thing you did five years ago only when something adjacent jogs it. The interview
-skill is built to do that jogging, and to write down what surfaces before it evaporates.
+## What using it looks like
 
-## Five things you'll do with it
+A condensed run of sessions from the example corpus. Sam Rivera is fictional, a backend
+engineer with eleven years at two companies, and every file mentioned below exists in
+[`examples/`](examples/). The replies are shortened; the label after **Claude** is the skill
+that picked up the request.
 
-Everything else in this README is detail under one of these.
+> **You:** Here's my résumé. Set me up.
+>
+> **Claude** · `bootstrap` — Your corpus is set up: a `profile.md` with your roles and skills,
+> and a ranked queue of stories to capture. First in the queue is the nightly batch job at
+> Tidewater. Your résumé says you cut its runtime by 80%, and a figure like that is the first
+> thing an interviewer will push on.
 
-**1. Build my corpus** — once, at the start.
+> **You:** Okay, interview me about the batch job.
+>
+> **Claude** · `interview` — Before we go further: your résumé says 80%, and just now you said
+> "about half, honestly." Which one could you defend in the room? … Written to
+> `corpus/tidewater/batch-window.md`. The figure is recorded as disputed. Until a dashboard
+> turns up, nothing above "at least half" reaches a résumé.
 
-```
-/career-corpus:bootstrap
-```
+> **You:** Bellhaven called me tech lead. What level does my work actually read as?
+>
+> **Claude** · `ladder` — The title outranks the evidence. It was a three-person squad,
+> nobody reported to you, and the principal engineer made the design call, so that work reads
+> as senior scope. Each finding cites a file and line. The gaps are split in two: the ones you can close with
+> an interview session, and the ones only new work will close.
 
-Paste in your résumé and anything else you have. You get the corpus structure, a `profile.md`,
-and a ranked queue of the stories worth extracting first — so you're never staring at an empty
-directory wondering where to begin.
+> **You:** I want this one: Engineering Lead at Kestrel Freight. <url>
+>
+> **Claude** · `apply` — Saved the posting and checked it against your corpus. Five
+> requirements are backed. The on-call and nightly-build stories are close matches. Line
+> management has no evidence at all, and your mentoring story won't survive a follow-up
+> question about it. My read: don't apply yet.
+>
+> **You:** Applying anyway. Name the gap.
+>
+> **Claude** · `render` — The résumé and cover letter are written. The letter's last paragraph
+> names the line-management gap rather than working around it.
 
-**2. Capture this memory** — the ongoing work, and where the depth comes from.
+> **You:** They booked a panel for next week.
+>
+> **Claude** · `prep` — Your prep pack is ready: an opener, a story bank mapped to Kestrel's
+> criteria, and the probes they will push on. The hardest probe is line management, and it has
+> an honest prepared answer.
 
-```
-/career-corpus:interview the hardest project I led at <company>
-```
+> **You:** It's done. They asked about a performance conversation that went badly. I had
+> nothing.
+>
+> **Claude** · `prep` — Logged what they asked. Three items went to your interview queue,
+> starting with that question.
 
-One memory per session, turned into a vetted story file with sources, ceilings and open gaps.
-This is also where a real interview's misses land afterwards — the highest-quality material
-the corpus will ever get.
+Sam didn't get the job, and the rejection cited the requirement the fit check named on day two.
+The whole thread is in
+[`examples/applications/kestrel-freight-engineering-lead/`](examples/applications/kestrel-freight-engineering-lead/).
 
-**3. Work this application** — one role, end to end.
+## What you can ask it
 
-```
-/career-corpus:apply <paste the posting, or its URL>
-```
+You don't have to remember any commands. Say what you want and the matching skill picks it up.
+Each skill also has a slash command, `/career-corpus:<skill>`, if you'd rather be explicit.
 
-Opens a folder for the role, captures the posting before it 404s, and checks your corpus
-against it *before* anything gets written. From there it hands off on its own: the résumé and
-cover letter when you're ready to send (that's `/career-corpus:render` — it also works
-standalone, for tailoring to a posting you're not tracking), the prep below when an interview
-gets booked, and the outcome logged when it lands.
+**Build the corpus**
 
-**4. Prep this interview** — booked, whether or not you applied through the kit.
+| Say something like | What you get | Skill |
+|---|---|---|
+| "Here's my résumé and LinkedIn. Set me up." | The corpus folders, a `profile.md`, a `.gitignore` that keeps raw inbound mail out of git, and a ranked queue of stories to capture first. Run it once. | `bootstrap` |
+| "Interview me about the hardest project I led at <company>." | One memory per session, turned into a vetted story file with its sources, your own limits on each claim, and the gaps still open. This is where the corpus gets its depth. | `interview` |
 
-```
-/career-corpus:prep
-```
+**Use the corpus**
 
-A recruiter's call, a referral, an internal loop — there doesn't have to be an application
-folder. You get an opener, a story bank mapped to what this employer actually hires for, the
-probes they'll push on with defensible answers, and questions to ask them. Run it again the
-day the interview ends — that's where intention 2's highest-quality material comes from.
+| Say something like | What you get | Skill |
+|---|---|---|
+| "I want to apply for this: <posting or URL>" | A folder for the role. The posting is saved before it disappears, and your corpus is checked against it before anything is written. From there it hands off to `render` and `prep`, and logs the outcome. | `apply` |
+| "Just the fit check for this posting. Don't write anything yet." | What the role asks for and which parts your corpus can back. Useful when you're deciding whether a role is worth an evening. | `apply` |
+| "What's live?" | Every application, its stage, and how long it has been quiet. | `apply` |
+| "Tailor my résumé to this job description." | A résumé or cover letter written only from vetted facts. It works without an application folder too. | `render` |
+| "I have an interview loop next Tuesday." | A prep pack: an opener, a story bank mapped to this employer's hiring criteria, the probes they will push on with defensible answers, and questions to ask them. No application folder needed. | `prep` |
+| "That interview is done. Here's what they asked and where I fumbled." | The questions you couldn't answer, queued for interview sessions. A question you had no answer for is the most precisely targeted gap you'll ever be handed, so this is worth doing even after a rejection. | `prep` |
+| "What level does my work at <company> read as?" | A level range, with a citation for each part of the ladder, the level your evidence clearly clears, and what stands between you and the next one. Each gap is marked as either missing from the file or missing from the work. | `ladder` |
+| "Benchmark my on-call story at staff level." | How an invented engineer at that level would tell the same story, so you can compare your own file against it. It is fiction, kept in `benchmarks/`, and never reaches a résumé. | `ladder` |
+| "Write a self-review for this cycle, grouped by these competencies: <rubric>" | A self-review written from your own evidence. | `render` |
+| "Write a promotion packet for <level> against this rubric, and list every line I have no evidence for." | The packet, plus the list of gaps. The list is the more valuable half. Run `ladder` first if you don't yet know which level your evidence supports. | `render` |
+| "Write a LinkedIn About section and a 60-word speaker bio." | The same facts at a different length. | `render` |
 
-**5. Maintain my corpus** — supervised, and rarer than the rest.
+**Maintain the corpus**
 
-```
-/career-corpus:compact
-```
-
-Prune the sediment interviews leave behind, and re-render a stale baseline rather than editing
-it by hand. Both show you a diff with a reason per change before anything moves.
-
-```
-/career-corpus:verify
-```
-
-Fact-check the corpus's technical claims against the public record — release dates, feature
-sets, how the mechanism really worked — the way a technical interviewer would, with citations.
-You accept, amend, or reject each finding; nothing is patched silently.
-
-```
-/career-corpus:ladder what level does my work at <company> read as?
-```
-
-Grade the vetted evidence against a career ladder — a range with a citation per pillar, the
-floor that gates the next level, and every shortfall sorted into missing-from-the-file versus
-missing-from-the-work. Ask it to *benchmark* a story instead and it writes the other direction:
-how an invented stranger at the level you name would tell the same situation, as an instrument
-to diff your own file against. That output is fiction, quarantined in `benchmarks/`, and never
-reaches a résumé.
-
-**You don't have to remember the commands.** Each skill advertises when it applies, so "help me
-capture what happened on the migration project" or "I have a loop next Tuesday" routes to the
-right one. The slash commands are the explicit form, for when you want to be sure.
+| Say something like | What you get | Skill |
+|---|---|---|
+| "Clean up my story files." | The resolved gaps and dated back-and-forth pruned out, with the rules that keep renders honest left alone. You see a diff with a reason for each change first. | `compact` |
+| "Fact-check the Tidewater stories." | Every publicly checkable technical claim checked against the public record, with citations. You accept, amend, or reject each finding. Nothing is patched silently. | `verify` |
+| "What's outstanding in my corpus?" | Seeds still in `_inbox/`, open gaps per story, and the technologies your stories mention that no capability file covers yet. | [`corpus_status.py`](#reference-the-eight-skills-in-two-lanes) |
 
 ## Install
 
@@ -159,7 +164,7 @@ covers what that means and what doesn't belong in a corpus.
 From that repo, run `/career-corpus:bootstrap` and follow its handoff. It writes a
 `.gitignore` before anything else — every `_inbox/` stays out of git, because raw recruiter
 mail and take-home briefs are the one thing you don't want in history forever. Everything
-after that is one of the five intentions above.
+after that is in [What you can ask it](#what-you-can-ask-it).
 
 ## Updating later
 
@@ -189,35 +194,9 @@ shows what you're on. Installed versions live in
 `~/.claude/plugins/cache/career-corpus-kit/career-corpus/<version>/`, so an old directory
 sticking around after an update is normal.
 
-## Beyond the résumé
-
-Once the corpus exists, it's a sourced, dated record of your work — and a résumé is only the
-most obvious thing to render from it. Each of these is just a prompt:
-
-- **Self-reviews and 360s** — performance season, written from your own evidence instead of a
-  blank box at 11pm. Map the corpus onto whatever competency model your company uses.
-  `/career-corpus:render a self-review for this cycle, grouped by these competencies: <paste rubric>`
-- **Promotion packets** — a promo doc is a rubric plus evidence, and the corpus is the evidence.
-  The second half of this prompt is the valuable half.
-  `/career-corpus:render a promotion packet for <level> against this rubric: <paste> — and list every line I have no evidence for`
-  Run `/career-corpus:ladder` first when you don't yet know which level the evidence supports:
-  it grades the corpus rather than packaging it.
-- **Gap analysis before you apply** — find out what your corpus *can't* support yet, while
-  there's still time to do something about it. This is step 2 of `apply`, so you get it for
-  free; ask for it on its own when you're deciding whether a role is worth the evening.
-  `/career-corpus:apply just the fit check for this posting — don't write anything yet: <paste>`
-- **LinkedIn, bios, speaker blurbs** — the same facts at a different compression.
-  `/career-corpus:render a LinkedIn About section and a 60-word conference speaker bio`
-- **Post-interview capture** — the loop that compounds. Right after a real interview, record
-  what you were asked and where you had nothing good to say.
-  `/career-corpus:prep that interview is done — here's what they actually asked and where I fumbled`
-
-The last one is worth doing even when you don't get the job. A question you couldn't answer is
-the most precisely targeted gap you'll ever be handed — a real interviewer found it for you.
-
 ## Reference: the eight skills, in two lanes
 
-Underneath the five intentions, the kit is two lanes. One builds the corpus. The other spends
+Underneath those prompts, the kit is two lanes. One builds the corpus. The other spends
 it, one job application at a time.
 
 **Lane 1 — build the corpus**
@@ -314,6 +293,18 @@ already has a build pipeline, `render` uses it and re-checks the page count. Wha
 pick, extract the text back out of the result once and read it: a converter can produce a
 perfect-looking page whose text layer no parser can match, and `render`'s `[TEXT-LAYER]` rule
 says what to look for.
+
+## Why a corpus
+
+A résumé bullet, a cover-letter paragraph, and a spoken interview answer are the same fact
+compressed to three different lengths. Most people write the compressed bullet and throw away
+the source, so when an interviewer pushes, there's nothing underneath. This kit inverts that.
+You write your career once, at full depth, in Markdown story files, and everything you send is
+rendered from them.
+
+It's also how you stop forgetting your own career. Recall is triggered, not enumerated: you
+remember the thing you did five years ago only when something nearby jogs it. The interview
+skill is built to do that jogging, and to write down what surfaces before it fades.
 
 ## See one before you build one
 
