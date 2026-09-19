@@ -12,11 +12,9 @@ feature is real, that the mechanism works the way the sentence says. An intervie
 exactly those things, in the room, with nothing at stake for them and everything at stake for
 the user. This skill runs that check first, on disk, with citations.
 
-It is the **batch enforcement point** of the interview skill's fact-check rule
-`[CHECK-THE-CLAIM]` — one rule, two enforcement points, the way a linter and a reviewer catch
-the same bug at different times. `[CHECK-THE-CLAIM]` and its sibling `[DATE-THE-TERM]` fire in
-conversation, while the user can still answer; this skill applies the same obligation to
-material already on disk, with nobody in the room. Don't restate those rules; cite them.
+The interview skill makes this check in conversation, while the user can still answer
+(`[CHECK-THE-CLAIM]`, `[DATE-THE-TERM]`); this skill makes it on material already on disk, with
+nobody in the room.
 
 It exists for two outcomes at once, and the second is not optional decoration:
 
@@ -32,12 +30,11 @@ It exists for two outcomes at once, and the second is not optional decoration:
   every vetted `.md` under the target. With no target named, ask; don't guess.
 - **Never a rendering.** This skill never reads or edits renderings. A résumé still carrying a
   claim the corpus has since corrected is *drift*, a different defect, deliberately out of
-  scope — two jobs in one skill would do neither cleanly.
+  scope.
 - **Never `_inbox/`.** Unvetted material isn't worth verifying — extraction may redo it from
   scratch (`[INBOX-QUEUE]`), and a correction filed against a queue entry evaporates with it.
-- **`anachronisms_corrected:` is the settled ledger.** Re-running on a checked file is cheap
-  and safe because settled entries are not reopened: the block records the old wording, the
-  new wording, and the citation, which is what stops the wrong word creeping back in.
+- **`anachronisms_corrected:` is the settled ledger.** Settled entries are not reopened, which
+  is what makes re-running on a checked file cheap and safe.
 
 ## Hard rules
 
@@ -120,8 +117,6 @@ list is what makes re-runs meaningful.
   want it flagged or left?"*
 - **Not a style pass.** Prose quality, story shape, ceilings and attribution belong to the
   capture lane. A sentence that is technically right and badly written is out of scope here.
-- **Not drift detection.** Corpus-vs-rendering disagreement is a different defect, and this
-  skill never reads a rendering to find it.
 
 ## Lessons — how this skill personalises to you
 
