@@ -43,7 +43,9 @@ The trigger is *"I found a job"* — not *"write me a résumé"*, which is `rend
 ## Stages
 
 Re-entrant by design. Run it again on an existing folder and it reads the current state, files
-whatever is new, and tells you where the thread stands. Don't recreate what's there.
+whatever is new, and tells you where the thread stands. Don't recreate what's there. A thread
+whose `application.md` has a log and no `events:` block predates the frontmatter: offer to
+migrate it, and follow [MIGRATING.md](MIGRATING.md) — assisted, never automatic.
 
 **1. Open.** Get the posting. If it's a URL, fetch it; if it's pasted text, take it as given;
 if it's a screenshot, transcribe it. Derive company and role from the posting, not from the
@@ -63,7 +65,10 @@ into a text field). Applications get answered weeks later and nobody remembers w
 claimed in the box. Record the files themselves in `application.md`'s `sent:` block, which is
 a separate question from the prose and is asked, never guessed — `[SENT-NAMES-WHAT-WENT]`. This
 is also where a generated artifact enters git: `git add -f` what actually went out, because the
-freeze is the moment it stops being rebuildable — `[PIN-NOT-ARCHIVE]`.
+freeze is the moment it stops being rebuildable — `[PIN-NOT-ARCHIVE]`. **Read
+[SENT.md](SENT.md) before writing the `sent` event** — it carries those two rules and
+`[PIN-NOT-SELF]`, which bind only here — and again whenever a check reports on a `sent:` block,
+a `lifecycle:` value or a pin.
 
 **5. Inbound.** Everything that arrives goes in `_inbox/` with a date, and the log gets a line.
 Recruiter mail, rejections, scheduling, the take-home brief, the "we've moved you to the next
@@ -152,28 +157,6 @@ Nine events:
 Something that fits none of them is usually two events. A fixed vocabulary is also what lets a
 reader — or a check — see at a glance that a thread was never `sent`, or was `interviewed`
 without ever being `routed`.
-
-## Migrating a thread that has no `events:` block
-
-A thread opened before the frontmatter existed still has all its events, in prose. Offer to
-migrate it when you next touch the folder, and run the migration like this:
-
-- **Find them with the checker first**, rather than one at a time as you happen to open a
-  folder: `python3 "${CLAUDE_PLUGIN_ROOT}/tools/corpus_doctor.py"` reports every thread that is
-  behind the current guidance, sorted by what blocks what, and writes nothing.
-- **Assisted, never automatic.** Propose the block, report what you could not resolve, and let
-  the user confirm before writing — report-then-patch, the shape `verify` already uses.
-- **The mechanical half only.** Lift the events into `events:` and fold the existing body into
-  the collapsed block **verbatim**. Don't rewrite paragraphs into one-liners and don't decide
-  what still binds: auto-summarising provenance is a silent lossy edit, and compression is a
-  judgement the user makes thread by thread, possibly never for a closed one.
-- **Ask for `sent.artifacts`.** Which files an employer received is not on disk anywhere, which
-  is the whole reason the block exists. A plausible guess here is indistinguishable from a fact.
-- **A log older than the vocabulary is expected to defeat you.** Say which lines you could not
-  parse and leave them alone. A confident wrong answer here is worse than an unmigrated thread,
-  because the unmigrated one reports itself as unmigrated and this one reports itself as done.
-- **Touch `application.md` and nothing else**, so a migration can never collide with a frozen
-  artifact, and run it twice safely.
 
 ## Hard rules
 
@@ -269,63 +252,6 @@ other half of `[NO-ROLLUP]`'s split, and the part that gets skipped: the corpus 
 render drew on, the hash of what was actually sent, the URL a posting was captured from. Lose
 one and it is gone — the posting 404s, the corpus moves on, and nothing on disk remembers. A
 pin is not a rollup; it records an input.
-
-**A pin is a fingerprint, not a copy — so keep the copy.** `[PIN-NOT-ARCHIVE]` A `sha256`
-settles one question and only one: whether a file the user still has is the file that went out.
-It recovers nothing, and frontmatter is never an archive of what a reader saw. That matters
-more than it reads, because **a generated artifact usually cannot be rebuilt**: PDF and DOCX
-writers stamp a creation time into the output, so the same Markdown through the same tool
-usually gives different bytes every run, and once the working copy is gone the sent file is
-gone with it. Some tools can be pinned to a fixed timestamp and some ignore the attempt — but a
-tool that is reproducible today still stops being so at its next upgrade, and the folder
-outlives the toolchain. So
-`git add -f <what went out>` at the moment the artifact freezes — the `sent` event, when its
-`lifecycle:` becomes `submitted`. Before the freeze it is regenerable working state and belongs
-nowhere near git; after it, it is the only evidence of what a reader saw.
-
-This covers what the kit generated from committed source and nothing else. A PDF built from the
-folder's own Markdown carries nothing the Markdown does not, so tracking it spends no privacy
-the repo has not already spent. **Inbound binaries never qualify** — an employer's brief, a
-recruiter's attachment, a scan — and that half of `bootstrap`'s `.gitignore` is what
-`[FOLDER-IS-SENSITIVE]` is really for. Leave the ignore rules alone either way: a path pattern
-cannot tell a frozen artifact from a working one, and one that tried would commit every
-in-flight re-render.
-
-Keep the hash for the case it was built for — bytes that genuinely cannot be tracked: sent from
-another machine, uploaded to a portal that kept no copy, or a file the user declines to commit.
-Opting out is theirs to choose and it is a real trade, so say what it costs rather than just
-recording their answer: the sent bytes stop being recoverable. Growth from doing this is
-bounded but monotonic — two or three files per application, once each, never rewritten.
-
-**Never pin a hash inside the file it hashes.** `[PIN-NOT-SELF]` Writing the pin changes the
-file, so the recorded value is wrong the instant it is saved and every later check reports
-tampering that never happened. That is worse than having no pin: it manufactures alarms at
-exactly the moment someone is trying to trust the folder. A pin references a different file, or
-a delimited region of its own. The case that catches people is a form field taking **pasted
-text** rather than an upload — there is no uploaded artifact to point at, so the obvious move is
-to hash the answer's own Markdown, which the hash then invalidates. Hash a delimited block and
-say where it begins and ends, or record the commit instead and skip the hash.
-
-**Record which files the employer actually received.** `[SENT-NAMES-WHAT-WENT]` The `sent:`
-block names them, and it is new information rather than a rollup: nothing else on disk knows
-which of the things the user prepared went out. Without it, an artifact prepared and
-deliberately not sent looks exactly like a defect — the thread reached `sent`, the file still
-reads `lifecycle: in-flight`, and a check reports a problem that isn't one. Recording the fact
-beats naming the condition, so this is also why there is no fourth `lifecycle:` value for
-*prepared and not sent*: it is already expressible as absence from the list. Two invariants
-follow, and they only work as a pair: everything in `artifacts:` carries `lifecycle: submitted`
-— or something went out unfrozen — and nothing outside it does, or something is frozen that
-nobody sent. Ask for the list; never infer it from what happens to be in the folder.
-
-`baselines:` is for a thread that sent something living outside its folder — the maintained
-résumé, a letter kept per role family — which is the normal shape of an application older than
-the user's folder convention. Without it such a thread can say neither what went out nor that
-nothing local did, because an empty `artifacts:` list reads as *nothing was sent*. **Baselines
-are deliberately never held to `lifecycle: submitted`**: a baseline goes on being edited, and
-freezing one would be wrong rather than merely noisy. One `baseline_pin` covers every file in
-the list, because it pins a repo commit and not a file version — `git show <pin>:<path>`
-recovers each of them as it stood. A per-file pin invites recording the commit that last
-*touched* that file, which quietly asserts nothing else in the send had moved.
 
 **Keep this folder in the private corpus repo and nowhere else.** `[FOLDER-IS-SENSITIVE]` It is
 the most sensitive thing in the repo — other people's real names, private correspondence, and
