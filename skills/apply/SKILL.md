@@ -202,12 +202,11 @@ prose as the surface the ambiguity is real. So: the frontmatter is authoritative
 the body for *why*. This is not the second copy `[NO-ROLLUP]` forbids — it is the only
 machine-readable copy, and nothing parses the body.
 
-The grammar is closed on purpose: `<YYYY-MM-DD> <event>`, one plain string per line,
-never a mapping. Mappings need a real YAML parser and a kit cannot assume the user has one, and
-a grammar narrow enough to read with one anchored expression is a grammar nobody has to guess
-at. Strip comments before parsing, whole-line and trailing — a user annotating why a date is an
-estimate or what a pin covers must not be committing a syntax error, or the annotation moves to
-some other file, away from the value it explains.
+The grammar is closed on purpose: `<YYYY-MM-DD> <event>`, one plain string per line, never a
+mapping — narrow enough to read with one anchored expression, so nobody has to guess at it and
+no YAML parser is needed. Comments are legal, whole-line and trailing: a user annotating why a
+date is an estimate or what a pin covers must not be committing a syntax error, or the
+annotation moves to some other file, away from the value it explains.
 
 **The folder is the memory; the log is dated and append-only.** `[LOG-APPEND-ONLY]` Don't
 rewrite history in `application.md` when a stage changes — add a line. What you believed on the
