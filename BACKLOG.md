@@ -205,7 +205,7 @@ rules, not a resolution change.
 
 ## One home for the send: `lifecycle:` and `submitted:` are rollups of `sent:`
 
-**Raised 2026-09-19, not designed.** Out of a size review of the skills: about half of
+**Raised 2026-09-19, parked the same day.** Out of a size review of the skills: about half of
 `apply`'s hard rules regulate the kit's own data model rather than a risk to the user, and
 the densest knot is that one fact — *which files an employer received, and when* — is held in
 three places:
@@ -250,6 +250,20 @@ do not have now.
   reads it.
 - `prep`'s pack files carry the same block and are never sent. Whether they keep `lifecycle:`
   at all is the same question from the other side.
+
+**The case against, found on reading the tools 2026-09-19, and the reason this is parked.**
+`lifecycle: submitted` on the artifact is a rollup, and it is also a freeze marker in the file
+a session is about to edit: `render` sees *frozen* without opening anything else, and deriving
+it moves the freeze into a different file from the frozen thing — the expensive direction to
+be wrong in. The copy is already machine-checked against `sent.artifacts` by
+`tools/application_status.py`, and the rules that govern it now load only at the sent stage
+(`SENT.md`), so its running cost is low and removing it costs a breaking migration. A narrower
+cut — keep `lifecycle:`, move only `submitted:` into `sent:` — drops the duplicated date and
+most of `[PIN-NOT-SELF]`, and still needs the wider grammar below.
+
+**Reopens on:** the paired-invariant check firing on a real thread for a reason that is the
+duplication itself rather than a genuine unfrozen send; or any other change that already
+forces a migration of `application.md` or artifact frontmatter, which makes this one free.
 
 **Not part of this:** the `events:` list and the log both recording each event. That is a
 deliberate split — data for tools, prose for *why* — and `[STATE-IS-DATA]` defends it on
