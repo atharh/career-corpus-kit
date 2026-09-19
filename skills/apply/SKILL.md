@@ -256,6 +256,14 @@ recomputed from what's already on disk. An open-application count, a "3 live, 1 
 line, a `status:` field beside a log that already ends in the current stage — all recomputable,
 so all of them rot silently and then lie. Read the folders and compute those each time.
 
+So `application.md` carries no `status:` field: its `events:` list **is** the status — the
+stage being the furthest pipeline event reached, since `inbound` and `routed` land after
+`interviewed` all the time and reading the last line written would pull a thread backwards —
+and a field beside it is a second copy on its own schedule. And application-level state
+lives in `application.md`'s frontmatter, artifact-level state in each artifact's own — **no
+separate manifest file**, because a file whose only job is to repeat another file's state goes
+stale without anything noticing.
+
 **Pin what cannot be reconstructed later, at the moment it is true.** `[PIN-THE-INPUTS]` The
 other half of `[NO-ROLLUP]`'s split, and the part that gets skipped: the corpus commit a
 render drew on, the hash of what was actually sent, the URL a posting was captured from. Lose
@@ -297,14 +305,6 @@ a delimited region of its own. The case that catches people is a form field taki
 text** rather than an upload — there is no uploaded artifact to point at, so the obvious move is
 to hash the answer's own Markdown, which the hash then invalidates. Hash a delimited block and
 say where it begins and ends, or record the commit instead and skip the hash.
-
-So `application.md` carries no `status:` field: its `events:` list **is** the status — the
-stage being the furthest pipeline event reached, since `inbound` and `routed` land after
-`interviewed` all the time and reading the last line written would pull a thread backwards —
-and a field beside it is a second copy on its own schedule. And application-level state
-lives in `application.md`'s frontmatter, artifact-level state in each artifact's own — **no
-separate manifest file**, because a file whose only job is to repeat another file's state goes
-stale without anything noticing.
 
 **Record which files the employer actually received.** `[SENT-NAMES-WHAT-WENT]` The `sent:`
 block names them, and it is new information rather than a rollup: nothing else on disk knows
