@@ -273,3 +273,32 @@ kit-internal grounds.
 and REFERENCE.md, `interview`'s `[MARK-DONT-FIX]`, `verify`, `tools/appthread.py`,
 `tools/application_status.py`, `tools/corpus_doctor.py`, `evals/application_checks.py`, the
 fixture under `examples/applications/`, and `DECISIONS.md`'s two lifecycle entries.
+
+---
+
+## The interview trip-wires fail live on correct refusals
+
+**Raised 2026-09-19, with evidence.** Five live runs of `evals/interview_tripwires.py` in one
+day, four failures, and in all four the seeded file had refused every planted claim. One hit
+was real and is fixed: a session recorded the draft's duration inside `facts_vetted`, within
+the ceiling refusing it, and `[DRAFTS-UNVETTED]` now bars that — `facts_vetted` came back clean
+in the three runs after the change. The other hits are all *body prose, own voice*, and all
+are the file naming a draft claim in order to refuse it, in a form `own_voice()` does not
+strip:
+
+- a refusal bullet in plain bold — *"It says nine months. Sam says four."*;
+- an italic mention in a terms-to-date list — *streaming analytics platform* — which is what
+  `[DATE-THE-TERM]` asks a session to write.
+
+`evals/README.md` records that the body exemption was widened once already for this reason.
+The skill now names the three quarantine forms the eval accepts, and sessions still reach for
+a fourth and a fifth, so the two options are the ones that entry faced: widen `own_voice()` —
+italic spans, and bullets under a heading that marks the section as the draft's claims — or
+hold the line and make the skill's wording bind. Until one is chosen the suite cannot gate a
+change to `interview`: a red run says nothing.
+
+**Not decided here** because widening an assertion to make a change pass is the wrong order;
+the change that prompted this run was committed with the failure stated.
+
+**Reopens on:** the next change to `interview`'s seeding rules, which will need this gate.
+

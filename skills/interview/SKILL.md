@@ -91,7 +91,12 @@ in their words, with a source. Only that lands.
 chat with another AI is a *rendering*, not raw material — an essay shape, an arc, a moral. Take
 the substance and the opinions, drop the framing, and treat every number as suspect until they
 confirm it: rendered prose inflates a one-time "traffic doubled after launch" into "tripled
-month over month", a compounding claim they never made and would have to defend in the room.
+month over month", a compounding claim they never made and would have to defend in the room. **A
+figure you refuse is held only where the file quarantines, never in `facts_vetted`** — not even
+inside the ceiling that refuses it, because that block is what renders and a number sitting in
+it is one careless read from being used. State the user's value there and nothing else. The
+refused one goes in a gap item to confirm or kill, a ⚠️ ceiling paragraph in the body, or a
+quoted span attributed to the draft; prose in the file's own voice never repeats it.
 
 **Numbers get a source or they don't go in.** `[NUMBER-SOURCE]` For every quantitative claim:
 where did it come from — a dashboard, a review doc, or a model's guess at what "kept growing"

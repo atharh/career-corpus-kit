@@ -166,7 +166,9 @@ question round to a file. Assertions are scoped the way the rules are:
   punish the skill for doing its job — the first live runs failed on exactly
   that, flagging a seeded file that had refused every planted claim in
   textbook form. `facts_vetted` and ➡️ stay strict: those are supposed to be
-  pristine, a hit there is rare, and the kept workdir makes it adjudicable.
+  pristine, a hit there is rare, and the kept workdir makes it adjudicable. The
+  skill states the same line — `[DRAFTS-UNVETTED]` names the three forms and
+  bars a refused figure from `facts_vetted`, even inside the ceiling refusing it.
 - `anywhere` patterns (the name) may not appear at all, in the story or the
   round — `[ROLES-ONLY]` admits no quarantine.
 - Three built-ins run beside the cases: **no number reaches `facts_vetted`
