@@ -11,19 +11,13 @@ is more archive than queue. This skill removes the sediment and leaves the rock.
 
 **It is a destructive skill.** Read the guard list before you touch anything.
 
-## Why not just leave it
+## Why it exists, and why it is dangerous
 
-Because the gap list is the interview's work queue, and a queue that is 40% struck-through
-is a queue nobody can read. The cost isn't tokens — a whole corpus is small. The cost is
-**attention**: an open question buried under six resolved items gets missed, by the model and by
-the user.
-
-## Why not just delete the old stuff
-
-Because most of what *looks* like history is a **rule**. A corpus file records not only what
-happened but what was decided about how to render it, and what was ruled out. Sweep those and
-you lose the thing that makes the corpus safer than memory — the same wrong reading comes
-back next session, and this time nobody catches it.
+The gap list is the interview's work queue, and a queue that is mostly struck-through is a queue
+nobody can read: an open question buried under six resolved items gets missed, by the model and
+by the user. But most of what *looks* like history is a **rule** — what was decided about how to
+render something, and what was ruled out. Sweep those and the same wrong reading comes back next
+session, and this time nobody catches it.
 
 ## The criterion
 
@@ -40,13 +34,13 @@ Everything below is that criterion, applied.
 
 Stop and leave the line alone if it carries any of:
 
-1. **A ceiling** — the user's own limit on a claim. *"doubled, not tripled"*, *"I honestly
-   didn't do much"*, *"in four months you can hardly do much"*. These exist to stop a later
+1. **A ceiling** — the user's own limit on a claim. *"doubled, not tripled"*, *"two teams
+   took it, not the org"*, *"roughly halved"*. These exist to stop a later
    session re-inflating a story that the user already shrank. They are the single most
    valuable lines in the corpus and the easiest to mistake for chatter.
 2. **A rendering decision** — `RENDERING DECISION`, or any note saying how something must or
-   must not be rendered. Including the negative ones: *"renders without a result"*,
-   *"never cite byline position as evidence"*.
+   must not be rendered. Including the negative ones: *"the reversal is interview material,
+   not résumé material"*, *"do not put a breach claim in writing"*.
 3. **A rejected reading** — a theory the model proposed and the user refuted, recorded as the
    model's error. Its whole function is recurrence prevention. Compress the prose if it's
    long; never remove the ruling.
@@ -56,14 +50,9 @@ Stop and leave the line alone if it carries any of:
    a fact that looks vetted.
 6. **Anachronism corrections** — `anachronisms_corrected` blocks and any "they said X, the
    period term was Y" note. The wrong word creeps back the moment the correction is gone.
-7. **Open gaps that would change a rendering.** Including ones that have been open a long
-   time — age is not evidence a question is dead. **The one exception, and it needs the user
-   in the room:** a gap that fails the interview skill's say-it-out-loud test `[SAY-ALOUD]` is
-   sediment, not queue. Nobody will ever ask it, so no answer changes anything, and it sits
-   there making the real queue unreadable. Sweeping those is a *separate, named pass* — propose
-   the list, get agreement, then delete. Never fold it into a routine compaction, and never
-   sweep a gap that merely looks tedious: *demand the mistake*, the cost, and the opposition
-   all read as uncomfortable and all pass the test.
+7. **Open gaps that would change a rendering** — however long open; age is not evidence a
+   question is dead. The one kind that may go is the last item of the sweep list, and only
+   with the user in the room.
 8. **A supersession trail where the earlier version might return** — if the user gave two
    different numbers across sessions, keep both with dates. Drift is evidence.
 
@@ -77,13 +66,19 @@ a kept line costs a few tokens, a swept rule costs a false claim in an interview
 - **Resolved gaps whose answer exists *only* in the checkbox.** Do not delete these. **Promote
   first** — write the fact into the body or frontmatter where it belongs, *then* delete the
   line. Never delete an answer that has nowhere else to live.
-- **Narration of the interview process** — "asked on the third asking", "answered 16/07 and
-  split in two", "Claude built this from an over-broad reading". Keep the *ruling*, drop the
-  transcript around it. One clause, not a paragraph.
+- **Narration of the interview process** — "asked twice before they answered", "answered in
+  the second session and split in two", "the model built this from an over-broad reading".
+  Keep the *ruling*, drop the transcript around it. One clause, not a paragraph.
 - **Stale cross-references** to files that have since been renamed, split, or merged.
 - **Restated derived state** — counts of open gaps, "N seeds in the inbox", anything a status
   script computes. It rots silently.
 - **Duplicated setup** that `background.md` already carries, restated inside a story file.
+- **Open gaps whose answer the user would never say out loud — in a bullet, a letter, or an
+  interview answer** (the interview skill's `[SAY-ALOUD]`). Nobody will ask, so no answer
+  changes anything, and they make the real queue unreadable. A *separate, named pass* with the
+  user in the room: propose the list, get agreement, then delete. Never part of a routine
+  compaction, and never a gap that merely looks uncomfortable — the mistake, the cost and the
+  opposition all pass the test.
 
 ## Procedure
 
@@ -93,8 +88,7 @@ Work **one file at a time**, and show the user what changed before moving on.
    so — the user needs the diff to be reviewable and the history to be recoverable.
 2. **Read the whole file.** Compaction without full context is how ceilings get swept.
 3. **Classify every candidate line** against the guard list, then the sweep list.
-4. **Promote before deleting.** Any answer living only in a resolved checkbox moves into the
-   body or frontmatter first. Do this as a separate visible step.
+4. **Promote before deleting** — the sweep list's second item — as a separate visible step.
 5. **Consolidate the rules into blocks.** A file after compaction should have its ceilings in
    one place, its rendering decisions in one place, and its rejected readings in one short
    section — not scattered through a gap list where the next sweep will mistake them for
@@ -111,12 +105,9 @@ Work **one file at a time**, and show the user what changed before moving on.
 - **Never compact `applications/`.** This skill works on `corpus/` only. An application folder
   is a dated record of what was actually claimed, sent and asked, and the dates *are* the
   value — a rendered artifact tidied after the fact stops matching what the employer received.
-  If an application's log has grown long, that's history worth keeping; the folder is closed
-  when the thread closes, not pruned.
-- **Never compact `LESSONS.md`.** It is small by design, and an entry that proved wrong is
-  retired where it misfired — struck through and dated, with the user's approval, by the skill
-  that was applying it — never swept here. If it genuinely outgrows itself, that's a
-  conversation with the user, not a sweep.
+- **Never compact `LESSONS.md`.** An entry leaves it only by the two exits in the Lessons
+  section below, never by a sweep. If it genuinely outgrows itself, that's a conversation with
+  the user.
 - **Never compact `through-lines.md`'s "where it doesn't hold" sections.** A through-line
   without its counter-examples is hagiography — the counter-example *is* the rule.
 - **Never compact a capability file's depth ceilings or its noes.** Same defect, same reason:
