@@ -16,7 +16,9 @@ People re-run it — on a new machine, after a stalled start, out of curiosity �
 seeding pass is a session overwriting vetted material with a fresh guess. If `corpus/` is not
 empty: report what exists (profile, queue, story files by company), apply step 1's
 missing-lines-only rule to the `.gitignore`, file anything new the user brought into `_inbox/`
-and add any genuinely new arcs to `QUEUE.md`, then hand off to `interview`. Never rewrite
+and add any genuinely new arcs to `QUEUE.md`, then hand off to `interview`, mentioning
+`python3 "${CLAUDE_PLUGIN_ROOT}/tools/corpus_doctor.py"` — it reports where an existing corpus
+is behind the current guidance and writes nothing. Never rewrite
 `profile.md` or replace an existing queue — those now belong to the interview loop, and a gap
 in them is filled there, not by re-seeding.
 
@@ -76,11 +78,9 @@ empty one is an invitation to fill it, and filling it is how it becomes a horosc
    `_inbox/` as raw material (never rendered from; see the interview skill's rules).
 
    **Say once, here, that a private repo is not a private computer.** Reading a corpus file
-   sends it to the model provider — that's how any of this works, and repo permissions don't
-   change it. It's the same exposure as pasting the same text into a chat window, which is the
-   alternative; the point is that they decide it knowingly rather than infer "private repo"
-   means "never leaves the machine". Anything too sensitive to send to a model doesn't go in
-   the corpus.
+   sends it to the model provider, whatever the repo's permissions — the same exposure as
+   pasting the text into a chat window. Anything too sensitive to send to a model doesn't go
+   in the corpus.
 3. **Write `profile.md` from vetted text only.** The career spine: years, education, contact,
    the skills line, and a one-paragraph summary — taken from what they wrote, not invented.
    Mark anything uncertain as a gap.
@@ -104,13 +104,8 @@ empty one is an invitation to fill it, and filling it is how it becomes a horosc
    `/career-corpus:interview <X>` to start."* Mention, without making them run it now, that
    the kit ships one checker they can run themselves from the repo root once applications
    exist — `python3 "${CLAUDE_PLUGIN_ROOT}/tools/application_status.py"` — and that it computes
-   what is live rather than storing it. It lives in the kit rather than being copied into the
-   corpus so that a fix reaches them on the next version; a checker that cannot be fixed
-   centrally is the same trap as a manifest. **Running against a corpus that already has files,
-   say this at the end of the diagnosis instead**: `python3
-   "${CLAUDE_PLUGIN_ROOT}/tools/corpus_doctor.py"` reports where an existing corpus is behind
-   the current guidance and writes nothing. That is the case where it earns its keep — a corpus
-   built against an older version has no other way to find out what changed.
+   what is live rather than storing it. Run it from the kit; never copy it into the corpus,
+   where a fix could not reach it.
 
 ## The one rule that matters here
 

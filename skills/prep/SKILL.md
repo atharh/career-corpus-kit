@@ -9,20 +9,14 @@ description: Build an interview prep pack for one scheduled interview — an ope
 scheduled interview, and then captures what happened afterwards.
 
 It is the corpus pointed at a room you're about to walk into. Everything it writes is a
-rendering, and the rules that make a rendering defensible are stated here, in the contract
-below. A skill loads its own `SKILL.md` and nothing else, so a rule held only behind a pointer
-holds only as well as the pointer gets followed — the contract is copied from `render` in
-render's own words, and a drift check holds every copied sentence to the original.
-[`../render/SKILL.md`](../render/SKILL.md) stays the canonical statement, alongside the
-machinery a pack has no use for — baseline upkeep, résumé selection, cover-letter shape, PDF
-output. Consult it when producing something to **send**; building a pack does not require the
-read.
+rendering, bound by the contract below — `render`'s rules, in render's own words. The contract
+is complete for a pack; read [`../render/SKILL.md`](../render/SKILL.md) only when producing
+something to **send**.
 
 ## The rendering contract
 
 - **Every claim about the candidate comes from the vetted corpus, and from nothing else.**
-  (`[CLAIM-SOURCE]`) `_inbox/` is not the corpus, and that matters more here than anywhere —
-  see below.
+  (`[CLAIM-SOURCE]`) `_inbox/` is not the corpus — see below.
 - **Numbers carry their source and their ceiling.** (`[NUMBER-CEILING]`) A figure in
   `facts_disputed` is spoken at neither value.
 - **Date the vocabulary, not just the facts.** (`[DATE-VOCABULARY]`) No term that postdates
@@ -73,17 +67,20 @@ doesn't have:
 - **The loop structure and the date.** How many rounds, with whom, over what period. The pack
   is a study plan as well as a document, and a plan needs a clock.
 
-**Read `applications/<company>-<role>/` before you ask for any of it.** Use the application
-the user named or the session has already established; with more than one live application and
-neither, list them and ask — never guess, because a pack built against the wrong loop looks
-exactly like a correct one. The `apply` skill
-opened that folder and most of this is already sitting in it — `jd.md` is the posting
-verbatim, `_inbox/` holds the recruiter's mail and the scheduling note, `fit.md` already names
-what the corpus can't back for this role (which is a ready-made probe list, see `04` below),
-and `application.md` has the dates and who's involved. Ask only for what's genuinely missing,
-and file anything the user hands you now into `_inbox/` so the next round inherits it. If the
-folder doesn't exist, offer `/career-corpus:apply` to open it — a booked interview is exactly
-when the thread starts needing a memory.
+**Read `applications/<company>-<role>/` before you ask for any of it.** The `apply` skill
+opened that folder and most of this is already sitting in it:
+
+- `jd.md` — the posting, verbatim;
+- `_inbox/` — the recruiter's mail and the scheduling note;
+- `fit.md` — what the corpus can't back for this role;
+- `application.md` — the dates and who's involved.
+
+Use the application the user named or the session has already established; with more than one
+live application and neither, list them and ask — never guess, because a pack built against the
+wrong loop looks exactly like a correct one. Ask only for what's genuinely missing, and file
+anything the user hands you now into `_inbox/` so the next round inherits it. If the folder
+doesn't exist, offer `/career-corpus:apply` to open it — a booked interview is exactly when the
+thread starts needing a memory.
 
 **But `_inbox/` is unvetted, and that matters more here than anywhere.** A recruiter is
 selling a job; their account of the team's scope, the role's remit or what the panel is
@@ -96,9 +93,6 @@ filenames, names in the body if the user wants them. Filenames get screenshotted
 and tab-completed in front of other people.
 
 ## The pack
-
-Every file below is a rendering, bound by the contract at the top of this file — that is what
-makes it defensible in the room.
 
 The pack goes in the application's own directory, `applications/<company>-<role>/`, alongside
 the JD and the rendered artifacts — the same folder `apply` opened and `render` wrote into.
@@ -140,9 +134,8 @@ what you did, so nobody mistakes your inference for their rubric.
 
 ## `04` — the probes file, and where probes come from
 
-**This is `interview`'s "state the worst reading" technique, turned around and pointed at the
-application instead of a memory.** It's the reason a corpus-backed pack beats generic prep: the
-corpus has already written down where this candidate is weak, in the candidate's own words.
+**The corpus has already written down where this candidate is weak, in the candidate's own
+words** — that is why a corpus-backed pack beats generic prep.
 
 Source probes from, in order of yield:
 
@@ -186,7 +179,7 @@ it reads as a candidate with one good year. Where a story must serve twice, note
 each use takes, and make sure they're genuinely different.
 
 **Carry the mistake into the room.** `[CARRY-MISTAKE]` The corpus keeps the failure in each
-story precisely so this file can use it. Prep the mistake as an answer, not as damage control.
+story precisely so the pack can use it. Prep the mistake as an answer, not as damage control.
 
 **Prep the follow-up, not just the answer.** `[DEPTH-THREE]` For each story, the second and
 third questions are usually already written down as that story's gaps. Answer down to depth
