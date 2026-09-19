@@ -216,31 +216,29 @@ a story's framing; let the job description do that.
 
 **Role families the evidence could back go in `corpus/directions.md`.** `[DIRECTIONS-FILE]` A
 corpus accumulates evidence faster than its owner re-reads it, and the families someone targets
-are usually the ones they targeted last time. The corpus is the only artifact positioned to
-notice that the stories now back a lane nobody has considered. **This is the most easily
-corrupted idea in the kit, and the warning is part of the rule**: a list of directions a career
-could go is a horoscope by default — broad enough to feel insightful, unfalsifiable, and
-flattering — and a file of wishes reads exactly like a file of findings, which is why the
-failure is not one bad entry but a whole file nobody can tell apart from a good one. So an
-entry gets in only by passing all three parts of the test above, unchanged:
+are usually the ones they targeted last time — so the corpus is the only artifact positioned to
+notice that the stories now back a lane nobody has considered. **It is also the most easily
+corrupted idea in the kit**: a list of directions a career could go is a horoscope by default —
+broad, unfalsifiable, flattering — and a file of wishes reads exactly like a file of findings,
+so the failure is not one bad entry but a whole file nobody can tell from a good one. An entry
+gets in only with all three:
 
 - the story files that back it, by path;
 - the gap — what the corpus cannot yet back for that family, stated as plainly as the evidence;
 - where it doesn't hold.
 
-An entry that cannot produce all three is a wish, and does not go in the file. Maintain it,
-never generate it: propose one when the evidence crosses that bar, let the user accept or
-reject it, and let the file grow by hand. A scan that proposes families from how often words
-recur produces precisely the horoscope. The file appears when the first entry passes, the way
-`capabilities/` does; an empty stub is an invitation to fill it.
+Anything less is a wish, and stays out. Maintain the file, never generate it: propose an entry
+when the evidence crosses that bar, let the user accept or reject it, and never scan for
+families by how often words recur — that produces precisely the horoscope. The file appears
+when the first entry passes, the way `capabilities/` does; an empty stub is an invitation to
+fill it.
 
-It informs targeting and it never renders. An option is a hypothesis about the user, not
-evidence about them: no artifact may cite it — `render`'s `[CLAIM-SOURCE]` bars rendering from
-anything that is not a vetted story file, and this is one of the things it bars — and no story
-may be bent toward it. That second half is the one that bites. A corpus that knows it *could go*
-somewhere will, left alone, start capturing stories in that framing, which corrupts the
-evidence to fit the hypothesis it was supposed to test. A direction is a through-line pointed
-forward instead of backward, and it earns its place only by being held to the same standard.
+It informs targeting and it never renders. A direction is a hypothesis about the user, not
+evidence about them — a through-line pointed forward instead of backward, held to the same
+standard. No artifact may cite it (`render`'s `[CLAIM-SOURCE]` bars it), and no story may be
+bent toward it, which is the half that bites: a corpus that knows it *could go* somewhere
+will, left alone, start capturing stories in that framing, corrupting the evidence to fit the
+hypothesis it was supposed to test.
 
 **Apply the say-it-out-loud test — before you ask, and before you log a gap.**
 `[SAY-ALOUD]` Depth is the point of a corpus; *completeness* is not. This skill drifts toward
@@ -290,20 +288,23 @@ matching sections.
 `[CAPABILITY-HARVEST]` The symmetric twin of `[THROUGH-LINES-FILE]`, for technologies: a fit
 check reads only what is written, so vetted technology experience that lives in story arcs
 with no capability file reads as *absent*, and an application gets scored against a gap the
-user does not have. When a story session lands vetted material about a technology that
-already has a capability file, add the instance there **in the same session** — in the
-capability file, citing the story file that owns the fact, `[OWNS-NO-FACTS]` unchanged. When
-no capability file exists, cite the would-be file anyway — `../capabilities/<technology>.md`
-in the story's gaps queue, marked as a forward pointer — because a pointer that resolves to
-nothing marks a file worth opening, not an error. Candidates for new capability files are
-**derived, never curated**: every term a story declares in `technologies:` that no capability
-file's `covers:` accounts for, computed by `tools/corpus_status.py` and stored nowhere. There
-is no lexicon and no dismissal list, because both would be a session's decisions dressed as
-the user's: a term the user would not claim standalone is covered by the family file whose
-ceiling says so, and a recorded clean no is coverage too — the file rules on the term
-(`[COVERS]`), and the tool's list of capability files with no `covers:` key is how that rule
-gets checked. The derived list is a queue the user prunes, per `[LIST-IS-A-QUEUE]`. The
-guard: **never ask capability-inventory questions inline in a story interview.** Recall is
+user does not have. When a story session lands vetted material about a technology:
+
+- **A capability file exists** → add the instance there **in the same session**, citing the
+  story file that owns the fact; `[OWNS-NO-FACTS]` unchanged.
+- **None exists** → cite the would-be file anyway — `../capabilities/<technology>.md` in the
+  story's gaps queue, marked as a forward pointer. A pointer that resolves to nothing marks a
+  file worth opening, not an error.
+
+Candidates for new capability files are **derived, never curated**: every term a story declares
+in `technologies:` that no capability file's `covers:` accounts for, computed by
+`tools/corpus_status.py` and stored nowhere. No lexicon and no dismissal list — both would be a
+session's decisions dressed as the user's. A term the user would not claim standalone is
+covered by the family file whose ceiling says so, and a recorded clean no is coverage too: the
+file rules on the term (`[COVERS]`), and the tool's list of capability files with no `covers:`
+key is how that gets checked. The user prunes the derived list, per `[LIST-IS-A-QUEUE]`.
+
+The guard: **never ask capability-inventory questions inline in a story interview.** Recall is
 triggered, and a tool question mid-arc makes people summarise instead of remember; "what's
 your experience with X" passes neither branch of the say-it-out-loud test `[SAY-ALOUD]`
 until a JD or a form makes it render or defend. Harvest what surfaces on its own; inventory
