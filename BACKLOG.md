@@ -200,3 +200,62 @@ and delta. Peer feedback in a 360 is third-party raw inbound. It goes in `_inbox
 of it becomes a claim until the user states it. That is the same fence as
 `[BENCHMARK-IS-A-NOD]`. Keep it out of the framework change: it is a new output with its own
 rules, not a resolution change.
+
+---
+
+## One home for the send: `lifecycle:` and `submitted:` are rollups of `sent:`
+
+**Raised 2026-09-19, not designed.** Out of a size review of the skills: about half of
+`apply`'s hard rules regulate the kit's own data model rather than a risk to the user, and
+the densest knot is that one fact — *which files an employer received, and when* — is held in
+three places:
+
+- the `sent` line in `application.md`'s log, in prose;
+- `application.md`'s `sent:` block (`artifacts:`, `baselines:`, `baseline_pin`);
+- each artifact's own `lifecycle: submitted` plus its `submitted:` block (`date`, `as`,
+  `sha256`).
+
+**The kit's own test condemns the third.** `[NO-ROLLUP]` asks whether a value can be recomputed
+from what is already on disk. Since `sent.artifacts` shipped, an in-folder artifact's
+lifecycle can be: `submitted` if its thread's `sent.artifacts` lists it, `baseline` if it
+belongs to no application, `in-flight` otherwise. `DECISIONS.md` already leans on this —
+*prepared and not sent* was refused a lifecycle value because it is "expressible as absence
+from `sent.artifacts`". `submitted.date` repeats `sent.date`. The artifact template still
+says lifecycle "is not derived either", which was true when it was written and stopped being
+true when `sent:` arrived.
+
+**What the second copy costs today:** `[SENT-NAMES-WHAT-WENT]`'s two invariants that "only
+work as a pair" are a consistency constraint between two copies of one fact; the checks that
+enforce the pair in `tools/application_status.py` and `evals/application_checks.py`;
+`[PIN-NOT-SELF]`'s commonest case, which exists because the hash sits in a file near the
+thing it hashes; and a share of `SENT.md`.
+
+**Shape of a fix:** `sent:` in `application.md` becomes the only record of the send. Artifacts
+inside `applications/` drop `lifecycle:` and `submitted:`; whoever needs the lifecycle derives
+it. `as` and the fallback `sha256` move beside the file's entry under `sent.artifacts`, where
+a pin is in a different file from what it pins by construction. Baselines keep nothing they
+do not have now.
+
+**Conflicts to settle when designing it:**
+
+- `sent.artifacts` entries are plain strings and `tools/appthread.py` parses without a YAML
+  library. Carrying `as` and `sha256` per file needs either a trailing-comment convention or
+  a wider grammar, and `[STATE-IS-DATA]` argues hard for narrow.
+- `render` and `interview`'s `[MARK-DONT-FIX]` read lifecycle off the artifact to decide
+  whether it may be rewritten. Deriving it costs a read of `application.md`; a session that
+  skips the read treats a frozen file as in-flight, which is the expensive direction.
+- Whether this breaks a corpus layout. Tolerating stale `lifecycle:` keys and ignoring them is
+  a minor bump; removing them is a major one and a second migration on top of
+  `MIGRATING.md`. A stale `lifecycle: in-flight` on a sent file is only harmless if nothing
+  reads it.
+- `prep`'s pack files carry the same block and are never sent. Whether they keep `lifecycle:`
+  at all is the same question from the other side.
+
+**Not part of this:** the `events:` list and the log both recording each event. That is a
+deliberate split — data for tools, prose for *why* — and `[STATE-IS-DATA]` defends it on
+kit-internal grounds.
+
+**Touches:** `apply`'s SKILL.md and `SENT.md`, `render`'s `templates/artifact-frontmatter.md`
+and REFERENCE.md, `interview`'s `[MARK-DONT-FIX]`, `verify`, `tools/appthread.py`,
+`tools/application_status.py`, `tools/corpus_doctor.py`, `evals/application_checks.py`, the
+fixture under `examples/applications/`, and `DECISIONS.md`'s two lifecycle entries.

@@ -113,6 +113,22 @@ that already carries one, restate the rule so it covers the new case — in fewe
 than the append would have cost. New rules and wording fixes are exempt; the trigger is
 a rule being amended for the second time.
 
+**A new hard rule arrives with a case that tempts its failure, or it replaces a rule.**
+`evals/README.md` sets the bar in its first paragraph: every hard rule exists to prevent one
+specific failure, so the test is a case that tempts it. A rule that lands without one is
+unfalsifiable from that day — nothing can later tell whether it changes behaviour or only
+costs attention, and attention is what the rules compete for. So the commit that adds a rule
+carries one of three things:
+
+- **a trip-wire case**, proved able to fail the way *Adding a case* in `evals/README.md` says;
+- **the rule it replaces or absorbs**, deleted in the same diff, so the count does not grow;
+- **a line under *What isn't here yet*** in `evals/README.md` naming the rule as uncovered —
+  only when the failure is a judgement no regex can assert. That keeps the debt a list
+  rather than a feeling, and it is the list a judge layer would start from.
+
+A rule that can offer none of the three waits in `BACKLOG.md`. Rewording, moving and
+consolidating existing rules are exempt: this gates the count, not the prose.
+
 **A new rule goes in at its right place in the order, and gets an id.** The order is
 priority, not history, so appending to the end is a decision about ranking made by
 default. Nothing renumbers, because there are no numbers: rules are addressed by the
