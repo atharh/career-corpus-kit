@@ -15,30 +15,29 @@ They chain, and that is the point. Assessment says *this reads as a senior engin
 floor is here*; the exemplar then shows what the floor would look like raised. Run either
 alone; run assessment first when the user doesn't yet know which level to aim at.
 
-Everything down to **Running an assessment** concerns the exemplar. That mode comes first
-because it is the dangerous one.
-
 Every other skill in this kit exists to keep invented detail out. The exemplar manufactures it
 on purpose, which makes it the most dangerous thing in the kit and the reason its containment
 rules come before its method.
 
-The problem it solves is real and nothing else touches it. The corpus records what the user
-did and how they told it. It has no way to show them **what they didn't do, didn't measure, or
-never thought to ask** — a gap of that kind leaves no trace in the material. An interview can
-only mine what happened. A verify pass only checks what is written. Neither can say: *the
-strongest version of this story opens with a baseline you never took.*
-
-So this skill writes that version. Same situation, same year, same constraints, a different
-person in the chair — one operating at the level the user is reaching for. The user reads it
-and does the comparison themselves, which is the only way the comparison carries any weight.
-
 **It is an instrument, not an artifact.** It has no standing as evidence, its numbers are
 invented, and it is worthless the moment anyone mistakes it for a record.
 
+## Which file to read
+
+This file holds what both modes share: the two containment rules, the calibration table and
+role resolution. Each mode's own rules and procedure sit beside it, in
+`${CLAUDE_PLUGIN_ROOT}/skills/ladder/`, and **neither mode is runnable from this file alone**:
+
+- **Exemplar** — read [EXEMPLAR.md](EXEMPLAR.md) in full before opening the source story.
+- **Assessment** — read [ASSESSMENT.md](ASSESSMENT.md) in full before opening the corpus.
+
+Read the one the request needs, and both when the user chains them.
+
 ## Hard rules
 
-These govern the exemplar. Assessment has its own set, further down; the calibration table and
-the role files in between belong to both.
+These two hold in both modes, because a benchmark on disk can be misused from either. The
+exemplar's remaining rules are in [EXEMPLAR.md](EXEMPLAR.md); assessment's are in
+[ASSESSMENT.md](ASSESSMENT.md).
 
 **Fiction lives outside the corpus, labelled, in `benchmarks/`.** `[FICTION-IS-QUARANTINED]`
 Never write a benchmark into `corpus/`, and never into a story file. `benchmarks/` mirrors
@@ -70,71 +69,6 @@ on the writing side, where a lift actually happens. `[NEVER-INVENT]` calls a pla
 detail a landmine
 with their name on it; this skill builds a field of them, and the fence is the only thing keeping
 it useful.
-
-**Same job, different chair.** `[SAME-SITUATION]` The exemplar inherits everything the source
-story fixes: the era, the scale, the tech, the org shape, the mandate, the constraints, the
-things that were genuinely not available. Only the caliber of judgment varies. Give the
-persona a bigger team, a later model, a friendlier VP or a budget the user never had and the
-diff stops measuring altitude and starts measuring luck, which teaches nothing. Anachronism is
-the commonest failure here, so it has a procedure: before naming any tool, term or practice,
-read the source story's `period:` and its `anachronisms_corrected:` block. A term settled in
-that block stays out of the exemplar, whatever the persona would call the thing today; anything
-else the persona reaches for must have existed in that year, and when unsure, name the
-function rather than the product. `[DATE-THE-TERM]` governs the exemplar exactly as it governs
-the corpus.
-
-**The level is the user's parameter, and one level up is only the default.**
-`[NAME-THE-LEVEL]` *"Benchmark this as a principal engineer"* or *"as a senior EM"* sets the
-target, and the answer changes accordingly — a principal telling reaches across orgs and argues
-about what the company should build, where a senior telling owns a system and its
-consequences. When they name no level, take the source story's role and add one, and **say in
-the first line of the response which level you set and that they can ask for another**. Set
-the level by scope and verb, never by adjective — see the calibration table below; "more
-impressive" is not a level, it is the failure this rule exists to stop. Two things stay true
-whatever they name. **Match the track**: a management story gets a manager exemplar, because
-modelling an EM's work as an IC's produces a document about a job the user was not doing — and
-the track comes from the role the story records, not from the shape of the work, so a
-people-and-process story told by someone with no reports still gets an IC persona. Where a
-story genuinely spans both tracks, ask which they want rather than splitting the difference.
-And **say so when the distance is large**: a senior-engineer story benchmarked at principal is
-a legitimate thing to want and a poor target to act on, because almost every beat comes back
-unreachable. Write it if they still want it, and name in the frontmatter which gaps are a
-*level* problem rather than a *capture* problem, so the file can't be read as a list of things
-they failed to do.
-
-**Reachable, not heroic.** `[REACHABLE-NOT-HEROIC]` A flawless exemplar is demoralising and,
-worse, uninstructive — the reader learns only that better people exist. The persona operates
-under real constraint: a decision made on thin evidence, an argument lost, a thing that broke
-with a cost attached, a question still open at handover. At least one beat is a
-**strategy-level** misjudgment the persona caught themselves and corrected in public, because
-that is the beat that distinguishes altitude from luck, and `[DEMAND-MISTAKE]` explains why a
-story where nobody who disagreed turns out to be right reads as a case study.
-
-**Invented numbers show the shape of the evidence, never a value.** `[SHAPE-NOT-NUMBERS]` The
-figures exist to make one thing concrete: *what kind of number this beat needs* — a baseline
-taken before the work started, a blast radius in hours of other people's time, a cost per unit
-of work, a quality floor somebody agreed to in advance. They are never an estimate of what the
-user's number was or should have been, and the exemplar never says or implies what their real
-figure probably looked like. Every figure the persona gives differs visibly from every number
-in the source file — including the ones under `facts_unvetted` and `facts_disputed` — because
-a persona's figure that matches the user's is a real number wearing a banner, and nothing
-downstream can tell them apart. Keep every number inside the persona's account, where the
-banner covers it.
-
-**Model the restraint, not just the achievement.** `[MODEL-THE-RESTRAINT]` The persona
-declines the flattering causal claim, names the confound in their own write-up, and draws their
-claim boundary unprompted at the end — including saying plainly which parts of the programme
-were somebody else's. This is not decoration. Half of what separates a staff+ telling from an
-inflated one is knowing what not to claim, and an exemplar that models only accomplishment
-teaches the user to inflate.
-
-**Write the exemplar; don't audit the user against it.** `[DIFF-ON-REQUEST]` Deliver the
-benchmark and stop. An unrequested comparison reads as a performance review the user didn't
-ask for, and it is built on nothing — the skill cannot tell a gap in the *work* from a gap in
-the *capture*, and only the user knows which any given beat is. When they do ask for the diff,
-run it as a separate pass and sort every finding into **did it and never recorded it** (→
-`/career-corpus:interview`), **didn't do it** (→ a lesson, not a defect), and **couldn't have
-done it here** (→ discard, and check `[SAME-SITUATION]` held).
 
 ## Calibrating the level
 
@@ -226,168 +160,6 @@ user was not doing, which is worse than no verdict.
 
 **A story that spans two roles borrows from each** rather than running both lists end to end,
 and the frontmatter or the report says which two.
-
-## Running an exemplar
-
-**Read before writing.** The source story file in full. Its siblings named in `related:`, for
-the era, the constraints and the shared vocabulary. `profile.md` for the user's track and
-level. Enough to be sure the exemplar is set in the same world. Before drafting, list every
-number in the source file — vetted, unvetted, disputed, and in the body prose — and check the
-finished draft against that list; a figure that reappears is `[SHAPE-NOT-NUMBERS]` failing, and
-a duration or a headcount slips through as easily as a metric.
-
-**Vetting status has no bearing here.** The exemplar takes the story's *shape* — the
-situation, the constraints, what kind of thing was built — and an entry under `facts_unvetted`
-or `facts_disputed` fixes that shape as well as a vetted one does. Nothing from the story is
-carried over as a claim in either case; the persona's account is invented from the first line.
-The one exception is a claim the user has struck or withdrawn in place: that records something
-that did *not* hold, so it cannot set the situation.
-
-**Ask about two things and only two.** Which story, if they named a company rather than a
-file. And the target level — but only when the story's own role is ambiguous or spans both
-tracks (`[NAME-THE-LEVEL]`); when they named a level, use it without confirming, and when they
-didn't, default to one up and say which you chose.
-
-**Then write the file**, opening with the frontmatter block in
-[`templates/exemplar-frontmatter.md`](templates/exemplar-frontmatter.md) — its keys, in its
-order, so the shape does not drift between runs — and continuing in this shape:
-
-1. **Frontmatter** — from the template: the banner as the `status:` block; the persona's
-   invented name and role; the track and the role file it resolved to; the source story path;
-   the target level **and whether the user named it or it was defaulted to one up**; the
-   corpus pin; one line on what the file is for; and, only when the distance is large, the
-   list of beats that are a level problem rather than a capture problem.
-2. **What separates this telling** — four to six structural differences, stated up front, so
-   the reader knows what they are looking for before the beats start.
-3. **The beats**, six to nine, drawn from the resolved role file's dimensions and ordered as
-   the work happened. Each: the situation, what the persona did, the artifact or number it
-   produced, and then a short indented **gap line** — the one question this beat would put to
-   the reader's own version. The gap line is the mechanism of the whole document; a beat
-   without one is just a nicer story.
-4. **The bullets this story yields** — three or four résumé lines the exemplar would support,
-   so the reader can feel the distance between those and their own at a glance.
-5. **The questions this story answers that a weaker one doesn't** — a numbered checklist, and
-   the most durable part of the file. It outlives the fiction: the user can run it against
-   every other story in the corpus without generating another benchmark.
-
-**Voice.** Write the persona in first person. Third-person summary flattens the altitude
-difference into a list of virtues and the document stops working. The banner, the invented
-name in the frontmatter and the quarantine path are what carry the containment — not the
-pronouns.
-
-**Names.** `[NO-NAMES-CODENAMES]` binds the exemplar too. Real colleagues never appear; the
-persona's collaborators are roles. Internal codenames the corpus bans stay banned — render the
-function instead.
-
-## Running an assessment
-
-*"Look at what I did at this company and tell me what level that reads as."* The ladder run
-backwards: evidence in, level out. It is the mode the user will reach for most, and the one
-where being agreeable does the most damage — an assessment that can only flatter is worth
-nothing, and they can get that anywhere.
-
-### Rules specific to an assessment
-
-**The level comes from the evidence, never from the title.** `[LEVEL-FROM-EVIDENCE]` What the
-user was called is an input to set aside, not a prior to confirm — a senior manager's title on
-a body of work that demonstrates a manager's scope is exactly the finding worth having. Read
-the stories for what was owned, who was influenced, over what horizon, and grade that. If the
-verdict lands on the title anyway, say what carried it rather than letting the coincidence do
-the arguing.
-
-**A thin file is a capture gap, not a competence gap — and the two get different verdicts.**
-`[CAPTURE-GAP-ISNT-A-GAP]` The corpus records what the user chose to write down, so absence of
-evidence is genuinely ambiguous, and collapsing that ambiguity into a level is the single most
-damaging thing this mode can do. Every shortfall gets sorted before it is scored: **missing
-from the file** (→ name the story and send them to `/career-corpus:interview`), **missing from
-the work** (→ a real gap, and the honest half of the assessment), or **not available in that
-role** (→ excluded from scoring, not held against them). When you cannot tell which, say so
-and ask — one question is cheaper than a wrong grade.
-
-**Only vetted facts score.** `[VETTED-ONLY]` A story file sorts its claims, and the sort is
-the evidence's own grade: `facts_vetted` counts, and nothing else does. An entry under
-`facts_unvetted` or `facts_disputed` is not held against the user, but it is not credit either
-— it is a capture gap, and goes in the interview queue with the story named. A claim the user
-has struck or withdrawn in place is excluded outright: it records something that did not hold.
-Grading the unvetted version of a file is the quiet way an assessment inflates: the user never
-asserted those claims, and the verdict would rest on them anyway.
-
-**The recorded ceilings bind the verdict.** `[CEILINGS-BIND-THE-VERDICT]` Score the claim as
-the story's ceilings leave it, never as the unfenced version. Work the user disclaimed —
-somebody else's decision, a team's build, a mandate executed rather than authored — counts at
-the level of *their actual contribution*, and air cover for a report's programme is a
-manager's evidence rather than a director's. This is the rule that makes the whole mode
-trustworthy: a grade that quietly re-inflates what the user themselves fenced off is worse
-than no grade, because they will take it into a room and defend it.
-
-**The most recent role carries the verdict, and an old story is graded in its own year.**
-`[RECENT-ROLE-CARRIES]` Stories combine by consistency, not by peak. Over a company or the
-whole corpus, the level is what holds across the stories of the most recent role: each pillar
-sits where its weakest recent story leaves it, and one story at a higher level is a spike to
-name, not a verdict to award. Earlier roles can fill a pillar the recent role has no evidence
-on, and never lower one it does. A story a decade old is graded on scope, reach and horizon
-as they were in its period — the ladder's axes don't date — and is never docked for a craft
-dimension, an artifact or a practice that did not exist in that year; that is the assessment's
-counterpart of `[SAME-SITUATION]`, and the source story's `period:` and
-`anachronisms_corrected:` block say what the year allowed.
-
-**Report a range and name the floor, because the floor is what gates a promotion.**
-`[RANGE-NOT-A-POINT]` Nobody sits at one level across every pillar. Give the honest spread —
-where they are solid, where they spike, where they are absent — and state plainly which weak
-pillar is holding the level down. Ladders promote on consistency, not on a peak, so a single
-outstanding dimension does not lift a verdict and should be named as a spike rather than a
-level. One story shows a level *in that instance* and never a career level: asked about one
-file, grade the file and refuse the generalisation.
-
-**Cite every grade, and say the uncomfortable one plainly.** `[CITE-THE-GRADE]` Each pillar's
-verdict points at the story and line that carries it; a grade with no citation is an
-impression and gets marked as one. Where the evidence reads *below* the user's current title,
-say it in the first two sentences, without cushioning and without apology — then spend the
-detail on what would move it. `[REACHABLE-NOT-HEROIC]` applies here too: the delta to the
-next level is stated as two or three specific things, not as a verdict on them.
-
-### The procedure
-
-1. **Fix the target.** Which company, which period, or the whole corpus — and which track. Ask
-   only if it is genuinely ambiguous.
-2. **Read the stories in that scope**, including their ceilings, withdrawals and rendering
-   decisions. Those are evidence about the *level*, not just about the claim: a user who fences
-   their own attribution accurately is demonstrating something a ladder grades. Score from
-   `facts_vetted` only (`[VETTED-ONLY]`); everything unvetted or disputed goes straight to the
-   interview queue.
-3. **Grade against the calibration table first** — scope, reach, horizon — then against the
-   resolved role file's dimensions, artifacts and blind spots. Scope and reach carry the
-   verdict; the dimensions explain it; the artifacts turn a soft grade into a question with a
-   name on it.
-4. **Sort every shortfall** into the three buckets from `[CAPTURE-GAP-ISNT-A-GAP]` before
-   writing anything.
-5. **Deliver in the terminal.** An assessment is a report to the user, not an artifact —
-   nothing is written to disk unless they ask. If they do want it kept, it goes to
-   `benchmarks/<company>/assessment.md` (or `benchmarks/assessment.md` for the whole corpus)
-   in the shape of [`templates/assessment.md`](templates/assessment.md), whose frontmatter
-   carries `generated:` (the
-   date) and `corpus_pin:` (the commit SHA of the corpus it read), plus a line saying it is
-   one session's read of the corpus at that pin, not a rating of the person. A date alone is
-   not a pin: nothing can be diffed against it, and the corpus moves under every saved
-   verdict.
-
-### The report
-
-[`templates/assessment.md`](templates/assessment.md) carries this shape; the terminal version
-has the same sections and no frontmatter.
-
-- **The verdict, in one sentence**, with the range and any track caveat.
-- **A pillar table**: dimension, the level the evidence supports, and the `file:line` that
-  carries it. Sorted with the floor first — the weakest pillar is the actionable row, so it
-  should not be buried under the flattering ones.
-- **The strongest evidence**, two or three items, named as what an interviewer would find
-  most convincing.
-- **The floor**, with what specifically is thin and which bucket it fell in.
-- **The delta**: two or three concrete things that would move the verdict a level, each
-  phrased as work or as capture, not as a personal quality.
-- **The interview queue**: the stories where the level is probably in the work but not in the
-  file — the highest-value output of this mode, and the one that routes straight to
-  `/career-corpus:interview`.
 
 ## What this skill is not
 
