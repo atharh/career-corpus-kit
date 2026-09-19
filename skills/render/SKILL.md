@@ -40,19 +40,10 @@ union of everything ever vetted — at which point the strongest evidence is bur
 merely true, and a reader who stops early never reaches it. **A refresh that only ever adds is
 not a refresh.** Every baseline refresh reconsiders what is already there, not just what is new.
 
-**Where the family list comes from.** The convention is in the filename and nothing says where
-the families themselves come from, so a corpus invents the set implicitly: a letter gets
-rendered for a role, gets kept, and a family exists. Nothing afterwards asks whether the set is
-complete. Derive it instead, from two things already on disk — the role families the user has
-actually targeted in `applications/`, which is the only evidence of intent a corpus holds, and
-what the corpus can evidence, because a family nothing can back is not a candidate however
-often it has been targeted. The output is a report: here are the families, here is which
-baseline artifacts each one has, here is the gap. A family with a letter and no résumé is the
-common shape, and this derivation is what surfaces it. Derive it on the spot and never store it — a stored
-family list is a rollup that goes stale exactly like the `status:` field `apply`'s `[NO-ROLLUP]`
-bans. This one is not in the status checker deliberately: which family an application belonged
-to is a judgement about a role rather than a field on disk, and a tool that guessed it would be
-confidently wrong on the interesting cases.
+**Which families exist is derived, never stored** — from what `applications/` shows the user has
+targeted and what the corpus can evidence. Asked which baselines are missing, or before
+proposing one under `[SUGGEST-DONT-SPAWN]`, follow *Deriving the family list* in
+[REFERENCE.md](REFERENCE.md).
 
 **A bullet earns its slot on all three** — the hard rules below, applied at *selection* time
 rather than at writing time:
@@ -202,14 +193,15 @@ people write when they have not looked. `fit.md` is the exception and not a viol
 assesses rather than records, names the file each ceiling came from, and is regenerated rather
 than maintained, so a stale citation gets rewritten instead of rotting.
 
-Held alongside it: not every doubt is a blocker — `apply`'s `[NOT-EVERY-DOUBT-IS-A-BLOCKER]`.
-Most uncertainty is not a
-blocker. The test is whether being wrong would be expensive or hard to undo — if it would not,
-say it once, in a clause, and carry on. A render that will not go out until some unresolved
-question is settled has usually escalated a question that no answer would have changed. Three
-things still earn a gate: editing a frozen artifact, putting an unsourced claim in front of an
-employer, and anything the user has said is theirs to decide. Note what the first two are —
-this rule loosens nothing that `[CLAIM-SOURCE]` or the freeze holds.
+One of `apply`'s rules is held alongside it:
+
+- **Not every doubt is a blocker.** (`[NOT-EVERY-DOUBT-IS-A-BLOCKER]`) Most uncertainty is not a
+  blocker. The test is whether being wrong would be expensive or hard to undo — if it would not,
+  say it once, in a clause, and carry on. A render that will not go out until some unresolved
+  question is settled has usually escalated a question that no answer would have changed. Three
+  things still earn a gate: editing a frozen artifact, putting an unsourced claim in front of an
+  employer, and anything the user has said is theirs to decide. Note what the first two are —
+  this rule loosens nothing that `[CLAIM-SOURCE]` or the freeze holds.
 
 **The user's say-so overrides the corpus and this skill, immediately and without argument.**
 `[USER-OVERRIDES]` The corpus exists to stop the user drifting and a model inflating; it has

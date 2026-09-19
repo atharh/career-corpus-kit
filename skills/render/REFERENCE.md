@@ -39,6 +39,24 @@ family*; for a tailored render, start from whichever is closest, but re-source f
 
 ---
 
+## Deriving the family list
+
+Baseline cover letters are kept one per role family, as `cover-letter-<family>.md`. The
+convention is in the filename and nothing says where the families themselves come from, so a
+corpus invents the set implicitly: a letter gets rendered for a role, gets kept, and a family
+exists. Nothing afterwards asks whether the set is complete. Derive it instead, from two things
+already on disk — the role families the user has actually targeted in `applications/`, which is
+the only evidence of intent a corpus holds, and what the corpus can evidence, because a family
+nothing can back is not a candidate however often it has been targeted. The output is a report:
+here are the families, here is which baseline artifacts each one has, here is the gap. A family
+with a letter and no résumé is the common shape, and this derivation is what surfaces it. Derive
+it on the spot and never store it — a stored family list is a rollup that goes stale exactly
+like the `status:` field `apply`'s `[NO-ROLLUP]` bans. This one is not in the status checker
+deliberately: which family an application belonged to is a judgement about a role rather than a
+field on disk, and a tool that guessed it would be confidently wrong on the interesting cases.
+
+---
+
 ## Résumé entry
 
 **Form:** terse, verb-led bullets. `###` role, then `**Company** | dates | location`, then
