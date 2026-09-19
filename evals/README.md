@@ -63,7 +63,15 @@ exact sentences that must not diverge between the copies.
 
 The repetition is deliberate and stays. A skill loads its own `SKILL.md` and
 nothing else, so a rule extracted into `_shared/TRUST.md` is in force only if the
-model happens to read that file, which turns a rule into a hope. What repetition
+model happens to read that file, which turns a rule into a hope. That is an
+argument about rules that must hold on *every* run, and it is why those stay in
+`SKILL.md`. A rule that binds only in one mode or at one stage may live in a
+file beside it — `ladder`'s `EXEMPLAR.md` and `ASSESSMENT.md`, `apply`'s
+`SENT.md`, `interview`'s `CAPABILITIES.md` — on two conditions: `SKILL.md` names
+the trigger for reading it, and a live trip-wire asserts a rule that lives only
+in that file. `ladder` meets both. `interview` and `apply` meet the first only:
+no case reaches `CAPABILITIES.md`, and the application lane has no live mode yet
+(`BACKLOG.md`). What repetition
 costs is drift, and drift shipped: `apply` and `render` both stated the sourcing
 rule, differently enough that render's copy barred reading the very folder its
 own workflow four screens below told it to read. Two copies of the filename rule

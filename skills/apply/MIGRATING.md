@@ -12,8 +12,11 @@ migrate it when you next touch the folder, and run the migration like this:
   the collapsed block **verbatim**. Don't rewrite paragraphs into one-liners and don't decide
   what still binds: auto-summarising provenance is a silent lossy edit, and compression is a
   judgement the user makes thread by thread, possibly never for a closed one.
-- **Ask for `sent.artifacts`.** Which files an employer received is not on disk anywhere, which
-  is the whole reason the block exists. A plausible guess here is indistinguishable from a fact.
+- **Ask for `sent.artifacts`, and read [SENT.md](SENT.md) before writing the `sent:` block.**
+  Which files an employer received is not on disk anywhere, which is the whole reason the block
+  exists; a plausible guess here is indistinguishable from a fact. A thread this old usually
+  sent a baseline from outside its folder, and `baselines:` — described there — is how it says
+  so, where an empty `artifacts:` would read as *nothing was sent*.
 - **A log older than the vocabulary is expected to defeat you.** Say which lines you could not
   parse and leave them alone. A confident wrong answer here is worse than an unmigrated thread,
   because the unmigrated one reports itself as unmigrated and this one reports itself as done.

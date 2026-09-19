@@ -65,8 +65,8 @@ file, grade the file and refuse the generalisation.
 verdict points at the story and line that carries it; a grade with no citation is an
 impression and gets marked as one. Where the evidence reads *below* the user's current title,
 say it in the first two sentences, without cushioning and without apology — then spend the
-detail on what would move it. `[REACHABLE-NOT-HEROIC]` applies here too: the delta to the
-next level is stated as two or three specific things, not as a verdict on them.
+detail on what would move it. State the delta to the next level as two or three specific
+things, never as a verdict on them — the exemplar's `[REACHABLE-NOT-HEROIC]`, from this side.
 
 ## The procedure
 

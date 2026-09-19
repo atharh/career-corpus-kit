@@ -26,9 +26,9 @@ level_gaps:          # only when the distance is large: beats that are a level p
 <The frontmatter block above is the whole template. `status:` is the banner, and it sits
 inside the first ten lines of the file by construction — the containment the ladder skill's
 `[FICTION-IS-QUARANTINED]` promises is this block plus the path under `benchmarks/`. The body
-below is the shape "Running an exemplar" in the ladder skill's `EXEMPLAR.md` gives: what separates this
-telling, the beats with their gap lines, the bullets the story would yield, and the checklist
-of questions it answers.>
+below is the shape "Running an exemplar" in the ladder skill's `EXEMPLAR.md` gives: what
+separates this telling, the beats with their gap lines, the bullets the story would yield, and
+the checklist of questions it answers.>
 
 <Every value here is either inherited unchanged from the source story (`period:`, the
 situation the beats are set in — `[SAME-SITUATION]`) or invented and marked as such. Nothing
