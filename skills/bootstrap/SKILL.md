@@ -90,7 +90,7 @@ empty one is an invitation to fill it, and filling it is how it becomes a horosc
    prefer arcs with a decision, opposition, and a number over accomplishments with none. Flag
    the user's headline claims — the things a JD will most often ask for. Write them to
    `QUEUE.md` as a checklist.
-5. **Seed, don't fill.** Do NOT write story files yet. Bootstrap sets up the queue; the
+5. **Seed, don't fill.** Don't write story files yet. Bootstrap sets up the queue; the
    interview skill writes the stories, one at a time, with the user in the room.
 6. **Create `LESSONS.md`** — an empty file whose header says both what the skills do with it
    and what belongs in it: they append the user's corrections here to personalise over time,

@@ -15,8 +15,7 @@ Baselines, self-reviews, promo packets and bios belong to no application; this s
 those on its own.
 
 Every LLM can "write a résumé." The value here is **rendering faithfully** — saying only what
-the corpus vouches for, in the form the artifact needs, tailored to the job. The rules below
-each exist because someone got them wrong.
+the corpus vouches for, in the form the artifact needs, tailored to the job.
 
 ## Two tiers: baseline and tailored
 
@@ -33,12 +32,11 @@ Refresh a baseline when the corpus gains material that would change it. A baseli
 faithful-rendering rule below; it just selects the generally-strongest evidence instead of
 JD-specific evidence.
 
-⚠️ **Read that instruction again: it only points one way.** Every corpus session validates new
-claims, the baseline is the obvious place for them to land, and nothing in this skill has ever
-said *remove*. Left alone, a baseline stops being the strongest general version and becomes the
-union of everything ever vetted — at which point the strongest evidence is buried among the
-merely true, and a reader who stops early never reaches it. **A refresh that only ever adds is
-not a refresh.** Every baseline refresh reconsiders what is already there, not just what is new.
+**A refresh removes as well as adds.** Every corpus session validates new claims, and the
+baseline is the obvious place for them to land. A baseline that only accumulates becomes the
+union of everything ever vetted, and the strongest evidence is buried among the merely true,
+where a reader who stops early never reaches it. Every refresh reconsiders what is already
+there, not only what is new.
 
 **Which families exist is derived, never stored** — from what `applications/` shows the user has
 targeted and what the corpus can evidence. Asked which baselines are missing, or before
@@ -92,10 +90,6 @@ advance and fit the corpus to it. Extract what the role actually rewards (real r
 not boilerplate), choose the 2–4 corpus stories that are the strongest evidence *for it*, and
 render each through the lens that fits. One story can be "aligned three orgs" for a leadership
 role and "engineering judgment under pressure" for a staff role — same facts, different face.
-
-⚠️ **This thesis-from-JD step is the least battle-tested part of the system.** Treat early
-tailored output as a strong first draft, and lean on the diff-and-decide review
-`[SHOW-THE-DIFF]` rather than trusting the selection blindly.
 
 ## Hard rules — faithful rendering
 
@@ -262,7 +256,7 @@ Rendered prose that reads as AI-written gets binned. Two moves, in order:
 - **Use the user's own recorded voice.** The corpus captures how they actually talk — their
   quotes, blunt phrasings, the concrete scenes. Pull those in rather than smoothing them into
   competent generic prose. A generic humanizer strips AI tells but can't *invent* their voice;
-  the corpus already has it. This step is unique to this system — do it first.
+  the corpus already has it.
 - **Run a humanizing pass to finish.** If a dedicated `humanizer` skill is installed, invoke
   it on the draft. If not, self-edit for the reliable tells: em-dash pile-ups (cut to near
   zero), uniform sentence length (vary it hard), rule-of-three cadence, inflated vocabulary
