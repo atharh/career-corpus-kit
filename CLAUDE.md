@@ -136,6 +136,17 @@ stable `[LIKE-THIS]` id after their heading, every rule carries one whether or n
 anything cites it yet, and `evals/static_checks.py` fails an untagged rule and a
 citation by number alike.
 
+## Working in this repo
+
+- Commit without asking, but don't push. This repo is public, so ask before every push.
+- Stage files by name, never `git add -A` or `git add .`. The root can hold untracked
+  personal notes, and a file swept into a commit is published on the next push.
+- Kit changes often arrive as handoff docs written in a private corpus repo. Read them
+  where they are and never write back to that repo. Each one ends with a "Not proposed"
+  section: port the rule, drop the instance, and stay inside that fence.
+- Before fixing a reported defect, reproduce its mechanism in a scratch case. A one-line
+  summary is someone's conclusion, and a fix aimed at it can miss the real cause.
+
 ## Versioning
 
 Bump `version` in `.claude-plugin/plugin.json` on every user-visible change —
