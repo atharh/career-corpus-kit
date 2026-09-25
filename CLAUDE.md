@@ -138,7 +138,8 @@ citation by number alike.
 
 ## Working in this repo
 
-- Commit without asking, but don't push. This repo is public, so ask before every push.
+- Commit without asking, but don't push. This repo is public, so ask before every push. A hook in
+  `.claude/settings.json` enforces this.
 - Stage files by name, never `git add -A` or `git add .`. The root can hold untracked
   personal notes, and a file swept into a commit is published on the next push.
 - Kit changes often arrive as handoff docs written in a private corpus repo. Read them
