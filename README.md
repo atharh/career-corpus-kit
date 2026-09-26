@@ -97,7 +97,7 @@ Each skill also has a slash command, `/career-corpus:<skill>`, if you'd rather b
 |---|---|---|
 | "Clean up my story files." | The resolved gaps and dated back-and-forth pruned out, with the rules that keep renders honest left alone. You see a diff with a reason for each change first. | `compact` |
 | "Fact-check the Tidewater stories." | Every publicly checkable technical claim checked against the public record, with citations. You accept, amend, or reject each finding. Nothing is patched silently. | `verify` |
-| "What's outstanding in my corpus?" | Seeds still in `_inbox/`, open gaps per story, and the technologies your stories mention that no capability file covers yet. | [`corpus_status.py`](#reference-the-eight-skills-in-two-lanes) |
+| "What's outstanding in my corpus?" | Seeds still in `_inbox/`, open gaps per story, and the technologies your stories mention that no capability file covers yet. | [`corpus_status.py`](#reference-the-skills-in-two-lanes) |
 
 ## Install
 
@@ -194,7 +194,7 @@ shows what you're on. Installed versions live in
 `~/.claude/plugins/cache/career-corpus-kit/career-corpus/<version>/`, so an old directory
 sticking around after an update is normal.
 
-## Reference: the eight skills, in two lanes
+## Reference: the skills, in two lanes
 
 Underneath those prompts, the kit is two lanes. One builds the corpus. The other spends
 it, one job application at a time.

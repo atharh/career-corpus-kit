@@ -379,6 +379,12 @@ def check_readme_lists_every_skill(r: Report, names: list[str]) -> None:
     readme = (ROOT / "README.md").read_text()
     for n in names:
         r.check(f"README documents /career-corpus:{n}", f"/career-corpus:{n}" in readme, "absent")
+    # A count of the kit's own skills goes stale the day one is added, and the
+    # listing check above cannot see it. Name the skills; never tally them.
+    count = re.compile(r"\b(two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|\d+) skills\b", re.I)
+    for rel in ("README.md", ".claude-plugin/plugin.json"):
+        hits = count.findall((ROOT / rel).read_text())
+        r.check(f"{rel} — no count of the kit's own skills", not hits, f"found {hits}")
 
 
 def check_example_corpus(r: Report) -> None:
