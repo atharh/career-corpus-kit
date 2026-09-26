@@ -302,3 +302,9 @@ the change that prompted this run was committed with the failure stated.
 
 **Reopens on:** the next change to `interview`'s seeding rules, which will need this gate.
 
+
+## The relative-link check doesn't resolve `#anchor` fragments
+
+Renaming a README heading left `README.md:100` pointing at a dead `#reference-the-eight-skills-…`
+anchor with every static check green (found and fixed by hand in 1.35.1). Proposed: resolve
+in-page fragments against GitHub's heading slugs in `check_relative_links`.
