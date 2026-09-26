@@ -151,6 +151,16 @@ which for a bare skills-line entry may be nothing; say so rather than padding th
 work. If the corpus says they were "doing data modelling in 2014," don't render it as a tool
 that shipped in 2016. Check `anachronisms_corrected` blocks before using any tool or role name.
 
+**Derive a figure that ages; never copy it.** `[DERIVE-AT-RENDER]` The render-side half of
+`[RECORD-WHAT-LASTS]` in `interview`. An elapsed figure — years of experience, how long
+something has run — is computed from the corpus's dates on the day of the render, never copied
+from a line that stated it. A count of something still growing, or a present-tense claim about
+a moving state, renders in the corpus's named form where one exists; where the corpus holds
+only a bare figure, render it with the date it was recorded or leave it out, and tell the user
+it needs re-reading. An artifact may speak in the present about the current role, because the
+day it is sent dates it; what it must not do is carry a stored count forward as today's. ⚠️ A
+`[NUMBER-CEILING]` figure about completed work is not this, and renders exactly as recorded.
+
 **No names of non-public people. No internal codenames.** `[NO-NAMES-CODENAMES]` Roles, not
 names ("a senior engineer," not the person). Say "the company's service catalog," not the
 internal project codename; "~10 teams," not the internal team names. Internal names mean nothing

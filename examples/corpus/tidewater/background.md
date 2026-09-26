@@ -4,7 +4,7 @@ period: 03/2019 – present
 location: remote (company HQ Rotterdam)
 what_it_is: freight-booking SaaS; mid-market shippers book and track container freight
 scale:
-  engineers: ~40 at hire, ~120 today
+  engineers: ~40 at hire (2019), ~120 at the 2026-02-14 interview
   team: Fulfilment Platform — 6 engineers, 1 EM, 1 PM
   reported_to: Engineering Manager
 sources:

@@ -403,6 +403,12 @@ confirm it fires, and revert.
 - **No judge layer.** Everything here is a regex. The fuzzy questions — is the
   thesis drawn from the JD or lifted from the baseline? is the story selection
   defensible? — need a rubric grader and aren't built.
+- **`[RECORD-WHAT-LASTS]` and `[DERIVE-AT-RENDER]` have no case.** Whether a
+  figure describes something still living or a finished past is the whole rule,
+  and a regex cannot tell *"a team of six"* today from *"a team of six"* in
+  2017. The failure to catch is a stored count or span carried forward as
+  today's; the failure to not cause is a finished-past ceiling stripped to look
+  tidy. A judge layer would start from both.
 - **Nothing runs against a real corpus.** Deliberate: a live corpus moves while
   the skills that write to it are under test, so a failure can't be attributed.
   For that, diff *claim sets* between two kit versions rather than diffing text.

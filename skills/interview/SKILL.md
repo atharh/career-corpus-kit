@@ -147,6 +147,25 @@ which. The true version is usually *more* specific and sounds more like someone 
 thing. Sibling to `[DATE-THE-TERM]`: that rule dates the word; this one verifies the claim
 behind it.
 
+**Record what stays true with nobody maintaining it.** `[RECORD-WHAT-LASTS]` Sibling to
+`[DATE-THE-TERM]`, facing the other way: that rule catches a word that postdates the work, this
+one catches a fact that will outlive its own truth. A corpus line is written once and read for
+years, and a claim can satisfy `[NUMBER-SOURCE]` completely and still be false next year. The
+test: **does this change if nobody touches the file?** Four shapes do — a count of something
+still growing (repos, publications, customers, a team's headcount today); an elapsed figure
+computed at writing (*"eleven years as"*, *"has run untouched for three years"*); a
+present-tense claim about a moving state (*"still in use"*, *"currently"*, *"the only one"*,
+*"their most recent"*); and a version pin on living software. Record the fixed point instead:
+the start date, not the span; the things by name, not their tally; the claim with the date it
+was last known true. Naming costs no specificity — *"reads invoices, flags duplicates and posts to
+the ledger"* says more than *"a three-module tool"* and cannot go stale. When a stale figure
+turns up, restate it in the durable form rather than patching the number, because a patched
+count goes stale again the next time the thing grows. ⚠️ **This is not licence to strip
+numbers.** A figure about a finished past cannot drift — a former team's size, users served, a
+project's dates, a version pin recording what a reader saw — and a ceiling on one stays exactly
+as `[NUMBER-SOURCE]` recorded it. Decay is a property of claims about living things, never of
+sourced history.
+
 **Beware present-day artifacts.** `[LENS-NOT-SOURCE]` A current project offered as "context" for
 an old story is a **lens, not a source** — it tells you what to ask, never what happened. A
 vivid, well-structured artifact beside a thin ten-year-old memory will colonise it, in exactly

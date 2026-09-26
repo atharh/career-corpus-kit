@@ -7,7 +7,7 @@
 The career spine. Facts that every story file assumes and none of them restate.
 
 - **sam@example.com** · they/them · Lisbon, remote-first since 2019
-- **11 years** as a backend engineer. Currently Senior Software Engineer.
+- **Backend engineer since 07/2014.** Senior Software Engineer since 2022.
 - **B.Sc. Computer Science**, 2014.
 
 ## Roles

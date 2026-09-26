@@ -30,6 +30,16 @@ A rule rejected on purpose leaves no trace in the skills, so without this list e
 re-argues it — and the dangerous case is a deliberate divergence quietly reverted to match
 the corpus that suggested it.
 
+- **Parts of the brittle-claims proposal behind `[RECORD-WHAT-LASTS]` / `[DERIVE-AT-RENDER]`**
+  (reshaped 2026-09-26, from a brief; no intake read, cursor unmoved). **One id on both skills**
+  would fail the kit-wide uniqueness check, and the kit already pairs record and render rules
+  under two ids (`[DATE-THE-TERM]` / `[DATE-VOCABULARY]`). **"Say *at the ⟨date⟩ read*" in
+  rendered prose** is wrong for a résumé, which the send date already dates; the render rule
+  derives elapsed figures from dates instead. **A live render case planting a tally beside a
+  ⚠️ never-state-it marker** tests `[OBEY-DECISIONS]`, not this rule, and passes with this rule
+  deleted; both rules are listed as uncovered in `evals/README.md` instead. **The superlative
+  as a fifth shape** folded into present-tense claims, which it is.
+
 - **A warning that `display: inline-block` on a bullet's `::before` silently drops the glyph
   from the text layer** (declined 2026-09-07, three times, on three different mechanisms for
   the same observation). Offered alongside `[TEXT-LAYER]`, and the reporting session's
