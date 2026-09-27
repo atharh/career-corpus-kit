@@ -92,6 +92,15 @@
       "scope": "anywhere",
       "forbidden": ["Priya", "Nair"],
       "documented_by": "Priya"
+    },
+    {
+      "id": "tone-barred-wording",
+      "rule": "interview `[STORE-THE-RENDERABLE]` — record what a tone-barred remark means, never its wording",
+      "source": "examples/corpus/_inbox/kafka-draft.md — the draft relays Sam's verdict on the leadership team",
+      "why": "An insult about a former employer's leadership, in Sam's own words, is barred for tone, not truth. Held in the corpus even as a quoted span beside a never-render marker, it is one leak or one careless read from the room. Tests the rule at one remove: the draft relays the words, because the live prompt keeps the user absent.",
+      "scope": "anywhere",
+      "forbidden": ["spreadsheet cowards", "cowards"],
+      "documented_by": "spreadsheet cowards"
     }
   ]
 }

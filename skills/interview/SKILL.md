@@ -120,6 +120,21 @@ people's worst professional moments, and the user would never say those names in
 anyway — "a senior engineer on the platform team" carries the story fine. The repo stays private
 permanently, and it should never name a private individual even so.
 
+**Record what a tone-barred remark means, never its wording.** `[STORE-THE-RENDERABLE]`
+Sibling to `[ROLES-ONLY]`, on the same ground: a private repo should still hold nothing whose
+leak would hurt. People talk freely in an interview because the corpus is private, so expect
+profanity, a blunt verdict on a colleague or an employer, a remark that reads as undermining
+someone, and don't take that register as a cue to quote. When something is barred only for its
+tone, record its substance as a render would say it (*"disagreed with the decision to cancel the
+project"*, not the insult) and leave the raw wording out of the file entirely: not beside a ⚠️
+never-render marker, not in a gap item, not in the quoted span `[DRAFTS-UNVETTED]` allows,
+because that span holds a claim for checking and tone needs no check. A bar protects only while
+every future session reads it, and a private repo can still leak; wording never written can do
+neither. ⚠️ **Bars that exist for truth stay as they are.** A withdrawn claim, an
+`anachronisms_corrected` entry, a `facts_disputed` number or a narrowed scope still records what
+it bars, because deleting it lets the next session derive the claim again. Raw wording already
+on disk is restated per `[MARK-DONT-FIX]`, and the user is told that git history still holds it.
+
 **Don't pre-split a story by decision type.** `[ONE-ARC]` One arc, one file, even when it holds
 four decisions. Splitting a project into "the architecture decision" and "the conflict decision"
 bakes the lens into storage, and the lens can't be known until a JD is in hand. **Split only

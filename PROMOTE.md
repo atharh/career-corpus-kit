@@ -24,11 +24,25 @@ benchmark skill as `ladder` (1.33.0) from a brief and the skill's own files — 
 the backlog entry naming it and `.claude/skills/benchmark/`, not the lesson log — so the range
 after `81490e1` is still unread.
 
+**Nor on 2026-09-27.** That pass ported `[STORE-THE-RENDERABLE]` (1.36.0) from a request a
+corpus session sent directly, reading the one lesson-log entry it named and nothing else. **It
+fails the recurrence gate on the kit's own terms**: one instance. It went in on the
+kit-internal ground that `[ROLES-ONLY]` already keeps names out of a private repo because the
+repo could leak, and tone-barred wording is the same exposure, with the user's approval to
+draft it for review.
+
 ## Declined — do not re-propose
 
 A rule rejected on purpose leaves no trace in the skills, so without this list every pass
 re-argues it — and the dangerous case is a deliberate divergence quietly reverted to match
 the corpus that suggested it.
+
+- **Parts of the tone-barred-wording request behind `[STORE-THE-RENDERABLE]`** (2026-09-27, from
+  a request; one entry read, cursor unmoved). **A line in `render`'s `[OBEY-DECISIONS]`**: a
+  render has nothing new to obey when the raw wording was never stored, and the ⚠️ markers that
+  rule already honours cover any legacy bar. **The corpus's sweep of wording already on disk**
+  is that corpus's work, not method; the rule's last sentence covers what a kit session owes
+  when it meets such wording.
 
 - **Parts of the brittle-claims proposal behind `[RECORD-WHAT-LASTS]` / `[DERIVE-AT-RENDER]`**
   (reshaped 2026-09-26, from a brief; no intake read, cursor unmoved). **One id on both skills**

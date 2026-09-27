@@ -27,7 +27,8 @@ The results spoke for themselves. At its peak, the platform was processing over 
 events a day, and report latency dropped by 90% — from overnight to minutes. Adoption grew
 month over month as more teams discovered what real-time data could do for them. Our EM,
 Priya Nair, championed the project to leadership, and it became a cornerstone of the
-engineering roadmap.
+engineering roadmap. When leadership finally pulled the plug, I didn't mince words: they
+were "spreadsheet cowards who never once opened the dashboards."
 
 Looking back, the biggest lesson wasn't technical. It was that transformation starts with one
 team willing to challenge the status quo — and that the best way to predict the future of

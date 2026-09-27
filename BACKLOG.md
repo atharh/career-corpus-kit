@@ -308,3 +308,16 @@ the change that prompted this run was committed with the failure stated.
 Renaming a README heading left `README.md:100` pointing at a dead `#reference-the-eight-skills-…`
 anchor with every static check green (found and fixed by hand in 1.35.1). Proposed: resolve
 in-page fragments against GitHub's heading slugs in `check_relative_links`.
+
+## `[STORE-THE-RENDERABLE]`'s trip-wire tests the rule at one remove
+
+The case plants the user's tone-barred wording in the inbox draft, relayed by a prior AI chat,
+because the live prompt keeps the user absent. The rule is about what the user says in the
+session. Proposed: let `interview_tripwires.py` plant a user statement in the prompt itself, so
+a case can assert the wording never reaches the seeded file when the user is the source.
+
+## `compact` keeps a legacy tone bar with its raw quote
+
+`skills/compact/SKILL.md:47` preserves ⚠️ markers "and anything they're attached to", so a bar
+written before `[STORE-THE-RENDERABLE]` survives a compact pass with the raw wording beside it.
+Proposed: have `compact` flag a ⚠️ bar that exists for tone only and offer the restatement.
