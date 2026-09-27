@@ -96,7 +96,8 @@ figure you refuse is held only where the file quarantines, never in `facts_vette
 inside the ceiling that refuses it, because that block is what renders and a number sitting in
 it is one careless read from being used. State the user's value there and nothing else. The
 refused one goes in a gap item to confirm or kill, a ⚠️ ceiling paragraph in the body, or a
-quoted span attributed to the draft; prose in the file's own voice never repeats it.
+quoted span attributed to the draft, except wording barred for tone, per
+`[STORE-THE-RENDERABLE]`; prose in the file's own voice never repeats it.
 
 **Numbers get a source or they don't go in.** `[NUMBER-SOURCE]` For every quantitative claim:
 where did it come from — a dashboard, a review doc, or a model's guess at what "kept growing"
