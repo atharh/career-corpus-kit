@@ -22,8 +22,9 @@ real room. That is why its containment moves into the output itself.
 is written to disk: no benchmark, no story file, no notes file, nothing under `corpus/`, not
 even when the user asks to keep it. A saved mock answer is an exemplar with no frontmatter and
 no quarantine path, so when they want something to keep, point them at exemplar mode, which
-writes one properly fenced. The first line of the first response is the banner, one plain
-sentence: these answers are **synthetic**, from an invented candidate, and no line of them may
+writes one properly fenced. The first line of the first response is the banner, with nothing
+before it — no status note, no word about what was read — because a banner below the fold is
+one the user has already scrolled past. It is one plain sentence: these answers are **synthetic**, from an invented candidate, and no line of them may
 be cited, rendered or spoken as the user's own. The next sentence restates
 `[ONLY-EXIT-IS-A-QUESTION]` in a clause: an answer that makes them think *"I did that"* goes to
 `/career-corpus:interview`, in their own words. And a third says the risk this mode adds, once:
@@ -51,8 +52,10 @@ register.
    role file from it the way `SKILL.md` describes. When they name a role but no level, take
    their current level from `profile.md` and add one, and say so in the banner's session line.
 2. **The chair.** `[SAME-SITUATION]`, applied per answer: the candidate sits in the user's real
-   situation — the employer, the era, the mandate and the constraints — so the answers measure
-   judgment rather than luck. Read `profile.md` and the relevant company's `background.md`,
+   situation — the employer, the era, the scale and the constraints — so the answers measure
+   judgment rather than luck. The mandate is the one exception: it comes from the role being
+   interviewed for, because that role is usually the next rung or a different track, and a
+   candidate who inherits the user's current mandate answers for a job nobody is hiring. Read `profile.md` and the relevant company's `background.md`,
    and nothing more; story files are not read, because an answer built from one is a rewrite
    of the user's story, which `SKILL.md` names as the most dangerous output this skill can
    produce. When they name no company, take the most recent role in `profile.md` and say which.

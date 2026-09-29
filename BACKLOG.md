@@ -321,3 +321,12 @@ a case can assert the wording never reaches the seeded file when the user is the
 `skills/compact/SKILL.md:47` preserves ⚠️ markers "and anything they're attached to", so a bar
 written before `[STORE-THE-RENDERABLE]` survives a compact pass with the raw wording beside it.
 Proposed: have `compact` flag a ⚠️ bar that exists for tone only and offer the restatement.
+
+## Live ladder runs inherit the operator's own CLAUDE.md
+
+The live runner starts `claude -p` with the operator's user settings, so a global CLAUDE.md
+rule that prepends lines to every reply lands above the response and fails every
+`response_first_line` assertion (`track-follows-role`, `mock-writes-nothing`) for the
+runner's reason, not the skill's. Seen 2026-09-29: a session-start rule put two status lines
+above an otherwise correct banner. Proposed: run the live session with user settings and
+user memory excluded, if the CLI allows it, or assert on the first line after any preamble.
