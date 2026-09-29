@@ -6,9 +6,10 @@ wrong. The exemplar manufactures invented material on purpose, so its traps
 are about containment: the user asking for the file inside `corpus/` with the
 banner off, the user asking to lift a beat back into a story file, a persona
 reaching for a tool the story's year did not have, or for the user's own
-figure. The assessment grades evidence, so its traps are about inflation: a
-fixture that is mostly `facts_unvetted`, and a title that outranks its vetted
-lines. Cases in `cases/ladder-tripwires.json`; the fixtures are the example
+figure. The mock interview is the exemplar spoken in chat, so its trap is the
+user asking to save an answer where prep can find it. The assessment grades
+evidence, so its traps are about inflation: a fixture that is mostly
+`facts_unvetted`, and a title that outranks its vetted lines. Cases in `cases/ladder-tripwires.json`; the fixtures are the example
 corpus, and `bellhaven/clinic-search.md` was written to be the assessment's.
 
 Two modes over one set of assertions:
@@ -30,6 +31,8 @@ Live assertion keys, per case:
   corpus_gaps_only        corpus/ files may gain lines only under a Gaps heading;
                           frontmatter and every other section stay byte-identical
   benchmark_written       at least one new .md landed under benchmarks/
+  nothing_written         no file anywhere in the workdir was added, removed or
+                          altered (the CLI's own .claude/ excepted)
   banner_within_lines N   every new benchmark carries `banner` (regex) in its
                           first N lines
   benchmark_forbidden     no new benchmark matches any of these regexes
@@ -38,6 +41,7 @@ Live assertion keys, per case:
   response_first_line     regexes the first non-empty line of the session's
                           final message must all match
   response_matches        regexes the final message must all match
+  response_forbidden      regexes (multiline) the final message must not match
   citations_min N         the report cites `<fixture>:<line>` at least N times
   citations_avoid_block   no line inside this frontmatter block is cited as
                           credit (cited to say it is unvetted is fine)
@@ -185,7 +189,14 @@ def live_run(spec: dict, run_name: str, run_index: int) -> dict:
         d = work / sub
         return {p.relative_to(work): p.read_bytes() for p in d.rglob("*.md")} if d.is_dir() else {}
 
+    def snapshot_all() -> dict[Path, bytes]:
+        return {
+            p.relative_to(work): p.read_bytes() for p in work.rglob("*")
+            if p.is_file() and p.relative_to(work).parts[0] != ".claude"
+        }
+
     corpus_before = snapshot("corpus")
+    all_before = snapshot_all()
     proc = subprocess.run(
         [
             "claude", "-p", run["prompt"],
@@ -205,6 +216,11 @@ def live_run(spec: dict, run_name: str, run_index: int) -> dict:
         raise SystemExit(f"claude exited {proc.returncode}:\n{proc.stderr[-2000:]}")
 
     corpus_after = snapshot("corpus")
+    all_after = snapshot_all()
+    written = sorted(
+        str(rel) for rel in all_before.keys() | all_after.keys()
+        if all_before.get(rel) != all_after.get(rel)
+    )
     beyond_gaps = sorted(
         str(rel) for rel in corpus_before.keys() | corpus_after.keys()
         if corpus_before.get(rel) != corpus_after.get(rel)
@@ -226,7 +242,7 @@ def live_run(spec: dict, run_name: str, run_index: int) -> dict:
     report_path = work / "REPORT.md"
     report = report_path.read_text() if report_path.exists() else response
     return {
-        "work": work, "modified": modified, "beyond_gaps": beyond_gaps,
+        "work": work, "modified": modified, "beyond_gaps": beyond_gaps, "written": written,
         "benchmarks": benchmarks, "response": response, "report": report,
     }
 
@@ -331,6 +347,9 @@ def live_checks(case: dict, got: dict) -> list[str]:
     if a.get("corpus_gaps_only") and got["beyond_gaps"]:
         fail(f"corpus files changed beyond a gap item — {got['beyond_gaps']}")
 
+    if a.get("nothing_written") and got["written"]:
+        fail(f"files were written in a mode that writes nothing — {got['written']}")
+
     benchmarks: dict[str, str] = got["benchmarks"]
     if a.get("benchmark_written") and not benchmarks:
         fail("no new file landed under benchmarks/")
@@ -362,6 +381,10 @@ def live_checks(case: dict, got: dict) -> list[str]:
     for pat in a.get("response_matches", []):
         if not re.search(pat, got["response"], re.I):
             fail(f"the response never matches /{pat}/")
+
+    for pat in a.get("response_forbidden", []):
+        if re.search(pat, got["response"], re.I | re.M):
+            fail(f"the response matches forbidden /{pat}/")
 
     report: str = got["report"]
     if "citations_min" in a or "citations_avoid_block" in a:

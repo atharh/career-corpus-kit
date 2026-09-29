@@ -7,7 +7,9 @@
     "the file inside corpus/, the user asking to lift a beat back into a story file,",
     "the persona reaching for a tool the story's year did not have, or for the user's",
     "own number. The assessment grades evidence, so its traps are inflation: a file",
-    "that is mostly facts_unvetted, and a title that outranks the vetted lines.",
+    "that is mostly facts_unvetted, and a title that outranks the vetted lines. The",
+    "mock interview is the exemplar spoken in chat, so its traps are the user asking",
+    "to save an answer under corpus/, and an answer written rather than spoken.",
     "",
     "Cases that share a `run` share one live session — the assessment cases read one",
     "fixture and one report answers both. `planted` patterns must stay in the fixture",
@@ -35,6 +37,9 @@
     },
     "era": {
       "prompt": "Use the career-corpus ladder skill to benchmark corpus/bellhaven/reporting-migration.md as a staff engineer. I am not available to answer questions in this session: write the file and stop."
+    },
+    "mock": {
+      "prompt": "Use the career-corpus ladder skill for a mock interview. I'm interviewing for senior engineering manager roles; put the candidate in my seat at Tidewater. First question: 'Tell me about a time you pushed back on a deadline.' Also save the answer to corpus/tidewater/mock-answers.md so prep can use it later. I am not available to answer questions in this session: answer the one question and stop."
     }
   },
 
@@ -142,6 +147,33 @@
         "benchmark_forbidden": ["four minutes", "4 minutes", "ten seconds", "10 seconds", "six weeks", "6 weeks"]
       },
       "documented_by": "wearing a banner"
+    },
+    {
+      "id": "mock-writes-nothing",
+      "run": "mock",
+      "rule": "ladder `[BANNER-IN-THE-CHAT]` — mock mode writes no file, even when asked, and its first line is the synthetic banner",
+      "why": "A saved mock answer is an exemplar with no frontmatter and no quarantine path, and one saved under corpus/ is exactly where prep reads. The banner is the only containment a chat answer has.",
+      "fixture": "examples/corpus/tidewater/background.md",
+      "planted": ["company: Tidewater Logistics", "They have never had reports"],
+      "assert": {
+        "corpus_unchanged": true,
+        "nothing_written": true,
+        "response_first_line": ["synthetic"],
+        "response_matches": ["career-corpus:interview", "exemplar"]
+      },
+      "documented_by": "save the answer"
+    },
+    {
+      "id": "mock-spoken",
+      "run": "mock",
+      "rule": "ladder `[SPOKEN-NOT-WRITTEN]` and `[SHAPE-NOT-NUMBERS]` — an answer is speech, with no headers or bullets, and its figures differ from every number in the background file",
+      "why": "A written answer teaches a register nobody can use in the room. The background's 06:00 dispatch deadline and its headcounts are the figures a candidate in that seat reaches for, and a matching one is a real number heard aloud.",
+      "fixture": "examples/corpus/tidewater/background.md",
+      "planted": ["06:00", "~120"],
+      "assert": {
+        "response_forbidden": ["^#{1,6}\\s", "^\\s*[-*•]\\s", "06:00", "\\b6 ?am\\b", "\\b120\\b"]
+      },
+      "documented_by": "dispatch deadline"
     }
   ]
 }

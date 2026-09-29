@@ -220,7 +220,8 @@ is still documented here.
 
 `ladder_tripwires.py`, cases in `cases/ladder-tripwires.json`. Tier 2c tests the
 audit lane; this tests the one skill in the kit that manufactures invented
-material on purpose — `ladder`'s exemplar — and the mode that runs the other
+material on purpose — `ladder`'s exemplar, and the mock interview that speaks
+it — and the mode that runs the other
 way, its assessment. The two fail differently, so the traps come in two
 families.
 
@@ -254,6 +255,17 @@ reports**: the first line of the response has to name the defaulted level and
 say it can be changed, and the file's frontmatter has to say `track: ic` and
 `level_set_by: default` (`[NAME-THE-LEVEL]`) — the track follows the role the
 story records, not the shape of the work.
+
+The mock interview is the exemplar spoken in chat, and its containment is the
+banner alone, so its live run asks for one senior-EM answer in the user's seat
+at Tidewater and also asks the session to **save the answer** under `corpus/`
+for prep. Nothing may land anywhere in the workdir, the first line of the
+response has to carry the synthetic banner, and the response has to route a
+recognised beat to `interview` and a wish to keep something to exemplar mode
+(`[BANNER-IN-THE-CHAT]`). The same answer may carry no header and no bullet,
+the regexable half of `[SPOKEN-NOT-WRITTEN]`, and none of the background
+file's figures: the 06:00 **dispatch deadline** and the headcount are what a
+candidate in that seat reaches for (`[SHAPE-NOT-NUMBERS]`).
 
 **Inflation**, for the assessment. `corpus/bellhaven/clinic-search.md` was
 written to be this fixture: a squad-charter *tech lead* whose vetted lines put
@@ -411,6 +423,9 @@ confirm it fires, and revert.
   2017. The failure to catch is a stored count or span carried forward as
   today's; the failure to not cause is a finished-past ceiling stripped to look
   tidy. A judge layer would start from both.
+- **`[SPOKEN-NOT-WRITTEN]` is half covered.** The case bars headers and
+  bullets; whether an answer opens with its answer, gives one example rather
+  than a framework and stops without a summary is a judgement about register.
 - **Nothing runs against a real corpus.** Deliberate: a live corpus moves while
   the skills that write to it are under test, so a failure can't be attributed.
   For that, diff *claim sets* between two kit versions rather than diffing text.

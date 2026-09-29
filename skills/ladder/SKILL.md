@@ -1,43 +1,47 @@
 ---
 name: ladder
-description: Work the career ladder in either direction against the user's corpus. Assessment mode reads what the vetted corpus holds and says which level the evidence supports — a range with citations, an honest floor, and every shortfall sorted into missing-from-the-file versus missing-from-the-work. Exemplar mode runs the other way — it writes how one story's situation would be told by an invented stranger operating at a named level, as an instrument to compare against, never as material. Use when the user asks what level their work reads as (senior, staff, principal, EM, director, or the equivalent rung in any role the corpus covers), asks to benchmark a story, wants a target to compare against, or is building a promotion case and needs the bar made concrete.
+description: Work the career ladder in either direction against the user's corpus. Assessment mode reads what the vetted corpus holds and says which level the evidence supports — a range with citations, an honest floor, and every shortfall sorted into missing-from-the-file versus missing-from-the-work. Exemplar mode runs the other way — it writes how one story's situation would be told by an invented stranger operating at a named level, as an instrument to compare against, never as material. Mock interview mode answers the user's interview questions one at a time, live in chat, as an invented candidate at a named level sitting in the user's own situation, and writes nothing to disk. Use when the user asks what level their work reads as (senior, staff, principal, EM, director, or the equivalent rung in any role the corpus covers), asks to benchmark a story, wants a target to compare against, or is building a promotion case and needs the bar made concrete — and for a mock interview, or "how would an ideal <level> answer this".
 ---
 
 # Career corpus — ladder
 
-**Two modes over one ladder.** *Assessment* reads what the corpus actually holds and says
+**Three modes over one ladder.** *Assessment* reads what the corpus actually holds and says
 which level the evidence supports. *Exemplar* runs it the other way: it takes a story and a
 level and writes what that situation would look like told from that level — fiction, to
-compare against. Same calibration table, same role files, opposite direction, which is why
-they live in one skill rather than drifting apart in two.
+compare against. *Mock interview* is the exemplar spoken rather than written: the user asks
+questions, and an invented candidate at a named level answers them live, in chat. Same
+calibration table, same role files, which is why they live in one skill rather than drifting
+apart in three.
 
 They chain, and that is the point. Assessment says *this reads as a senior engineer, and the
 floor is here*; the exemplar then shows what the floor would look like raised. Run either
 alone; run assessment first when the user doesn't yet know which level to aim at.
 
-Every other skill in this kit exists to keep invented detail out. The exemplar manufactures it
-on purpose, which makes it the most dangerous thing in the kit and the reason its containment
-rules come before its method.
+Every other skill in this kit exists to keep invented detail out. The exemplar and the mock
+interview manufacture it on purpose, which makes them the most dangerous thing in the kit and the reason their
+containment rules come before their method.
 
 **It is an instrument, not an artifact.** It has no standing as evidence, its numbers are
 invented, and it is worthless the moment anyone mistakes it for a record.
 
 ## Which file to read
 
-This file holds what both modes share: the two containment rules, the calibration table and
+This file holds what the modes share: the two containment rules, the calibration table and
 role resolution. Each mode's own rules and procedure sit beside it, in
 `${CLAUDE_PLUGIN_ROOT}/skills/ladder/`, and **neither mode is runnable from this file alone**:
 
 - **Exemplar** — read [EXEMPLAR.md](EXEMPLAR.md) in full before opening the source story.
 - **Assessment** — read [ASSESSMENT.md](ASSESSMENT.md) in full before opening the corpus.
+- **Mock interview** — read [EXEMPLAR.md](EXEMPLAR.md), then [MOCK.md](MOCK.md), in full
+  before answering the first question; mock mode inherits the exemplar's rules by id.
 
-Read the one the request needs, and both when the user chains them.
+Read the one the request needs, and each one the user chains.
 
 ## Hard rules
 
-These two hold in both modes, because a benchmark on disk can be misused from either. The
-exemplar's remaining rules are in [EXEMPLAR.md](EXEMPLAR.md); assessment's are in
-[ASSESSMENT.md](ASSESSMENT.md).
+These two hold in every mode, because invented material can be misused from any of them. The
+exemplar's remaining rules are in [EXEMPLAR.md](EXEMPLAR.md), assessment's in
+[ASSESSMENT.md](ASSESSMENT.md), and the mock interview's in [MOCK.md](MOCK.md).
 
 **Fiction lives outside the corpus, labelled, in `benchmarks/`.** `[FICTION-IS-QUARANTINED]`
 Never write a benchmark into `corpus/`, and never into a story file. `benchmarks/` mirrors
@@ -53,7 +57,8 @@ fact-checking fiction would waste a run and lend it a provenance it must never h
 opens with the frontmatter in [`templates/exemplar-frontmatter.md`](templates/exemplar-frontmatter.md),
 and the `status:` block
 there is the banner: within the first ten lines, this is invented, it is not a record, no line
-of it may be cited, rendered or spoken. `tools/corpus_doctor.py` reports any sentence a story
+of it may be cited, rendered or spoken. Mock interview mode writes no file at all, so its
+quarantine is the banner that opens the chat (`[BANNER-IN-THE-CHAT]`). `tools/corpus_doctor.py` reports any sentence a story
 file shares with a benchmark, because that is the one leak the fences cannot see.
 
 **The only exit is a question.** `[ONLY-EXIT-IS-A-QUESTION]` A benchmark beat that makes the
@@ -91,7 +96,7 @@ as merely bigger rather than higher.
 | **Senior manager** | several teams or workstreams, and the operating model | peer orgs; initiatives outside my own area | six to twelve months | outcomes hold across teams I don't run |
 | **Director** | a strategic objective tied to a company goal; the portfolio and its budget | the managers below me, and partner functions I up-level | one to two years | it survives my departure, and executives fund it on my framing |
 
-**The five tells** separate levels more reliably than any adjective, and both modes use them
+**The five tells** separate levels more reliably than any adjective, and every mode uses them
 directly.
 
 - **Ambiguity and guidance.** The sharpest of the five, and the one every published ladder
