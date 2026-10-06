@@ -55,6 +55,12 @@ Stop and leave the line alone if it carries any of:
    with the user in the room.
 8. **A supersession trail where the earlier version might return** — if the user gave two
    different numbers across sessions, keep both with dates. Drift is evidence.
+9. **A copy that disagrees with the line it copies** — a resolved gap against the body, a story
+   file against `background.md`, a capability file against a story file, two story files.
+   Two sweep items below assume the copies agree; when they don't, sweeping either one picks
+   the winner, and which one is right is the user's call (the interview skill's
+   `[MARK-DONT-FIX]`, and `[CROSS-FILE-CEILINGS]` for a capability file). Leave both and
+   report it as a mismatch.
 
 When in doubt, keep. The skill's failure mode is over-sweeping, and it is not symmetric:
 a kept line costs a few tokens, a swept rule costs a false claim in an interview.
@@ -70,6 +76,13 @@ a kept line costs a few tokens, a swept rule costs a false claim in an interview
   the second session and split in two", "the model built this from an over-broad reading".
   Keep the *ruling*, drop the transcript around it. One clause, not a paragraph.
 - **Stale cross-references** to files that have since been renamed, split, or merged.
+- **A correction note about another corpus file whose error is gone** — *"`background.md`
+  says X; it was Y"*. Read that file first. If it no longer says X, the note is an orphan and
+  goes. If it still does, the note is the correction's only home: when the note records the
+  user's own correction, promote Y into that file as a visible step, then delete the note;
+  otherwise it is a mismatch (guard 9). Never this item: an anachronism correction (guard 6)
+  stays whatever the file now says, and a marker against a rendered artifact is an open gap
+  (guard 7), because this skill never reads `applications/` to check it.
 - **Restated derived state** — counts of open gaps, "N seeds in the inbox", anything a status
   script computes. It rots silently.
 - **Duplicated setup** that `background.md` already carries, restated inside a story file.
@@ -95,8 +108,10 @@ Work **one file at a time**, and show the user what changed before moving on.
    history.
 6. **Rewrite the gap list as a pure queue.** Open items only. Sharpest first.
 7. **Report the numbers**: lines before and after, how many resolved gaps were removed, how
-   many facts were promoted, and anything you deliberately kept that looked like history.
-8. **Commit per file or per company**, with a message naming what was compacted. One
+   many facts were promoted, anything you deliberately kept that looked like history, and
+   every mismatch (guard 9), quoting both lines, left for the user.
+8. **Check the links.** Every relative link and file path in a changed file still resolves.
+9. **Commit per file or per company**, with a message naming what was compacted. One
    reviewable commit beats one big one.
 
 ## Never

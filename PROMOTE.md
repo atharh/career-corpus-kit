@@ -37,6 +37,15 @@ A rule rejected on purpose leaves no trace in the skills, so without this list e
 re-argues it — and the dangerous case is a deliberate divergence quietly reverted to match
 the corpus that suggested it.
 
+- **Parts of the orphan-correction-note rule in `compact`** (2026-10-06, from a request
+  porting a maintainer's own doc-pruning skill; no corpus intake read, cursor unmoved).
+  **"If the error is gone, the note goes" for every correction note**: an anachronism
+  correction exists to keep a wrong word from returning, so it stays when the word is gone,
+  and a marker against a rendered artifact can't be checked by a skill that never reads
+  `applications/`. Both are excluded by name. **"If the error is still there, fix the fact"**:
+  a cross-file fix is a factual call that `[MARK-DONT-FIX]` leaves to the user, so it shipped
+  only as a promote of the user's own recorded correction, and as a mismatch otherwise.
+
 - **Parts of the tone-barred-wording request behind `[STORE-THE-RENDERABLE]`** (2026-09-27, from
   a request; one entry read, cursor unmoved). **A line in `render`'s `[OBEY-DECISIONS]`**: a
   render has nothing new to obey when the raw wording was never stored, and the ⚠️ markers that

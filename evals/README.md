@@ -426,6 +426,12 @@ confirm it fires, and revert.
 - **`[SPOKEN-NOT-WRITTEN]` is half covered.** The case bars headers and
   bullets; whether an answer opens with its answer, gives one example rather
   than a framework and stops without a summary is a judgement about register.
+- **`compact` has no case at all.** Its guard list is judgement: whether two
+  lines in different files disagree, or merely say the same thing in other
+  words, is not a regex. The newest guard, a copy that disagrees with the line
+  it copies, fails by sweeping one copy and so quietly picking a winner; a judge
+  layer would plant a story file whose restated setup contradicts
+  `background.md` and check that both survive.
 - **Nothing runs against a real corpus.** Deliberate: a live corpus moves while
   the skills that write to it are under test, so a failure can't be attributed.
   For that, diff *claim sets* between two kit versions rather than diffing text.
