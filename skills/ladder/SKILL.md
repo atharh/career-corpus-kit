@@ -60,8 +60,7 @@ exemplar's remaining rules are in [EXEMPLAR.md](EXEMPLAR.md), assessment's in
 [ASSESSMENT.md](ASSESSMENT.md), and the mock interview's in [MOCK.md](MOCK.md).
 
 **Fiction lives outside the corpus, labelled, in `benchmarks/`.** `[FICTION-IS-QUARANTINED]`
-Two words, two things: an *exemplar* is the invented telling, and a *benchmark* is the file
-under `benchmarks/` that holds one. Never write a benchmark into `corpus/`, and never into a story file. `benchmarks/` mirrors
+Never write a benchmark into `corpus/`, and never into a story file. `benchmarks/` mirrors
 `corpus/` exactly — `corpus/tidewater/batch-window.md` is shadowed by
 `benchmarks/tidewater/batch-window.md`: one directory per company, same filename — so a
 benchmark sits parallel to the story it shadows and the pairing needs no index to find. One
