@@ -9,6 +9,17 @@ Buildable work lives in `BACKLOG.md`. Promote-pass state lives in `PROMOTE.md`.
 
 ---
 
+## Interview's file contract stays in SKILL.md
+
+**Declined 2026-10-15.** A review against Anthropic's skill-authoring guide proposed moving
+`interview`'s "The file" and "What 'vetted' means" sections into a sibling file, to keep
+SKILL.md short. They stay. They define the corpus layout and the three fact blocks, and the
+skill places a fact into one of those blocks every round, so a sibling file would hold what
+every session needs. Reopens if `interview/SKILL.md` passes the guide's 500-line split point,
+and then the move should take reference material, not the block definitions.
+
+---
+
 ## Pack staleness: record the inputs, don't build the checker
 
 **Declined at the design stage 2026-08-12.** A rendered artifact is a snapshot of a corpus
