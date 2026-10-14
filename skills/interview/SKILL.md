@@ -11,8 +11,8 @@ of it. This skill is how material gets in. The companion `render` skill is how i
 
 **Recall is triggered, not enumerated.** People do not remember their careers by listing
 them — they remember when something snags. Whole years of relevant work stay invisible until
-writing about something adjacent dislodges them. So this is an interview, not a form. Never
-hand the user a template to fill in.
+writing about something adjacent dislodges them. So this is an interview, not a form: ask the
+questions yourself, in rounds, and never hand the user a template to fill in.
 
 ## Lessons — how this skill personalises to you
 
@@ -391,7 +391,7 @@ corpus/
 Frontmatter holds facts that must not drift, split by provenance
 (`facts_vetted` / `facts_disputed` / `facts_unvetted` / `sources`); prose holds the arc, in
 their voice, with beats as `##` subheads so they're addressable without being boxes. See
-`templates/story.md` for the skeleton. **Never use a STAR template** — it produces dead
+`templates/story.md` for the skeleton. **Write the arc as that prose, never as a STAR template** — a template produces dead
 checklist prose they'll resent filling in, and STAR can be rendered *from* good prose while
 life can't be put back into prose born as a form.
 
