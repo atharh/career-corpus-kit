@@ -118,12 +118,9 @@ that reads like a finished claim is already a rendering, and taking it at face v
 baseline telephone game above with a second lossy hop. It is the easiest mistake to make once
 the folder holds something that looks nearly right.
 
-`_inbox/` is **never evidence for a candidate claim** — in the corpus and in an application
-alike. It may supply attributed employer context and operational fact: what the role is said to
-want, when the interview is, what format it takes. Nothing more. It is raw ore: its numbers are
-unsourced and forbidden until extracted into a story file, and a recruiter's account of the role
-is a claim by a stranger with an incentive, never a verified fact about the company or the user.
-It can shape what you emphasise. It can never become a sentence the user has to defend.
+`_inbox/` is **never evidence for a candidate claim**, in the corpus or in an application
+(`apply`'s `[INBOX-NOT-EVIDENCE]`). It may supply attributed employer context and operational
+fact: what the role is said to want, when the interview is, what format it takes. Nothing more.
 
 **Numbers carry their source and their ceiling.** `[NUMBER-CEILING]` Render only figures a
 corpus file sources, at the value it sources. If a metric was confirmed as "doubled," never the
@@ -204,8 +201,7 @@ One of `apply`'s rules is held alongside it:
   say it once, in a clause, and carry on. A render that will not go out until some unresolved
   question is settled has usually escalated a question that no answer would have changed. Three
   things still earn a gate: editing a frozen artifact, putting an unsourced claim in front of an
-  employer, and anything the user has said is theirs to decide. Note what the first two are —
-  this rule loosens nothing that `[CLAIM-SOURCE]` or the freeze holds.
+  employer, and anything the user has said is theirs to decide.
 
 **The user's say-so overrides the corpus and this skill, immediately and without argument.**
 `[USER-OVERRIDES]` The corpus exists to stop the user drifting and a model inflating; it has
@@ -299,14 +295,9 @@ private and personal.
   apply next time. Route it first — a rule that would still hold if the corpus were about
   someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
   rule nobody can diff is a rule nobody can review, port, or undo.
-- **A lesson leaves this file two ways, each on the user's explicit say-so, entry by entry.**
-  One that proves *wrong* is retired in the session where it misfired, struck in place —
-  `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>` — and never applied again; the
-  strike records wrongness, which lives nowhere else. One the method has since *absorbed* is
-  deleted outright, no strike left behind — a shipped rule's duplicate here can only drift —
-  once nothing local remains (no calibration about this user, no number they set, no recorded
-  divergence; trim the entry to that residue if any does) and no session still loads a skill
-  version without the rule.
+- **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
+  exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
+  of why>` — is never applied again.
 
 ## Workflow
 

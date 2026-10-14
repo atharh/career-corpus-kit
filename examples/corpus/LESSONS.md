@@ -4,8 +4,14 @@
 
 The skills read this at session start and treat each entry as a rule for working with **this**
 corpus, on equal footing with their built-in rules. Appended when a correction generalises.
-Newest at the bottom. One lesson each. A lesson that proves wrong is struck in place, never
-rewritten; one the kit's method has since fully absorbed is deleted outright.
+Newest at the bottom. One lesson each.
+
+A lesson leaves two ways, each on your explicit say-so, entry by entry. One that proves wrong is
+struck in place, never rewritten — `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>` —
+and is no longer applied. One the kit's method has since fully absorbed is deleted outright, once
+nothing local remains in it (no calibration about you, no number you set, no recorded
+divergence; trim the entry to that residue if any does) and no session still loads a kit version
+without the rule.
 
 **This file is the whole personalisation mechanism.** It ships empty. It fills up with the
 things you had to tell Claude twice.

@@ -373,14 +373,9 @@ private and personal.
   apply next time. Route it first — a rule that would still hold if the corpus were about
   someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
   rule nobody can diff is a rule nobody can review, port, or undo.
-- **A lesson leaves this file two ways, each on the user's explicit say-so, entry by entry.**
-  One that proves *wrong* is retired in the session where it misfired, struck in place —
-  `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>` — and never applied again; the
-  strike records wrongness, which lives nowhere else. One the method has since *absorbed* is
-  deleted outright, no strike left behind — a shipped rule's duplicate here can only drift —
-  once nothing local remains (no calibration about this user, no number they set, no recorded
-  divergence; trim the entry to that residue if any does) and no session still loads a skill
-  version without the rule.
+- **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
+  exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
+  of why>` — is never applied again.
 
 ## The file
 
@@ -461,11 +456,10 @@ interviewer will push on.
    reveals the next round's questions.
 4. **Resolve gaps explicitly.** `- [x] ~~question~~ Resolved YYYY-MM-DD: answer.` The gaps
    list is the queue for next time; leaving it honest is what makes the corpus resumable.
-5. **Prune the queue as you go**, per the say-it-out-loud test `[SAY-ALOUD]`. A gap that
-   survives three sessions unasked is
-   usually failing the say-it-out-loud test with nobody saying so; delete it, git keeps it.
-   **A deferred topic is different from a dead one:** log *what* was deferred in enough detail
-   to resume — "they said they'd made mistakes here" with no topic wastes a future session.
+5. **Prune the queue as you go**, per `[SAY-ALOUD]`. A gap that survives three sessions unasked
+   is usually failing it with nobody saying so; delete it, git keeps it. **A deferred topic is
+   different from a dead one:** log *what* was deferred in enough detail to resume — "they said
+   they'd made mistakes here" with no topic wastes a future session.
 6. **Stop when they defer.** If they say a topic is for another session, log it and leave it;
    don't ruin a productive thread by pushing.
 
@@ -475,11 +469,9 @@ A story is done enough when it could survive an interviewer who wants to spend t
 on it: the setup has stakes, the decisions have alternatives and opposition, the numbers have
 sources, someone disagreed, something went wrong, and a real person somewhere in it is more
 than an obstacle. **Note what that list does *not* include:** every fact about the arc. A
-story is done when it survives pressure, not when it's complete — the second target is
-unreachable, and the say-it-out-loud test `[SAY-ALOUD]` exists because you will keep finding
-another question.
+story is done when it survives pressure, not when it's complete; the second target is
+unreachable.
 
-A session is done when the frontier holds nothing that passes the say-it-out-loud test, or
-when they've had enough. What survives the test becomes the gaps list; what doesn't gets
-dropped, not parked. Most stories will not get there in one session, and that's fine — depth
+A session is done when the frontier holds nothing that passes `[SAY-ALOUD]`, or when they've
+had enough. Most stories will not get there in one session, and that's fine — depth
 accretes, and a short honest queue is worth more than a long thorough one nobody works through.

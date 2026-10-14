@@ -202,11 +202,6 @@ private and personal.
   constraint of their era, or a ceiling on how one of their stories may be told is theirs and
   lands here. Either way the rule lives in a *file*: a rule nobody can diff is a rule nobody
   can review, port, or undo.
-- **A lesson leaves this file two ways, each on the user's explicit say-so, entry by entry.**
-  One that proves *wrong* is retired in the session where it misfired, struck in place —
-  `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>` — and never applied again; the
-  strike records wrongness, which lives nowhere else. One the method has since *absorbed* is
-  deleted outright, no strike left behind — a shipped rule's duplicate here can only drift —
-  once nothing local remains (no calibration about this user, no number they set, no recorded
-  divergence; trim the entry to that residue if any does) and no session still loads a skill
-  version without the rule.
+- **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
+  exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
+  of why>` — is never applied again.

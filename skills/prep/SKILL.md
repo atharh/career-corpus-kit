@@ -43,9 +43,7 @@ Two more hold across the whole kit, and both are about what *not* to write down:
 
 - **Not every doubt is a blocker.** (`[NOT-EVERY-DOUBT-IS-A-BLOCKER]`) Most uncertainty is not
   a blocker. The test is whether being wrong would be expensive or hard to undo — if it would
-  not, say it once, in a clause, and carry on. A pack is the easiest place in the kit to
-  accumulate caution, because every unresolved thing looks like something to prepare for.
-  Three things still earn a gate: editing a frozen artifact, putting an unsourced claim in
+  not, say it once, in a clause, and carry on. Three things still earn a gate: editing a frozen artifact, putting an unsourced claim in
   front of an employer, and anything the user has said is theirs to decide. `[NAME-THE-WEAK]`
   is not in tension with this: naming a weakness once is the clause, and a pack that returns
   to it in four files has stopped preparing the user and started worrying at them.
@@ -82,11 +80,8 @@ anything the user hands you now into `_inbox/` so the next round inherits it. If
 doesn't exist, offer `/career-corpus:apply` to open it — a booked interview is exactly when the
 thread starts needing a memory.
 
-**But `_inbox/` is unvetted, and that matters more here than anywhere.** A recruiter is
-selling a job; their account of the team's scope, the role's remit or what the panel is
-looking for tells you what to *prepare for* and never what is *true*. Use it to aim the pack.
-Never let it become a claim in the user's mouth — the interviewer knows what the team actually
-does.
+**But `_inbox/` is unvetted** (`apply`'s `[INBOX-NOT-EVIDENCE]`). Use it to aim the pack, never
+as a claim in the user's mouth: the interviewer knows what the team actually does.
 
 If a round is with a named individual, keep that name **out of filenames**. Roles in
 filenames, names in the body if the user wants them. Filenames get screenshotted, screen-shared
@@ -207,14 +202,9 @@ private and personal.
   apply next time. Route it first — a rule that would still hold if the corpus were about
   someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
   rule nobody can diff is a rule nobody can review, port, or undo.
-- **A lesson leaves this file two ways, each on the user's explicit say-so, entry by entry.**
-  One that proves *wrong* is retired in the session where it misfired, struck in place —
-  `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>` — and never applied again; the
-  strike records wrongness, which lives nowhere else. One the method has since *absorbed* is
-  deleted outright, no strike left behind — a shipped rule's duplicate here can only drift —
-  once nothing local remains (no calibration about this user, no number they set, no recorded
-  divergence; trim the entry to that residue if any does) and no session still loads a skill
-  version without the rule.
+- **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
+  exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
+  of why>` — is never applied again.
 
 ## After the interview — this is half the skill
 

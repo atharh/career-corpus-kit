@@ -179,18 +179,13 @@ follow the flow an interview actually takes.
 - **STAR rendered *from* prose, never as a filled-in template.** Situation/Task/Action/Result
   as a skeleton the good corpus prose hangs on — the corpus already stores arcs this way
   (setup → beats → outcome → what-it-cost).
-- **Prep the follow-ups, because the corpus already found them.** Every story file's `gaps` and
-  `⚠️` notes are the exact places a sharp interviewer pushes. Surface the question *and* the
-  defensible answer.
-- **Carry the mistake.** The corpus deliberately keeps the failure in each story. A story with
-  no misstep reads as a case study — interviewers can smell it.
-- **Match story to question type.** Tag which corpus stories answer "hardest problem,"
-  "conflict," "failure," "leadership," "ambiguity." One story can serve several through
-  different lenses — but **note where a story is already spent**, so the same anecdote isn't
-  reused across answers in a single loop.
 - **Through-lines are talking points, not scripts.** Offer them as ways to connect stories,
   never as claims to recite. Let the interviewer's question pick the lens, same as the JD does
   for a letter.
+- **The rest is `prep`'s, and holds here too:** bullets and a first line, never a script
+  (`[NO-SCRIPT]`); answer the follow-ups down to depth three (`[DEPTH-THREE]`); carry the
+  mistake (`[CARRY-MISTAKE]`); and track which story is spent on which question
+  (`[SPEND-STORIES]`). See [`../prep/SKILL.md`](../prep/SKILL.md).
 
 ---
 

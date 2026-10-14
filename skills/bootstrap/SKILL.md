@@ -99,7 +99,10 @@ empty one is an invitation to fill it, and filling it is how it becomes a horosc
    lesson leaves: one that proves wrong is retired on the user's say-so by marking it in place
    — `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>` — and a struck entry is no
    longer applied; one the method has since fully absorbed is deleted outright, on the user's
-   say-so, entry by entry.
+   say-so, entry by entry, once nothing local remains in it (no calibration about this user, no
+   number they set, no recorded divergence; trim the entry to that residue if any does) and no
+   session still loads a skill version without the rule. Every skill points at this header for
+   the exits, so it states them in full.
 7. **Hand off.** Point at the top of the queue: *"Your highest-value story looks like <X>. Run
    `/career-corpus:interview <X>` to start."* Mention, without making them run it now, that
    the kit ships one checker they can run themselves from the repo root once applications

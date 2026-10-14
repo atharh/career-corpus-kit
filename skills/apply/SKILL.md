@@ -286,13 +286,9 @@ land in:
 - **A constraint has one home.** (`[CONSTRAINT-HAS-ONE-HOME]`) A limit on a claim lives in the
   corpus file that owns the claim, and an application thread never repeats it. Nothing keeps a
   copy true: correct the corpus later and the copy goes on stating the old position with full
-  confidence. **Grep the corpus before writing a constraint into an application thread** — a
-  rule saying *don't duplicate* loses to a session that sincerely believes it is not
-  duplicating, and "this exists nowhere else" is the sentence people write when they have not
-  looked. The exception is `fit.md`, and it is not a violation: weighing corpus evidence against
-  a posting is that file's whole job, it names the file each ceiling came from, and it is
-  regenerated rather than maintained, so a stale citation gets rewritten instead of rotting.
-  Assessment may cite a constraint; a log of what happened may not.
+  confidence. **Grep the corpus before writing a constraint into an application thread.**
+  `fit.md` is the exception, because it names the file each ceiling came from and is regenerated
+  rather than maintained. Assessment may cite a constraint; a log of what happened may not.
 
 ## Lessons — how this skill personalises to you
 
@@ -307,14 +303,9 @@ private and personal.
   apply next time. Route it first — a rule that would still hold if the corpus were about
   someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
   rule nobody can diff is a rule nobody can review, port, or undo.
-- **A lesson leaves this file two ways, each on the user's explicit say-so, entry by entry.**
-  One that proves *wrong* is retired in the session where it misfired, struck in place —
-  `~~<the entry>~~ retired YYYY-MM-DD: <one clause of why>` — and never applied again; the
-  strike records wrongness, which lives nowhere else. One the method has since *absorbed* is
-  deleted outright, no strike left behind — a shipped rule's duplicate here can only drift —
-  once nothing local remains (no calibration about this user, no number they set, no recorded
-  divergence; trim the entry to that residue if any does) and no session still loads a skill
-  version without the rule.
+- **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
+  exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
+  of why>` — is never applied again.
 
 ## What "good" looks like
 
