@@ -173,8 +173,8 @@ the start date, not the span; the things by name, not their tally; the claim wit
 was last known true. Naming costs no specificity — *"reads invoices, flags duplicates and posts
 to the ledger"* says more than *"a three-module tool"* and cannot go stale. Restate a stale
 figure in the durable form rather than patching the number, which goes stale again the next
-time the thing grows. ⚠️ **Only claims about living things decay.** A figure about a finished
-past — a former team's size, users served, a project's dates, a version pin recording what a
+time the thing grows. ⚠️ **This is not licence to strip numbers: only claims about living
+things decay.** A figure about a finished past — a former team's size, users served, a project's dates, a version pin recording what a
 reader saw — stays exactly as `[NUMBER-SOURCE]` recorded it, ceiling included.
 
 **Beware present-day artifacts.** `[LENS-NOT-SOURCE]` A current project offered as "context" for
@@ -210,14 +210,14 @@ factual call that was theirs, and a model settles on the vaguer version. The mov
 - **The reading is yours, not theirs** → label it in the file as your inference, dated, to be
   confirmed or rejected before rendering. Record a rejection *and their reasoning*.
 - **The change invalidates something already rendered** → say so in the same breath (*"that
-  contradicts your résumé, which says X"*). The session owes the **marker, not the fix**: an
-  unchecked gap in the story file naming the artifact and the line, with a re-render offered
-  separately, because nothing re-reads a rendered artifact. The artifact's lifecycle bounds
-  what happens next: a **submitted** one is frozen evidence of what a reader saw, superseded
-  and never rewritten; an **in-flight** one is re-rendered on request, with the diff shown; a
-  **baseline** is refreshed as its own deliberate act, in its own commit. And **once per
-  corpus, diff the whole résumé against the corpus**, asking of each claim what vouches for it
-  *now*.
+  contradicts your résumé, which says X"*), and let them decide. The session owes the **marker,
+  not the fix**: an unchecked gap in the story file naming the artifact and the line, with a
+  re-render offered separately. Never say *the corpus now knows*, because nothing re-reads a
+  rendered artifact. The artifact's lifecycle bounds what happens next: a **submitted** one is
+  frozen evidence of what a reader saw, superseded and never rewritten; an **in-flight** one is
+  re-rendered on request, with the diff shown; a **baseline** is refreshed as its own
+  deliberate act, in its own commit. And **once per corpus, not once per session, diff the whole
+  résumé against the corpus**, asking of each claim what vouches for it *now*.
 - **The change rewrites a line already on disk** → new information usually *adds*. **If the
   proposed line says less than the one it replaces, it is not a fix**: add a sentence beside
   the original rather than merging both, because the detail that looked like clutter answers
