@@ -1,6 +1,6 @@
 ---
 name: compact
-description: Prune accumulated history out of corpus story files without losing the rules that keep renders honest. Use when story files have become heavy with resolved gaps and dated back-and-forth, when a gap list is more history than queue, or after a long interview session.
+description: Prune accumulated history out of corpus story files without losing the rules that keep renders honest. Use when the user asks to compact, prune, tidy or slim down a story file or a company's files, when story files have become heavy with resolved gaps and dated back-and-forth, when a gap list is more history than queue, or after a long interview session.
 ---
 
 # Career corpus — compact
