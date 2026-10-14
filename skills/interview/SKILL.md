@@ -207,31 +207,26 @@ changes only by a decision the user makes and sees: **show what stands, show wha
 replace it, name what prompted the change, and let them choose.** Settling it yourself makes a
 factual call that was theirs, and a model settles on the vaguer version. The move, by case:
 
-- **Two of their own statements conflict** → quote both lines, name the conflict, let them
-  reconcile it — the reconciliation is usually more interesting than either version. A
-  self-correction is not a conflict: when they revise an earlier answer *and say which one is
-  right* — *"actually it was four months, not six"* — they have marked the change themselves
-  and it is settled. Take the new answer; quoting it back reads as not listening, and routing
-  it to `facts_disputed` parks a settled number where neither value renders.
+- **Two of their own statements conflict** → quote both, name the conflict, let them reconcile
+  it; the reconciliation is usually better material than either version. A revision that says
+  which one is right (*"actually it was four months, not six"*) is not a conflict but a
+  settled change: take the new answer, without quoting it back and without parking it in
+  `facts_disputed`.
 - **The reading is yours, not theirs** → label it in the file as your inference, dated, to be
-  confirmed or rejected before rendering. Record a rejection *and their reasoning*; the
-  refutation is often better material than the theory was.
-- **The change invalidates something already rendered** → say it in the same breath — *"that
-  contradicts your résumé, which says X"* — and let them decide. The session owes the
-  **marker, not the fix**: an unchecked gap in the story file naming the artifact and the
-  line, re-render offered separately — never *the corpus now knows*, because nothing re-reads
-  a rendered artifact. The artifact's lifecycle bounds what may happen next: a **submitted**
-  artifact is frozen evidence of what a reader saw — supersede it, never rewrite it; an
-  **in-flight** one is re-rendered on request, with the diff shown; a **baseline** is
-  refreshed as its own deliberate act, in its own commit. And **once per corpus — not once per
-  session — diff the whole résumé against the corpus**, asking of each claim what vouches for
-  it *now*.
-- **The change rewrites a line already on disk** → new information usually *adds* rather than
-  contradicts, and folding the detail into the sentence already written is where substance
-  goes quietly missing. **If the proposed line says less than the one it replaces, it is not
-  a fix**; adding a sentence beside the original beats merging both into one — the detail
-  that looked like clutter answers the third follow-up and is not recoverable from the merged
-  version.
+  confirmed or rejected before rendering. Record a rejection *and their reasoning*.
+- **The change invalidates something already rendered** → say so in the same breath (*"that
+  contradicts your résumé, which says X"*). The session owes the **marker, not the fix**: an
+  unchecked gap in the story file naming the artifact and the line, with a re-render offered
+  separately, because nothing re-reads a rendered artifact. The artifact's lifecycle bounds
+  what happens next: a **submitted** one is frozen evidence of what a reader saw, superseded
+  and never rewritten; an **in-flight** one is re-rendered on request, with the diff shown; a
+  **baseline** is refreshed as its own deliberate act, in its own commit. And **once per
+  corpus, diff the whole résumé against the corpus**, asking of each claim what vouches for it
+  *now*.
+- **The change rewrites a line already on disk** → new information usually *adds*. **If the
+  proposed line says less than the one it replaces, it is not a fix**: add a sentence beside
+  the original rather than merging both, because the detail that looked like clutter answers
+  the third follow-up.
 
 **The trigger is meaning, not keystrokes.** `[MEANING-NOT-KEYSTROKES]` A decision round is owed
 when the edit could change fact, specificity, provenance, emphasis, or a recorded rendering
