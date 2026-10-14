@@ -102,8 +102,6 @@ rather than a patch:
   template, apply's SKILL.md, the examples README) and nothing pins them to
   `appthread.EVENTS`. A tenth event added to one copy drifts silently.
 
-Same family: `[NOT-EVERY-DOUBT-IS-A-BLOCKER]` and `[CONSTRAINT-HAS-ONE-HOME]` are each stated
-near-verbatim in three SKILL.md files — a CLAUDE.md-consolidate-pass candidate, not a defect.
 
 **Added 2026-09-03.** A third copy of a different predicate: what counts as a corpus file and
 where `_inbox/` stops is now defined in `tools/corpus_status.py` and, four times over, in
