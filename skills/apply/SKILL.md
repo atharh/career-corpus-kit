@@ -1,6 +1,5 @@
 ---
 name: apply
-allowed-tools: Bash(python3 "${CLAUDE_PLUGIN_ROOT}/tools/application_status.py"*) Bash(python3 "${CLAUDE_PLUGIN_ROOT}/tools/corpus_doctor.py"*)
 description: Open and run one job application end to end — capture the posting, check the corpus against it before writing anything, then hold everything that arrives afterwards in one folder. Use when the user has found a role they want to apply for, pastes a job posting or its URL, wants to track or update an application already in flight, or asks what applications are live. Hands off to the career-corpus render skill for the résumé and cover letter, and to prep once an interview is booked.
 ---
 
