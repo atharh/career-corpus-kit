@@ -1,5 +1,22 @@
 # Interviewing reference — the question playbook
 
+## Contents
+
+The question playbook, techniques in rank order:
+
+1. State the worst reading and make them rebut it `[WORST-READING]`
+2. Cross-check the arithmetic — but only where it changes a claim `[CHECK-ARITHMETIC]`
+3. Interrogate the compressed phrase `[COMPRESSED-PHRASE]`
+4. Demand the mistake — but not by asking for one `[DEMAND-MISTAKE]`
+5. Ask who was told `[WHO-WAS-TOLD]`
+6. Chase the generic word `[GENERIC-WORD]`
+7. Close the causal loop `[CAUSAL-LOOP]`
+8. Name a pattern across stories `[PATTERN-ACROSS-STORIES]`
+9. Offer a wrong theory, invite rejection `[WRONG-THEORY]`
+10. Establish who owned it before you write it down `[WHO-OWNED-IT]`
+11. Ask where a number came from, and don't cushion the ask `[UNCUSHIONED-ASK]`
+12. Don't soften the ask to protect a good number — withdrawal is a win `[ASK-IS-THE-FILTER]`
+
 Hard rules, round mechanics and the file contract live in SKILL.md. This file is **technique**:
 what to actually ask once the frontier is computed and you're composing a round. Read it when
 you write questions, which is every round.

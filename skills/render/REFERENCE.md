@@ -1,5 +1,14 @@
 # Rendering reference — per-artifact shapes
 
+## Contents
+
+- Where files live
+- Deriving the family list
+- Résumé entry
+- Cover letter
+- Interview-prep answers
+- The outbound file
+
 Shared rules live in SKILL.md. This file is the shape each artifact takes.
 
 ## Where files live

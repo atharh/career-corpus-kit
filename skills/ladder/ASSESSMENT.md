@@ -1,5 +1,11 @@
 # Ladder — assessment mode
 
+## Contents
+
+- Rules specific to an assessment
+- The procedure
+- The report
+
 Read after [SKILL.md](SKILL.md), which carries the two containment rules, the calibration table
 and role resolution. This file is the rest of the mode: its rules, its procedure, its report.
 

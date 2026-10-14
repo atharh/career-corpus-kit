@@ -1,5 +1,10 @@
 # Ladder — exemplar mode
 
+## Contents
+
+- Rules specific to an exemplar
+- Running an exemplar
+
 Read after [SKILL.md](SKILL.md), which carries the two containment rules, the calibration table
 and role resolution. This file is the rest of the mode: why it exists, its rules, its procedure.
 

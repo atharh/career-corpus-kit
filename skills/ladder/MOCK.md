@@ -1,5 +1,11 @@
 # Ladder — mock interview mode
 
+## Contents
+
+- Rules specific to a mock interview
+- Running a mock interview
+- The register, by example
+
 Read after [SKILL.md](SKILL.md), which carries the two containment rules, the calibration table
 and role resolution, and after [EXEMPLAR.md](EXEMPLAR.md), whose rules this mode inherits by id.
 This file is the rest of the mode: why it exists, its own rules, its procedure.
