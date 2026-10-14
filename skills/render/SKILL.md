@@ -155,8 +155,8 @@ from a line that stated it. A count of something still growing, or a present-ten
 a moving state, renders in the corpus's named form where one exists; where the corpus holds
 only a bare figure, render it with the date it was recorded or leave it out, and tell the user
 it needs re-reading. An artifact may speak in the present about the current role, because the
-day it is sent dates it; what it must not do is carry a stored count forward as today's. ⚠️ A
-`[NUMBER-CEILING]` figure about completed work is not this, and renders exactly as recorded.
+day it is sent dates it. ⚠️ A `[NUMBER-CEILING]` figure about completed work does not age, and
+renders exactly as recorded.
 
 **No names of non-public people. No internal codenames.** `[NO-NAMES-CODENAMES]` Roles, not
 names ("a senior engineer," not the person). Say "the company's service catalog," not the
