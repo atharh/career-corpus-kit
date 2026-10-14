@@ -75,8 +75,9 @@ person did is a claim by a stranger selling a job. It can shape what you *ask* a
 fact about the **user**, it earns its way into the corpus through `interview`, like everything
 else.
 
-**Never source a claim about the candidate from `applications/`.** `[NOT-FROM-APPLICATIONS]` The
-folder is read, never cited: `jd.md` is what a render tailors *to* and `fit.md` is most of the
+**Never source a claim about the candidate from `applications/`.** `[NOT-FROM-APPLICATIONS]`
+`render` reads the folder rather than asking the user to paste it again; the bar is on claims
+about the user, not on the folder: `jd.md` is what it tailors *to* and `fit.md` is most of the
 selection work, but anything here that reads like a claim about the user is already a rendering
 (another application's résumé, this one's earlier draft, a line `fit.md` quoted). Follow the
 pointer back to the corpus story and render the claim from there; `render`'s `[CLAIM-SOURCE]`
@@ -121,9 +122,10 @@ have to reconstruct *where does this stand* by working forward through a log. `e
 the top of the file and ends in the current stage, so the state is already first — and **no
 other surface restates it**: not the heading, not the paragraph beneath it, not a badge or a
 date beside either. The heading tempts most, because it is the most visible line in the file,
-but a stage in it is a rollup like any other (`[NO-ROLLUP]`) and goes stale the next time the
-thread moves. What the paragraph beneath the heading carries instead is the part
-that is genuinely not derivable: what the thread is waiting on, and whose move it is next.
+but a stage in it is a rollup however much it reads as a courtesy (`[NO-ROLLUP]`), and it goes
+stale the next time the thread moves. What the paragraph beneath the heading carries instead is
+the part that is genuinely not derivable: what the thread is waiting on, and whose move it is
+next.
 Entries that no longer bear on the next decision move into a collapsed `<details>` block, which
 folds on GitHub and stops dead material from reading as live.
 
