@@ -32,6 +32,24 @@ are the shape, not a form: a field with nothing true to put in it stays empty ra
 getting a guess. Rendered artifacts carry their own frontmatter block, which belongs to the
 skill that writes them — see [`../render/templates/artifact-frontmatter.md`](../render/templates/artifact-frontmatter.md).
 
+## Lessons — how this skill personalises to you
+
+This skill ships generic and sharpens by accumulating the user's own corrections in
+`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit. Never edit this
+SKILL.md to record a lesson: the method stays stable and shareable; the scar tissue stays
+private and personal.
+
+- **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
+  additional rule for this user, on equal footing with this skill's hard rules.
+- **After a correction that generalises, append one dated line**: the mistake, and the rule to
+  apply next time. Route it first — a rule that would still hold if the corpus were about
+  someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
+  rule nobody can diff is a rule nobody can review, port, or undo.
+- **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
+  exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
+  of why>` — is never applied again. Delete an absorbed one only once nothing local remains in
+  it, trimming it to that residue if any does.
+
 ## Where this sits
 
 The kit has two lanes. `bootstrap` → `interview` → `compact` builds the corpus. `apply` →
@@ -39,124 +57,6 @@ The kit has two lanes. `bootstrap` → `interview` → `compact` builds the corp
 point to the second lane.
 
 The trigger is *"I found a job"* — not *"write me a résumé"*, which is `render` on its own.
-
-## Stages
-
-Re-entrant by design. Run it again on an existing folder and it reads the current state, files
-whatever is new, and tells you where the thread stands. Don't recreate what's there. A thread
-whose `application.md` has a log and no `events:` block predates the frontmatter: offer to
-migrate it, and follow [MIGRATING.md](MIGRATING.md) — assisted, never automatic.
-
-**1. Open.** Get the posting. If it's a URL, fetch it; if it's pasted text, take it as given;
-if it's a screenshot, transcribe it. Derive company and role from the posting, not from the
-user's shorthand — `<company>-<role>` in kebab case, short enough to tab-complete. Write
-`jd.md` and start `application.md`.
-
-**2. Fit.** Read the corpus against the JD **before anything gets written**. This is the step
-that earns the skill; see below.
-
-**3. Render.** Hand off: *"Run `/career-corpus:render` for this application."* Don't write the
-résumé or the letter here — `render` carries the faithful-rendering rules and this skill
-doesn't repeat them.
-
-**4. Sent.** Log the date and what actually went out, including anything the form asked for
-that the folder doesn't hold (a portfolio link, a salary expectation, a "why us" box typed
-into a text field). Applications get answered weeks later and nobody remembers what they
-claimed in the box. Record the files themselves in `application.md`'s `sent:` block, which is
-a separate question from the prose and is asked, never guessed — `[SENT-NAMES-WHAT-WENT]`. This
-is also where a generated artifact enters git: `git add -f` what actually went out, because the
-freeze is the moment it stops being rebuildable — `[PIN-NOT-ARCHIVE]`. **Read
-[SENT.md](SENT.md) before writing the `sent` event** — it carries those two rules and
-`[PIN-NOT-SELF]`, which bind only here — and again whenever a check reports on a `sent:` block,
-a `lifecycle:` value or a pin.
-
-**5. Inbound.** Everything that arrives goes in `_inbox/` with a date, and the log gets a line.
-Recruiter mail, rejections, scheduling, the take-home brief, the "we've moved you to the next
-round" note.
-
-**6. Prep.** When a round is booked: *"Run `/career-corpus:prep` — the JD and the recruiter's
-note are already in the folder."* `prep` reads them from here rather than asking again.
-
-**7. Close.** Record the outcome and the date. Then the part people skip: **a rejection with a
-reason in it is corpus material.** So is anything the loop exposed. Route it to
-`/career-corpus:interview` and say so explicitly — this is the highest-signal queue the corpus
-ever gets, and it evaporates within a week.
-
-**Asked "what's live?"** — run the kit's checker from the corpus repo root rather than
-hand-rolling the computation:
-
-```
-python3 "${CLAUDE_PLUGIN_ROOT}/tools/application_status.py"
-```
-
-It reads the `events:` block of each `applications/*/application.md` and reports stage, age and
-what has gone quiet — computed, never stored. Its `NEEDS ATTENTION` block is conformance rather
-than reporting: every line in it is a stated rule being broken. A thread with a log and no
-`events:` is reported as unmigrated, never as a thread with no events. Read its output back to
-the user in their terms and add the next action per thread, which the tool deliberately refuses
-to compute — that one is a judgement, and `[SURFACE-DONT-DECIDE]` says whose.
-
-## The fit check — `fit.md`
-
-Read the JD's real requirements (not its boilerplate) against the corpus, and give each one an
-**evidence state**, which is exactly one of three:
-
-- **`backed`** — a story file is evidence for it. Name the file. A requirement with a named
-  file behind it needs no further work.
-- **`thin`** — there's something adjacent, but it would fold under a second question.
-- **`no-corpus-evidence`** — nothing in the corpus speaks to it.
-
-**Call the third one `no-corpus-evidence` and never `missing`**, because those are different
-claims and only one of them is yours to make. A requirement the corpus can't back may be one
-the user never did, or one they did and never recorded — *absent* versus *unwritten* — and the
-two need opposite responses: don't apply, versus book an interview session. This file records
-what it can see and asks; picking between them is a call about someone's career, which the
-surface-don't-decide rule `[SURFACE-DONT-DECIDE]` says is theirs. Say which you suspect and
-why, as a question.
-
-**The third state is the point, and "don't apply yet" is a valid result.** A requirement with
-nothing behind it doesn't get solved by rendering harder at it; it gets solved by an
-`interview` session, or by deciding to apply anyway with the gap named and a plan for the
-question. Both are fine. Papering over it with the nearest adjacent story is not — that story
-gets one follow-up question in the room and collapses, and everything either side of it gets
-discounted with it.
-
-Say which requirements you judged to be real and which you discarded as boilerplate, so the
-user can disagree. Every posting asks for ten years of a five-year-old technology.
-
-**A judgement in here is only as good as what you computed it from.** When a line of `fit.md`
-rests on a rendered artifact rather than on something the user said — a résumé bullet, an older
-cover letter — it inherits that artifact's errors, and a gap that is really a stale bullet reads
-exactly like a gap in the corpus. Confirm the input before the conclusion hardens into a
-section, because once it is written down the next reader treats it as a finding. Say which
-inputs a judgement rests on where it isn't obvious.
-
-Where the corpus is thin, the useful output is a **pointer, not a verdict**: *"nothing backs
-'led a platform migration' — the closest is `corpus/<company>/<story>.md`, and an interview
-session on <arc> would probably produce it."*
-
-## The event vocabulary
-
-A thread is a dated list of events, named from a fixed set so it can be read at a glance six
-weeks later. Every event is written in two places at once: a line in `events:` for anything
-that reads state, and a line in the log for the reader who wants to know why — `[STATE-IS-DATA]`.
-Nine events:
-
-| Event | What it marks |
-|---|---|
-| `opened` | The posting was captured and the folder created. |
-| `fit-checked` | `fit.md` was written or revised, and what the user decided off the back of it. |
-| `rendered` | An artifact was produced or re-rendered. |
-| `sent` | The application went out. Record what actually went out, including the form-only fields this folder doesn't hold. |
-| `inbound` | Something arrived and was filed in `_inbox/`. Name the file. |
-| `scheduled` | A round was booked. |
-| `interviewed` | A round happened. |
-| `outcome` | Offer, rejection, or the user withdrawing. Say which, and quote any reason given. |
-| `routed` | Something this thread exposed went back to the corpus queue. |
-
-Something that fits none of them is usually two events. A fixed vocabulary is also what lets a
-reader — or a check — see at a glance that a thread was never `sent`, or was `interviewed`
-without ever being `routed`.
 
 ## Hard rules
 
@@ -290,23 +190,123 @@ land in:
   `fit.md` is the exception, because it names the file each ceiling came from and is regenerated
   rather than maintained. Assessment may cite a constraint; a log of what happened may not.
 
-## Lessons — how this skill personalises to you
+## Stages
 
-This skill ships generic and sharpens by accumulating the user's own corrections in
-`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit. Never edit this
-SKILL.md to record a lesson: the method stays stable and shareable; the scar tissue stays
-private and personal.
+Re-entrant by design. Run it again on an existing folder and it reads the current state, files
+whatever is new, and tells you where the thread stands. Don't recreate what's there. A thread
+whose `application.md` has a log and no `events:` block predates the frontmatter: offer to
+migrate it, and follow [MIGRATING.md](MIGRATING.md) — assisted, never automatic.
 
-- **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
-  additional rule for this user, on equal footing with the hard rules above.
-- **After a correction that generalises, append one dated line**: the mistake, and the rule to
-  apply next time. Route it first — a rule that would still hold if the corpus were about
-  someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
-  rule nobody can diff is a rule nobody can review, port, or undo.
-- **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
-  exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
-  of why>` — is never applied again. Delete an absorbed one only once nothing local remains in
-  it, trimming it to that residue if any does.
+**1. Open.** Get the posting. If it's a URL, fetch it; if it's pasted text, take it as given;
+if it's a screenshot, transcribe it. Derive company and role from the posting, not from the
+user's shorthand — `<company>-<role>` in kebab case, short enough to tab-complete. Write
+`jd.md` and start `application.md`.
+
+**2. Fit.** Read the corpus against the JD **before anything gets written**. This is the step
+that earns the skill; see below.
+
+**3. Render.** Hand off: *"Run `/career-corpus:render` for this application."* Don't write the
+résumé or the letter here — `render` carries the faithful-rendering rules and this skill
+doesn't repeat them.
+
+**4. Sent.** Log the date and what actually went out, including anything the form asked for
+that the folder doesn't hold (a portfolio link, a salary expectation, a "why us" box typed
+into a text field). Applications get answered weeks later and nobody remembers what they
+claimed in the box. Record the files themselves in `application.md`'s `sent:` block, which is
+a separate question from the prose and is asked, never guessed — `[SENT-NAMES-WHAT-WENT]`. This
+is also where a generated artifact enters git: `git add -f` what actually went out, because the
+freeze is the moment it stops being rebuildable — `[PIN-NOT-ARCHIVE]`. **Read
+[SENT.md](SENT.md) before writing the `sent` event** — it carries those two rules and
+`[PIN-NOT-SELF]`, which bind only here — and again whenever a check reports on a `sent:` block,
+a `lifecycle:` value or a pin.
+
+**5. Inbound.** Everything that arrives goes in `_inbox/` with a date, and the log gets a line.
+Recruiter mail, rejections, scheduling, the take-home brief, the "we've moved you to the next
+round" note.
+
+**6. Prep.** When a round is booked: *"Run `/career-corpus:prep` — the JD and the recruiter's
+note are already in the folder."* `prep` reads them from here rather than asking again.
+
+**7. Close.** Record the outcome and the date. Then the part people skip: **a rejection with a
+reason in it is corpus material.** So is anything the loop exposed. Route it to
+`/career-corpus:interview` and say so explicitly — this is the highest-signal queue the corpus
+ever gets, and it evaporates within a week.
+
+**Asked "what's live?"** — run the kit's checker from the corpus repo root rather than
+hand-rolling the computation:
+
+```
+python3 "${CLAUDE_PLUGIN_ROOT}/tools/application_status.py"
+```
+
+It reads the `events:` block of each `applications/*/application.md` and reports stage, age and
+what has gone quiet — computed, never stored. Its `NEEDS ATTENTION` block is conformance rather
+than reporting: every line in it is a stated rule being broken. A thread with a log and no
+`events:` is reported as unmigrated, never as a thread with no events. Read its output back to
+the user in their terms and add the next action per thread, which the tool deliberately refuses
+to compute — that one is a judgement, and `[SURFACE-DONT-DECIDE]` says whose.
+
+## The fit check — `fit.md`
+
+Read the JD's real requirements (not its boilerplate) against the corpus, and give each one an
+**evidence state**, which is exactly one of three:
+
+- **`backed`** — a story file is evidence for it. Name the file. A requirement with a named
+  file behind it needs no further work.
+- **`thin`** — there's something adjacent, but it would fold under a second question.
+- **`no-corpus-evidence`** — nothing in the corpus speaks to it.
+
+**Call the third one `no-corpus-evidence` and never `missing`**, because those are different
+claims and only one of them is yours to make. A requirement the corpus can't back may be one
+the user never did, or one they did and never recorded — *absent* versus *unwritten* — and the
+two need opposite responses: don't apply, versus book an interview session. This file records
+what it can see and asks; picking between them is a call about someone's career, which the
+surface-don't-decide rule `[SURFACE-DONT-DECIDE]` says is theirs. Say which you suspect and
+why, as a question.
+
+**The third state is the point, and "don't apply yet" is a valid result.** A requirement with
+nothing behind it doesn't get solved by rendering harder at it; it gets solved by an
+`interview` session, or by deciding to apply anyway with the gap named and a plan for the
+question. Both are fine. Papering over it with the nearest adjacent story is not — that story
+gets one follow-up question in the room and collapses, and everything either side of it gets
+discounted with it.
+
+Say which requirements you judged to be real and which you discarded as boilerplate, so the
+user can disagree. Every posting asks for ten years of a five-year-old technology.
+
+**A judgement in here is only as good as what you computed it from.** When a line of `fit.md`
+rests on a rendered artifact rather than on something the user said — a résumé bullet, an older
+cover letter — it inherits that artifact's errors, and a gap that is really a stale bullet reads
+exactly like a gap in the corpus. Confirm the input before the conclusion hardens into a
+section, because once it is written down the next reader treats it as a finding. Say which
+inputs a judgement rests on where it isn't obvious.
+
+Where the corpus is thin, the useful output is a **pointer, not a verdict**: *"nothing backs
+'led a platform migration' — the closest is `corpus/<company>/<story>.md`, and an interview
+session on <arc> would probably produce it."*
+
+## The event vocabulary
+
+A thread is a dated list of events, named from a fixed set so it can be read at a glance six
+weeks later. Every event is written in two places at once: a line in `events:` for anything
+that reads state, and a line in the log for the reader who wants to know why — `[STATE-IS-DATA]`.
+Nine events:
+
+| Event | What it marks |
+|---|---|
+| `opened` | The posting was captured and the folder created. |
+| `fit-checked` | `fit.md` was written or revised, and what the user decided off the back of it. |
+| `rendered` | An artifact was produced or re-rendered. |
+| `sent` | The application went out. Record what actually went out, including the form-only fields this folder doesn't hold. |
+| `inbound` | Something arrived and was filed in `_inbox/`. Name the file. |
+| `scheduled` | A round was booked. |
+| `interviewed` | A round happened. |
+| `outcome` | Offer, rejection, or the user withdrawing. Say which, and quote any reason given. |
+| `routed` | Something this thread exposed went back to the corpus queue. |
+
+Something that fits none of them is usually two events. A fixed vocabulary is also what lets a
+reader — or a check — see at a glance that a thread was never `sent`, or was `interviewed`
+without ever being `routed`.
 
 ## What "good" looks like
 

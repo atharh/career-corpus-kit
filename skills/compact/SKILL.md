@@ -11,6 +11,29 @@ is more archive than queue. This skill removes the sediment and leaves the rock.
 
 **It is a destructive skill.** Read the guard list before you touch anything.
 
+## Lessons — how this skill personalises to you
+
+This skill ships generic and sharpens by accumulating the user's own corrections in
+`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit. Never edit this
+SKILL.md to record a lesson: the method stays stable and shareable; the scar tissue stays
+private and personal.
+
+A compaction session is where sweep-or-keep calls get corrected — "that line was a ceiling",
+"never sweep X-shaped notes" — and those corrections are lessons like any other. Carrying this
+block does not loosen the Never list below: reading and appending to `LESSONS.md` is not
+compacting it.
+
+- **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
+  additional rule for this user, on equal footing with this skill's hard rules.
+- **After a correction that generalises, append one dated line**: the mistake, and the rule to
+  apply next time. Route it first — a rule that would still hold if the corpus were about
+  someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
+  rule nobody can diff is a rule nobody can review, port, or undo.
+- **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
+  exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
+  of why>` — is never applied again. Delete an absorbed one only once nothing local remains in
+  it, trimming it to that residue if any does.
+
 ## Why it exists, and why it is dangerous
 
 The gap list is the interview's work queue, and a queue that is mostly struck-through is a queue
@@ -121,7 +144,7 @@ Work **one file at a time**, and show the user what changed before moving on.
   is a dated record of what was actually claimed, sent and asked, and the dates *are* the
   value — a rendered artifact tidied after the fact stops matching what the employer received.
 - **Never compact `LESSONS.md`.** An entry leaves it only by the two exits in the Lessons
-  section below, never by a sweep. If it genuinely outgrows itself, that's a conversation with
+  section above, never by a sweep. If it genuinely outgrows itself, that's a conversation with
   the user.
 - **Never compact `through-lines.md`'s "where it doesn't hold" sections.** A through-line
   without its counter-examples is hagiography — the counter-example *is* the rule.
@@ -131,29 +154,6 @@ Work **one file at a time**, and show the user what changed before moving on.
 - **Never run unsupervised**, in a loop, or across the whole corpus in one pass. This is a
   reviewed operation.
 - **Never sweep a line you don't understand.** Ask.
-
-## Lessons — how this skill personalises to you
-
-This skill ships generic and sharpens by accumulating the user's own corrections in
-`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit. Never edit this
-SKILL.md to record a lesson: the method stays stable and shareable; the scar tissue stays
-private and personal.
-
-A compaction session is where sweep-or-keep calls get corrected — "that line was a ceiling",
-"never sweep X-shaped notes" — and those corrections are lessons like any other. Carrying this
-block does not loosen the Never list above: reading and appending to `LESSONS.md` is not
-compacting it.
-
-- **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
-  additional rule for this user, on equal footing with the hard rules above.
-- **After a correction that generalises, append one dated line**: the mistake, and the rule to
-  apply next time. Route it first — a rule that would still hold if the corpus were about
-  someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
-  rule nobody can diff is a rule nobody can review, port, or undo.
-- **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
-  exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
-  of why>` — is never applied again. Delete an absorbed one only once nothing local remains in
-  it, trimming it to that residue if any does.
 
 ## What good looks like
 

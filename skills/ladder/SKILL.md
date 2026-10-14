@@ -19,6 +19,29 @@ containment rules come before their method.
 **It is an instrument, not an artifact.** It has no standing as evidence, its numbers are
 invented, and it is worthless the moment anyone mistakes it for a record.
 
+## Lessons — how this skill personalises to you
+
+This skill ships generic and sharpens by accumulating the user's own corrections in
+`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit. Never edit this
+SKILL.md to record a lesson: the method stays stable and shareable; the scar tissue stays
+private and personal.
+
+- **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
+  additional rule for this user, on equal footing with this skill's hard rules.
+- **After a correction that generalises, append one dated line**: the mistake, and the rule to
+  apply next time. Route it first — a rule that would still hold if the corpus were about
+  someone else belongs to the method, not this file. Here that test has a sharp form: a level
+  miscalibrated, a horizon wrong, a dimension badly shaped or a tell that fails to separate
+  levels is a correction to the ladder or to a role file, whoever is being measured, and it
+  reaches the kit through its own process; a dimension the user's domain never had, a
+  constraint of their era, or a ceiling on how one of their stories may be told is theirs and
+  lands here. Either way the rule lives in a *file*: a rule nobody can diff is a rule nobody
+  can review, port, or undo.
+- **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
+  exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
+  of why>` — is never applied again. Delete an absorbed one only once nothing local remains in
+  it, trimming it to that residue if any does.
+
 ## Which file to read
 
 This file holds what the modes share: the two containment rules, the calibration table and
@@ -178,26 +201,3 @@ and the frontmatter or the report says which two.
   output: it is the one somebody eventually pastes into a résumé.
 - **Not a promotion packet.** It shows the bar; it makes no case that the user cleared it.
   `/career-corpus:render` writes the packet, from the corpus, from vetted claims only.
-
-## Lessons — how this skill personalises to you
-
-This skill ships generic and sharpens by accumulating the user's own corrections in
-`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit. Never edit this
-SKILL.md to record a lesson: the method stays stable and shareable; the scar tissue stays
-private and personal.
-
-- **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
-  additional rule for this user, on equal footing with the hard rules above.
-- **After a correction that generalises, append one dated line**: the mistake, and the rule to
-  apply next time. Route it first — a rule that would still hold if the corpus were about
-  someone else belongs to the method, not this file. Here that test has a sharp form: a level
-  miscalibrated, a horizon wrong, a dimension badly shaped or a tell that fails to separate
-  levels is a correction to the ladder or to a role file, whoever is being measured, and it
-  reaches the kit through its own process; a dimension the user's domain never had, a
-  constraint of their era, or a ceiling on how one of their stories may be told is theirs and
-  lands here. Either way the rule lives in a *file*: a rule nobody can diff is a rule nobody
-  can review, port, or undo.
-- **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
-  exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
-  of why>` — is never applied again. Delete an absorbed one only once nothing local remains in
-  it, trimming it to that residue if any does.

@@ -24,6 +24,24 @@ It exists for two outcomes at once, and the second is not optional decoration:
    what the defensible sentence is. Surfacing the gap here is cheaper than surfacing it in an
    interview loop.
 
+## Lessons — how this skill personalises to you
+
+This skill ships generic and sharpens by accumulating the user's own corrections in
+`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit. Never edit this
+SKILL.md to record a lesson: the method stays stable and shareable; the scar tissue stays
+private and personal.
+
+- **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
+  additional rule for this user, on equal footing with this skill's hard rules.
+- **After a correction that generalises, append one dated line**: the mistake, and the rule to
+  apply next time. Route it first — a rule that would still hold if the corpus were about
+  someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
+  rule nobody can diff is a rule nobody can review, port, or undo.
+- **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
+  exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
+  of why>` — is never applied again. Delete an absorbed one only once nothing local remains in
+  it, trimming it to that residue if any does.
+
 ## Where this sits — and where it must not reach
 
 - **The corpus only.** Point it at one story file, a company directory, or the whole corpus —
@@ -117,21 +135,3 @@ list is what makes re-runs meaningful.
   want it flagged or left?"*
 - **Not a style pass.** Prose quality, story shape, ceilings and attribution belong to the
   capture lane. A sentence that is technically right and badly written is out of scope here.
-
-## Lessons — how this skill personalises to you
-
-This skill ships generic and sharpens by accumulating the user's own corrections in
-`corpus/LESSONS.md` — in their **private** corpus repo, never in the kit. Never edit this
-SKILL.md to record a lesson: the method stays stable and shareable; the scar tissue stays
-private and personal.
-
-- **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
-  additional rule for this user, on equal footing with the hard rules above.
-- **After a correction that generalises, append one dated line**: the mistake, and the rule to
-  apply next time. Route it first — a rule that would still hold if the corpus were about
-  someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
-  rule nobody can diff is a rule nobody can review, port, or undo.
-- **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
-  exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
-  of why>` — is never applied again. Delete an absorbed one only once nothing local remains in
-  it, trimming it to that residue if any does.
