@@ -152,7 +152,8 @@ compacting it.
   rule nobody can diff is a rule nobody can review, port, or undo.
 - **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
   exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
-  of why>` — is never applied again.
+  of why>` — is never applied again. Delete an absorbed one only once nothing local remains in
+  it, trimming it to that residue if any does.
 
 ## What good looks like
 
