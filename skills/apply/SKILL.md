@@ -76,15 +76,11 @@ fact about the **user**, it earns its way into the corpus through `interview`, l
 else.
 
 **Never source a claim about the candidate from `applications/`.** `[NOT-FROM-APPLICATIONS]` The
-folder holds plenty a render legitimately needs — `jd.md` is what it tailors *to*, `fit.md` is
-most of the selection work already done — and `render` is meant to read all of it rather than
-ask the user to paste it again. What it may not do is take a *claim about the user* from here.
-Everything in this folder that reads like one is already a rendering: another application's
-résumé, this one's earlier draft, a line `fit.md` quoted while making its case. Follow the
-pointer back to the corpus story and render the claim from there. `render` warns that tailoring
-from a baseline loses exactly the material the JD needs; tailoring from another application's
-output is the same failure with one more copy in between, and it is the easiest mistake to make
-once the folder has a `resume.md` sitting in it that looks nearly right.
+folder is read, never cited: `jd.md` is what a render tailors *to* and `fit.md` is most of the
+selection work, but anything here that reads like a claim about the user is already a rendering
+(another application's résumé, this one's earlier draft, a line `fit.md` quoted). Follow the
+pointer back to the corpus story and render the claim from there; `render`'s `[CLAIM-SOURCE]`
+states the full rule.
 
 **No individual's name in a filename or a folder name.** `[NO-NAMES-IN-FILENAMES]` Roles in
 filenames, names in the body if the user wants them. Filenames get screenshotted, screen-shared
@@ -124,10 +120,9 @@ folds, and it does not delete.
 have to reconstruct *where does this stand* by working forward through a log. `events:` is at
 the top of the file and ends in the current stage, so the state is already first — and **no
 other surface restates it**: not the heading, not the paragraph beneath it, not a badge or a
-date beside either. The heading is the one that will tempt you, because it is the most visible
-line in the file and a stage in it reads as a courtesy rather than as the rollup `[NO-ROLLUP]`
-forbids. It is one all the same, and a conspicuous one goes stale in front of everybody the
-next time the thread moves. What the paragraph beneath the heading carries instead is the part
+date beside either. The heading tempts most, because it is the most visible line in the file,
+but a stage in it is a rollup like any other (`[NO-ROLLUP]`) and goes stale the next time the
+thread moves. What the paragraph beneath the heading carries instead is the part
 that is genuinely not derivable: what the thread is waiting on, and whose move it is next.
 Entries that no longer bear on the next decision move into a collapsed `<details>` block, which
 folds on GitHub and stops dead material from reading as live.
