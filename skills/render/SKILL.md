@@ -44,7 +44,7 @@ artifact, kept current as the corpus grows. The user sends it when there is no s
 posting, and every tailored version starts from it for voice and style. Keep these as
 canonical repo files, for example:
 - `resume.md`, the résumé;
-- `cover-letter-<family>.md`, one per role family they apply to (leadership, IC, and so on).
+- `cover-letter-<family>.md`, one per role family they apply to (for example `leadership`, `ic`).
 
 Refresh a baseline when the corpus gains material that would change it. A baseline obeys every
 faithful-rendering rule below; it selects the generally strongest evidence instead of
@@ -69,8 +69,8 @@ you select material rather than when you write it:
   (`[TRUE-VERSION]`). A line that would fit a stranger's résumé unchanged describes a job, not
   their work.
 - **An outcome or scope figure that survives one follow-up question** (`[NUMBER-CEILING]`).
-  This is the test most bullets fail: an outcome nobody measured is the same defect as an
-  unsourced number.
+  Of the bullets that fail, most fail this one: an outcome nobody measured is the same defect
+  as an unsourced number.
 
 Bullets that establish the **role and its scope are structural, not outcomes.** They answer
 "what was this person" rather than "what did they do", and they do not compete for outcome
@@ -117,7 +117,7 @@ the first is evidence about the user:
 - **Candidate claims:** what they did, built, decided, chose against, achieved, know. Vetted
   corpus files only.
 - **Employer context:** what the role wants, what the company does, what the team is for. This
-  comes from `jd.md`, the employer's own public material, and clearly attributed inbound mail.
+  comes from `jd.md`, the employer's own public material, and clearly attributed inbound.
   It is what you tailor *to*, and it is never a fact about the user.
 - **Derived analysis:** `fit.md`, an earlier draft, another application's résumé, and
   `corpus/directions.md`, which is a hypothesis about where the evidence *could* point and never
@@ -151,11 +151,11 @@ anyone checked; see "What 'vetted' means" in `interview`.
 **A technology claim renders from its capability file, at its recorded depth.**
 `[CAPABILITY-CLAIMS]` When the artifact wants a skills line, a form's self-rating, or an answer
 to "what's your experience with X", source it from the `corpus/capabilities/` file whose
-`covers:` names X. Match on that line, not on the filename, since a family file answers for
-terms it isn't named after. Where such a file exists it already carries the depth ceilings and
-the noes, so render inside them. Never flatten different depths into one uniformly confident
-list: *administered it* and *my team ran on it* are different claims, and a list that reads
-them alike over-claims the weaker one. Where no capability file exists, the claim renders only
+`covers:` names X, where one exists. Match on that line, not on the filename, since a family
+file answers for terms it isn't named after. The file already carries the depth ceilings and
+the noes, so render inside them, and never flatten its different depths into one uniformly
+confident list: *administered it* and *my team ran on it* are different claims, and a list
+that reads them alike over-claims the weaker one. Where no capability file exists, the claim renders only
 what story files back, which for a bare skills-line entry may be nothing; say so rather than
 padding the list.
 
@@ -224,9 +224,10 @@ standing against the user. If they direct a claim rendered, render it; if they s
 shape is wrong, change the shape. Never answer their instruction with "the corpus can't back
 that", and never make them say it twice. Record the override as one line of story-file
 frontmatter, `overridden: <date> — <what they directed>`, and never as a hedge in the artifact
-(`[PROVENANCE-NOT-PROSE]`). The line lets a later session tell a claim the corpus vouches for
-from one the user directed, which matters to the user in an interview: one is defended as
-their own recollection, the other has a source to point to. Two things are not overrides:
+(`[PROVENANCE-NOT-PROSE]` keeps it out of anything they send). The line lets a later session
+tell a claim the corpus vouches for from one the user directed. That matters to the user in a
+room: a directed claim is defended as their own recollection, and they must not reach for a
+source that was never there. Two things are not overrides:
 
 1. **An inferred or stale instruction.** An override must be explicit and current: never
    inferred from a passing remark, and never an old one carried forward to reinstate something
@@ -243,8 +244,8 @@ beats "wrote 50 modules". Write precise claims, not superlatives.
 claim is known in corpus frontmatter. The artifact itself states clean, confident claims, with
 no hedges that show the research process in the sentence the reader sees.
 
-**Surface diffs and decisions; never silently apply.** `[SHOW-THE-DIFF]` Show the current text
-and the proposed text with a one-line reason per change. Flag genuine choices as *the user's*
+**Surface diffs and decisions; never silently apply.** `[SHOW-THE-DIFF]` Show current → proposed
+with a one-line reason per change. Flag genuine choices as *the user's*
 call, not yours: accurate-but-different versus safe-but-vague wording, whether to include a
 team win, what to cut for length. Reconciling their own material is their decision.
 
@@ -261,7 +262,7 @@ family is equally not your call, because someone who has stopped targeting a rol
 still want its checkpoint; that is `apply`'s `[SURFACE-DONT-DECIDE]`.
 
 **How long an entry should run is theirs to set, and this skill states no number.**
-`[LENGTH-IS-THEIRS]` The first time it comes up, ask, and write the length they accept into
+`[LENGTH-IS-THEIRS]` The first time it comes up, ask, and write the shape they accept into
 `corpus/LESSONS.md`, which is where their preferences live. Afterwards hold to it without
 re-asking; reopen the question only when a refresh would exceed what they set. A number written
 here would impose one preference on every user of the kit. The cover-letter bounds in
@@ -311,7 +312,7 @@ Whether a reader can read the artifact is a fact about the reader, like the page
 4. **Select** the 2–4 stories that are the strongest evidence: for the JD if tailored, in
    general if baseline. Leave the rest out; a résumé cuts as much as it adds.
 5. **Render** in the artifact's shape. See [REFERENCE.md](REFERENCE.md) for résumé, cover
-   letter and interview-answer specifics, and
+   letter and interview-prep specifics, and
    [templates/artifact-frontmatter.md](templates/artifact-frontmatter.md) for the block every
    artifact opens with.
 6. **Present it as a reviewable diff**, with decisions flagged, before applying anything.

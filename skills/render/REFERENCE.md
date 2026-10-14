@@ -115,7 +115,7 @@ which the letter itself shows. Every rule below serves those three.
   built, owned, fixed) and how the company likes to work (values, culture, method statements).
   A thesis can come from the JD and still come from the wrong part of it. To tell the two
   apart, ask what this person will be doing on a Wednesday. Weight the letter there; the second
-  register gets a clause, not a paragraph.
+  register gets a clause, not a beat.
 - **Then a positioning summary: the written form of "tell us about yourself".** Two or three
   sentences: years, domains, the kinds of systems and contexts worked in, and the through-line
   that aims all of it at this role. It is the same thing as `prep`'s `01-about-me.md` opener,
@@ -182,15 +182,15 @@ unedited.
 For a **booked** interview, `prep` owns this: it builds a whole pack against the employer's
 criteria and writes it into the application folder. What follows is the shape of a spoken
 answer on its own, for the ad-hoc case: rehearsing one story, or answering a question that
-arrived outside a loop. `prep` renders answers in this shape too.
+arrived out of band. `prep` renders answers in this shape too.
 
 **Form:** spoken, longer than a bullet, structured but not stiff: stories that follow the
 order an interview actually takes.
 
 **Rules of the form:**
-- **STAR rendered *from* prose, never as a filled-in template.** Situation, Task, Action and
-  Result are an outline the corpus prose already fits, because the corpus stores arcs this way
-  (setup, beats, outcome, what it cost).
+- **STAR rendered *from* prose, never as a filled-in template.** Use Situation, Task, Action,
+  Result as a skeleton to hang the corpus prose on; the corpus already stores arcs this way
+  (setup → beats → outcome → what-it-cost).
 - **Through-lines are talking points, not scripts.** Offer them as ways to connect stories,
   never as claims to recite. Let the interviewer's question pick the framing, as the JD does
   for a letter.
@@ -245,7 +245,7 @@ that looks correct on the page is not evidence. Extract the text and search it f
 you expect, or check whether any font's `ToUnicode` table maps U+2022 and U+FB00–FB04. Confirm
 the page count has not changed while you are there.
 
-**A check that reports the same numbers before and after may not have run.** Rebuilds are the
+**A check that reports the same numbers before and after is reporting that it did not run.** Rebuilds are the
 usual cause: a stale file on disk, or a build that failed and left the last good output in
 place. Compare a hash of the two files before you believe two readings that agree, and keep
 one deliberately broken case around to confirm the check can still fail.
