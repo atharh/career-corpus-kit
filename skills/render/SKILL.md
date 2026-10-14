@@ -278,8 +278,10 @@ Readers discard prose that reads as AI-written. Two steps, in order:
   the corpus already has it.
 - **Finish with a humanizing pass.** If a dedicated `humanizer` skill is installed, invoke it on
   the draft. If not, edit for the reliable tells yourself: em-dash pile-ups (cut to near zero),
-  uniform sentence length (vary it hard), rule-of-three cadence, inflated vocabulary
-  (*leverage, robust, seamless, testament, delve*), and filler or throat-clearing.
+  uniform sentence length (vary it hard), rule-of-three cadence, filler or throat-clearing, and
+  inflated vocabulary. Which words read as machine-written changes as models change, so edit
+  against the stock words current models overuse; *leverage* and *delve* are examples, not the
+  list.
 
 This applies to human-facing prose only (cover letters, interview answers). Corpus story files
 are internal working files and stay as they are.
