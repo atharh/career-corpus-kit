@@ -27,7 +27,8 @@ SKILL.md to record a lesson.
   additional rule for this user, on equal footing with this skill's hard rules.
 - **After a correction that generalises, append one dated line**: the mistake, and the rule to
   apply next time. Route it first — a rule that would still hold if the corpus were about
-  someone else belongs to the method, not this file. Either way the rule lives in a *file*.
+  someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
+  rule nobody can diff is a rule nobody can review, port, or undo.
 - **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
   exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
   of why>` — is never applied again. Delete an absorbed one only once nothing local remains in
@@ -277,9 +278,8 @@ Readers discard prose that reads as AI-written. Two steps, in order:
 - **Finish with a humanizing pass.** If a dedicated `humanizer` skill is installed, invoke it on
   the draft. If not, edit for the reliable tells yourself: em-dash pile-ups (cut to near zero),
   uniform sentence length (vary it hard), rule-of-three cadence, filler or throat-clearing, and
-  inflated vocabulary. Which words read as machine-written changes as models change, so edit
-  against the stock words current models overuse; *leverage* and *delve* are examples, not the
-  list.
+  inflated vocabulary (*leverage, robust, seamless, testament, delve*). Those words are
+  examples that date, not the whole list: also cut any other stock word the draft leans on.
 
 This applies to human-facing prose only (cover letters, interview answers). Corpus story files
 are internal working files and stay as they are.

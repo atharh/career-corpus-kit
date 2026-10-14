@@ -328,3 +328,16 @@ rule that prepends lines to every reply lands above the response and fails every
 runner's reason, not the skill's. Seen 2026-09-29: a session-start rule put two status lines
 above an otherwise correct banner. Proposed: run the live session with user settings and
 user memory excluded, if the CLI allows it, or assert on the first line after any preamble.
+
+## Pre-approve apply's read-only checkers with `allowed-tools`
+
+**Raised 2026-10-15**, from a review against the Claude Code skills docs
+(https://code.claude.com/docs/en/skills). `apply` runs `tools/application_status.py`, and its
+`MIGRATING.md` runs `tools/corpus_doctor.py`; both write nothing, yet each run prompts. A
+frontmatter line `allowed-tools: Bash(python3 "${CLAUDE_PLUGIN_ROOT}/tools/<script>.py"*)` would
+pre-approve them for the turn. Built and reverted the same day, because two things need a live
+run first: whether `${CLAUDE_PLUGIN_ROOT}` and the quotes match the command the model actually
+types (if not, the line silently does nothing), and whether the trailing `*` also approves an
+output redirect such as `> corpus/STATUS.md`, which would turn a read-only grant into a write.
+Test both in an installed plugin before relanding, and end the rule at the script name plus
+arguments if redirects match.

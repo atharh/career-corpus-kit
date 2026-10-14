@@ -24,7 +24,8 @@ SKILL.md to record a lesson.
   additional rule for this user, on equal footing with this skill's hard rules.
 - **After a correction that generalises, append one dated line**: the mistake, and the rule to
   apply next time. Route it first — a rule that would still hold if the corpus were about
-  someone else belongs to the method, not this file. Either way the rule lives in a *file*.
+  someone else belongs to the method, not this file. Either way the rule lives in a *file*: a
+  rule nobody can diff is a rule nobody can review, port, or undo.
 - **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
   exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
   of why>` — is never applied again. Delete an absorbed one only once nothing local remains in
@@ -389,9 +390,9 @@ corpus/
 Frontmatter holds facts that must not drift, split by provenance
 (`facts_vetted` / `facts_disputed` / `facts_unvetted` / `sources`); prose holds the arc, in
 their voice, with beats as `##` subheads so they're addressable without being boxes. See
-`templates/story.md` for the skeleton. **Write the arc as that prose, never as a STAR template** — a template produces dead
-checklist prose they'll resent filling in, and STAR can be rendered *from* good prose while
-life can't be put back into prose born as a form.
+`templates/story.md` for the skeleton. **Write the arc as that prose, never as a STAR
+template** — STAR produces dead checklist prose they'll resent filling in, and STAR can be
+rendered *from* good prose while life can't be put back into prose born as a form.
 
 **A personal project is a story file that belongs to no employer.** Same skeleton, same rules,
 filed under `corpus/personal-projects/` because there is no company folder to claim it. Its

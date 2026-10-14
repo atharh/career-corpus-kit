@@ -17,9 +17,9 @@ may be a real defect — record it in `BACKLOG.md`, which is a defect tracker an
 hold evidence — but the rule waits for a separate pass, made here, on kit-internal
 grounds.
 
-This is the same split the skills state in their own Lessons sections: the method is
-public and stable, the scar tissue is private and belongs in the user's
-`corpus/LESSONS.md`. `evals/static_checks.py` bans gendered singular pronouns in
+This is the same split the skills' Lessons sections enforce: a lesson goes in the user's
+private `corpus/LESSONS.md`, never in the kit, and never as an edit to a SKILL.md. The method
+is public and stable; the scar tissue is private. `evals/static_checks.py` bans gendered singular pronouns in
 `skills/` because leaked incident prose almost always carries one.
 
 ## Promote — moving a rule up from a live corpus
