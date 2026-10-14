@@ -91,13 +91,11 @@ in their words, with a source. Only that lands.
 chat with another AI is a *rendering*, not raw material — an essay shape, an arc, a moral. Take
 the substance and the opinions, drop the framing, and treat every number as suspect until they
 confirm it: rendered prose inflates a one-time "traffic doubled after launch" into "tripled
-month over month", a compounding claim they never made and would have to defend in the room. **A
-figure you refuse is held only where the file quarantines, never in `facts_vetted`** — not even
-inside the ceiling that refuses it, because that block is what renders and a number sitting in
-it is one careless read from being used. State the user's value there and nothing else. The
-refused one goes in a gap item to confirm or kill, a ⚠️ ceiling paragraph in the body, or a
-quoted span attributed to the draft, except wording barred for tone, per
-`[STORE-THE-RENDERABLE]`; prose in the file's own voice never repeats it.
+month over month", a compounding claim they never made and would have to defend in the room.
+**A refused figure never sits in `facts_vetted`**, not even inside the ceiling that refuses it,
+because that block is what renders: state the user's value there and nothing else. The refused
+one lives only in a gap item to confirm or kill, a ⚠️ ceiling paragraph in the body, or a quoted
+span attributed to the draft; prose in the file's own voice never repeats it.
 
 **Numbers get a source or they don't go in.** `[NUMBER-SOURCE]` For every quantitative claim:
 where did it come from — a dashboard, a review doc, or a model's guess at what "kept growing"
@@ -122,19 +120,19 @@ anyway — "a senior engineer on the platform team" carries the story fine. The 
 permanently, and it should never name a private individual even so.
 
 **Record what a tone-barred remark means, never its wording.** `[STORE-THE-RENDERABLE]`
-Sibling to `[ROLES-ONLY]`, on the same ground: a private repo should still hold nothing whose
-leak would hurt. People talk freely in an interview because the corpus is private, so expect
-profanity, a blunt verdict on a colleague or an employer, a remark that reads as undermining
-someone, and don't take that register as a cue to quote. When something is barred only for its
-tone, record its substance as a render would say it (*"disagreed with the decision to cancel the
-project"*, not the insult) and leave the raw wording out of the file entirely: not beside a ⚠️
-never-render marker, not in a gap item, not in the quoted span `[DRAFTS-UNVETTED]` allows,
-because that span holds a claim for checking and tone needs no check. A bar protects only while
-every future session reads it, and a private repo can still leak; wording never written can do
-neither. ⚠️ **Bars that exist for truth stay as they are.** A withdrawn claim, an
-`anachronisms_corrected` entry, a `facts_disputed` number or a narrowed scope still records what
-it bars, because deleting it lets the next session derive the claim again. Raw wording already
-on disk is restated per `[MARK-DONT-FIX]`, and the user is told that git history still holds it.
+Sibling to `[ROLES-ONLY]`: a private repo can still leak, so it should hold nothing whose leak
+would hurt. People talk freely because the corpus is private, so expect profanity, a blunt
+verdict on a colleague or an employer, a remark that reads as undermining someone, and don't
+take that register as a cue to quote. When something is barred only for its tone, record its
+substance as a render would say it (*"disagreed with the decision to cancel the project"*, not
+the insult) and leave the raw wording out of the file entirely: not beside a ⚠️ never-render
+marker, not in a gap item, not in the quoted span `[DRAFTS-UNVETTED]` allows, which holds a
+claim for checking, and tone needs no check. A bar protects only while every future session
+reads it; wording never written needs no bar. **Bars that exist for truth are different and
+stay:** a withdrawn claim, an `anachronisms_corrected` entry, a `facts_disputed` number or a
+narrowed scope still records what it bars, or the next session derives the claim again. Raw
+wording already on disk is restated per `[MARK-DONT-FIX]`, and the user is told that git
+history still holds it.
 
 **Don't pre-split a story by decision type.** `[ONE-ARC]` One arc, one file, even when it holds
 four decisions. Splitting a project into "the architecture decision" and "the conflict decision"
