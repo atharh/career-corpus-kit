@@ -83,9 +83,9 @@ ask the user to paste it again. What it may not do is take a *claim about the us
 Everything in this folder that reads like one is already a rendering: another application's
 résumé, this one's earlier draft, a line `fit.md` quoted while making its case. Follow the
 pointer back to the corpus story and render the claim from there. `render` warns that tailoring
-from a baseline is a telephone game that loses exactly the material the JD needs; tailoring from
-another application's output is that failure with a second lossy hop, and it is the single
-easiest mistake to make once the folder has a `resume.md` sitting in it that looks nearly right.
+from a baseline loses exactly the material the JD needs; tailoring from another application's
+output is the same failure with one more copy in between, and it is the easiest mistake to make
+once the folder has a `resume.md` sitting in it that looks nearly right.
 
 **No individual's name in a filename or a folder name.** `[NO-NAMES-IN-FILENAMES]` Roles in
 filenames, names in the body if the user wants them. Filenames get screenshotted, screen-shared
