@@ -5,13 +5,8 @@ description: Measure the user's work against a career ladder. Use when the user 
 
 # Career corpus — ladder
 
-**Three modes over one ladder.** *Assessment* reads what the corpus actually holds and says
-which level the evidence supports. *Exemplar* runs it the other way: it takes a story and a
-level and writes what that situation would look like told from that level — fiction, to
-compare against. *Mock interview* is the exemplar spoken rather than written: the user asks
-questions, and an invented candidate at a named level answers them live, in chat. Same
-calibration table, same role files, which is why they live in one skill rather than drifting
-apart in three.
+**Three modes over one ladder**, sharing one calibration table and one set of role files. Mock
+interview is the exemplar spoken rather than written.
 
 They chain, and that is the point. Assessment says *this reads as a senior engineer, and the
 floor is here*; the exemplar then shows what the floor would look like raised. Run either

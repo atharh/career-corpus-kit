@@ -14,8 +14,8 @@ Rendering a tailored artifact is one step inside an application that `apply` ope
 Baselines, self-reviews, promo packets and bios belong to no application; this skill handles
 those on its own.
 
-Every LLM can "write a résumé." The value here is **rendering faithfully** — saying only what
-the corpus vouches for, in the form the artifact needs, tailored to the job.
+The job is **rendering faithfully**: say only what the corpus vouches for, in the form the
+artifact needs, tailored to the job.
 
 ## Two tiers: baseline and tailored
 
