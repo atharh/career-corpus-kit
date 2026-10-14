@@ -23,8 +23,7 @@ invented, and it is worthless the moment anyone mistakes it for a record.
 
 This skill ships generic and sharpens by accumulating the user's own corrections in
 `corpus/LESSONS.md` — in their **private** corpus repo, never in the kit. Never edit this
-SKILL.md to record a lesson: the method stays stable and shareable; the scar tissue stays
-private and personal.
+SKILL.md to record a lesson.
 
 - **At the start of a session, read `corpus/LESSONS.md`** if it exists. Treat each entry as an
   additional rule for this user, on equal footing with this skill's hard rules.
@@ -35,8 +34,7 @@ private and personal.
   levels is a correction to the ladder or to a role file, whoever is being measured, and it
   reaches the kit through its own process; a dimension the user's domain never had, a
   constraint of their era, or a ceiling on how one of their stories may be told is theirs and
-  lands here. Either way the rule lives in a *file*: a rule nobody can diff is a rule nobody
-  can review, port, or undo.
+  lands here. Either way the rule lives in a *file*.
 - **A lesson leaves this file only on the user's explicit say-so, entry by entry, by the two
   exits its header states.** A struck entry — `~~<the entry>~~ retired YYYY-MM-DD: <one clause
   of why>` — is never applied again. Delete an absorbed one only once nothing local remains in
