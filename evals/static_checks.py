@@ -143,6 +143,12 @@ def check_skill_frontmatter(r: Report) -> list[str]:
                 len(desc) >= 80,
                 f"{len(desc)} chars, want >= 80",
             )
+            # The Agent Skills spec caps a description at 1,024 characters.
+            r.check(
+                f"{rel} description fits the 1,024-character cap",
+                len(desc) <= 1024,
+                f"{len(desc)} chars",
+            )
         if name:
             names.append(name)
 
