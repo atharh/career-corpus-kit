@@ -1,7 +1,7 @@
 ---
 source_url: <the posting URL, or `none — pasted text` / `none — screenshot`>
 captured: <YYYY-MM-DD>
-capture_method: <fetched | pasted by the user | transcribed from a screenshot>
+capture_method: <rendered in a browser, innerText of the description element | pasted by the user | transcribed from a screenshot>   # then any method refused, and why
 ---
 
 # <Role> — <Company>

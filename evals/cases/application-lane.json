@@ -46,12 +46,14 @@
   "banned_frontmatter_keys": ["status"],
   "evidence_states": ["backed", "thin", "no-corpus-evidence"],
   "banned_in_fit": ["\\bmissing\\b"],
+  "capture_methods": ["rendered in a browser", "pasted by the user", "transcribed from a screenshot"],
 
   "documented_by": {
     "template-conformance": "The log has no `status:` field.",
     "event-vocabulary": "The events are in the frontmatter, and only there.",
     "sent-block": "names which files the employer actually received",
     "jd-verbatim-boundary": "captured verbatim between two markers",
+    "jd-capture-method": "rendered in a browser and diffed",
     "fit-evidence-states": "never `missing`",
     "artifact-frontmatter": "Every artifact says which corpus it came from."
   },

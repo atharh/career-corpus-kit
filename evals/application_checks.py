@@ -347,7 +347,7 @@ def check_sent_block(r: Report, spec: dict, fixture: Path) -> None:
     )
 
 
-def check_jd_boundary(r: Report, fixture: Path) -> None:
+def check_jd_boundary(r: Report, spec: dict, fixture: Path) -> None:
     """The verbatim boundary is what makes `[CAPTURE-POSTING]` checkable.
 
     That rule forbids summarising into jd.md. Without a marked boundary that is
@@ -373,6 +373,22 @@ def check_jd_boundary(r: Report, fixture: Path) -> None:
         "jd.md ends at the END marker",
         text[j + len(END) :].strip() == "",
         "commentary after the boundary belongs in fit.md — apply `[CAPTURE-POSTING]`",
+    )
+    # A page's text has no tags in it. One inside the markers means the capture
+    # stripped raw HTML and guessed where the description ended.
+    tags = re.findall(r"</?[a-z][a-z0-9]*(?:\s[^>]*)?/?>", text[i + len(BEGIN) : j], re.I)
+    r.check(
+        "jd.md's verbatim block holds no HTML markup",
+        not tags,
+        f"found {tags[:3]} — capture the rendered page's innerText, not its HTML",
+    )
+    method = scalar(frontmatter(text) or "", "capture_method") or ""
+    allowed = spec["capture_methods"]
+    r.check(
+        f"jd.md capture_method starts with one of {allowed}",
+        any(method.startswith(m) for m in allowed),
+        f"got {method!r} — a fetch tool that answers a prompt returns a paraphrase; "
+        "apply `[CAPTURE-POSTING]` renders the page and diffs it",
     )
 
 
@@ -1202,7 +1218,7 @@ def main() -> int:
     check_templates_conform(r, spec, fixture)
     check_event_vocabulary(r, spec, fixture)
     check_sent_block(r, spec, fixture)
-    check_jd_boundary(r, fixture)
+    check_jd_boundary(r, spec, fixture)
     check_fit_states(r, spec, fixture)
     check_artifact_frontmatter(r, spec, fixture)
     check_inbox_claims(r, spec, fixture)

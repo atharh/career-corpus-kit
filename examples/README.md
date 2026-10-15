@@ -82,7 +82,8 @@ check named on day two.
 1. **[`jd.md`](applications/kestrel-freight-engineering-lead/jd.md)** — the posting, captured
    verbatim between two markers. The markers are the point: `apply` forbids summarising into
    this file, and a boundary is what makes that checkable by something other than good
-   intentions.
+   intentions. Its `capture_method:` says the page was rendered in a browser and diffed, and
+   which method was refused.
 2. **[`fit.md`](applications/kestrel-freight-engineering-lead/fit.md)** — **start here if you
    only read one file.** Nine requirements, each with an evidence state, and the read at the
    bottom is *don't apply yet*.

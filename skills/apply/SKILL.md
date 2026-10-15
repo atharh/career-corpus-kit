@@ -59,11 +59,13 @@ The trigger is *"I found a job"* — not *"write me a résumé"*, which is `rend
 
 ## Hard rules
 
-**Capture the posting before it rots.** `[CAPTURE-POSTING]` Postings are pulled, edited and
-404'd within weeks, and `prep` needs the employer's own words months later to map a story bank
-to their criteria. `jd.md` holds the text **verbatim**, with the source URL and the capture date
-at the top. Summarise in `fit.md` if you want a summary. Never summarise *into* `jd.md` — a
-paraphrase silently becomes the thing you prepare against.
+**Capture the posting before it rots, in the employer's own words.** `[CAPTURE-POSTING]`
+Postings are pulled, edited and 404'd within weeks, and `prep` needs the employer's own words
+months later to map a story bank to their criteria. `jd.md` holds the text **verbatim**, with
+the source URL, the capture date and the capture method at the top. Summarise in `fit.md`, never
+*into* `jd.md`: a paraphrase silently becomes the thing you prepare against. Verbatim means what
+a reader of the rendered page sees, and it is checked, not assumed — diff what you wrote against
+what the browser returned before committing. Stage 1 says how.
 
 **`_inbox/` here means what `corpus/_inbox/` means: unvetted, and never rendered from and
 never cited as fact.** `[INBOX-NOT-EVIDENCE]` Folder location is a truth claim — the same rule
@@ -193,10 +195,29 @@ whatever is new, and tells you where the thread stands. Don't recreate what's th
 whose `application.md` has a log and no `events:` block predates the frontmatter: offer to
 migrate it, and follow [MIGRATING.md](MIGRATING.md) — assisted, never automatic.
 
-**1. Open.** Get the posting. If it's a URL, fetch it; if it's pasted text, take it as given;
-if it's a screenshot, transcribe it. Derive company and role from the posting, not from the
-user's shorthand — `<company>-<role>` in kebab case, short enough to tab-complete. Write
-`jd.md` and start `application.md`.
+**1. Open.** Get the posting. If it's a URL, render it in a browser; if it's pasted text, take it
+as given; if it's a screenshot, transcribe it. Derive company and role from the posting, not
+from the user's shorthand — `<company>-<role>` in kebab case, short enough to tab-complete.
+Write `jd.md` and start `application.md`.
+
+Capturing from a URL, because the obvious tools fail quietly:
+
+- **Never a tool that answers a prompt about the page.** A fetch tool that runs the page through
+  a model (Claude Code's `WebFetch` is one) returns a paraphrase however the prompt is worded,
+  and "verbatim, do not summarise" gets back a tidy summary with headings the employer never
+  wrote.
+- **Render the page and take the description element's `innerText`**, with whatever browser
+  automation is to hand. That is what a human reads, with nothing summarised or invented, and
+  boards that render on the client need a browser anyway.
+- **Take `innerText` whole.** A hand-written DOM walker that keeps list structure drops what it
+  doesn't expect: nested sections collapse, paragraph bodies vanish. Restore bullets afterwards
+  if you want them.
+- **Not regex over raw HTML.** The end of the description gets guessed rather than found, and
+  form markup leaks inside the markers.
+- **Diff before committing.** Word level is enough: split both texts to one word per line, drop
+  blank lines, `diff`. An empty diff is what makes "verbatim" a claim a later reader can check.
+- **Record the method in `capture_method:`**, and any method refused with its reason, so the
+  next session does not retry it.
 
 **2. Fit.** Read the corpus against the JD **before anything gets written**. This is the step
 that earns the skill; see below.

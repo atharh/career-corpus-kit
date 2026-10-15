@@ -1,7 +1,7 @@
 ---
 source_url: https://careers.kestrelfreight.example/roles/engineering-lead-dispatch-data
 captured: 2026-04-06
-capture_method: fetched
+capture_method: rendered in a browser, innerText of the description element; word diff empty; WebFetch refused, it returns a paraphrase
 ---
 
 > ⚠️ **FICTIONAL EXAMPLE.** Kestrel Freight Network does not exist and neither does this

@@ -296,7 +296,9 @@ Two kinds of assertion:
 
 - **Conformance.** Every file the lane owns carries the frontmatter its template
   declares, the log is dated and uses the nine named events and nothing else,
-  `jd.md`'s verbatim boundary is intact with nothing after it, every artifact
+  `jd.md`'s verbatim boundary is intact with nothing after it and no HTML markup
+  inside it, its `capture_method:` is one of the three the template names (so a
+  posting recorded as fetched through a tool that paraphrases fails), every artifact
   names a lifecycle state and a corpus pin and sources that resolve, and nothing
   anywhere carries a `status:` rollup. **The required keys are read out of
   `skills/apply/templates/` and `skills/render/templates/` rather than restated
