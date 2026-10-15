@@ -515,6 +515,9 @@ def check_gap_not_covered(r: Report, spec: dict, fixture: Path) -> None:
             )
 
 
+VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
+
+
 class SayLines(html.parser.HTMLParser):
     """The text of every `.say` element, with a `.word` slot read as `{word}`.
 
@@ -531,6 +534,8 @@ class SayLines(html.parser.HTMLParser):
 
     def handle_starttag(self, tag, attrs):
         classes = (dict(attrs).get("class") or "").split()
+        if tag in VOID:  # no end tag ever arrives, so it must not deepen the count
+            return
         if self.depth:
             self.depth += 1
             if "word" in classes:
@@ -541,7 +546,7 @@ class SayLines(html.parser.HTMLParser):
             self.buf = []
 
     def handle_endtag(self, tag):
-        if not self.depth:
+        if not self.depth or tag in VOID:
             return
         if self.word_at == self.depth:
             self.word_at = 0
