@@ -194,8 +194,8 @@ order an interview actually takes.
 - **Through-lines are talking points, not scripts.** Offer them as ways to connect stories,
   never as claims to recite. Let the interviewer's question pick the framing, as the JD does
   for a letter.
-- **The rest is `prep`'s, and holds here too:** bullets and a first line, never a script
-  (`[NO-SCRIPT]`); answer the follow-ups down to depth three (`[DEPTH-THREE]`); carry the
+- **The rest is `prep`'s, and holds here too:** write each answer once, to read rather than
+  to learn, with the notes around it in bullets (`[NO-SCRIPT]`); answer the follow-ups down to depth three (`[DEPTH-THREE]`); carry the
   mistake (`[CARRY-MISTAKE]`); and track which story is spent on which question
   (`[SPEND-STORIES]`). See [`../prep/SKILL.md`](../prep/SKILL.md).
 

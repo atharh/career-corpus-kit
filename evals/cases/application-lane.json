@@ -91,6 +91,7 @@
     "file": "06-interview-script.html",
     "template": "skills/prep/templates/interview-script.html",
     "pack": ["interview-prep.md", "03-story-bank.md", "04-probes-and-defences.md"],
+    "story_bank": "03-story-bank.md",
     "why": "A line restated in the page is a second version of the fact. The pack gets re-rendered when the corpus moves and the page does not, and the page is what gets read in the room.",
     "documented_by": "Every spoken line on the live page is copied from the pack."
   },

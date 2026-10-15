@@ -146,6 +146,12 @@ extract a story that fits, or to accept it as the weak spot and prepare for the 
 Where no criteria are published, derive sections from the JD's own emphasis — but say that's
 what you did, so nobody mistakes your inference for their rubric.
 
+Each story section writes its answer out once, in full, under a `**Spoken answer:**` line: three
+or four sentences in a fixed order. Their question back in their words; the tie to the pack's
+main message; one piece of evidence that names a real story and carries its one number; an
+offer of a test, the depth they can push to next. That answer is the one `06` copies. The notes
+around it stay bullets: beats, ceilings, expected follow-ups, never-say lines.
+
 ## `04` — the probes file, and where probes come from
 
 **The corpus has already written down where this candidate is weak, in the candidate's own
@@ -203,9 +209,9 @@ The page's form:
 - **What each person needs.** The opening asks every interviewer what would make the hour useful
   and notes one word per person; later answers and the close refer back to it.
 - **Questions collapsed under their wording**, grouped by the employer's focus areas (the
-  recruiter's stated criteria, when given) or by who will ask. Each answer runs in one order: their
-  words back, the main message, one story and its one number, an offer of depth. An unknown gets
-  one fixed line, *"I don't have that number. I'll have it by <day>."*
+  recruiter's stated criteria, when given) or by who will ask. Each answer is `03`'s spoken
+  answer, copied whole, one sentence per SAY line. An unknown gets one fixed line, *"I don't have
+  that number. I'll have it by <day>."*
 - **Recovery lines**: how to take a correction (*"That changes the arithmetic, not the
   approach."*), how to stop rambling, how to find the thread again.
 - **An earlier round's probe gets an answer here.** Whatever the last round pressed on is the
@@ -219,11 +225,11 @@ the team that builds it. A round with no published shape gets the behavioural th
 
 ## Rules specific to prep
 
-**Bullets and a first line, never a script.** `[NO-SCRIPT]` A written-out answer gets memorised
-and then *sounds* memorised, and it collapses the moment the question arrives in a slightly
-different shape. So the study files give each answer its opening sentence and its beats, and
-write out in full only a line worth saying as-is. `06` holds those lines and nothing longer; the
-beats between them are DO cues.
+**Write each answer once, to read, never to learn.** `[NO-SCRIPT]` A memorised answer sounds
+memorised, and it collapses the moment the question arrives in a slightly different shape. So
+`03` writes each answer out in full exactly once, as the spoken version `06` copies, and it is
+there to be read off the page in the room, not drilled beforehand. Everything around it stays
+bullets, because the bullets are what make a reshaped question answerable.
 
 **The live page copies its spoken lines; it never writes them.** `[SAY-FROM-PACK]` Every SAY line
 in `06` appears word for word in `01`–`05`, or is one of the template's fixed lines, and the

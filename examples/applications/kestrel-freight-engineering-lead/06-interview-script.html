@@ -125,18 +125,22 @@ candidate applying to a lead posting, saying so.</div>
 
 <h3>Delivery under constraint</h3>
 <details><summary>Tell me about delivering under a hard deadline.</summary>
-<p class="do">Dispatch instructions owed by 06:00. 40 minutes when Sam joined, three hours ten by mid-2021. It was reprocessing every historical partition on every run.</p>
+<p class="say">A hard deadline is the right word for it: dispatch instructions were owed to customers by 06:00, and that time was in the contract.</p>
+<p class="say">That is the job this posting describes, an overnight build with a hand-off nobody can miss.</p>
+<p class="say">At Tidewater the build had drifted from 40 minutes to three hours ten because it reprocessed every historical partition on every run, and fixing that roughly halved the runtime.</p>
+<p class="say">Ask me how we found it, because I'd looked straight past it twice.</p>
+<p class="do">If they ask how:</p>
 <p class="say">I'd worked on that job twice before and never looked at what it was actually doing. I optimised two queries inside a thing that shouldn't have been running at all.</p>
-<p class="do">If asked by how much:</p>
-<p class="say">Roughly halved.</p>
 <p class="warn">"Cut runtime by 80%." Withdrawn. "Identified an architectural flaw."</p>
 </details>
 
 <h3>Migration and reversibility</h3>
 <details><summary>Walk me through a migration you de-risked.</summary>
-<p class="do">The other team owned the scheduler and objected: a silently stale dispatch file is worse than a late one.</p>
-<p class="say">They weren't blocking me, they were right.</p>
-<p class="do">Three weeks, both pipelines, nightly byte-compare. Two watermark bugs in week one, both fixed before cutover. Volunteer the cost:</p>
+<p class="say">The migration I de-risked moved that nightly build onto incremental processing, and the team that owned the scheduler objected.</p>
+<p class="say">They weren't blocking me, they were right: a silently stale dispatch file is worse than a late one.</p>
+<p class="say">So we ran both pipelines for three weeks with a nightly byte-compare, and it caught two watermark bugs in week one, both fixed before cutover.</p>
+<p class="say">I can take you through the parallel run, or through what it cost to do it on evenings first.</p>
+<p class="do">If they ask about the cost:</p>
 <p class="say">If I'd asked for it as planned work in month one instead of being precious about proving it first, it'd have been done in six weeks.</p>
 </details>
 <details><summary>How widely was it adopted?</summary>
@@ -153,9 +157,12 @@ candidate applying to a lead posting, saying so.</div>
 
 <h3>Direction without ownership</h3>
 <details><summary>How do you get a team you don't manage to change course?</summary>
-<p class="do">Method in one line: evidence instead of argument. Lead with the on-call rebuild: categorised every page from a quarter before changing a single rule, 19 of 31 needed no human action. Then the batch window as the second example:</p>
+<p class="say">Changing course for a team I don't manage has always come down to evidence rather than argument.</p>
+<p class="say">That is most of this role, because the systems either side of it belong to other teams.</p>
+<p class="say">On the on-call rebuild at Tidewater I had a pager and a sponsor and no authority, so I categorised every page from a quarter before changing a single rule, and 19 of 31 needed no human action.</p>
+<p class="say">Ask me what I got wrong there, because I reversed part of it in public.</p>
+<p class="do">If they ask: the rotation cut from eight to five, reversed after seven weeks. If they want a second example, the batch window:</p>
 <p class="say">The difference between us was that I could prove it and they couldn't disprove it, so the parallel run was the only honest way through. I'd have argued for a month otherwise.</p>
-<p class="do">If asked about consequences: the rotation cut from eight to five, reversed after seven weeks, in public.</p>
 </details>
 
 <h3 id="gaps">Gaps: say each once, then move on</h3>

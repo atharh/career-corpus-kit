@@ -319,7 +319,9 @@ The pack's live page, `06-interview-script.html`, is in both trip-wires' scope a
 assertions of its own. Its `<style>` block must equal the one in
 `skills/prep/templates/interview-script.html`, so the template's look is load-bearing the way its
 frontmatter is. Every SAY line must occur word for word in a pack file, or match one of the
-template's fixed lines with its `{slots}` filled (`[SAY-FROM-PACK]`). And no SAY line may occur
+template's fixed lines with its `{slots}` filled (`[SAY-FROM-PACK]`). Every spoken answer in the
+story bank must be three or four sentences and appear whole in the page's SAY text
+(`[NO-SCRIPT]`: written once, read live). And no SAY line may occur
 twice (`[SAY-IT-ONCE]`). That last one is the regexable half: whether a gap line sits at the
 first moment that shows it is a judgement about the round's order.
 

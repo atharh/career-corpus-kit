@@ -567,6 +567,7 @@ def say_lines(text: str) -> list[str]:
 
 def plain(text: str) -> str:
     """Markdown or SAY text reduced to its words, for a verbatim comparison."""
+    text = re.sub(r"^[ \t]*>[ \t]?", "", text, flags=re.M)  # a blockquote marker is not a word
     text = text.replace("\u2019", "'").replace("*", "").replace("\u2026", "...")
     return re.sub(r"\s+", " ", text).strip().lower()
 
@@ -614,6 +615,28 @@ def check_live_script(r: Report, spec: dict, fixture: Path) -> None:
         )
     dupes = sorted({ln for ln in lines if lines.count(ln) > 1})
     r.check(f"[SAY-IT-ONCE] {live['file']} says no line twice", not dupes, f"repeated: {dupes}")
+
+    # `[NO-SCRIPT]`: the story bank writes each answer out once, in full, and the
+    # page reads it whole. A missing answer means the page was written instead.
+    bank = (fixture / live["story_bank"]).read_text()
+    answers = [
+        " ".join(ln.lstrip(">").strip() for ln in m.group(1).splitlines())
+        for m in re.finditer(r"^\*\*Spoken answer:\*\*[ \t]*\n[ \t]*\n((?:>.*\n?)+)", bank, re.M)
+    ]
+    r.check(f"{live['story_bank']} writes out spoken answers", bool(answers), "no **Spoken answer:** blocks")
+    said = plain(" ".join(lines))
+    for ans in answers:
+        n = len(re.findall(r"[.!?](?=\s|$)", ans.strip()))
+        r.check(
+            f"[NO-SCRIPT] {ans[:50]!r} is three or four sentences",
+            3 <= n <= 4,
+            f"{n} sentences — their words back, the main message, one story, an offer of a test",
+        )
+        r.check(
+            f"[NO-SCRIPT] {ans[:50]!r} is read whole from {live['file']}",
+            plain(ans) in said,
+            "the page must copy the story bank's spoken answer word for word, in order",
+        )
 
 
 STATUS_TOOL = ROOT / "tools" / "application_status.py"
