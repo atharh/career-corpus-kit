@@ -83,7 +83,7 @@ Each skill also has a slash command, `/career-corpus:<skill>`, if you'd rather b
 | "Just the fit check for this posting. Don't write anything yet." | What the role asks for and which parts your corpus can back. Useful when you're deciding whether a role is worth an evening. | `apply` |
 | "What's live?" | Every application, its stage, and how long it has been quiet. | `apply` |
 | "Tailor my résumé to this job description." | A résumé or cover letter written only from vetted facts. It works without an application folder too. | `render` |
-| "I have an interview loop next Tuesday." | A prep pack: an opener, a story bank mapped to this employer's hiring criteria, the probes they will push on with defensible answers, and questions to ask them. No application folder needed. | `prep` |
+| "I have an interview loop next Tuesday." | A prep pack: an opener, a story bank mapped to this employer's hiring criteria, the probes they will push on with defensible answers, questions to ask them, and one page to read from during the interview. No application folder needed. | `prep` |
 | "That interview is done. Here's what they asked and where I fumbled." | The questions you couldn't answer, queued for interview sessions. A question you had no answer for is the most precisely targeted gap you'll ever be handed, so this is worth doing even after a rejection. | `prep` |
 | "What level does my work at <company> read as?" | A level range, with a citation for each part of the ladder, the level your evidence clearly clears, and what stands between you and the next one. Each gap is marked as either missing from the file or missing from the work. | `ladder` |
 | "Benchmark my on-call story at staff level." | How an invented engineer at that level would tell the same story, so you can compare your own file against it. It is fiction, kept in `benchmarks/`, and never reaches a résumé. | `ladder` |
@@ -216,7 +216,7 @@ it, one job application at a time.
 |---|---|---|
 | **`/career-corpus:apply`** | you found a role | Opens the application and owns it end to end. Captures the posting before it 404s, checks the corpus against the role *before* anything gets written, and holds everything that arrives afterwards — recruiter mail, take-home briefs, the outcome — in one folder. |
 | **`/career-corpus:render`** | you're writing the application | Reads the vetted corpus + the job description and produces a résumé entry or cover letter — tailored to that role, sourced only from what the corpus vouches for. |
-| **`/career-corpus:prep`** | an interview is booked | Builds a prep pack for that specific interview: an opener, a story bank mapped to the employer's own hiring criteria, the probes they'll push on with defensible answers, and questions to ask them. Run it again afterwards to capture what was actually asked. |
+| **`/career-corpus:prep`** | an interview is booked | Builds a prep pack for that specific interview: an opener, a story bank mapped to the employer's own hiring criteria, the probes they'll push on with defensible answers, questions to ask them, and one page to read from during the interview itself. Run it again afterwards to capture what was actually asked. |
 
 `render` produces documents you **send**. `prep` produces a directory you **study** — and its
 second half feeds what you fumbled back into `interview`, which is where the loop closes.
@@ -230,7 +230,7 @@ applications/acme-staff-engineer/
   fit.md           ← what this role wants, and what your corpus can and can't back
   _inbox/          ← raw inbound — recruiter mail, take-home brief. Unvetted, never rendered from
   resume.md, cover-letter.md         ← written by render
-  interview-prep.md, 01-…–05-…       ← written by prep
+  interview-prep.md, 01-…–06-…       ← written by prep
 ```
 
 `fit.md` is the one people don't expect. It runs **before** the résumé, and "don't apply yet —

@@ -27,6 +27,7 @@ Run:  python3 evals/application_checks.py
 
 from __future__ import annotations
 
+import html.parser
 import json
 import re
 import subprocess
@@ -75,6 +76,10 @@ class Report:
 
 def frontmatter(text: str) -> str | None:
     m = re.match(r"^---\n(.*?)\n---\n", text, re.S)
+    if m:
+        return m.group(1)
+    # An HTML artifact (prep's `06`) carries the same block inside a comment in <head>.
+    m = re.search(r"<!--\n---\n(.*?)\n---\n-->", text.split("</head>")[0], re.S)
     return m.group(1) if m else None
 
 
@@ -508,6 +513,102 @@ def check_gap_not_covered(r: Report, spec: dict, fixture: Path) -> None:
                 bool(re.search(pat, text, re.I)),
                 "an uncovered gap that is also unnamed is just an omission",
             )
+
+
+class SayLines(html.parser.HTMLParser):
+    """The text of every `.say` element, with a `.word` slot read as `{word}`.
+
+    A `.word` is filled in during the interview, so its static text is a
+    placeholder rather than words anybody copies from the pack.
+    """
+
+    def __init__(self) -> None:
+        super().__init__()
+        self.lines: list[str] = []
+        self.depth = 0  # element depth inside the current .say, 0 when outside
+        self.word_at = 0  # depth of the open .word slot, 0 when none
+        self.buf: list[str] = []
+
+    def handle_starttag(self, tag, attrs):
+        classes = (dict(attrs).get("class") or "").split()
+        if self.depth:
+            self.depth += 1
+            if "word" in classes:
+                self.word_at = self.depth
+                self.buf.append("{word}")
+        elif "say" in classes:
+            self.depth = 1
+            self.buf = []
+
+    def handle_endtag(self, tag):
+        if not self.depth:
+            return
+        if self.word_at == self.depth:
+            self.word_at = 0
+        self.depth -= 1
+        if not self.depth:
+            self.lines.append(re.sub(r"\s+", " ", "".join(self.buf)).strip())
+
+    def handle_data(self, data):
+        if self.depth and not self.word_at:
+            self.buf.append(data)
+
+
+def say_lines(text: str) -> list[str]:
+    p = SayLines()
+    p.feed(text)
+    return p.lines
+
+
+def plain(text: str) -> str:
+    """Markdown or SAY text reduced to its words, for a verbatim comparison."""
+    text = text.replace("\u2019", "'").replace("*", "").replace("\u2026", "...")
+    return re.sub(r"\s+", " ", text).strip().lower()
+
+
+def check_live_script(r: Report, spec: dict, fixture: Path) -> None:
+    """prep's `06`: the template's look, and spoken lines copied from the pack.
+
+    `[SAY-FROM-PACK]`: every SAY line occurs word for word in a pack file, or is
+    one of the template's fixed lines, whose `{slot}`s match anything. A template
+    line that is nothing but a slot is a fill-in, not a fixed line, and matches
+    nothing. `[SAY-IT-ONCE]`: no SAY line occurs twice.
+    """
+    live = spec["live_script"]
+    path = fixture / live["file"]
+    if not r.check(f"{live['file']} exists in the fixture", path.is_file(), f"no {path}"):
+        return
+    page = path.read_text()
+    template = (ROOT / live["template"]).read_text()
+
+    style = re.compile(r"<style>.*?</style>", re.S)
+    mine, theirs = style.search(page), style.search(template)
+    r.check(
+        f"{live['file']} carries the template's stylesheet unchanged",
+        bool(mine and theirs and mine.group(0) == theirs.group(0)),
+        f"the <style> block differs from {live['template']} — the look is the template's",
+    )
+
+    fixed = []
+    for line in say_lines(template):
+        if re.fullmatch(r"\{[^}]*\}", line):
+            continue
+        parts = re.split(r"\{[^}]*\}", plain(line))
+        fixed.append(re.compile(".+?".join(re.escape(x) for x in parts)))
+    pack = plain("\n".join((fixture / n).read_text() for n in live["pack"]))
+
+    lines = say_lines(page)
+    r.check(f"{live['file']} has SAY lines", bool(lines), "no .say elements found")
+    for line in lines:
+        flat = plain(line)
+        r.check(
+            f"[SAY-FROM-PACK] {line[:50]!r} is copied, not written",
+            flat in pack or any(f.fullmatch(flat) for f in fixed),
+            f"not word for word in {live['pack']} or a template fixed line\n"
+            f"      why:  {live['why']}",
+        )
+    dupes = sorted({ln for ln in lines if lines.count(ln) > 1})
+    r.check(f"[SAY-IT-ONCE] {live['file']} says no line twice", not dupes, f"repeated: {dupes}")
 
 
 STATUS_TOOL = ROOT / "tools" / "application_status.py"
@@ -1048,6 +1149,7 @@ def check_documented(r: Report, spec: dict) -> None:
     for case in spec["inbox_claims"]:
         needles[case["id"]] = case["documented_by"]
     needles[spec["gap"]["id"]] = spec["gap"]["documented_by"]
+    needles["live-script"] = spec["live_script"]["documented_by"]
     for key, needle in needles.items():
         r.check(
             f"{key} is documented in {spec['documented_in']}",
@@ -1077,6 +1179,7 @@ def main() -> int:
     check_artifact_frontmatter(r, spec, fixture)
     check_inbox_claims(r, spec, fixture)
     check_gap_not_covered(r, spec, fixture)
+    check_live_script(r, spec, fixture)
     return r.summary()
 
 

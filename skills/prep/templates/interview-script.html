@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{Company} Interview Script</title>
+<!--
+---
+artifact: study-pack-section
+application: <company>-<role>
+lifecycle: in-flight
+generated: <YYYY-MM-DD>
+corpus_pin: <the corpus commit this render read>
+sources:
+  - applications/<company>-<role>/01-about-me.md
+  - applications/<company>-<role>/03-story-bank.md
+  - applications/<company>-<role>/04-probes-and-defences.md
+---
+-->
+<!--
+The page read from during the interview. Every SAY line is copied from the pack's 01-05, which
+carry the sources and the ceilings; keep the two in step. A fact changes there first, then here
+(prep's `[SAY-FROM-PACK]`). The SAY lines already written below are the template's fixed lines and
+are the only ones not copied from the pack.
+
+Fill in: <title>; the three data- attributes on <body>; one nav link per section with its start
+time in data-t; the thesis and the numbers strip; one word slot per interviewer. Delete a section
+the round doesn't have. Headings name roles, never people.
+
+Line types, and only SAY is spoken:
+  <p class="say">   the exact words, copied from the pack
+  <p class="do">    an action or a cue, never read aloud
+  <p class="pause"> stop and wait for an answer
+  <p class="warn">  a never-say line, under the answer it guards
+-->
+<style>
+:root {
+  --bg: #f6f8f9; --surface: #fff; --fg: #17232b; --muted: #5d6c76; --line: #d6dee3;
+  --accent: #0f5c78; --accent-soft: #e2eff4; --flag: #8a5300; --flag-soft: #fbf0dc;
+  --body: system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono: ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f171c; --surface: #16222a; --fg: #e3eaee; --muted: #9aabb6; --line: #2a3a44;
+    --accent: #6cc0dd; --accent-soft: #173341; --flag: #f0b45a; --flag-soft: #3a2a12;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f171c; --surface: #16222a; --fg: #e3eaee; --muted: #9aabb6; --line: #2a3a44;
+  --accent: #6cc0dd; --accent-soft: #173341; --flag: #f0b45a; --flag-soft: #3a2a12;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.5 var(--body); }
+.wrap { max-width: 860px; margin: 0 auto; padding: 12px 16px 80px; }
+nav { position: sticky; top: 0; z-index: 5; background: var(--bg); border-bottom: 1px solid var(--line);
+  display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 16px; align-items: center; }
+nav a { font: 600 13px var(--mono); color: var(--accent); text-decoration: none; padding: 4px 8px;
+  border: 1px solid var(--line); border-radius: 6px; background: var(--surface); }
+nav a.now { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+#clock { margin-left: auto; font: 600 14px var(--mono); color: var(--muted); }
+h1 { font-size: 1.5rem; margin: 12px 0 4px; }
+h2 { font-size: 1.3rem; margin: 32px 0 8px; scroll-margin-top: 56px; display: flex; gap: 10px;
+  align-items: baseline; flex-wrap: wrap; }
+h2 .t { font: 600 0.95rem var(--mono); color: var(--accent); }
+h2 .s { font: 600 0.8rem var(--mono); color: var(--muted); }
+h3 { font-size: 1rem; margin: 18px 0 6px; color: var(--muted); }
+.thesis { background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 10px 14px;
+  border-radius: 6px; margin: 8px 0; }
+.say { font-size: 1.12rem; font-weight: 600; border-left: 4px solid var(--accent); padding: 4px 0 4px 12px; margin: 8px 0; }
+.say::before { content: "SAY "; font: 600 0.72rem var(--mono); color: var(--accent); }
+.do { color: var(--muted); margin: 6px 0; }
+.do::before { content: "DO "; font: 600 0.72rem var(--mono); color: var(--muted); }
+.pause { background: var(--flag-soft); padding: 6px 12px; border-radius: 6px; margin: 8px 0; }
+.pause::before { content: "PAUSE "; font: 600 0.72rem var(--mono); color: var(--flag); }
+.warn { color: var(--flag); font-size: 0.92rem; margin: 6px 0; }
+.warn::before { content: "NEVER "; font: 600 0.72rem var(--mono); }
+.nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 8px; margin: 10px 0; }
+.nums div { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px;
+  font-size: 0.85rem; color: var(--muted); }
+.nums b { display: block; font: 600 1.1rem var(--mono); color: var(--fg); }
+details { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; margin: 6px 0; padding: 6px 12px; }
+summary { cursor: pointer; font-weight: 600; }
+.word { display: inline-block; min-width: 180px; border-bottom: 2px dashed var(--line); font: 600 1rem var(--mono); }
+ul, ol { margin: 6px 0; padding-left: 22px; } li { margin: 4px 0; }
+</style>
+</head>
+<!-- data-tz is an IANA zone; data-start and data-end bound the hour the nav highlights. -->
+<body data-tz="{Area/City}" data-start="{HH:MM}" data-end="{HH:MM}">
+<nav>
+  <a href="#open" data-t="{HH:MM}">{HH:MM} Open</a>
+  <a href="#their" data-t="{HH:MM}">{HH:MM} Their questions</a>
+  <a href="#gaps">Gaps</a>
+  <a href="#mine" data-t="{HH:MM}">{HH:MM} Your questions</a>
+  <a href="#close" data-t="{HH:MM}">{HH:MM} Close</a>
+  <a href="#rescue">Rescue</a>
+  <span id="clock">--:--</span>
+</nav>
+<div class="wrap">
+
+<h1>{Company}: {interviewer's role}, {round}</h1>
+<p class="do">{Day DD.MM, HH:MM–HH:MM, time zone}. {Round, and the role applied for.}</p>
+
+<!-- The main message in one paragraph, and the numbers the answers lean on. Each number is the
+     pack's figure at its ceiling, never rounded up for the strip. -->
+<div class="thesis">{The main message, one paragraph.}</div>
+
+<div class="nums">
+  <div><b>{figure}</b>{what it counts}</div>
+</div>
+
+<p class="pause">Running late: {what to cut first, and what never to cut}.</p>
+
+<h2 id="open"><span class="t">{HH:MM}</span> Open <span class="s">{N} min</span></h2>
+<p class="say">Before I jump in, what would make this hour most useful for you?</p>
+<!-- One slot per interviewer: copy the line and give each its own data-person. -->
+<p class="pause">Listen. Note one word for what they need: <span class="word" data-person="1" contenteditable="true">&nbsp;</span></p>
+<p class="do">The word is what that person needs from the hour. When an answer reaches it, refer back: "You said {word}. Here is how I did it."</p>
+
+<h3>Tell me about yourself</h3>
+<p class="say">{Copied from 01.}</p>
+
+<h2 id="their"><span class="t">{HH:MM}</span> Their questions <span class="s">{N} min</span></h2>
+<p class="do">Each answer: their words back, the main message, one story and its number, then offer depth. Stop and let them pick the branch.</p>
+
+<!-- One h3 per focus area (the employer's criteria, verbatim, when given) or per interviewer.
+     Each question collapsed under its summary. -->
+<h3>{Focus area}</h3>
+<details><summary>{The question, in their words.}</summary>
+<p class="say">{First line, copied from 03.}</p>
+<p class="do">{The story's beat and its one number, as a cue.}</p>
+<p class="warn">{A never-say line from 04 that guards this answer.}</p>
+</details>
+
+<!-- An earlier round's probe gets its own answer here. For a method question: the method in one
+     line, one story per step, a one-line close. -->
+
+<h3 id="gaps">Gaps: say each once, then move on</h3>
+<!-- A gap line sits at the first moment that shows it, and is never repeated (`[SAY-IT-ONCE]`). -->
+<details><summary>{The gap}</summary>
+<p class="say">{The honest line, copied from 04.}</p>
+<p class="do">Then stop. Don't reach for an adjacent story.</p>
+</details>
+
+<h2 id="mine"><span class="t">{HH:MM}</span> Your questions <span class="s">{N} min</span></h2>
+<ol>
+  <li class="say">{Copied from 05.}</li>
+</ol>
+
+<h2 id="close"><span class="t">{HH:MM}</span> Close <span class="s">{N} min</span></h2>
+<p class="say">You mentioned <span class="word" data-echo="1">&nbsp;</span> at the start.</p>
+<p class="say">What are the next steps from here?</p>
+
+<!-- A build-and-demo panel adds a section before the close that steps out of role: the
+     decisions made and why, what you'd change, how you'd lead the team that builds it. -->
+
+<h2 id="rescue">Rescue lines</h2>
+<ul>
+  <li><b>Unknown number:</b> <span class="say">I don't have that number. I'll have it by {day}.</span></li>
+  <li><b>They correct you:</b> <span class="say">That changes the arithmetic, not the approach.</span></li>
+  <li><b>You're rambling:</b> <span class="say">The short version is…</span> then one sentence and stop.</li>
+  <li><b>Lost the thread:</b> glance at the box at the top and the numbers.</li>
+  <li><b>Saying "we":</b> split it: "I did X; the team did Y."</li>
+</ul>
+
+</div>
+<script>
+// Live clock in the interview's time zone; highlights the section whose start time has passed.
+(function () {
+  var b = document.body, clock = document.getElementById('clock');
+  var links = Array.prototype.slice.call(document.querySelectorAll('nav a[data-t]'));
+  function tick() {
+    var now = new Date().toLocaleTimeString('en-GB', { timeZone: b.dataset.tz, hour: '2-digit', minute: '2-digit' });
+    clock.textContent = now;
+    var live = now >= b.dataset.start && now < b.dataset.end, current = null;
+    links.forEach(function (a) { if (a.dataset.t <= now) current = a.dataset.t; });
+    links.forEach(function (a) { a.classList.toggle('now', live && a.dataset.t === current); });
+  }
+  tick(); setInterval(tick, 15000);
+  // The closing line echoes the word noted for the same person at the open.
+  document.querySelectorAll('.word[data-person]').forEach(function (w) {
+    w.addEventListener('input', function () {
+      document.querySelectorAll('.word[data-echo="' + w.dataset.person + '"]').forEach(function (e) {
+        e.textContent = w.textContent;
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

@@ -361,7 +361,8 @@ def check_no_gendered_pronouns(r: Report) -> None:
     This one marker is cheap and it is present nearly every time.
     """
     banned = re.compile(r"\b(he|him|his|she|her|hers)\b", re.I)
-    for path in sorted((ROOT / "skills").rglob("*.md")):
+    # Templates count too: a page template is prose a session fills in from an incident.
+    for path in sorted([*(ROOT / "skills").rglob("*.md"), *(ROOT / "skills").rglob("*.html")]):
         rel = path.relative_to(ROOT)
         hits = sorted({m.group(0).lower() for m in banned.finditer(path.read_text())})
         r.check(

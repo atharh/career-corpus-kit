@@ -96,6 +96,9 @@ check named on day two.
    question arriving in the room.
 6. **[`application.md`](applications/kestrel-freight-engineering-lead/application.md)** — the
    whole thread as a dated event log, opened to closed, fifteen lines.
+7. **[`06-interview-script.html`](applications/kestrel-freight-engineering-lead/06-interview-script.html)**
+   — the page read from during the screen. Open it in a browser: the sticky bar, the clock, the
+   typed lines and the collapsed questions all come from `prep`'s template.
 
 ## What to notice
 
@@ -114,6 +117,10 @@ check named on day two.
   headcount, how far along the build already is — none of it appears in the letter, the résumé
   or the pack. The dates and the panel shape from the same email are used freely, because those
   are scheduling, not claims. The split is written down in the note itself.
+- **Every spoken line on the live page is copied from the pack.** `06`'s SAY lines appear word
+  for word in `03`, `04` or `interview-prep.md`, or are the template's fixed lines; the beats
+  between them are DO cues. The pack skipped `01` and `05` for this round, so the opener and the
+  questions to ask are cues too: nothing wrote those lines out, so nothing is read aloud.
 - **The log has no `status:` field.** The status is derived from `events:` — the furthest
   pipeline event reached, with `inbound` and `routed` never advancing it. Anything stored
   beside it is a second copy going stale on its own schedule — `apply`'s no-rollup rule

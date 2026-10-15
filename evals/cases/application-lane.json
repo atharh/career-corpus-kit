@@ -38,7 +38,8 @@
     "cover-letter.md",
     "interview-prep.md",
     "03-story-bank.md",
-    "04-probes-and-defences.md"
+    "04-probes-and-defences.md",
+    "06-interview-script.html"
   ],
 
   "lifecycle_states": ["baseline", "in-flight", "submitted"],
@@ -86,11 +87,19 @@
     }
   ],
 
+  "live_script": {
+    "file": "06-interview-script.html",
+    "template": "skills/prep/templates/interview-script.html",
+    "pack": ["interview-prep.md", "03-story-bank.md", "04-probes-and-defences.md"],
+    "why": "A line restated in the page is a second version of the fact. The pack gets re-rendered when the corpus moves and the page does not, and the page is what gets read in the room.",
+    "documented_by": "Every spoken line on the live page is copied from the pack."
+  },
+
   "gap": {
     "id": "line-management",
     "rule": "apply's fit check — papering over a no-corpus-evidence requirement with the nearest adjacent story",
     "why": "Mentoring two juniors is the obvious cover for a line-management requirement and it survives exactly one follow-up question. When it goes, the four strong requirements above it get discounted with it.",
-    "forbidden_in": ["resume.md", "cover-letter.md", "03-story-bank.md"],
+    "forbidden_in": ["resume.md", "cover-letter.md", "03-story-bank.md", "06-interview-script.html"],
     "forbidden": [
       "led (a|the|my|our) team\\b",
       "managed (a|the|my|our) team\\b",

@@ -1,6 +1,6 @@
 ---
 name: prep
-description: Build an interview prep pack for one scheduled interview — an opener, a story bank mapped to the employer's own hiring criteria, the probes they'll push on with defensible answers, and questions to ask them. Use when an interview or an interview loop is booked, when preparing for a specific round, or after an interview to capture what was asked.
+description: Build an interview prep pack for one scheduled interview — an opener, a story bank mapped to the employer's own hiring criteria, the probes they'll push on with defensible answers, questions to ask them, and one page to read from during the interview itself. Use when an interview or an interview loop is booked, when preparing for a specific round, or after an interview to capture what was asked.
 ---
 
 # Career corpus — prep
@@ -118,12 +118,14 @@ Files are numbered so the reading order is the preparation order.
 | `03-story-bank.md` | Stories mapped to **their** criteria — one section per criterion. |
 | `04-probes-and-defences.md` | Where they'll push, and the answer. See below; this is the file that earns the pack. |
 | `05-questions-to-ask.md` | What to ask them, and what not to. |
+| `06-interview-script.html` | The one page read from **during** the interview: the round in its own order, on a clock, its spoken lines copied from `01`–`05`. See below. |
 
 Skip files that don't apply. A 30-minute screen doesn't need six — say in `interview-prep.md`
 which ones you skipped, so a later round doesn't read the gap as an oversight.
 
 Every file in the pack is a rendering, so every one of them opens with the artifact frontmatter
-block in [`../render/templates/artifact-frontmatter.md`](../render/templates/artifact-frontmatter.md).
+block in [`../render/templates/artifact-frontmatter.md`](../render/templates/artifact-frontmatter.md),
+inside an HTML comment in `06`.
 A pack is `in-flight` by definition: it belongs to a live application, and it gets re-rendered
 rather than edited when the corpus underneath it moves.
 
@@ -179,16 +181,65 @@ ruled out, the codenames that stay internal, the numbers that were withdrawn. Un
 people reach for the version they've said most often, which is frequently the one the corpus
 retired six months ago.
 
+## `06` — the live script
+
+`01`–`05` are read before the interview; `06` is read during it, glancing up between answers, in
+light or dark mode, sometimes while sharing a screen. So it is one HTML page built from
+[`templates/interview-script.html`](templates/interview-script.html), which carries the whole
+stylesheet and the clock; fill its slots and keep its look. It sits beside the story bank and
+does not replace it: the ceilings, the follow-ups and the full never-say list stay in `03` and
+`04`, because they are needed to prepare and are too long to read live.
+
+The page's form:
+
+- **The round's own order.** One section per part of the interview, each with its start time and
+  length, linked from a sticky bar that holds a live clock in the interview's time zone. Near the
+  top, one line says what to cut when time runs short.
+- **The thread at a glance.** One paragraph with the main message, and a strip of the numbers the
+  answers lean on, each at the pack's ceiling.
+- **Typed lines.** SAY is the exact words, in bold. DO is an action or a cue. PAUSE is stop and
+  wait for an answer. A never-say line from `04` sits as a short warning under the answer it
+  guards. Only SAY lines are spoken.
+- **What each person needs.** The opening asks every interviewer what would make the hour useful
+  and notes one word per person; later answers and the close refer back to it.
+- **Questions collapsed under their wording**, grouped by the employer's focus areas (the
+  recruiter's stated criteria, when given) or by who will ask. Each answer runs in one order: their
+  words back, the main message, one story and its one number, an offer of depth. An unknown gets
+  one fixed line, *"I don't have that number. I'll have it by <day>."*
+- **Recovery lines**: how to take a correction (*"That changes the arithmetic, not the
+  approach."*), how to stop rambling, how to find the thread again.
+- **An earlier round's probe gets an answer here.** Whatever the last round pressed on is the
+  likeliest question in this one. A method question gets the method in one line, one story per
+  step, and a one-line close.
+
+A behavioural or hiring-manager round has three parts: the open, their questions by focus area,
+and the candidate's questions. A build-and-demo panel follows its own agenda and adds a closing
+part that steps out of role: the decisions made and why, what you'd change, and how you'd lead
+the team that builds it. A round with no published shape gets the behavioural three.
+
 ## Rules specific to prep
 
-**Bullets and a first line, never a script.** `[NO-SCRIPT]` Give the opening sentence and the
-beats. A written-out answer gets memorised and then *sounds* memorised, and it collapses the
-moment the question arrives in a slightly different shape.
+**Bullets and a first line, never a script.** `[NO-SCRIPT]` A written-out answer gets memorised
+and then *sounds* memorised, and it collapses the moment the question arrives in a slightly
+different shape. So the study files give each answer its opening sentence and its beats, and
+write out in full only a line worth saying as-is. `06` holds those lines and nothing longer; the
+beats between them are DO cues.
+
+**The live page copies its spoken lines; it never writes them.** `[SAY-FROM-PACK]` Every SAY line
+in `06` appears word for word in `01`–`05`, or is one of the template's fixed lines, and the
+page's opening comment says the two must stay in step. A fact changes in the pack first, then in
+the page. Restated in new words, it becomes a second version of the fact that the next re-render
+of the pack will not update, and the page is the one that gets read in the room.
 
 **Spend the stories deliberately.** `[SPEND-STORIES]` Track which story serves which criterion
 and which question type. One anecdote reused across three answers in a single loop is a tell —
 it reads as a candidate with one good year. Where a story must serve twice, note which *lens*
 each use takes, and make sure they're genuinely different.
+
+**A line that fits several moments is said at the first one.** `[SAY-IT-ONCE]` A gap line, or any
+line two questions could call for, sits in `06` where it is likeliest to come up first, and a
+DO cue at the later moments says it has been said. Naming a gap once is honest; naming it twice
+in one hour is the candidate worrying at it out loud.
 
 **Carry the mistake into the room.** `[CARRY-MISTAKE]` The corpus keeps the failure in each
 story precisely so the pack can use it. Prep the mistake as an answer, not as damage control.
@@ -211,7 +262,8 @@ weak sections at the top of `interview-prep.md`.
 Run this again the same day, while it's fresh. Three outputs:
 
 - **Update the pack** with what was actually asked, which answers landed, and which didn't.
-  A later round with the same company inherits it.
+  A later round with the same company inherits it, and its `06` gets an answer for whatever this
+  round pressed on.
 - **Add a dated line to `application.md`** — round, date, how it went, what happens next. The
   log is what makes a thread readable six weeks later.
 - **Feed the misses back into the corpus.** Anything the user fumbled, couldn't source, or

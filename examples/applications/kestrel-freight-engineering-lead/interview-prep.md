@@ -44,7 +44,7 @@ and panel roles are scheduling fact and safe to plan against.
 
 | When | What | Who | Length |
 |---|---|---|---|
-| Tue 28 Apr | Screen | Engineering Manager, Dispatch | 45 min |
+| Tue 28 Apr, 14:00 UK | Screen | Engineering Manager, Dispatch | 45 min |
 | w/c 4 May | Systems design | two staff engineers | 60 min |
 | w/c 4 May | Leading without authority | a director | 45 min |
 | w/c 4 May | Data-modelling exercise, discussed live | not stated | 60 min |

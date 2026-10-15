@@ -315,6 +315,14 @@ Two kinds of assertion:
   check, the story bank and the probes file — an uncovered gap that is also
   unnamed is just an omission.
 
+The pack's live page, `06-interview-script.html`, is in both trip-wires' scope and gets three
+assertions of its own. Its `<style>` block must equal the one in
+`skills/prep/templates/interview-script.html`, so the template's look is load-bearing the way its
+frontmatter is. Every SAY line must occur word for word in a pack file, or match one of the
+template's fixed lines with its `{slots}` filled (`[SAY-FROM-PACK]`). And no SAY line may occur
+twice (`[SAY-IT-ONCE]`). That last one is the regexable half: whether a gap line sits at the
+first moment that shows it is a judgement about the round's order.
+
 Each trip-wire also asserts its own temptation is still there in `_inbox/`. A
 trap that gets quietly deleted must not leave an assertion passing forever over
 nothing. Groups are tethered to `examples/README.md` by `documented_by`, the same

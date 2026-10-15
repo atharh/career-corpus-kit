@@ -29,7 +29,7 @@ the filename and out of the corpus.
 >
 > Process, if you're up for it:
 >
-> - **Screen** — Tuesday 28 April, 45 minutes, video, with the Engineering Manager for Dispatch.
+> - **Screen** — Tuesday 28 April, 14:00 UK time, 45 minutes, video, with the Engineering Manager for Dispatch.
 > - **Loop**, week commencing 4 May, three rounds:
 >   - Systems design, 60 minutes, two staff engineers.
 >   - Leading without authority, 45 minutes, a director.
